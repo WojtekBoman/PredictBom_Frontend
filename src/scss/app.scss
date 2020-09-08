@@ -1,0 +1,26 @@
+$background: url('../img/background.jpg');
+$containerMargin: 5% auto;
+$containerPadding: 30px;
+$fullHeight: 100vh;
+
+body {
+    background-image: $background;
+    height: $fullHeight;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    }
+
+.container {
+    margin: $containerMargin;
+    padding: $containerPadding;
+}
+
+.form-container {
+    width: 50%;
+}
+
+.login-alert{
+    margin-top:10px;
+}
