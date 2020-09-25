@@ -12,7 +12,8 @@ export const login = ({username, password}) => {
             .then(
                 user => { 
                     dispatch(success(user));
-                    history.push('/');
+                    console.log(user);
+                    history.push('/profile');
                 },
                 error => {
                     console.log(error);
@@ -31,5 +32,6 @@ export const login = ({username, password}) => {
 
 export const logout = () => {
     userService.logout();
+    history.push('/login');
     return {type: loginConstants.LOGOUT};
 }

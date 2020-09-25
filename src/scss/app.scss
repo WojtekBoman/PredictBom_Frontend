@@ -1,4 +1,4 @@
-$background: url('../img/background.jpg');
+$background: url('../img/background2.jpg');
 $containerMargin: 5% auto;
 $containerPadding: 30px;
 $fullHeight: 100vh;
@@ -17,10 +17,29 @@ body {
     padding: $containerPadding;
 }
 
-.form-container {
+.form-container, .profile-container {
     width: 50%;
+}
+
+.create-market-container{
+    width:70%
 }
 
 .login-alert{
     margin-top:10px;
+}
+
+.form-button{
+    margin:0 5px;
+}
+
+.img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+.img-box{
+    margin: 10px auto;
+    width: 90%;
 }

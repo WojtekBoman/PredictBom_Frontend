@@ -6,6 +6,7 @@ import {register} from '../actions/registerActions';
 
 class RegisterPage extends React.Component {
 
+    
     renderError({error,touched}) {
         if(touched && error) {
             return(

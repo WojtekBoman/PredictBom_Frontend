@@ -9,12 +9,12 @@ export default (state = initialState, action) => {
         case loginConstants.LOGIN_REQUEST:
             return {
                 loggedIn: false,
-                user: action.payload
+                user: action.user
             };
         case loginConstants.LOGIN_SUCCESS:
             return {
                 loggedIn: true,
-                user: action.payload
+                user: action.user
             };
         case loginConstants.LOGIN_FAILURE:
             return {};
