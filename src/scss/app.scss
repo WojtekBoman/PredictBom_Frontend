@@ -1,5 +1,5 @@
 $background: url('../img/background2.jpg');
-$containerMargin: 5% auto;
+$containerMargin: 2% auto;
 $containerPadding: 30px;
 $fullHeight: 100vh;
 
@@ -42,4 +42,14 @@ body {
 .img-box{
     margin: 10px auto;
     width: 90%;
+}
+
+.market-buttons-group {
+    width: 100%;
+    text-align: center;
+}
+
+.market-button{
+    float: left;
+    margin: 10px 10px 10px 0px;
 }

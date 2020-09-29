@@ -1,13 +1,15 @@
 import React from 'react';
-import {Alert,Container,Form, Button,Spinner,Image} from 'react-bootstrap';
+import {Alert,Container,Form, Button,Spinner,Image,Input} from 'react-bootstrap';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import {connect} from 'react-redux';
-import {createMarket} from '../actions/marketActions';
+import {createMarket} from '../../actions/marketActions';
+
 
 
 class CreateMarketPage extends React.Component {
 
     state = {
+      resetButtonDisable:true,
       imageFile: null
     }
 
@@ -27,13 +29,13 @@ class CreateMarketPage extends React.Component {
       )
     }
 
-    renderInput = ({input, label,meta,type,placeholder,as,helpText}) => {
+    renderInput = ({input, label,meta,type,placeholder,as,helpText,rows}) => {
         return (
         <Form.Group>
         <Form.Label>{label}</Form.Label>
-        <Form.Control {...input} as={as} type={type} placeholder={placeholder}/>
-        {helpText && (<Form.Text className="text-muted">{helpText}</Form.Text>)}
+        <Form.Control {...input} as={as} type={type} placeholder={placeholder} rows={rows}/>
         {this.renderError(meta)}
+        {helpText && (<Form.Text className="text-muted">{helpText}</Form.Text>)}    
         </Form.Group>
         )
     }
@@ -85,6 +87,7 @@ class CreateMarketPage extends React.Component {
         imageObject.src = localImageUrl;
       }
     };
+
 
     renderSelectField({
         input,
@@ -141,9 +144,12 @@ class CreateMarketPage extends React.Component {
 
     resetForm = () => {
       this.props.reset();
-      this.setState({imageFile:null})
+      this.setState({imageFile:null,resetButtonDisable:true})
     }
       
+    checkIsEmptyField = (e) => {
+      e.target.value ? this.setState({resetButtonDisable:false}) : this.setState({resetButtonDisable:true});
+    }
 
     render() {
 
@@ -151,17 +157,18 @@ class CreateMarketPage extends React.Component {
             <Container className="bg-light border rounded shadow-container create-market-container">
                 <h3>Krok 1 - Tworzenie rynku</h3>
                 <Form onSubmit={this.props.handleSubmit(this.onSubmit)} encType="multipart/form-data">
-                <Field type="text" label="Tytuł rynku" name="marketTitle" component={this.renderInput} placeholder="Wprowadź tytuł rynku prognostycznego"></Field>
-                <Field helpText="Jeżeli nie wiesz kiedy może zakończyć się dany rynek nie wypełniaj tego pola" type="date" label="Przewidywana data zakończenia rynku" name="predictedDateEnd" component={this.renderInput}></Field>
+                <Field onChange={this.checkIsEmptyField} type="text" label="Tytuł rynku" name="marketTitle" component={this.renderInput} placeholder="Wprowadź tytuł rynku prognostycznego"></Field>
+                <Field onChange={this.checkIsEmptyField} helpText="Jeżeli nie wiesz kiedy może zakończyć się dany rynek nie wypełniaj tego pola" type="date" label="Przewidywana data zakończenia rynku" name="predictedDateEnd" component={this.renderInput}></Field>
                 <Field name="marketCategory" label="Wybierz kategorię rynku" options={this.getOptions()} component={this.renderSelectField}/>
                 {/* <Field validate={this.validateImageFormat} type="file" name="marketCover" component={this.renderFileInput} />
                 <div className="img-box">
                 {this.state.imageFile && (<Image className="img" src={this.state.imageFile} rounded/>)}
                 </div> */}
+                <Field as="textarea" rows="5" name="description" label="Krótko opisz rynek i jego zasady" component={this.renderInput} />
                 <Button className="form-button" variant="primary" type="submit">
                   {this.renderButtonContent()}
                 </Button>
-                <Button className="form-button" variant="primary" type="reset" onClick={this.resetForm}>
+                <Button className="form-button" variant="primary" type="reset" onClick={this.resetForm} disabled={this.state.resetButtonDisable}>
                   Cofnij zmiany
                 </Button>
                 </Form>

@@ -29,6 +29,11 @@ class NavigationBar extends React.Component {
                     Dodaj nowy rynek
                 </NavDropdown.Item>
               </LinkContainer>
+              <LinkContainer to="/modMarkets">
+                <NavDropdown.Item >
+                    Zarządzaj rynkami
+                </NavDropdown.Item>
+              </LinkContainer>
             </NavDropdown>
             </Nav>
           )

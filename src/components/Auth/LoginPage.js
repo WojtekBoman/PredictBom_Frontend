@@ -2,11 +2,17 @@ import React from 'react';
 import {Alert,Container,Form, Button,Spinner} from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
-import {register} from '../actions/registerActions';
+import {login} from '../../actions/loginActions';
+import { alertActions } from '../../actions/alertActions';
 
-class RegisterPage extends React.Component {
 
-    
+
+class LoginPage extends React.Component {
+
+    componentWillUnmount() {
+        this.props.clear();
+    }
+
     renderError({error,touched}) {
         if(touched && error) {
             return(
@@ -26,6 +32,10 @@ class RegisterPage extends React.Component {
         {this.renderError(meta)}
         </Form.Group>
         )
+    }
+
+    onSubmit = (formValues) => {
+        this.props.login(formValues)
     }
 
     renderInfo() {
@@ -55,67 +65,56 @@ class RegisterPage extends React.Component {
         }
     }
 
-    onSubmit = (formValues) => {
-        this.props.register(formValues);
-    }
-
     render(){
-        console.log(this.props);
         return(
             <Container className="bg-light border rounded shadow-container form-container">
             <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                <h2>Dołącz do PredictBom</h2>
+                <h2>Logowanie</h2>
                     <Field type="text" label="Nazwa użytkownika" name="username" component={this.renderInput} placeholder="Wprowadź nazwę użytkownika"></Field>
                     <Form.Text className="text-muted">
                     Zapewniamy że twoje dane będą bezpieczne 
                     </Form.Text>
-                    <Field type="text" label="Imię" name="firstName" component={this.renderInput} placeholder="Podaj swoje imię"></Field>
-                    <Field type="text" label="Nazwisko" name="surname" component={this.renderInput} placeholder="Podaj swoje nazwisko"></Field>
-                    <Field type="text" label="Adres e-mail" name="email" component={this.renderInput} placeholder="Wprowadź swój adres e-mail"></Field>
                     <Field type="password" label="Hasło" name="password" component={this.renderInput} placeholder="Wprowadź hasło"></Field>
-                    <Field type="password" label="Powtórz hasło" name="repeatPassword" component={this.renderInput} placeholder="Powtórz swoje hasło"></Field>
                 <Button variant="primary" type="submit">
                     {this.renderButtonContent()}
                 </Button>
         </Form>
         {this.renderInfo()}
         </Container>
+
         )
     }
 }
 
+
 const validate = formValues => {
-    const errors = {}
-    const requiredFields = [ 'username','firstName', 'surname', 'email', 'password','repeatPassword']
-    requiredFields.forEach(field => {
-    if (!formValues[ field ]) {
-      errors[ field ] = 'To pole jest wymagane'
+    const errors = {};
+
+    if(!formValues.username) {
+        errors.username = 'Musisz podać nazwę użytkownika';
     }
-  })
-  if (formValues.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formValues.email)) {
-    errors.email = 'Niepoprawny adres e-mail'
-  }
 
-  if(formValues.password !== formValues.repeatPassword){
-    errors.repeatPassword = "Podane hasła są różne";
-  }
+    if(!formValues.password) {
+        errors.password = 'Musisz podać hasło';
+    }
 
-  return errors
+    return errors;
 }
 
 const mapStateToProps = state => {
     return {
         alert: state.alert,
-        loading: state.loading.REGISTER
+        loading: state.loading.LOGIN
         }
 }
 
-
 const formWrapped = reduxForm(
     {
-        form:'registerForm',
+        form:'loginForm',
         validate
     }
-)(RegisterPage);
+)(LoginPage);
 
-export default connect(mapStateToProps,{register})(formWrapped);
+const {clear} = alertActions;
+
+export default connect(mapStateToProps,{login,clear})(formWrapped);

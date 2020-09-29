@@ -9,7 +9,7 @@ import { reducer as formReducer } from 'redux-form';
 export default combineReducers({
    login: loginReducer,
    form: formReducer,
-   marketsReducer: marketsReducer,
+   markets: marketsReducer,
    register: registerReducer,
    alert: alertReducer,
    loading: loadingReducer
