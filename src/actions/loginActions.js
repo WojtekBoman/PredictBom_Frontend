@@ -4,7 +4,6 @@ import history from '../history';
 import { alertActions } from './alertActions';
 
 export const login = ({username, password}) => {
-    console.log(username,password);
     return dispatch => {
         dispatch(request({ username }));
 
@@ -12,11 +11,9 @@ export const login = ({username, password}) => {
             .then(
                 user => { 
                     dispatch(success(user));
-                    console.log(user);
                     history.push('/profile');
                 },
                 error => {
-                    console.log(error);
                     dispatch(failure(error.toString()));
                     dispatch(alertActions.error(error.toString()));
                 }

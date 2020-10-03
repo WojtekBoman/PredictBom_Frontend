@@ -1,5 +1,3 @@
-import {authHeader} from '../helpers/authHeader';
-
 const login = (username,password) => {
     const reqOptions = {
         method: 'POST',
@@ -37,7 +35,7 @@ const handleResponse = (res) => {
     return res
     .text()
     .then(text => {
-        console.log("inside",text);
+
         const data = text && JSON.parse(text);
         if(!res.ok) {
             // if(res.status === 401) {
@@ -48,7 +46,7 @@ const handleResponse = (res) => {
             let error = (data && data.error) || res.statusText;
             return Promise.reject(error);
         }
-        console.log("data",data);
+        
         return data;
     });
 }

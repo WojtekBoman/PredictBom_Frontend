@@ -1,6 +1,6 @@
 import React from 'react';
-import {Alert,Container,Form, Button,Spinner,Image,Input} from 'react-bootstrap';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import {Alert,Container,Form, Button,Spinner} from 'react-bootstrap';
+import { Field, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
 import {createMarket} from '../../actions/marketActions';
 

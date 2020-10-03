@@ -53,3 +53,31 @@ body {
     float: left;
     margin: 10px 10px 10px 0px;
 }
+
+.toMarket{
+    cursor: pointer;
+}
+
+/* Inactive tab */
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff !important;
+    background-color: black !important;
+}
+
+.nav-pills .nav-link.hover, .nav-pills .show>.nav-link {
+    color: #fff !important;
+    background-color: grey !important;
+}
+
+
+.nav-pills a {
+        color: black;
+        text-decoration: none;
+        background-color: transparent;
+}
+
+.nav-pills a:hover {
+    color: white;
+    text-decoration: none;
+    background-color: #292b2c;
+}
