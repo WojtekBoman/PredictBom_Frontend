@@ -6,6 +6,12 @@ import {setMarketCover} from '../../actions/marketActions';
 
 class MarketCoverPage extends React.Component {
 
+    constructor(props) {
+      super(props);
+
+      this.fileInput = React.createRef();
+    }
+
     state = {
         resetButtonDisable:true,
         imageFile: null
@@ -31,9 +37,7 @@ class MarketCoverPage extends React.Component {
             accept={accept}
             onChange={event => this.handleChange(event, input)}
           />
-          {meta && meta.invalid && meta.error && (
-              <h2>Błąd</h2>
-          )}
+          {this.renderError(meta)}
           </div>
       );
   };
@@ -54,7 +58,7 @@ class MarketCoverPage extends React.Component {
          
           URL.revokeObjectURL(imageFile);
         };
-        this.setState({imageFile:localImageUrl});
+        this.setState({imageFile:localImageUrl,resetButtonDisable:false});
         imageObject.src = localImageUrl;
       }
     };
@@ -80,25 +84,34 @@ class MarketCoverPage extends React.Component {
         }
     }
   
-    renderInfo() {
-      if(this.props.alert.payload) {
-          return <Alert className="login-alert" variant="danger">
-              {this.props.alert.payload}
-          </Alert>
-      }
-  }
+    // renderInfo() {
+    //   if(!this.state.imageFile) {
+    //       return <Alert className="login-alert" variant="danger">
+    //           {"Musisz dodać zdjęcie"}
+    //       </Alert>
+    //   }
+  
 
   onSubmit = (marketCover) => {
+    console.log(marketCover);
       this.props.setMarketCover(this.props.match.params.id,marketCover);
   }
 
-    render() {
+  resetForm = () => {
+    Array.from(document.querySelectorAll("input")).forEach(
+      input => (input.value = "")
+    );
+    this.props.reset();
+    this.setState({imageFile: null,resetButtonDisable:true})
+  }
 
+    render() {
+        console.log(this.state);
         return(
             <Container className="bg-light border rounded shadow-container create-market-container">
                 <h3>Edytuj zdjęcie</h3>
                 <Form onSubmit={this.props.handleSubmit(this.onSubmit)} encType="multipart/form-data">
-                <Field accept="image/*" type="file" name="marketCover" component={this.renderFileInput} />
+                <Field ref={ref=> this.fileInput = ref} accept="image/*" type="file" name="marketCover" component={this.renderFileInput} />
                 <div className="img-box">
                 {this.state.imageFile && (<Image className="img" src={this.state.imageFile} rounded/>)}
                 </div>
@@ -109,7 +122,6 @@ class MarketCoverPage extends React.Component {
                   Cofnij zmiany
                 </Button>
                 </Form>
-                {this.renderInfo()}
             </Container>
         )
     }
@@ -123,6 +135,10 @@ const validate = formValues => {
       if(!formValues.marketCover.type.includes("image")){
         errors['marketCover'] = "Wybierz plik który jest obrazem";
       }
+  }
+
+  if(!formValues.marketCover) {
+    errors['marketCover'] = "Wybierz zdjęcie";
   }
 
   return errors

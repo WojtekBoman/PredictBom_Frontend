@@ -1,4 +1,5 @@
 import authHeader from '../helpers/authHeader';
+import authHeaderImgReq from '../helpers/authHeaderImgReq'
 
 
 const createMarket = (marketTitle, marketCategory, predictedDateEnd,description) => {
@@ -16,9 +17,8 @@ const createMarket = (marketTitle, marketCategory, predictedDateEnd,description)
     return fetch('http://localhost:8080/markets/new', reqOptions).then((res) => handleResponse(res))
 }
 
-const fetchMarkets = (typeOfMarkets,marketTitle,marketCategories=[],sortedBy,page) => {
+const fetchMarkets = (typeOfMarkets,marketTitle,marketCategories=[],sortedBy,page,pageSize) => {
 
-    console.log("Kategorie do requestu",marketCategories);
 
     let marketCategoryParams = "";
     if (marketCategories.length > 0) {
@@ -34,19 +34,20 @@ const fetchMarkets = (typeOfMarkets,marketTitle,marketCategories=[],sortedBy,pag
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:8080/markets/${typeOfMarkets}?marketTitle=${marketTitle}&${marketCategoryParams}&page=${page}&size=${2}`,reqOptions).then((res) => handleMarkets(res));
+
+    return fetch(`http://localhost:8080/markets/${typeOfMarkets}?marketTitle=${marketTitle}&${marketCategoryParams}&page=${page}&size=${pageSize}&sortAttribute=${sortedBy[0]}&sortDirection=${sortedBy[1]}`,reqOptions).then((res) => handleMarkets(res));
 }
 
 const setMarketCover = (marketId,{marketCover}) => {
     const data = new FormData();
-    data.append("marketCover", marketCover);
+    data.append("marketCover",marketCover)
     const reqOptions = {
         method: 'POST',
-        headers: authHeader(),
+        headers: authHeaderImgReq(),
         body: data
     }
 
-    return fetch(`http://localhost:8080/markets/marketCover/${marketId}`,reqOptions).then(res => handleChangeMarketCover(res));
+    return fetch(`http://localhost:8080/markets/marketCover/${marketId}`,reqOptions).then(res => handleResponse(res));
 }
 
 const handleMarkets = res => {
@@ -63,14 +64,6 @@ const handleMarkets = res => {
     })
 }
 
-const handleChangeMarketCover = (res) => {
-    return res 
-    .text()
-    .then(text => {
-        console.log(text);
-    })
-}
-
 
 const handleResponse = (res) => {
 
@@ -78,6 +71,7 @@ const handleResponse = (res) => {
     .text()
     .then(text => {
         const data = text && JSON.parse(text);
+        console.log(data);
         if(!data.predictionMarket){
             let error = data.info;
             return Promise.reject(error);
@@ -88,7 +82,7 @@ const handleResponse = (res) => {
             let error = (data && data.error) || res.statusText;
             return Promise.reject(error);
         }
-        return data;
+        return data.predictionMarket;
     });
 }
 

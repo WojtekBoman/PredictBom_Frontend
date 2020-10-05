@@ -34,3 +34,10 @@ export const changePage = (page) => {
         payload: page
     }
 }
+
+export const changePageSize = (pageSize) => {
+    return{
+        type: filterConstants.UPDATE_PAGE_SIZE,
+        payload: pageSize
+    }
+}

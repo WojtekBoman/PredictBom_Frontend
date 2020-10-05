@@ -41,9 +41,14 @@ const Market = (props) => {
       <Card.Text>
         {props.description}
       </Card.Text>
-      <LinkContainer to={`/markets/editCover/${props.marketId}`}>
+      <LinkContainer className="market-card-buttons" to={`/markets/editCover/${props.marketId}`}>
       <Button>
         Zmień zdjęcie
+      </Button>
+      </LinkContainer>
+      <LinkContainer className="market-card-buttons" to={`/markets/editBets/${props.marketId}`}>
+      <Button>
+        Edytuj Zakłady
       </Button>
       </LinkContainer>
     </Card.Body>

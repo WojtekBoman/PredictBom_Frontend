@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Form} from 'react-bootstrap';
-import {selectCategory, unselectCategory} from '../../actions/filterActions';
+import {selectCategory, unselectCategory,updateSorted, changePageSize} from '../../actions/filterActions';
 // import {filterConstants} from '../../constants/filterConstants';
 
 class MarketsFilter extends React.Component {
@@ -10,25 +10,74 @@ class MarketsFilter extends React.Component {
         filters: []
     }
 
- 
+    range = (from, to, step = 1) => {
+        let i = from;
+        const range = [];
+      
+        while (i <= to) {
+          range.push(i);
+          i += step;
+        }
+      
+        return range;
+      }
 
-    // onInputSearchChange = (e) => {
-        
-    //     this.setState({filters:{text:e.target.value}})
-    //     console.log(this.state);
-    //     this.props.dispatch(updateFilters(this.state.filters))
-    // }
+    handleSort = (e) => {
+      this.props.dispatch(updateSorted(e.target.value.split(',')));
+    }
 
     handleCategory = (e) => {
-        const actualFilters = this.state.filters;
+
         if(this.props.selectedCategories.includes(e.target.value)) {
             this.props.dispatch(unselectCategory(e.target.value))
         }else{
             this.props.dispatch(selectCategory(e.target.value))
         }
-        console.log(e.target.active);
+    }
+
+    handlePageSize = (e) => {
         console.log(e.target.value);
-        // this.props.dispatch(updateFilters(e.target.value));
+        this.props.dispatch(changePageSize(parseInt(e.target.value)));
+    }
+
+    renderPageSizeFilter() {
+    
+        return(
+            <div>
+                <Form.Label><h4>Rozmiar strony</h4></Form.Label>
+                <Form.Control as="select" onChange={this.handlePageSize}>
+                    {this.range(2,20,2).map(number => 
+                         <option key={number} value={number}>{number}</option>)}
+                </Form.Control>
+            </div>
+        )
+    }
+
+    renderCategoryFilter() {
+        const categories = [
+            {label:"Sport",value:"sport"},
+            {label:"Celebryci",value:"cel"},
+            {label:"Polityka",value:"pol"},
+            {label:"Gospodarka",value:"gosp"},
+            {label:"Inne",value:"inne"}
+        ]
+
+        return(
+            <div className="mb-3">
+                 <h4>Kategorie</h4>
+                <Form.Group>
+                    {categories.map(category => 
+                <Form.Check
+                 onClick={this.handleCategory}
+                    key={category.value}
+                    label={category.label}
+                    value={category.value}
+                    name="checkbox"
+                    type="checkbox"
+                 />)}
+                </Form.Group>
+            </div>
+        )
     }
 
     render() {
@@ -37,53 +86,14 @@ class MarketsFilter extends React.Component {
         return (
             <div>
              <Form.Label><h4>Sortuj według</h4></Form.Label>
-                <Form.Control as="select">
-                <option>Od najstarszych</option>
-                <option>Od najnowszych</option>
-                <option>Nabliższego czasu zakończenia</option>
-                <option>Najdalszego czasu zakończenia</option>
+                <Form.Control as="select" onChange={this.handleSort}>
+                <option value={"createdDate,desc"}>Od najstarszych</option>
+                <option value={"createdDate,asc"}>Od najnowszych</option>
+                <option value={"predictedDateEnd,desc"}>Nabliższego czasu zakończenia</option>
+                <option value={"predictedDateEnd,asc"}>Najdalszego czasu zakończenia</option>
                 </Form.Control>
-           
-             <div className="mb-3">
-                 <h4>Kategorie</h4>
-                <Form.Group>
-                 <Form.Check
-                 onClick={this.handleCategory}
-                 label={"Sport"}
-                 value={"sport"}
-                 name="checkbox"
-                type="checkbox"
-                 />
-                 <Form.Check
-                 onClick={this.handleCategory}
-                 label={"Celebryci"}
-                 value="cel"
-                 name="selectedCategory"
-                type="checkbox"
-                 />
-                 <Form.Check
-                 onClick={this.handleCategory}
-                 label={"Polityka"}
-                 value="pol"
-                 name="checkbox"
-                type="checkbox"
-                 />
-                 <Form.Check
-                 onClick={this.handleCategory}
-                 label={"Gospodarka"}
-                 value="gosp"
-                 name="selectedCategory"
-                type="checkbox"
-                 />
-                 <Form.Check
-                 onClick={this.handleCategory}
-                 label={"Inne"}
-                 value="inne"
-                 name="selectedCategory"
-                type="checkbox"
-                 />
-                 </Form.Group>
-            </div>
+             {this.renderPageSizeFilter()}
+             {this.renderCategoryFilter()}
             </div>
         )
     }

@@ -10,6 +10,7 @@ import MarketCoverPage from './Markets/MarketCoverPage';
 import NavigationBar from './NavigationBar';
 import ProfilePage from './User/ProfilePage';
 import RegisterPage from './Auth/RegisterPage';
+import EditBetsPage from './Markets/EditBetsPage';
 
 
 
@@ -27,6 +28,7 @@ const App = () => {
                     <PrivateRoute path="/markets/new" component={CreateMarketPage}/>
                     <PrivateRoute path="/modMarkets" component={ModeratorMarketsPage}/>
                     <PrivateRoute path="/markets/editCover/:id" component={MarketCoverPage}/>
+                    <PrivateRoute path="/markets/editBets/:id" component={EditBetsPage} />
                     <Redirect from="*" to="/" />
             </Switch>
             </Router>

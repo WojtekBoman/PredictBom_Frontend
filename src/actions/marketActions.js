@@ -21,16 +21,15 @@ export const createMarket = ({marketTitle,marketCategory,predictedDateEnd = "",d
             );
     };
 
-    function request(market) { return { type: marketsConstants.CREATE_MARKET_REQUEST,market  } }
-    function success(market) { return { type: marketsConstants.CREATE_MARKET_SUCCESS, market } }
+    function request(market) { return { type: marketsConstants.CREATE_MARKET_REQUEST,payload:market  } }
+    function success(market) { return { type: marketsConstants.CREATE_MARKET_SUCCESS, payload:market } }
     function failure(error) { return { type: marketsConstants.CREATE_MARKET_FAILURE, error } }
 }
 
-export const fetchMarkets = (typeOfMarkets,marketTitle,marketCategories,sortedBy,page) => {
-    console.log("Kategorie w feczu",marketCategories);
+export const fetchMarkets = (typeOfMarkets,marketTitle,marketCategories,sortedBy,page,pageSize) => {
     return dispatch => {
-        dispatch(request(typeOfMarkets,marketTitle,marketCategories,sortedBy,page))
-        marketService.fetchMarkets(typeOfMarkets,marketTitle,marketCategories,sortedBy,page) 
+        dispatch(request(typeOfMarkets,marketTitle,marketCategories,sortedBy,page,pageSize))
+        marketService.fetchMarkets(typeOfMarkets,marketTitle,marketCategories,sortedBy,page,pageSize) 
             .then(
                 markets => {
                     dispatch(success(markets));
@@ -42,7 +41,7 @@ export const fetchMarkets = (typeOfMarkets,marketTitle,marketCategories,sortedBy
             )
     };
 
-    function request(markets) { return { type: marketsConstants.FETCH_MARKETS_REQUEST,markets  } }
+    function request(markets) { return { type: marketsConstants.FETCH_MARKETS_REQUEST,payload:markets  } }
     function success(markets) { return { type: marketsConstants.FETCH_MARKETS_SUCCESS, markets } }
     function failure(error) { return { type: marketsConstants.FETCH_MARKETS_FAILURE, error } }
 }
@@ -63,7 +62,7 @@ export const setMarketCover = (marketId, marketCover) => {
             )
     }
 
-    function request(markets) { return { type: marketsConstants.SET_MARKET_COVER_REQUEST,markets  } }
-    function success(markets) { return { type: marketsConstants.SET_MARKET_COVER_SUCCESS, markets } }
+    function request(market) { return { type: marketsConstants.SET_MARKET_COVER_REQUEST,payload:market  } }
+    function success(market) { return { type: marketsConstants.SET_MARKET_COVER_SUCCESS,payload:market } }
     function failure(error) { return { type: marketsConstants.SET_MARKET_COVER_FAILURE, error } }
 }

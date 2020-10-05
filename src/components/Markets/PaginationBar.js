@@ -6,6 +6,10 @@ import {changePage} from '../../actions/filterActions';
 
 class PaginationBar extends React.Component {
 
+    state = {
+        pageNeighbours: 1
+    }
+
     range = (from, to, step = 1) => {
         let i = from;
         const range = [];
@@ -23,13 +27,13 @@ class PaginationBar extends React.Component {
         const RIGHT_PAGE = 'RIGHT';
         const totalPages = this.props.totalPages
         const currentPage = this.props.currentPage;
-        const pageNeighbours = 2;
+        const pageNeighbours = this.state.pageNeighbours;
     
         /**
          * totalNumbers: the total page numbers to show on the control
          * totalBlocks: totalNumbers + 2 to cover for the left(<) and right(>) controls
          */
-        const totalNumbers = (this.pageNeighbours * 2) + 3;
+        const totalNumbers = (pageNeighbours * 2) + 3;
         const totalBlocks = totalNumbers + 2;
     
         if (totalPages > totalBlocks) {
@@ -50,21 +54,21 @@ class PaginationBar extends React.Component {
             // handle: (1) < {5 6} [7] {8 9} (10)
             case (hasLeftSpill && !hasRightSpill): {
               const extraPages = this.range(startPage - spillOffset, startPage - 1);
-              pages = [LEFT_PAGE, ...extraPages, ...pages];
+              pages = ['LEFT', ...extraPages, ...pages];
               break;
             }
     
             // handle: (1) {2 3} [4] {5 6} > (10)
             case (!hasLeftSpill && hasRightSpill): {
               const extraPages = this.range(endPage + 1, endPage + spillOffset);
-              pages = [...pages, ...extraPages, RIGHT_PAGE];
+              pages = [...pages, ...extraPages, 'RIGHT'];
               break;
             }
     
             // handle: (1) < {4 5} [6] {7 8} > (10)
             case (hasLeftSpill && hasRightSpill):
             default: {
-              pages = [LEFT_PAGE, ...pages, RIGHT_PAGE];
+              pages = [LEFT_PAGE, ...pages, 'RIGHT'];
               break;
             }
           }
@@ -76,7 +80,7 @@ class PaginationBar extends React.Component {
       }
 
       renderPagination() {
-        if (!this.props.size || this.props.size === 1) return null;
+        if (!this.props.totalPages || this.props.totalPages === 1) return null;
 
         const LEFT_PAGE = 'LEFT';
         const RIGHT_PAGE = 'RIGHT';
@@ -89,18 +93,18 @@ class PaginationBar extends React.Component {
               <ul className="pagination">
                 { pages.map((page, index) => {
     
-                  if (page === LEFT_PAGE) return (
+                  if (page === 'LEFT') return (
                     <li key={index} className="page-item">
-                      <Nav.Link onClick={() => this.changePage(page-1)} className="page-link" aria-label="Previous">
+                      <Nav.Link onClick={() => this.handleMoveLeft(currentPage)} className="page-link" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                         <span className="sr-only">Previous</span>
                       </Nav.Link>
                     </li>
                   );
     
-                  if (page === RIGHT_PAGE) return (
+                  if (page === 'RIGHT') return (
                     <Nav.Item key={index} className="page-item">
-                      <Nav.Link onClick={() => this.changePage(page+1)} className="page-link" aria-label="Next">
+                      <Nav.Link onClick={() => this.handleMoveRight(currentPage)} className="page-link" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                         <span className="sr-only">Next</span>
                       </Nav.Link>
@@ -123,6 +127,16 @@ class PaginationBar extends React.Component {
     changePage(page) {
         console.log("Wywołano dla strony",page-1)
         this.props.dispatch(changePage(page-1))
+    }
+
+    handleMoveLeft(page) {
+        console.log(page - (this.state.pageNeighbours * 2) - 1)
+        this.props.dispatch(changePage(page- 1 - (this.state.pageNeighbours * 2) - 1))
+    }
+
+    handleMoveRight(page) {
+        console.log(page- 1 + (this.state.pageNeighbours * 2) + 1);
+        this.props.dispatch(changePage(page + (this.state.pageNeighbours * 2) + 1))
     }
 
     render() {
