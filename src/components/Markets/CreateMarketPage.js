@@ -4,8 +4,6 @@ import { Field, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
 import {createMarket} from '../../actions/marketActions';
 
-
-
 class CreateMarketPage extends React.Component {
 
     state = {
@@ -49,25 +47,6 @@ class CreateMarketPage extends React.Component {
             )
         }
     }
-
-    renderFileInput = ({ input, type, meta,accept }) => {
-      const { mimeType } = this.props;
-      return (
-          <div>
-          <input
-            name={input.name}
-            type={type}
-            accept={accept}
-            onChange={event => this.handleChange(event, input)}
-          />
-          {meta && meta.invalid && meta.error && (
-              <h2>Błąd</h2>
-          )}
-          </div>
-      );
-  };
-
-
 
     handleChange = (event, input) => {
       event.preventDefault();

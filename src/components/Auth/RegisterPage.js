@@ -3,9 +3,13 @@ import {Alert,Container,Form, Button,Spinner} from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
 import {register} from '../../actions/registerActions';
+import {alertActions} from '../../actions/alertActions';
 
 class RegisterPage extends React.Component {
 
+    componentWillUnmount() {
+        this.props.clear();
+    }
     
     renderError({error,touched}) {
         if(touched && error) {
@@ -118,4 +122,4 @@ const formWrapped = reduxForm(
     }
 )(RegisterPage);
 
-export default connect(mapStateToProps,{register})(formWrapped);
+export default connect(mapStateToProps,{register,clear:alertActions.clear})(formWrapped);

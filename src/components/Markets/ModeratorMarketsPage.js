@@ -3,6 +3,8 @@ import {Tab,Row,Col,Nav, Container} from 'react-bootstrap';
 import MarketsList from './MarketsList';
 import MarketsFilter from './MarketsFilter'
 import SearchBar from './SearchBar'
+import {connect} from 'react-redux';
+import {alertActions} from '../../actions/alertActions';
 
 
 class ModeratorMarketsPage extends React.Component {
@@ -11,12 +13,8 @@ class ModeratorMarketsPage extends React.Component {
       search:""
     }
 
-    handleSelect() {
-
-    }
-
     componentWillUnmount() {
-      
+      this.props.clear();
     }
 
     onInputSearchChange = (e) => {
@@ -44,7 +42,7 @@ class ModeratorMarketsPage extends React.Component {
           // </div>
           <Container className="bg-light border rounded shadow-container create-market-container">
             <header>
-              <h3>Rynki prognostyczne</h3>
+              <h3>Twoje rynki prognostyczne</h3>
               <br />
               <SearchBar />
             </header>
@@ -53,10 +51,10 @@ class ModeratorMarketsPage extends React.Component {
     <Col sm={12} md={3}>
       <Nav variant="pills" className="flex-column" color="dark" >
         <Nav.Item >
-          <Nav.Link className="dark-link" eventKey="first">Rynki bez zakładów</Nav.Link>
+          <Nav.Link className="dark-link" eventKey="first">Prywatne</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="second">Prywatne</Nav.Link>
+          <Nav.Link eventKey="second">Rynki bez zakładów</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link eventKey="third">Opublikowane</Nav.Link>
@@ -69,11 +67,11 @@ class ModeratorMarketsPage extends React.Component {
     </Col>
     <Col sm={12} md={9}>
       <Tab.Content>
-        <Tab.Pane eventKey="first" unmountOnExit={true}>
-          <MarketsList typeOfMarkets="filteredWaitingForBets" search={this.state.search}/>
+      <Tab.Pane eventKey="first" unmountOnExit={true}>
+          <MarketsList typeOfMarkets="private" search={this.state.search}/>
         </Tab.Pane>
         <Tab.Pane eventKey="second" unmountOnExit={true}>
-
+          <MarketsList typeOfMarkets="filteredWaitingForBets" search={this.state.search}/>
         </Tab.Pane>
         <Tab.Pane eventKey="third" unmountOnExit={true}>
           
@@ -91,4 +89,4 @@ class ModeratorMarketsPage extends React.Component {
 }
 
 
-export default ModeratorMarketsPage;
+export default connect(null,{clear:alertActions.clear})(ModeratorMarketsPage);

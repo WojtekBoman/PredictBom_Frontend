@@ -22,6 +22,7 @@ const clear = () => {
     }
 }
 
+// test web W 8.12
 export const clearAction = () => {
     return {
         type: alertConstants.ALERT_CLEAR

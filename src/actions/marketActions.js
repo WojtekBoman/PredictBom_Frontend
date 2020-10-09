@@ -2,6 +2,8 @@ import {marketsConstants} from '../constants/marketsConstants';
 import history from '../history';
 import { alertActions } from './alertActions';
 import { marketService} from '../services/marketService';
+import {updatePagination} from './paginationActions';
+import _ from 'lodash';
 
 export const createMarket = ({marketTitle,marketCategory,predictedDateEnd = "",description}) => {
 
@@ -10,8 +12,8 @@ export const createMarket = ({marketTitle,marketCategory,predictedDateEnd = "",d
 
         marketService.createMarket(marketTitle,marketCategory,predictedDateEnd,description)
             .then(
-                market => { 
-                    dispatch(success(market));
+                res => { 
+                    dispatch(success(res.predictionMarket));
                     history.push('/modMarkets');
                 },
                 error => {
@@ -32,7 +34,8 @@ export const fetchMarkets = (typeOfMarkets,marketTitle,marketCategories,sortedBy
         marketService.fetchMarkets(typeOfMarkets,marketTitle,marketCategories,sortedBy,page,pageSize) 
             .then(
                 markets => {
-                    dispatch(success(markets));
+                    dispatch(success(markets.content));
+                    dispatch(updatePagination(_.omit(markets,['content'])))
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -41,9 +44,32 @@ export const fetchMarkets = (typeOfMarkets,marketTitle,marketCategories,sortedBy
             )
     };
 
+
     function request(markets) { return { type: marketsConstants.FETCH_MARKETS_REQUEST,payload:markets  } }
-    function success(markets) { return { type: marketsConstants.FETCH_MARKETS_SUCCESS, markets } }
+    function success(markets) { return { type: marketsConstants.FETCH_MARKETS_SUCCESS,payload: markets } }
     function failure(error) { return { type: marketsConstants.FETCH_MARKETS_FAILURE, error } }
+}
+
+export const fetchMarket = (marketId) => {
+    return dispatch => {
+        dispatch(request(marketId))
+        marketService.fetchMarket(marketId) 
+            .then(
+                market => {
+                    dispatch(success(market));
+                },
+                error => {
+                    console.log(error);
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            )
+    };
+
+
+    function request(market) { return { type: marketsConstants.FETCH_MARKET_REQUEST,payload:market  } }
+    function success(market) { return { type: marketsConstants.FETCH_MARKET_SUCCESS,payload: market } }
+    function failure(error) { return { type: marketsConstants.FETCH_MARKET_FAILURE, error } }
 }
 
 export const setMarketCover = (marketId, marketCover) => {
@@ -52,7 +78,8 @@ export const setMarketCover = (marketId, marketCover) => {
         marketService.setMarketCover(marketId,marketCover)
             .then(
                 res => {
-                    dispatch(success(res));
+                    dispatch(success(res.predictionMarket));
+                    dispatch(alertActions.success(res.info));
                     history.push('/modMarkets')
                 },
                 error => {
@@ -65,4 +92,48 @@ export const setMarketCover = (marketId, marketCover) => {
     function request(market) { return { type: marketsConstants.SET_MARKET_COVER_REQUEST,payload:market  } }
     function success(market) { return { type: marketsConstants.SET_MARKET_COVER_SUCCESS,payload:market } }
     function failure(error) { return { type: marketsConstants.SET_MARKET_COVER_FAILURE, error } }
+}
+
+
+export const addBet = (marketId, chosenOption) => {
+    return dispatch => {
+        console.log(marketId,chosenOption);
+        dispatch(request(marketId));
+        marketService.addBet(marketId,chosenOption)
+            .then(
+                res => {
+                    dispatch(success(res.predictionMarket));
+                    dispatch(alertActions.success(res.info));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            )
+    }
+
+    function request(market) { return { type: marketsConstants.ADD_BET_REQUEST,payload:market  } }
+    function success(market) { return { type: marketsConstants.ADD_BET_SUCCESS,payload:market } }
+    function failure(error) { return { type: marketsConstants.ADD_BET_FAILURE, error } }
+}
+
+export const deleteBet = (marketId,betId) => {
+    return dispatch => {
+        dispatch(request(marketId));
+        marketService.deleteBet(marketId,betId) 
+            .then(
+                res => {
+                    dispatch(success(res.predictionMarket));
+                    dispatch(alertActions.success(res.info));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            )
+    }
+
+    function request(market) { return { type: marketsConstants.DELETE_BET_REQUEST,payload:market  } }
+    function success(market) { return { type: marketsConstants.DELETE_BET_SUCCESS,payload:market } }
+    function failure(error) { return { type: marketsConstants.DELETE_BET_FAILURE, error } }
 }

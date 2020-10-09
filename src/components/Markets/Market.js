@@ -6,6 +6,9 @@ import celebryciBackground from '../../img/celebryciBackground.jpg';
 import politykaBackground from '../../img/politykaBackground.jpg';
 import gospodarkaBackground from '../../img/gospodarkaBackground.jpg';
 import inneBackground from '../../img/inneBackground.png';
+import TimeAgo from 'react-timeago'
+import polishStrings from 'react-timeago/lib/language-strings/pl'
+import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
 
 
 const  setCover = (category) => {
@@ -28,6 +31,7 @@ const  setCover = (category) => {
 }
 
 const Market = (props) => {
+
 
     return(
         <Card>
@@ -53,7 +57,7 @@ const Market = (props) => {
       </LinkContainer>
     </Card.Body>
     <Card.Footer>
-      <small className="text-muted">Last updated 3 mins ago</small>
+      <small className="text-muted">Dodano <TimeAgo date={props.createdDate} formatter={buildFormatter(polishStrings)}/></small>
     </Card.Footer>
   </Card>
     )

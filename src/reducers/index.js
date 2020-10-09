@@ -5,6 +5,7 @@ import alertReducer from './alertReducer';
 import loadingReducer from './loadingReducer';
 import marketsReducer from './marketsReducer';
 import filterReducer from './filterReducer';
+import paginationReducer from './paginationReducer';
 import { reducer as formReducer } from 'redux-form';
 
 export default combineReducers({
@@ -14,5 +15,6 @@ export default combineReducers({
    register: registerReducer,
    filter: filterReducer,
    alert: alertReducer,
-   loading: loadingReducer
+   loading: loadingReducer,
+   pagination: paginationReducer
 });

@@ -25,8 +25,8 @@ class PaginationBar extends React.Component {
       fetchPageNumbers = () => {
         const LEFT_PAGE = 'LEFT';
         const RIGHT_PAGE = 'RIGHT';
-        const totalPages = this.props.totalPages
-        const currentPage = this.props.currentPage;
+        const totalPages = this.props.paginationInfo.totalPages
+        const currentPage = this.props.paginationInfo.number;
         const pageNeighbours = this.state.pageNeighbours;
     
         /**
@@ -80,48 +80,51 @@ class PaginationBar extends React.Component {
       }
 
       renderPagination() {
-        if (!this.props.totalPages || this.props.totalPages === 1) return null;
+        if(this.props.paginationInfo){
+          if (!this.props.paginationInfo.totalPages || this.props.paginationInfo.totalPages === 1) return null;
 
-        const LEFT_PAGE = 'LEFT';
-        const RIGHT_PAGE = 'RIGHT';
-    
-        const { currentPage } = this.props;
-        const pages = this.fetchPageNumbers();
-    
-        return (
-            <Nav aria-label="Countries Pagination" className="text-center">
-              <ul className="pagination">
-                { pages.map((page, index) => {
-    
-                  if (page === 'LEFT') return (
-                    <li key={index} className="page-item">
-                      <Nav.Link onClick={() => this.handleMoveLeft(currentPage)} className="page-link" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span className="sr-only">Previous</span>
-                      </Nav.Link>
-                    </li>
-                  );
-    
-                  if (page === 'RIGHT') return (
-                    <Nav.Item key={index} className="page-item">
-                      <Nav.Link onClick={() => this.handleMoveRight(currentPage)} className="page-link" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span className="sr-only">Next</span>
-                      </Nav.Link>
-                    </Nav.Item>
-                  );
-    
-                  return (
-                    <Nav.Item key={index} className={`page-item${ currentPage === page-1 ? ' active' : ''}`}>
-                      <Nav.Link className="page-link" onClick={() => this.changePage(page)} >{ page }</Nav.Link>
-                    </Nav.Item>
-                  );
-    
-                }) }
-    
-              </ul>
-            </Nav>
-        );
+          const LEFT_PAGE = 'LEFT';
+          const RIGHT_PAGE = 'RIGHT';
+      
+          const { number } = this.props.paginationInfo;
+          const pages = this.fetchPageNumbers();
+      
+          return (
+              <Nav aria-label="Countries Pagination" className="text-center">
+                <ul className="pagination">
+                  { pages.map((page, index) => {
+      
+                    if (page === 'LEFT') return (
+                      <li key={index} className="page-item">
+                        <Nav.Link onClick={() => this.handleMoveLeft(number)} className="page-link" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                          <span className="sr-only">Previous</span>
+                        </Nav.Link>
+                      </li>
+                    );
+      
+                    if (page === 'RIGHT') return (
+                      <Nav.Item key={index} className="page-item">
+                        <Nav.Link onClick={() => this.handleMoveRight(number)} className="page-link" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                          <span className="sr-only">Next</span>
+                        </Nav.Link>
+                      </Nav.Item>
+                    );
+      
+                    return (
+                      <Nav.Item key={index} className={`page-item${ number === page-1 ? ' active' : ''}`}>
+                        <Nav.Link className="page-link" onClick={() => this.changePage(page)} >{ page }</Nav.Link>
+                      </Nav.Item>
+                    );
+      
+                  }) }
+      
+                </ul>
+              </Nav>
+          );
+        }
+        
       }
 
     changePage(page) {
@@ -140,46 +143,7 @@ class PaginationBar extends React.Component {
     }
 
     render() {
-    
-        const pageNumCss = {
-            minWidth: "30px",
-            maxWidth:"45px",
-            border: "1px solid #292b2c",
-            color: "#292b2c",
-            textAlign: "center",
-            fontWeight: "bold"
-        };
-
-        // return ( <Card.Footer>
-        //     <div style={{ "float": "left" }}>
-        //         Strona {this.props.currentPage + 1} z {this.props.size}
-        //     </div>
-        //     <div style={{ "float": "right" }}>
-        //         <InputGroup size="sm">
-        //             <InputGroup.Prepend>
-        //                 <Button type="button" variant="outline-dark">
-        //                     {/* <FontAwesomeIcon icon={faAngleDoubleLeft} /> */}
-        //                      {"<<"}
-        //                     </Button>
-        //                 <Button type="button" variant="outline-dark" >
-        //                     {/* <FontAwesomeIcon icon={faAngleLeft} /> */}
-        //                      {"<"}
-        //                     </Button>
-        //             </InputGroup.Prepend>
-        //             <FormControl style={pageNumCss} className={"bg-light"} name="currentPage" value={this.props.currentPage+1} disabled/>
-        //             <InputGroup.Append>
-        //                 <Button type="button" variant="outline-dark" >
-        //                     {/* <FontAwesomeIcon icon={faAngleRight} />  */}
-        //                     {">"}
-        //                     </Button>
-        //                 <Button type="button" variant="outline-dark">
-        //                     {/* <FontAwesomeIcon icon={faAngleDoubleRight} />  */}
-        //                     {">>"}
-        //                     </Button>
-        //             </InputGroup.Append>
-        //         </InputGroup>
-        //     </div>
-        // </Card.Footer>)
+      console.log(this.props);
         return (
             <div>
                 {this.renderPagination()}
@@ -188,13 +152,11 @@ class PaginationBar extends React.Component {
     }
 }
 
-// const mapStateToProps = (state,ownProps) => {
-//     return {
-//         totalPages: ownProps.totalPages,
-//         firstPage: ownProps.firstPage,
-//         lastPage: ownProps.lastPage
-//     }
-// }
+const mapStateToProps = (state,ownProps) => {
+    return {
+        paginationInfo: state.pagination.paginationInfo
+    }
+}
 
 const mapDispatchToProps = dispatch => {
     return{
@@ -202,4 +164,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null,mapDispatchToProps)(PaginationBar);
+export default connect(mapStateToProps,mapDispatchToProps)(PaginationBar);
