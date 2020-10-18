@@ -11,6 +11,8 @@ import NavigationBar from './NavigationBar';
 import ProfilePage from './User/ProfilePage';
 import RegisterPage from './Auth/RegisterPage';
 import EditBetsPage from './Markets/EditBetsPage';
+import ResetPasswordPage from './Auth/ResetPasswordPage';
+import ResetPasswordWithToken from './Auth/ResetPasswordWithToken';
 
 
 
@@ -24,11 +26,14 @@ const App = () => {
             <PrivateRoute exact path="/" component={HomePage} />
                     <Route path="/login" component={LoginPage} />
                     <Route path="/rejestracja" component={RegisterPage} />
+                    <Route path="/resetPassword" component={ResetPasswordPage} />
+                    <Route path="/resetPasswordWithToken" component={ResetPasswordWithToken} />
                     <PrivateRoute path="/profile" component={ProfilePage} />
                     <PrivateRoute path="/markets/new" component={CreateMarketPage}/>
                     <PrivateRoute path="/modMarkets" component={ModeratorMarketsPage}/>
                     <PrivateRoute path="/markets/editCover/:id" component={MarketCoverPage}/>
                     <PrivateRoute path="/markets/editBets/:id" component={EditBetsPage} />
+
                     <Redirect from="*" to="/" />
             </Switch>
             </Router>

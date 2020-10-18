@@ -29,13 +29,56 @@ const register = (username,firstName,surname,email,password) => {
 
 }
 
+const sendToken = (email) => {
+    const reqOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'}
+    }
+    return fetch(`http://localhost:8080/api/auth/user/resetPassword?username=${email}`,reqOptions).then(res => handleTextResponse(res));
+}
+
+const checkToken = (token) => {
+    const reqOptions = {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'}
+    }
+    return fetch(`http://localhost:8080/api/auth/user/changePassword?token=${token}`,reqOptions).then(res => handleTextResponse(res));
+}
+
+const changePasswordWithToken = (newPassword,repeatedPassword,token) => {
+    const reqOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({newPassword,repeatedPassword,token})
+    }
+
+    return fetch('http://localhost:8080/api/auth/user/changePassword',reqOptions).then(res => handleTextResponse(res));
+}
+
+const handleTextResponse = (textResponse) => {
+    return textResponse
+    .text()
+    .then(text => {
+        if(!textResponse.ok) {
+            // if(res.status === 401) {
+            //     logout();
+            //     // window.location.reload(true);
+            // }
+
+            let error = (text) || textResponse.statusText;
+            return Promise.reject(error);
+        }
+        
+        return text;
+    });
+}
 
 const handleResponse = (res) => {
 
     return res
     .text()
     .then(text => {
-
+        console.log(text);
         const data = text && JSON.parse(text);
         if(!res.ok) {
             // if(res.status === 401) {
@@ -51,8 +94,13 @@ const handleResponse = (res) => {
     });
 }
 
+
+
 export const userService = {
     login,
     logout,
-    register
+    register,
+    sendToken,
+    checkToken,
+    changePasswordWithToken
 };

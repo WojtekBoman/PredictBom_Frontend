@@ -94,12 +94,11 @@ const handleMarkets = res => {
 
 
 const handleResponse = (res) => {
-
     return res
     .text()
     .then(text => {
         const data = text && JSON.parse(text);
-        console.log(data);
+        console.log("Infooo",text);
         if(!data.predictionMarket){
             let error = data.info;
             return Promise.reject(error);

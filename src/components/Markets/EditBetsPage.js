@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Alert,Container,Form,Button,Spinner,Modal} from 'react-bootstrap';
+import {Alert,Container,Form,Button,Spinner,Modal,Row,Col} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faTimesCircle} from '@fortawesome/free-solid-svg-icons';
 import {addBet,deleteBet,fetchMarket} from '../../actions/marketActions';
@@ -126,6 +126,16 @@ renderBetsList = () => {
                 <h3>{this.props.currentMarket.topic}</h3>
                 <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
                 <Field onChange={this.checkIsEmptyField} type="text" label="Dodawanie zakładu" name="chosenOption" component={this.renderInput} placeholder="Wprowadź tytuł zakładu"></Field>
+                <Row>
+                    <Col sm={6}>
+                    <Field type="number" name="yesPrice" component={this.renderInput} placeholder="Podaj cenę kontraktu na tak"></Field>
+                    </Col>
+                    <Col sm={6}>
+                    <Field type="number" name="noPrice" component={this.renderInput} placeholder="Podaj cenę kontraktu na nie"></Field>
+                    </Col>
+                </Row>
+                
+
                     <Button variant="primary" type="submit">
                         {this.renderButtonContent()}
                     </Button>
@@ -168,6 +178,10 @@ const validate = formValues => {
     if(!formValues.chosenOption) {
         errors['chosenOption'] = "To pole jest wymagane";
     }
+
+    // if(Math.abs(formValues.yesPrice - formValues.noPrice) > 10) {
+    //     errors['yesPrice'] = "Różnica między cenami na tak i nie może wynosić maksymalnie 10 $";
+    // }
 
     return errors;
 }

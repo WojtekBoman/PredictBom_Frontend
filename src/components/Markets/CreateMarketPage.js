@@ -8,7 +8,6 @@ class CreateMarketPage extends React.Component {
 
     state = {
       resetButtonDisable:true,
-      imageFile: null
     }
 
     componentDidMount() {
@@ -47,26 +46,6 @@ class CreateMarketPage extends React.Component {
             )
         }
     }
-
-    handleChange = (event, input) => {
-      event.preventDefault();
-      let imageFile = event.target.files[0];
-      if (imageFile) {
-        const localImageUrl = URL.createObjectURL(imageFile);
-        const imageObject = new window.Image();
-  
-        imageObject.onload = () => {
-          imageFile.width = imageObject.naturalWidth;
-          imageFile.height = imageObject.naturalHeight;
-          input.onChange(imageFile);
-         
-          URL.revokeObjectURL(imageFile);
-        };
-        this.setState({imageFile:localImageUrl});
-        imageObject.src = localImageUrl;
-      }
-    };
-
 
     renderSelectField({
         input,
@@ -123,7 +102,6 @@ class CreateMarketPage extends React.Component {
 
     resetForm = () => {
       this.props.reset();
-      this.setState({imageFile:null,resetButtonDisable:true})
     }
       
     checkIsEmptyField = (e) => {

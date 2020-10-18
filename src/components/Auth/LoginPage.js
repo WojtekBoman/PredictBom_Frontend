@@ -4,6 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
 import {login} from '../../actions/loginActions';
 import { alertActions } from '../../actions/alertActions';
+import { Link } from 'react-router-dom';
 
 
 
@@ -75,10 +76,12 @@ class LoginPage extends React.Component {
                     Zapewniamy że twoje dane będą bezpieczne 
                     </Form.Text>
                     <Field type="password" label="Hasło" name="password" component={this.renderInput} placeholder="Wprowadź hasło"></Field>
+                    
                 <Button variant="primary" type="submit">
                     {this.renderButtonContent()}
                 </Button>
         </Form>
+        <Link to="/resetPassword">Zapomniałeś hasła ?</Link>
         {this.renderInfo()}
         </Container>
 
