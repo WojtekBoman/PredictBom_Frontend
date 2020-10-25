@@ -86,7 +86,7 @@ const handleResponse = (res) => {
             //     // window.location.reload(true);
             // }
 
-            let error = (data && data.error) || res.statusText;
+            let error = (data && data.message) || res.statusText;
             return Promise.reject(error);
         }
         

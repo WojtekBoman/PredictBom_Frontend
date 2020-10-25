@@ -6,6 +6,7 @@ import Market from './Market';
 import PaginationBar from './PaginationBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faSadTear} from '@fortawesome/free-solid-svg-icons';
+import Loader from 'react-loader-spinner';
 
 
 
@@ -44,19 +45,14 @@ class MarketsList extends React.Component {
     }
 
     renderLoadingMessage(){
-        if ((typeof this.props.loading !== 'undefined') && this.props.loading.pending) {
         return(
         <div className="text-center">
-        <Spinner
-        as="span"
-        animation="border"
-        size="sm"
-        aria-hidden="true"
+        <Loader
+             type="TailSpin"
+             color="black"
         />
-       
         </div>
         )
-    }
     }
 
     renderInfo() {
@@ -81,7 +77,7 @@ class MarketsList extends React.Component {
         }else{
             return (
                 <div>
-                    {this.renderNotFoundMessage()}
+                    {((typeof this.props.loading !== 'undefined') && this.props.loading.pending) ? <div>{this.renderLoadingMessage()}</div> : <div>{this.renderNotFoundMessage()}</div> }
                 </div>
             )
         }
@@ -92,7 +88,6 @@ class MarketsList extends React.Component {
         console.log("render marketslist")
         return(
                 <div>
-                {this.renderLoadingMessage()}
                 {this.renderList()}
                 {this.renderInfo()}
                 {this.renderPagination()}

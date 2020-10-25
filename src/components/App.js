@@ -13,11 +13,12 @@ import RegisterPage from './Auth/RegisterPage';
 import EditBetsPage from './Markets/EditBetsPage';
 import ResetPasswordPage from './Auth/ResetPasswordPage';
 import ResetPasswordWithToken from './Auth/ResetPasswordWithToken';
+import MakeMarketPublicPage from './Markets/MakeMarketPublicPage';
 
 
 
 const App = () => {
-    
+    console.log("APP");
     return(
         <div className='wrapper'>
             <Router history={history}>
@@ -33,7 +34,7 @@ const App = () => {
                     <PrivateRoute path="/modMarkets" component={ModeratorMarketsPage}/>
                     <PrivateRoute path="/markets/editCover/:id" component={MarketCoverPage}/>
                     <PrivateRoute path="/markets/editBets/:id" component={EditBetsPage} />
-
+                    <PrivateRoute path="/markets/makePubic:/:id" component={MakeMarketPublicPage} />
                     <Redirect from="*" to="/" />
             </Switch>
             </Router>

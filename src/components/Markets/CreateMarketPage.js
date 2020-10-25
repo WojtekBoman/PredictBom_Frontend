@@ -3,6 +3,8 @@ import {Alert,Container,Form, Button,Spinner} from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
 import {createMarket} from '../../actions/marketActions';
+import MarketProgressBar from './MarketProgressBar';
+
 
 class CreateMarketPage extends React.Component {
 

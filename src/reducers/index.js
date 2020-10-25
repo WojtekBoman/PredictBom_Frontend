@@ -7,6 +7,7 @@ import marketsReducer from './marketsReducer';
 import filterReducer from './filterReducer';
 import paginationReducer from './paginationReducer';
 import tokenReducer from './tokenReducer';
+import betsReducer from './betsReducer';
 import { reducer as formReducer } from 'redux-form';
 
 export default combineReducers({
@@ -18,5 +19,6 @@ export default combineReducers({
    alert: alertReducer,
    loading: loadingReducer,
    pagination: paginationReducer,
-   token: tokenReducer
+   token: tokenReducer,
+   bets: betsReducer
 });

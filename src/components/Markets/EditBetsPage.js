@@ -8,6 +8,8 @@ import { Field, reduxForm } from 'redux-form';
 import MarketModal from './MarketModal';
 import BetsList from './BetsList';
 import {alertActions} from '../../actions/alertActions';
+import {Link} from "react-router-dom"
+import { LinkContainer } from 'react-router-bootstrap';
 
 class EditBetsPage extends React.Component {
     
@@ -58,11 +60,11 @@ class EditBetsPage extends React.Component {
         )
   }
 
-  renderInput = ({input, label,meta,type,placeholder,as,helpText,rows}) => {
+  renderInput = ({input, label,meta,type,placeholder,as,helpText,rows,max}) => {
     return (
     <Form.Group>
     <Form.Label>{label}</Form.Label>
-    <Form.Control {...input} as={as} type={type} placeholder={placeholder} rows={rows}/>
+    <Form.Control {...input} max={max} as={as} type={type} placeholder={placeholder} rows={rows}/>
     {this.renderError(meta)}
     {helpText && (<Form.Text className="text-muted">{helpText}</Form.Text>)}    
     </Form.Group>
@@ -90,7 +92,7 @@ renderError({error,touched}) {
 // }
 
 onSubmit = (formValues) => {
-    this.props.addBet(this.props.match.params.id,formValues.chosenOption)
+    this.props.addBet(this.props.match.params.id,formValues.yesPrice,formValues.noPrice,formValues.chosenOption)
 }
 
 renderBetsList = () => {
@@ -119,7 +121,17 @@ renderBetsList = () => {
         }
     }
 
-    renderFormContent() {
+    renderNextStepButton = () => {
+        if(this.props.currentMarket.bets) {
+            return(<LinkContainer to={`editCover/${this.props.match.params.id}`}>
+                <Button variant="primary" type="submit">
+                        Zatwierdź zakłady
+                </Button>
+            </LinkContainer>)
+        }
+    }
+
+    renderPageContent() {
         if(this.props.currentMarket){
             return(
                 <Container className="bg-light border rounded shadow-container create-market-container">
@@ -128,20 +140,19 @@ renderBetsList = () => {
                 <Field onChange={this.checkIsEmptyField} type="text" label="Dodawanie zakładu" name="chosenOption" component={this.renderInput} placeholder="Wprowadź tytuł zakładu"></Field>
                 <Row>
                     <Col sm={6}>
-                    <Field type="number" name="yesPrice" component={this.renderInput} placeholder="Podaj cenę kontraktu na tak"></Field>
+                    <Field type="number" label="Podaj cenę kontraktu na tak" max="100" name="yesPrice" component={this.renderInput} placeholder="Podaj cenę kontraktu na tak"></Field>
                     </Col>
                     <Col sm={6}>
-                    <Field type="number" name="noPrice" component={this.renderInput} placeholder="Podaj cenę kontraktu na nie"></Field>
+                    <Field type="number" label="Podaj cenę kontraktu na nie" max="100" name="noPrice" component={this.renderInput} placeholder="Podaj cenę kontraktu na nie"></Field>
                     </Col>
                 </Row>
-                
-
                     <Button variant="primary" type="submit">
                         {this.renderButtonContent()}
                     </Button>
                 </Form>
                 {this.renderInfo()}            
                 {this.renderBetsList()}
+                {this.renderNextStepButton()}
             </Container>
             )
         }
@@ -165,7 +176,7 @@ renderBetsList = () => {
             <div>
             {this.renderLoading()}
             {this.renderFailedToFetch()}
-            {this.renderFormContent()}
+            {this.renderPageContent()}
             {this.renderInfo()}
             {/* {this.renderFailedFetch()} */}
             </div>
@@ -179,9 +190,10 @@ const validate = formValues => {
         errors['chosenOption'] = "To pole jest wymagane";
     }
 
-    // if(Math.abs(formValues.yesPrice - formValues.noPrice) > 10) {
-    //     errors['yesPrice'] = "Różnica między cenami na tak i nie może wynosić maksymalnie 10 $";
-    // }
+    if((parseInt(formValues.yesPrice) + parseInt(formValues.noPrice)) > 100) {
+        console.log(formValues)
+        errors['yesPrice'] = "Różnica między cenami na tak i nie może wynosić maksymalnie 10 $";
+    }
 
     return errors;
 }

@@ -27,6 +27,7 @@ export default (state = [], action) => {
             return newArray;
         case marketsConstants.CREATE_MARKET_FAILURE:
             return [...state]
+        
         case marketsConstants.SET_MARKET_COVER_REQUEST:
             return [...state];
         case marketsConstants.SET_MARKET_COVER_SUCCESS:

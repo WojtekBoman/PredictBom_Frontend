@@ -2,6 +2,7 @@ import {marketsConstants} from '../constants/marketsConstants';
 import history from '../history';
 import { alertActions } from './alertActions';
 import { marketService} from '../services/marketService';
+import {betsConstants} from '../constants/betsConstants';
 import {updatePagination} from './paginationActions';
 import _ from 'lodash';
 
@@ -14,7 +15,7 @@ export const createMarket = ({marketTitle,marketCategory,predictedDateEnd = "",d
             .then(
                 res => { 
                     dispatch(success(res.predictionMarket));
-                    history.push('/modMarkets');
+                    history.push(`editBets/${res.predictionMarket.marketId}`);
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -59,7 +60,6 @@ export const fetchMarket = (marketId) => {
                     dispatch(success(market));
                 },
                 error => {
-                    console.log(error);
                     dispatch(failure(error.toString()));
                     dispatch(alertActions.error(error.toString()));
                 }
@@ -95,14 +95,15 @@ export const setMarketCover = (marketId, marketCover) => {
 }
 
 
-export const addBet = (marketId, chosenOption) => {
+export const addBet = (marketId,yesPrice, noPrice,chosenOption) => {
     return dispatch => {
         console.log(marketId,chosenOption);
         dispatch(request(marketId));
-        marketService.addBet(marketId,chosenOption)
+        marketService.addBet(marketId,yesPrice,noPrice,chosenOption)
             .then(
                 res => {
                     dispatch(success(res.predictionMarket));
+                    dispatch(addBetPrice(res.betPrice))
                     dispatch(alertActions.success(res.info));
                 },
                 error => {
@@ -115,6 +116,28 @@ export const addBet = (marketId, chosenOption) => {
     function request(market) { return { type: marketsConstants.ADD_BET_REQUEST,payload:market  } }
     function success(market) { return { type: marketsConstants.ADD_BET_SUCCESS,payload:market } }
     function failure(error) { return { type: marketsConstants.ADD_BET_FAILURE, error } }
+    function addBetPrice(betPrice) {return {type:betsConstants.FETCH_BET_PRICE_SUCCESS,payload:betPrice}}
+}
+
+export const fetchBetPrice = (betId) => {
+    return dispatch => {
+        dispatch(request(betId))
+        marketService.fetchBetPrice(betId) 
+            .then(
+                betPrice => {
+                    dispatch(success(betPrice));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            )
+    };
+
+
+    function request(betPrice) { return { type: betsConstants.FETCH_BET_PRICE_REQUEST,payload:betPrice  } }
+    function success(betPrice) { return { type: betsConstants.FETCH_BET_PRICE_SUCCESS,payload: betPrice } }
+    function failure(error) { return { type: betsConstants.FETCH_BET_PRICE_FAILURE, error } }
 }
 
 export const deleteBet = (marketId,betId) => {
@@ -125,6 +148,7 @@ export const deleteBet = (marketId,betId) => {
                 res => {
                     dispatch(success(res.predictionMarket));
                     dispatch(alertActions.success(res.info));
+                    dispatch(deleteBetPrice(betId));
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -136,4 +160,5 @@ export const deleteBet = (marketId,betId) => {
     function request(market) { return { type: marketsConstants.DELETE_BET_REQUEST,payload:market  } }
     function success(market) { return { type: marketsConstants.DELETE_BET_SUCCESS,payload:market } }
     function failure(error) { return { type: marketsConstants.DELETE_BET_FAILURE, error } }
+    function deleteBetPrice(betId) {return {type:betsConstants.DELETE_BET,payload:betId}}
 }
