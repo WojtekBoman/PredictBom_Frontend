@@ -6,9 +6,10 @@ import celebryciBackground from '../../img/celebryciBackground.jpg';
 import politykaBackground from '../../img/politykaBackground.jpg';
 import gospodarkaBackground from '../../img/gospodarkaBackground.jpg';
 import inneBackground from '../../img/inneBackground.png';
-import TimeAgo from 'react-timeago'
-import polishStrings from 'react-timeago/lib/language-strings/pl'
-import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
+import TimeAgo from 'react-timeago';
+import polishStrings from 'react-timeago/lib/language-strings/pl';
+import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
+import {connect} from 'react-redux'
 
 
 const  setCover = (category) => {
@@ -32,7 +33,6 @@ const  setCover = (category) => {
 
 const Market = (props) => {
 
-
     return(
         <Card>
           <LinkContainer to={`/markets/details/${props.marketId}`}>
@@ -45,7 +45,9 @@ const Market = (props) => {
       <Card.Text>
         {props.description}
       </Card.Text>
-      <LinkContainer className="market-card-buttons" to={`/markets/editCover/${props.marketId}`}>
+      {props.user.roles[0]==="ROLE_MODERATOR" && (
+        <div>
+<LinkContainer className="market-card-buttons" to={`/markets/editCover/${props.marketId}`}>
       <Button>
         Zmień zdjęcie
       </Button>
@@ -55,6 +57,16 @@ const Market = (props) => {
         Edytuj Zakłady
       </Button>
       </LinkContainer>
+      {props.bets && (
+         <LinkContainer className="market-card-buttons" to={`/markets/makePublic/${props.marketId}`}>
+         <Button>
+           Opublikuj rynek
+         </Button>
+         </LinkContainer>
+      )}
+        </div>
+      )}
+      
     </Card.Body>
     <Card.Footer>
       <small className="text-muted">Dodano <TimeAgo date={props.createdDate} formatter={buildFormatter(polishStrings)}/></small>
@@ -63,4 +75,10 @@ const Market = (props) => {
     )
 }
 
-export default Market;
+const mapStateToProps = state => {
+  return{
+    user: state.login.user
+  }
+}
+
+export default connect(mapStateToProps)(Market);

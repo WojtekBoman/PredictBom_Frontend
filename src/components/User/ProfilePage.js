@@ -1,9 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Alert,Container,Form, Button,Spinner} from 'react-bootstrap';
+import {fetchPlayer} from '../../actions/playerActions';
 
 
 class ProfilePage extends React.Component {
+
+    componentDidMount() {
+        if(this.props.user.roles[0] === "ROLE_PLAYER") {
+            console.log(this.props.user)
+            this.props.fetchPlayer(this.props.user.username)
+        }
+    }
 
     render() {
         return(
@@ -20,4 +28,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(ProfilePage);
+export default connect(mapStateToProps,{fetchPlayer})(ProfilePage);

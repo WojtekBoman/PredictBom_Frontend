@@ -17,6 +17,13 @@ body {
     padding: $containerPadding;
 }
 
+.edit-market-button{
+    margin: 10px;
+    min-width: 60%;
+    max-width: 90%;
+}
+
+
 .form-container, .profile-container {
     width: 50%;
 }

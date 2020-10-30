@@ -33,7 +33,7 @@ const fetchMarkets = (typeOfMarkets,marketTitle,marketCategories=[],sortedBy,pag
     }
 
 
-    return fetch(`http://localhost:8080/markets/${typeOfMarkets}?marketTitle=${marketTitle}&${marketCategoryParams}&page=${page}&size=${pageSize}&sortAttribute=${sortedBy[0]}&sortDirection=${sortedBy[1]}`,reqOptions).then((res) => handleMarkets(res));
+    return fetch(`http://localhost:8080/markets${typeOfMarkets}?marketTitle=${marketTitle}&${marketCategoryParams}&page=${page}&size=${pageSize}&sortAttribute=${sortedBy[0]}&sortDirection=${sortedBy[1]}`,reqOptions).then((res) => handleMarkets(res));
 }
 
 const fetchMarket = (marketId) => {
@@ -122,7 +122,7 @@ const handleResponse = (res) => {
         }
         if(!res.ok) {
           
-
+            
             let error = (data && data.error) || res.statusText;
             return Promise.reject(error);
         }

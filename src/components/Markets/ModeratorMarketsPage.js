@@ -24,23 +24,6 @@ class ModeratorMarketsPage extends React.Component {
 
     render() {
         return(
-          //   <div>
-          //   <Container className="bg-light border rounded shadow-container create-market-container">
-          //   <Nav fill variant="tabs" defaultActiveKey="/home">
-          //     <Nav.Item>
-          //       <Nav.Link active="selected" eventKey="link-0">Rynki bez zakładów</Nav.Link>
-          //     </Nav.Item>
-          //     <Nav.Item>
-          //       <Nav.Link eventKey="link-1">Prywatne</Nav.Link>
-          //     </Nav.Item>
-          //     <Nav.Item>
-          //       <Nav.Link eventKey="link-2">Opublikowane</Nav.Link>
-          //     </Nav.Item>
-          //   </Nav>
-
-          // </Container>
-          
-          // </div>
           <Container className="bg-light border rounded shadow-container create-market-container">
             <header>
               <h3>Twoje rynki prognostyczne</h3>
@@ -69,10 +52,10 @@ class ModeratorMarketsPage extends React.Component {
     <Col sm={12} md={9}>
       <Tab.Content>
       <Tab.Pane eventKey="first" unmountOnExit={true}>
-          <MarketsList typeOfMarkets="private" search={this.state.search}/>
+          <MarketsList typeOfMarkets="/private" search={this.state.search}/>
         </Tab.Pane>
         <Tab.Pane eventKey="second" unmountOnExit={true}>
-          <MarketsList typeOfMarkets="filteredWaitingForBets" search={this.state.search}/>
+          <MarketsList typeOfMarkets="/filteredWaitingForBets" search={this.state.search}/>
         </Tab.Pane>
         <Tab.Pane eventKey="third" unmountOnExit={true}>
           

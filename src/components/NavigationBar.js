@@ -1,15 +1,22 @@
 import React from 'react';
 import { LinkContainer } from "react-router-bootstrap";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faMoneyBillWave,faStar} from '@fortawesome/free-solid-svg-icons';
 import {Link} from "react-router-dom"
 import {logout} from '../actions/loginActions';
 import history from '../history';
+import {fetchPlayer} from '../actions/playerActions';
 
 import {connect} from 'react-redux';
 
 class NavigationBar extends React.Component {
 
- 
+    componentDidMount() {
+      if(this.props.login.loggedIn && this.props.login.user.roles[0] === "ROLE_PLAYER"){
+          this.props.fetchPlayer(this.props.login.user.username);
+      }
+    }
 
     logout(e) {
       e.preventDefault();
@@ -29,7 +36,7 @@ class NavigationBar extends React.Component {
                     Dodaj nowy rynek
                 </NavDropdown.Item>
               </LinkContainer>
-              <LinkContainer to="/modMarkets">
+              <LinkContainer to="/markets">
                 <NavDropdown.Item >
                     Zarządzaj rynkami
                 </NavDropdown.Item>
@@ -41,6 +48,21 @@ class NavigationBar extends React.Component {
           return ( 
           <Nav className="mr-auto">
           <Nav.Link onClick={this.logout.bind(this)}>Wyloguj się</Nav.Link>
+          <LinkContainer to="/markets">
+                <Nav.Link>
+                    Rynki
+                </Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/offers">
+                <Nav.Link>
+                    Oferty
+                </Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/contracts">
+                <Nav.Link>
+                    Kontrakty
+                </Nav.Link>
+              </LinkContainer>
           </Nav>
         )
       }
@@ -61,7 +83,23 @@ class NavigationBar extends React.Component {
       
     }
 
+    renderData = () => {
+      if(this.props.player){
+        return(
+          <Navbar.Collapse className="justify-content-end">
+          <Navbar.Text style={{marginRight:"10px"}}>
+              <FontAwesomeIcon icon={faMoneyBillWave} /> Budżet: {this.props.player.budget} 
+          </Navbar.Text>
+          <Navbar.Text>  
+            <FontAwesomeIcon icon={faStar} /> Punkty: {this.props.player.points}
+          </Navbar.Text>
+        </Navbar.Collapse>
+        )
+      }
+    }
+
     render(){
+      console.log(this.props.player)
         return(
         <Navbar bg="primary" variant="dark" sticky="top">
             <LinkContainer to='/'>
@@ -72,6 +110,7 @@ class NavigationBar extends React.Component {
            ) : (
               this.renderUnloggedUserPanel()
            )}
+           {this.renderData()}
         </Navbar>
         )
     }
@@ -80,8 +119,8 @@ class NavigationBar extends React.Component {
 const mapStateToProps = state => {
  return{ 
    login: state.login,
-  //  isModerator: state.login.user.roles.includes("ROLE_MODERATOR")
+   player: state.player
          }
 }
 
-export default connect(mapStateToProps,{logout})(NavigationBar);
+export default connect(mapStateToProps,{logout,fetchPlayer})(NavigationBar);

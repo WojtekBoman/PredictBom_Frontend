@@ -15,7 +15,7 @@ export default (state = [], action) => {
                 if(state.find(market => market.marketId === action.payload.marketId)) {
                     return [...state]
                 }
-                return [action.payload]
+                return [...state,action.payload]
             case marketsConstants.FETCH_MARKET_FAILURE:
                 return [...state]
         case marketsConstants.CREATE_MARKET_REQUEST:
@@ -54,6 +54,15 @@ export default (state = [], action) => {
                 newArray_four[index_four] = action.payload
                 return newArray_four;
         case marketsConstants.DELETE_BET_FAILURE:
+                return [...state]
+        case marketsConstants.MAKE_MARKET_PUBLIC_REQUEST:
+            return [...state]
+        case marketsConstants.MAKE_MARKET_PUBLIC_SUCCESS:
+            const index_five = state.findIndex(market => market.marketId === action.payload.marketId)
+                const newArray_five = [...state]
+                newArray_five[index_five] = action.payload
+                return newArray_five;
+        case marketsConstants.MAKE_MARKET_PUBLIC_FAILURE:
                 return [...state]
         default:
             return state;

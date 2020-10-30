@@ -45,14 +45,16 @@ class MarketsList extends React.Component {
     }
 
     renderLoadingMessage(){
-        return(
-        <div className="text-center">
-        <Loader
-             type="TailSpin"
-             color="black"
-        />
-        </div>
-        )
+        if(typeof(this.props.loading) !== "undefined" && this.props.loading.pending){
+            return(
+                <div className="text-center">
+                <Loader
+                     type="TailSpin"
+                     color="black"
+                />
+                </div>
+                )
+        }
     }
 
     renderInfo() {
@@ -69,7 +71,7 @@ class MarketsList extends React.Component {
                 <Row style={{width:"100%"}}>
                     {this.props.markets.map(market => 
                     <Col xs={12} sm={6} className="d-flex align-items-stretch" style={{margin:"20px 0"}} key={market.marketId}>
-                        <Market marketId={market.marketId} marketTitle={market.topic} description={market.description} marketCategory={market.category} marketCover={market.marketCover} createdDate={market.createdDate}/>
+                        <Market marketId={market.marketId} marketTitle={market.topic} description={market.description} marketCategory={market.category} marketCover={market.marketCover} createdDate={market.createdDate} bets={market.bets}/>
                     </Col>
                     )}
                 </Row>
@@ -77,17 +79,17 @@ class MarketsList extends React.Component {
         }else{
             return (
                 <div>
-                    {((typeof this.props.loading !== 'undefined') && this.props.loading.pending) ? <div>{this.renderLoadingMessage()}</div> : <div>{this.renderNotFoundMessage()}</div> }
+                    {this.renderNotFoundMessage()}
                 </div>
             )
         }
-        
     }
 
     render() {
         console.log("render marketslist")
         return(
                 <div>
+                {this.renderLoadingMessage()}
                 {this.renderList()}
                 {this.renderInfo()}
                 {this.renderPagination()}

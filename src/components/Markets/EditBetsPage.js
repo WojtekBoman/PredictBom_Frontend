@@ -10,6 +10,7 @@ import BetsList from './BetsList';
 import {alertActions} from '../../actions/alertActions';
 import {Link} from "react-router-dom"
 import { LinkContainer } from 'react-router-bootstrap';
+import { Line, Circle } from 'rc-progress';
 
 class EditBetsPage extends React.Component {
     
@@ -55,6 +56,7 @@ class EditBetsPage extends React.Component {
               <Button variant="secondary" onClick={this.props.clear}>
                 Powrót
               </Button>
+
             </Modal.Footer>
           </Modal>   
         )
@@ -100,8 +102,6 @@ renderBetsList = () => {
             <BetsList bets={this.props.currentMarket.bets}
             marketId={this.props.match.params.id} />
         )
-    
-    
 } 
 
     renderLoading = () => {
@@ -123,7 +123,7 @@ renderBetsList = () => {
 
     renderNextStepButton = () => {
         if(this.props.currentMarket.bets) {
-            return(<LinkContainer to={`editCover/${this.props.match.params.id}`}>
+            return(<LinkContainer to={`/markets/makePublic/${this.props.match.params.id}`}>
                 <Button variant="primary" type="submit">
                         Zatwierdź zakłady
                 </Button>
@@ -171,7 +171,6 @@ renderBetsList = () => {
  
 
     render(){
-        console.log(this.props);
         return( 
             <div>
             {this.renderLoading()}

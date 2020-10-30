@@ -4,16 +4,31 @@ import {connect} from 'react-redux';
 import { Segment } from 'semantic-ui-react'
 import {deleteBet} from '../../actions/marketActions';
 import {fetchBetPrice} from '../../actions/marketActions';
+import {alertActions} from '../../actions/alertActions';
 import Loader from 'react-loader-spinner';
+import BuyContractForm from './BuyContractForm';
 
 class Bet extends React.Component {
 
+    constructor(props) {
+        super(props)
+    
+        this.hideForm = this.hideForm.bind(this)
+      }
+    
+
     state={
-        submitted:false
+        submitted:false,
+        contractOption:null,
     }
 
     componentDidMount() {
-        this.props.fetchBetPrice(this.props.betId);
+       if(!this.props.betPrice) this.props.fetchBetPrice(this.props.betId);
+    }
+
+    hideForm = () => {
+        this.setState({contractOption:null});
+        this.props.clear();
     }
 
     renderButtonContent() {
@@ -40,9 +55,6 @@ class Bet extends React.Component {
         this.props.deleteBet(this.props.marketId,this.props.betId)
     }
 
-    renderLoadingMessage(){
-     
-    }
 
     renderPrice() {
         if(this.props.betPrice){
@@ -52,14 +64,14 @@ class Bet extends React.Component {
                 <Col sm={6}>
                     <h5>Cena tak</h5>
                     <h6>{this.props.betPrice.yesPrice} $</h6>
-                    <Button variant={"success"}>
+                    <Button variant={"success"} onClick={() => this.setState({contractOption:true})}>
                         Kup
                     </Button>
                 </Col>
                 <Col sm={6}>
                     <h5>Cena nie</h5>
                     <h6>{this.props.betPrice.noPrice} $</h6>
-                    <Button variant={"danger"}>
+                    <Button variant={"danger"} onClick={() => this.setState({contractOption:false})}>
                         Kup
                     </Button>
                 </Col>
@@ -81,14 +93,24 @@ class Bet extends React.Component {
         }
     }
 
+    renderBuyForm = () => {
+        if(this.state.contractOption != null){
+            return(
+               <BuyContractForm betId={this.props.betId} contractOption={this.state.contractOption} hideForm={this.hideForm}/>
+            )
+        }
+    }
+
     render() {
+        console.log(this.state);
         return(
             <div>
             <Segment color="blue" style={{margin:"10px"}}>
             <h2 className="ui header">{this.props.chosenOption}</h2>
-            <Button className="close-button" onClick={this.onClickDeleteBet}>{this.renderButtonContent()}</Button>
+            {window.location.href.includes("editBets") && (<Button className="close-button" onClick={this.onClickDeleteBet}>{this.renderButtonContent()}</Button>)}
             {this.renderPrice()}
             {this.renderLoadingPrice()}
+            {this.renderBuyForm()}
             </Segment>
             </div>
         )
@@ -98,9 +120,9 @@ class Bet extends React.Component {
 const mapStateToProps = (state,ownProps) => {
     return {
         loading: state.loading.DELETE_BET,
-        betPrice:state.bets[ownProps.betId],
-        loadingPrice: state.loading.FETCH_BET_PRICE
+        betPrice:state.betPrice[ownProps.betId],
+        loadingPrice: state.loading.FETCH_BETS_PRICE
     }
 }
 
-export default connect(mapStateToProps,{deleteBet,fetchBetPrice})(Bet);
+export default connect(mapStateToProps,{clear:alertActions.clear,deleteBet,fetchBetPrice})(Bet);

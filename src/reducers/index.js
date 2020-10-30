@@ -7,8 +7,11 @@ import marketsReducer from './marketsReducer';
 import filterReducer from './filterReducer';
 import paginationReducer from './paginationReducer';
 import tokenReducer from './tokenReducer';
-import betsReducer from './betsReducer';
+import betPriceReducer from './betPriceReducer';
 import { reducer as formReducer } from 'redux-form';
+import playerReducer from './playerReducer';
+import contractReducer from './contractReducer';
+import betReducer from './betReducer';
 
 export default combineReducers({
    login: loginReducer,
@@ -20,5 +23,8 @@ export default combineReducers({
    loading: loadingReducer,
    pagination: paginationReducer,
    token: tokenReducer,
-   bets: betsReducer
+   betPrice: betPriceReducer,
+   bets:betReducer,
+   player:playerReducer,
+   contracts: contractReducer
 });

@@ -80,7 +80,7 @@ export const setMarketCover = (marketId, marketCover) => {
                 res => {
                     dispatch(success(res.predictionMarket));
                     dispatch(alertActions.success(res.info));
-                    history.push('/modMarkets')
+                    history.push('/markets')
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -161,4 +161,26 @@ export const deleteBet = (marketId,betId) => {
     function success(market) { return { type: marketsConstants.DELETE_BET_SUCCESS,payload:market } }
     function failure(error) { return { type: marketsConstants.DELETE_BET_FAILURE, error } }
     function deleteBetPrice(betId) {return {type:betsConstants.DELETE_BET,payload:betId}}
+}
+
+export const makePublic = (marketId) => {
+    return dispatch => {
+        dispatch(request(marketId));
+        marketService.makePublic(marketId) 
+            .then(
+                res => {
+                    dispatch(success(res.predictionMarket));
+                    dispatch(alertActions.success(res.info));
+                    history.push('/markets');
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            )
+    }
+
+    function request(market) { return { type: marketsConstants.MAKE_MARKET_PUBLIC_REQUEST,payload:market  } }
+    function success(market) { return { type: marketsConstants.MAKE_MARKET_PUBLIC_SUCCESS,payload:market } }
+    function failure(error) { return { type: marketsConstants.MAKE_MARKET_PUBLIC_FAILURE, error } }
 }

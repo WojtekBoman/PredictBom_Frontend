@@ -140,7 +140,7 @@ class CreateMarketPage extends React.Component {
 
 const validate = formValues => {
     const errors = {}
-    const requiredFields = [ 'marketTitle']
+    const requiredFields = [ 'marketTitle','description']
     requiredFields.forEach(field => {
     if (!formValues[ field ]) {
       errors[ field ] = 'To pole jest wymagane'
