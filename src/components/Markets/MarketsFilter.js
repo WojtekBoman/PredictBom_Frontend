@@ -92,8 +92,11 @@ class MarketsFilter extends React.Component {
                 <option value={"predictedDateEnd,desc"}>Nabliższego czasu zakończenia</option>
                 <option value={"predictedDateEnd,asc"}>Najdalszego czasu zakończenia</option>
                 </Form.Control>
+                <hr className="my-4"></hr>
              {this.renderPageSizeFilter()}
+             <hr className="my-4"></hr>
              {this.renderCategoryFilter()}
+             <hr className="my-4"></hr>
             </div>
         )
     }

@@ -59,10 +59,14 @@ class MakeMarketPublicPage extends React.Component {
         return(
             <div className="text-center">
                 <LinkContainer to={`/markets/editCover/${this.props.match.params.id}`}>
+                <Button variant="primary" className="edit-market-button">Zmień okładkę</Button>
+                </LinkContainer>
+                <LinkContainer to={`/markets/editBets/${this.props.match.params.id}`}>
+                <Button variant="primary" className="edit-market-button">Edytuj zakłady</Button>
+                </LinkContainer>
+                <LinkContainer to={`/markets/editMarket/${this.props.match.params.id}`}>
                 <Button variant="primary" className="edit-market-button">Edytuj dane rynku</Button>
                 </LinkContainer>
-                <Button variant="primary" className="edit-market-button">Zmień okładkę</Button>
-                <Button variant="primary" className="edit-market-button">Edytuj zakłady</Button>
             </div>
         )
     }

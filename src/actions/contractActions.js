@@ -7,11 +7,11 @@ import { alertActions } from './alertActions';
 import _ from 'lodash';
 import { playerConstants } from '../constants/playerConstants';
 
-export const buyContract = (betId, contractOption,{maxPrice, countOfShares}) => {
+export const buyContract = (betId,marketId, contractOption,{maxPrice, countOfShares}) => {
 
     return dispatch => {
         dispatch(request({ betId }));
-        betsService.buyContract(betId, contractOption,maxPrice, countOfShares)
+        betsService.buyContract(betId,marketId, contractOption,maxPrice, countOfShares)
             .then(
                 res => { 
                     dispatch(success(res.boughtContract));
@@ -31,13 +31,33 @@ export const buyContract = (betId, contractOption,{maxPrice, countOfShares}) => 
     function failure(error) { return { type: contractConstants.BUY_CONTRACT_FAILURE, error } }
 }
 
-export const fetchContracts = () => {
+export const fetchFilteredContracts = (contractOption,marketTitle,marketCategories=[],sortedBy,page,pageSize) => {
     return dispatch => {
         dispatch(request());
-        betsService.fetchContracts()
+        betsService.fetchFilteredContracts(contractOption,marketTitle,marketCategories=[],sortedBy,page,pageSize)
             .then(
                 res => { 
-                    dispatch(success(res));
+                    dispatch(success(res.content));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+
+    function request() { return { type: contractConstants.FETCH_CONTRACTS_REQUEST } }
+    function success(payload) { return { type: contractConstants.FETCH_CONTRACTS_SUCCESS, payload } }
+    function failure(error) { return { type: contractConstants.FETCH_CONTRACTS_FAILURE, error } }
+}
+
+export const fetchContracts = (contractOption,marketTitle,marketCategories=[],sortedBy,page,pageSize) => {
+    return dispatch => {
+        dispatch(request());
+        betsService.fetchContracts(contractOption,marketTitle,marketCategories=[],sortedBy,page,pageSize)
+            .then(
+                res => { 
+                    dispatch(success(res.content));
                 },
                 error => {
                     dispatch(failure(error.toString()));

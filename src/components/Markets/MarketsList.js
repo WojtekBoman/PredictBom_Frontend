@@ -28,7 +28,7 @@ class MarketsList extends React.Component {
             return(
                 <div>
                     {/* lastPage={this.props.markets.markets.last} firstPage={this.props.markets.markets.first} currentPage={this.props.markets.markets.number} totalElements={this.props.markets.markets.totalElements} totalPages={this.props.markets.markets.totalPages} size={this.props.markets.markets.size}  */}
-                    <PaginationBar />
+                    
                 </div>
             )
         }
@@ -44,7 +44,7 @@ class MarketsList extends React.Component {
         )
     }
 
-    renderLoadingMessage(){
+    renderContent(){
         if(typeof(this.props.loading) !== "undefined" && this.props.loading.pending){
             return(
                 <div className="text-center">
@@ -54,6 +54,10 @@ class MarketsList extends React.Component {
                 />
                 </div>
                 )
+        }else{
+            return(<div>
+                {this.renderList()}
+            </div>)
         }
     }
 
@@ -71,9 +75,10 @@ class MarketsList extends React.Component {
                 <Row style={{width:"100%"}}>
                     {this.props.markets.map(market => 
                     <Col xs={12} sm={6} className="d-flex align-items-stretch" style={{margin:"20px 0"}} key={market.marketId}>
-                        <Market marketId={market.marketId} marketTitle={market.topic} description={market.description} marketCategory={market.category} marketCover={market.marketCover} createdDate={market.createdDate} bets={market.bets}/>
+                        <Market marketId={market.marketId} published={market.published} marketTitle={market.topic} description={market.description} marketCategory={market.category} marketCover={market.marketCover} createdDate={market.createdDate} bets={market.bets}/>
                     </Col>
                     )}
+                    <PaginationBar />
                 </Row>
                 )
         }else{
@@ -89,8 +94,7 @@ class MarketsList extends React.Component {
         console.log("render marketslist")
         return(
                 <div>
-                {this.renderLoadingMessage()}
-                {this.renderList()}
+                {this.renderContent()}
                 {this.renderInfo()}
                 {this.renderPagination()}
             </div>

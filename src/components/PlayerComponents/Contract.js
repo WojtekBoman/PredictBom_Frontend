@@ -1,19 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Row,Col,Card,Button} from 'react-bootstrap';
+import {Row,Col,Button,Figure} from 'react-bootstrap';
 import sportBackground from '../../img/sportBackground.png';
 import celebryciBackground from '../../img/celebryciBackground.jpg';
 import politykaBackground from '../../img/politykaBackground.jpg';
 import gospodarkaBackground from '../../img/gospodarkaBackground.jpg';
+import { LinkContainer } from "react-router-bootstrap";
 import Loader from 'react-loader-spinner';
 import inneBackground from '../../img/inneBackground.png';
 import {fetchContractDetails} from '../../actions/contractActions';
+import { Image, Item,Card,Icon } from 'semantic-ui-react'
 
 class Contract extends React.Component {
 
-    componentDidMount() {
-        this.props.fetchContractDetails(this.props.betId);
-    }
 
     setCover = (category) => {
       switch(category){
@@ -48,68 +47,66 @@ class Contract extends React.Component {
   }
 
   renderContractContent = () => {
-    if(this.props.bet && this.props.market) {
+
+//     return(
+//     <Row className="no-gutters">
+//     <Col md="4">
+//           {this.props.market.marketCover && (<Card.Img className="img" src={typeof(this.props.market.marketCover) !== 'undefined' ? (`data:image/jpeg;base64,${this.props.market.marketCover.data}`) : (this.setCover(this.props.market.marketCategory))} rounded/>)}
+//           </Col>
+//           <Col md="8">
+//             <Card.Body>
+//               <Card.Title>{this.props.market.topic}</Card.Title>
+//               <Card.Subtitle style={{marginTop:"10px"}}>{this.props.market.bets[0].chosenOption} </Card.Subtitle>
+//               <Card.Subtitle style={{marginTop:"10px"}}>{this.props.contractOption ? <p>Wybrana opcja na tak</p> : <p>Wybrana opcja na nie</p>}</Card.Subtitle>
+//               <Card.Subtitle style={{marginTop:"10px"}}>Liczba akcji: {this.props.countOfContracts}</Card.Subtitle>
+//               <Card.Subtitle style={{marginTop:"10px"}}>Wartość akcji: {this.props.valueOfShares}</Card.Subtitle>
+//               <Card.Text>
+//               {this.props.market.description}
+//               </Card.Text>
+//               <Button>Button</Button>
+//             </Card.Body>
+//           </Col>
+// </Row>
+//     )
+
       return(
-        <Row className="no-gutters">
-            <Col md="4">
-                  {this.props.market.marketCover && (<Card.Img className="img" src={typeof(this.props.market.marketCover) !== 'undefined' ? (`data:image/jpeg;base64,${this.props.market.marketCover.data}`) : (this.setCover(this.props.market.marketCategory))} rounded/>)}
-                  </Col>
-                  <Col md="8">
-                    <Card.Body>
-                      <Card.Title>{this.props.market.topic}</Card.Title>
-                      <Card.Subtitle style={{marginTop:"10px"}}>{this.props.bet.chosenOption} </Card.Subtitle>
-                      <Card.Subtitle style={{marginTop:"10px"}}>{this.props.contractOption ? <p>Wybrana opcja na tak</p> : <p>Wybrana opcja na nie</p>}</Card.Subtitle>
-                      <Card.Subtitle style={{marginTop:"10px"}}>Liczba akcji: {this.props.countOfContracts}</Card.Subtitle>
-                      <Card.Subtitle style={{marginTop:"10px"}}>Wartość akcji: {this.props.valueOfShares}</Card.Subtitle>
-                      <Card.Text>
-                      {this.props.market.description}
-                      </Card.Text>
-                      <Button>Button</Button>
-                    </Card.Body>
-                  </Col>
-        </Row>
+        <Figure>
+        <Figure.Image style={{width: "100%",
+    height: "15vw",
+    objectFit: "cover"}} className="img" src={this.props.market.marketCover ? (`data:image/jpeg;base64,${this.props.market.marketCover.data}`) : (this.setCover(this.props.market.marketCategory))} rounded/>
+  <Figure.Caption>
+    Nulla vitae elit libero, a pharetra augue mollis interdum.
+  </Figure.Caption>
+</Figure>
       )
-    }
   }
   
     render() {
-        if(this.props.bet && this.props.market) {
           return(
-            <Row style={{margin:"20px"}}>
-            <Col>
-              <Card>
-                  {this.renderContractContent()}
-              </Card>
-            </Col>
-          </Row>)
+            <Card style={{margin:"0 auto"}}>
+              <LinkContainer to={`/contracts/details/${this.props.betId}`}>
+    <Image style={{width: "100%",
+    height: "15vw",
+    objectFit: "cover"}} className="img" src={this.props.market.marketCover ? (`data:image/jpeg;base64,${this.props.market.marketCover.data}`) : (this.setCover(this.props.market.category))} />
+    </LinkContainer>
+    <Card.Content>
+          <Card.Header>{this.props.market.bets[0].chosenOption}</Card.Header>
+            {this.props.contractOption ? <Card.Header>Kontrakt na tak</Card.Header> : <Card.Header>Kontrakt na nie</Card.Header>}
+      <Card.Meta>{this.props.market.topic}</Card.Meta>
+      <Card.Description>
+        {this.props.market.description}
+      </Card.Description>
+    </Card.Content>
+    <Card.Content extra>
+      <a>
+        <Icon name='money bill alternate outline' />
+        Liczba akcji: {this.props.countOfContracts}
+      </a>
+    </Card.Content>
+  </Card>)
     }
-    return(
-      <div>
-      {this.renderLoading()}
-      </div>
-    )
-        }
-        
-       
-    }
-
-
-const findMarket = (state,ownProps) => {
-  if(state.bets[ownProps.betId]) {
-    return state.markets.find(market => market.marketId == state.bets[ownProps.betId].marketId) 
-  } else{
-    return null;
-  }
-}
-
-const mapStateToProps = (state,ownProps) => {
-  console.log(state);
-    return{
-        bet: state.bets[ownProps.betId],
-        market: findMarket(state,ownProps),
-        alert: state.alert
-    }
-}
     
+}
 
-export default connect(mapStateToProps,{fetchContractDetails})(Contract);
+
+export default connect(null)(Contract);

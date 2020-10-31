@@ -7,10 +7,13 @@ import {Link} from "react-router-dom"
 import {logout} from '../actions/loginActions';
 import history from '../history';
 import {fetchPlayer} from '../actions/playerActions';
+import _ from 'lodash';
 
 import {connect} from 'react-redux';
 
 class NavigationBar extends React.Component {
+
+    
 
     componentDidMount() {
       if(this.props.login.loggedIn && this.props.login.user.roles[0] === "ROLE_PLAYER"){
@@ -84,14 +87,11 @@ class NavigationBar extends React.Component {
     }
 
     renderData = () => {
-      if(this.props.player){
+      if(!_.isEmpty(this.props.player)){
         return(
           <Navbar.Collapse className="justify-content-end">
           <Navbar.Text style={{marginRight:"10px"}}>
-              <FontAwesomeIcon icon={faMoneyBillWave} /> Budżet: {this.props.player.budget} 
-          </Navbar.Text>
-          <Navbar.Text>  
-            <FontAwesomeIcon icon={faStar} /> Punkty: {this.props.player.points}
+              <FontAwesomeIcon icon={faMoneyBillWave} /> Budżet: {Math.round((this.props.player.budget + Number.EPSILON) * 100) / 100} 
           </Navbar.Text>
         </Navbar.Collapse>
         )
@@ -119,7 +119,8 @@ class NavigationBar extends React.Component {
 const mapStateToProps = state => {
  return{ 
    login: state.login,
-   player: state.player
+   player: state.player,
+   loading: state.loading.FETCH_PLAYER
          }
 }
 

@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import Loader from 'react-loader-spinner';
 import {buyContract} from '../../actions/contractActions';
 
+
 class BuyContractForm extends React.Component {
 
     renderInput = ({input,max,min,label,meta,type,placeholder,as,helpText,rows}) => {
@@ -29,7 +30,7 @@ class BuyContractForm extends React.Component {
     }
 
     onSubmit = (formValues) => {
-        this.props.buyContract(this.props.betId,this.props.contractOption,formValues);
+        this.props.buyContract(this.props.betId, this.props.marketId,this.props.contractOption,formValues);
     }
 
     renderInfo() {
@@ -51,13 +52,15 @@ class BuyContractForm extends React.Component {
         </div> */}
         <Field type="number" min="1" max="100" name="maxPrice" label="Podaj maksymalną cenę 1 akcji" component={this.renderInput} />
         <Field type="number" min="1" max="1000" name="countOfShares"  label="Ile akcji chcesz kupić" component={this.renderInput} />
+        <div style={{display:"inline-block"}}>
         <Button className="form-button" variant="primary" type="submit">
           Kup
         </Button>
-        </Form>
         <Button className="form-button" variant="primary" onClick={this.props.hideForm}>
           Zamknij
         </Button>
+        </div>
+        </Form>
         </div>
         )
     }
@@ -94,7 +97,13 @@ const mapStateToProps = state => {
 }
 
 const validate = formValues => {
-    const errors = {}
+    const errors = {};
+    const requiredFields = [ 'maxPrice','countOfShares']
+    requiredFields.forEach(field => {
+    if (!formValues[ field ]) {
+      errors[ field ] = 'To pole jest wymagane'
+    }
+  })
     
     return errors
 }

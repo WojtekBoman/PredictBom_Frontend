@@ -28,7 +28,7 @@ class ModeratorMarketsPage extends React.Component {
             <header>
               <h3>Twoje rynki prognostyczne</h3>
               <br />
-              <SearchBar />
+              <SearchBar searchParam="szukanko"/>
             </header>
           <Tab.Container id="left-tabs-example" defaultActiveKey="first">
   <Row>
@@ -58,7 +58,7 @@ class ModeratorMarketsPage extends React.Component {
           <MarketsList typeOfMarkets="/filteredWaitingForBets" search={this.state.search}/>
         </Tab.Pane>
         <Tab.Pane eventKey="third" unmountOnExit={true}>
-          
+        <MarketsList typeOfMarkets="/public" search={this.state.search}/>
           </Tab.Pane>
           <Tab.Pane eventKey="fourth" unmountOnExit={true}>
 

@@ -18,6 +18,9 @@ import MarketsPage from './Markets/MarketsPage';
 import MarketDetails from './Markets/MarketDetails';
 import ContractList from './PlayerComponents/ContractList';
 import Contract from './PlayerComponents/Contract';
+import EditMarketPage from './Markets/EditMarketPage';
+import SolveMarketPage from './Markets/SolveMarketPage';
+import ContractDetails from './PlayerComponents/ContractDetails';
 
 
 const App = () => {
@@ -33,12 +36,14 @@ const App = () => {
                     <Route path="/resetPassword" component={ResetPasswordPage} />
                     <Route path="/resetPasswordWithToken" component={ResetPasswordWithToken} />
                     <PrivateRoute path="/profile" component={ProfilePage} />
+                    <PrivateRoute path="/contracts/details/:id" component={ContractDetails} />
                     <PrivateRoute path="/contracts" component={ContractList} />
-                    <PrivateRoute path="/contracts/:id" component={Contract} />
                     <PrivateRoute path="/markets/new" component={CreateMarketPage}/>
                     <PrivateRoute path="/markets/details/:id" component={MarketDetails}/>
-                    <PrivateRoute  path="/markets/editCover/:id" component={MarketCoverPage}/>
+                    <PrivateRoute path="/markets/editCover/:id" component={MarketCoverPage}/>
                     <PrivateRoute path="/markets/editBets/:id" component={EditBetsPage} />
+                    <PrivateRoute path="/markets/editMarket/:id" component={EditMarketPage} />
+                    <PrivateRoute path="/markets/solveMarket/:id" component={SolveMarketPage} />
                     <PrivateRoute path="/markets/makePublic/:id" component={MakeMarketPublicPage} />
                     <PrivateRoute path="/markets/" component={MarketsPage}/>
                     <Redirect from="*" to="/" />

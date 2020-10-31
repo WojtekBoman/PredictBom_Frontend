@@ -8,13 +8,14 @@ class SearchBar extends React.Component {
     state = {
         searchText: ""
     }
+    
 
     onInputSearchChange = (e) => {
         this.setState({searchText:e.target.value});
     }
 
     onSubmitSearch = () => {
-        this.props.dispatch(updateSearch(this.state.searchText));
+        this.props.dispatch(this.props.search(this.state.searchText));
     }
 
     render() {
@@ -30,6 +31,12 @@ class SearchBar extends React.Component {
     }
 }
 
+const mapStateToProps = (state,ownProps) => {
+    console.log(ownProps);
+    return{
+        search: ownProps.search
+    }
+}
 
 const mapDispatchToProps = dispatch => {
     return{
@@ -37,4 +44,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null,mapDispatchToProps)(SearchBar)
+export default connect(mapStateToProps,mapDispatchToProps)(SearchBar)

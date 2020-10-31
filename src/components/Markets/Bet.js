@@ -7,6 +7,7 @@ import {fetchBetPrice} from '../../actions/marketActions';
 import {alertActions} from '../../actions/alertActions';
 import Loader from 'react-loader-spinner';
 import BuyContractForm from './BuyContractForm';
+import _ from 'lodash';
 
 class Bet extends React.Component {
 
@@ -58,23 +59,32 @@ class Bet extends React.Component {
 
     renderPrice() {
         if(this.props.betPrice){
-            console.log("BetPrice",this.props.betPrice)
             return(
                 <Row className="text-center">
-                <Col sm={6}>
+                <Col sm={4}>
                     <h5>Cena tak</h5>
                     <h6>{this.props.betPrice.yesPrice} $</h6>
-                    <Button variant={"success"} onClick={() => this.setState({contractOption:true})}>
+                    {(!_.isEmpty(this.props.player)) && (<Button variant={"success"} onClick={() => this.setState({contractOption:true})}>
                         Kup
-                    </Button>
+                    </Button>)}
+                   
                 </Col>
-                <Col sm={6}>
+                <Col>
+                <Button style={{marginBottom:"10px"}}>
+                        Przeglądaj oferty na tak
+                </Button>
+                <Button>
+                        Przeglądaj oferty na nie
+                </Button>
+                </Col>
+                <Col sm={4}>
                     <h5>Cena nie</h5>
                     <h6>{this.props.betPrice.noPrice} $</h6>
-                    <Button variant={"danger"} onClick={() => this.setState({contractOption:false})}>
+                    {(!_.isEmpty(this.props.player)) && ( <Button variant={"danger"} onClick={() => this.setState({contractOption:false})}>
                         Kup
-                    </Button>
+                    </Button>) }
                 </Col>
+               
             </Row>
             )
         }
@@ -96,7 +106,7 @@ class Bet extends React.Component {
     renderBuyForm = () => {
         if(this.state.contractOption != null){
             return(
-               <BuyContractForm betId={this.props.betId} contractOption={this.state.contractOption} hideForm={this.hideForm}/>
+               <BuyContractForm marketId={this.props.marketId} betId={this.props.betId} contractOption={this.state.contractOption} hideForm={this.hideForm}/>
             )
         }
     }
@@ -107,7 +117,7 @@ class Bet extends React.Component {
             <div>
             <Segment color="blue" style={{margin:"10px"}}>
             <h2 className="ui header">{this.props.chosenOption}</h2>
-            {window.location.href.includes("editBets") && (<Button className="close-button" onClick={this.onClickDeleteBet}>{this.renderButtonContent()}</Button>)}
+            {window.location.href.includes("editBets") && !this.props.published && (<Button className="close-button" onClick={this.onClickDeleteBet}>{this.renderButtonContent()}</Button>)}
             {this.renderPrice()}
             {this.renderLoadingPrice()}
             {this.renderBuyForm()}
@@ -121,7 +131,8 @@ const mapStateToProps = (state,ownProps) => {
     return {
         loading: state.loading.DELETE_BET,
         betPrice:state.betPrice[ownProps.betId],
-        loadingPrice: state.loading.FETCH_BETS_PRICE
+        loadingPrice: state.loading.FETCH_BETS_PRICE,
+        player: state.player
     }
 }
 

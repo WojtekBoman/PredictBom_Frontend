@@ -1,6 +1,6 @@
 import {filterConstants} from '../constants/filterConstants';
 
-const initialState = {marketTitle:'',selectedCategories:[],sortedBy:['createdDate','desc'],page:0,pageSize:2}
+const initialState = {marketTitle:'',selectedCategories:[],sortedBy:['createdDate','desc'],page:0,pageSize:10}
 
 export default (state = initialState, action) => {
     switch(action.type) {

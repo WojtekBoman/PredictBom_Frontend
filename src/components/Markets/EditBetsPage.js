@@ -100,7 +100,7 @@ onSubmit = (formValues) => {
 renderBetsList = () => {
         return(
             <BetsList bets={this.props.currentMarket.bets}
-            marketId={this.props.match.params.id} />
+            published={this.props.currentMarket.published} marketId={this.props.match.params.id} />
         )
 } 
 
@@ -185,9 +185,12 @@ renderBetsList = () => {
 
 const validate = formValues => {
     const errors = {};
-    if(!formValues.chosenOption) {
-        errors['chosenOption'] = "To pole jest wymagane";
+    const requiredFields = [ 'chosenOption','yesPrice','noPrice']
+    requiredFields.forEach(field => {
+    if (!formValues[ field ]) {
+      errors[ field ] = 'To pole jest wymagane'
     }
+  })
 
     if((parseInt(formValues.yesPrice) + parseInt(formValues.noPrice)) > 100) {
         console.log(formValues)

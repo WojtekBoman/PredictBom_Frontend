@@ -49,7 +49,7 @@ class MarketDetails extends React.Component {
                     </div>
                     <div className="bets">
                         <h4>Zakłady</h4>
-                        {this.renderBetsList()};
+                        {this.renderBetsList()}
                     </div>
                 </Container>
                 );
@@ -59,8 +59,8 @@ class MarketDetails extends React.Component {
     render() {
         return(
         <div>
-            {this.renderLoading()};
-            {this.renderMarketPage()};
+            {this.renderLoading()}
+            {this.renderMarketPage()}
         </div>
         )
     }

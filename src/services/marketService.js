@@ -53,6 +53,14 @@ export const fetchBetPrice = (betId) => {
     return fetch(`http://localhost:8080/markets/betPrice/${betId}`,reqOptions).then(res => handleMarkets(res));
 }
 
+const solveMarket = (marketId,betId) => {
+    const reqOptions = {
+        method: 'GET',
+        headers: authHeader(),
+    };
+    return fetch(`http://localhost:8080/markets/solveMarket?marketId=${marketId}&betId=${betId}`,reqOptions).then(res => handleMarkets(res));
+}
+
 const setMarketCover = (marketId,{marketCover}) => {
     const data = new FormData();
     data.append("marketCover",marketCover)
