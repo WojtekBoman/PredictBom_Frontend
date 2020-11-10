@@ -1,5 +1,5 @@
 import React from 'react';
-import {Tab,Row,Col,Nav, Container} from 'react-bootstrap';
+import {Tab,Tabs,Row,Col,Nav, Container} from 'react-bootstrap';
 import MarketsList from './MarketsList';
 import MarketsFilter from './MarketsFilter'
 import SearchBar from './SearchBar'
@@ -23,6 +23,29 @@ class ModeratorMarketsPage extends React.Component {
     }
 
     render() {
+
+        return (
+
+          <Container className="bg-light border rounded shadow-container create-market-container">
+            <header>
+              <h2>Rynki prognostyczne</h2>
+            </header>
+            <Tabs id="controlled-tab-example" style={{marginTop:"15px"}}>
+            <Tab eventKey="private" title="Prywatne" unmountOnExit>
+            <MarketsList typeOfMarkets="/private" search={this.state.search}/>
+            </Tab>
+            <Tab eventKey="filteredWaitingForBets" title="Rynki bez zakładów" unmountOnExit>
+            <MarketsList typeOfMarkets="/filteredWaitingForBets" search={this.state.search}/>
+            </Tab>
+            <Tab eventKey="public" title="Opublikowane" unmountOnExit>
+            <MarketsList typeOfMarkets="/public" search={this.state.search}/>
+            </Tab>
+
+            
+          </Tabs>
+          </Container>
+        );
+
         return(
           <Container className="bg-light border rounded shadow-container create-market-container">
             <header>

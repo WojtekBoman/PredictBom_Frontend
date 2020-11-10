@@ -93,6 +93,24 @@ export const deleteBet = (marketId, betId) => {
     return fetch(`http://localhost:8080/markets/deleteBet?marketId=${marketId}&betId=${betId}`,reqOptions).then(res => handleResponse(res));
 }
 
+export const solveMultiBetMarket = (marketId,betId) => {
+    const reqOptions = {
+        method: 'PUT',
+        headers: authHeader()
+    }
+
+    return fetch(`http://localhost:8080/markets/solveMultiBetMarket?marketId=${marketId}&betId=${betId}`,reqOptions).then(res => handleResponse(res));
+}
+
+export const solveSingleBetMarket = (marketId,betId,correctOption) => {
+    const reqOptions = {
+        method: 'PUT',
+        headers: authHeader()
+    }
+
+    return fetch(`http://localhost:8080/markets/solveSingleBetMarket?marketId=${marketId}&betId=${betId}&correctOption=${correctOption}`,reqOptions).then(res => handleResponse(res));
+}
+
 const makePublic = (marketId) => {
     const reqOptions = {
         method: 'PUT',
@@ -148,5 +166,7 @@ export const marketService = {
     setMarketCover,
     addBet,
     deleteBet,
-    makePublic
+    makePublic,
+    solveSingleBetMarket,
+    solveMultiBetMarket
 }

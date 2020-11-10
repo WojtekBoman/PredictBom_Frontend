@@ -5,8 +5,13 @@ import {Row,Col,Spinner,Alert} from 'react-bootstrap';
 import Market from './Market';
 import PaginationBar from './PaginationBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faSadTear} from '@fortawesome/free-solid-svg-icons';
+import {faSadTear,faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import Loader from 'react-loader-spinner';
+import {changePage,clearFilters} from '../../actions/filterActions';
+import { alertActions } from '../../actions/alertActions';
+import MarketsFilter from './MarketsFilter';
+import SearchBar from './SearchBar'
+import {updateSearch} from '../../actions/filterActions';
 
 
 
@@ -16,8 +21,14 @@ class MarketsList extends React.Component {
         this.props.fetchMarkets(this.props.typeOfMarkets,this.props.filter.marketTitle,this.props.filter.selectedCategories,this.props.filter.sortedBy,this.props.filter.page,this.props.filter.pageSize);
     }
 
+    componentWillUnmount() {
+        this.props.clear();
+        this.props.clearFilters();
+    }
+
     componentDidUpdate(prevProps,prevState) {
         if(!(JSON.stringify(this.props.filter)===JSON.stringify(prevProps.filter))){
+ 
             this.props.fetchMarkets(this.props.typeOfMarkets,this.props.filter.marketTitle,this.props.filter.selectedCategories,this.props.filter.sortedBy,this.props.filter.page,this.props.filter.pageSize);
         }
         
@@ -35,7 +46,7 @@ class MarketsList extends React.Component {
     }
 
     renderNotFoundMessage() {
-        
+        if(!this.props.alert.payload)
         return (
         <div className="text-center">
             <FontAwesomeIcon icon={faSadTear} size={"9x"}/>
@@ -63,9 +74,10 @@ class MarketsList extends React.Component {
 
     renderInfo() {
         if(this.props.alert.payload) {
-            return <Alert className="login-alert" variant="danger">
-                {this.props.alert.payload}
-            </Alert>
+            return <div className="text-center">
+            <FontAwesomeIcon icon={faExclamationCircle} size={"9x"}/>
+            <h2>{this.props.alert.payload}</h2>
+        </div>
         }
     }
 
@@ -78,7 +90,7 @@ class MarketsList extends React.Component {
                         <Market marketId={market.marketId} published={market.published} marketTitle={market.topic} description={market.description} marketCategory={market.category} marketCover={market.marketCover} createdDate={market.createdDate} bets={market.bets}/>
                     </Col>
                     )}
-                    <PaginationBar />
+                    <PaginationBar paginationInfo={this.props.paginationInfo} changePage={changePage}/>
                 </Row>
                 )
         }else{
@@ -90,13 +102,26 @@ class MarketsList extends React.Component {
         }
     }
 
+    renderFilters = () => {
+        return <MarketsFilter />;
+     }
+
+
     render() {
         console.log("render marketslist")
         return(
-                <div>
-                {this.renderContent()}
-                {this.renderInfo()}
-                {this.renderPagination()}
+            <div style={{marginTop:"20px"}}>
+                <SearchBar search={updateSearch}/>
+                <Row >
+                    <Col sm={3}>
+                    {this.renderFilters()}
+                    </Col>
+                    <Col sm={9}>
+                    {this.renderContent()}
+                    {this.renderInfo()}
+                    {this.renderPagination()}
+                    </Col>
+            </Row>
             </div>
         )
     }
@@ -108,8 +133,9 @@ const mapStateToProps = (state,ownProps) => {
         markets: Object.values(state.markets),
         loading: state.loading.FETCH_MARKETS,
         filter: state.filter,
-        alert: state.alert
+        alert: state.alert,
+        paginationInfo: state.pagination.paginationInfo
     }
 }
 
-export default connect(mapStateToProps,{fetchMarkets})(MarketsList);
+export default connect(mapStateToProps,{fetchMarkets,clear:alertActions.clear,clearFilters})(MarketsList);

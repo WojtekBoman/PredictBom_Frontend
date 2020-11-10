@@ -1,4 +1,4 @@
-import {loginConstants} from '../constants/userConstants';
+import {loginConstants,editPasswordConstants} from '../constants/userConstants';
 
 
 let user = JSON.parse(localStorage.getItem('user'));
@@ -20,6 +20,12 @@ export default (state = initialState, action) => {
             return {};
         case loginConstants.LOGOUT:
             return {};
+        case editPasswordConstants.EDIT_PASSWORD_REQUEST:
+            return {...state};
+        case editPasswordConstants.EDIT_PASSWORD_SUCCESS:
+            return {...state};
+        case editPasswordConstants.EDIT_PASSWORD_FAILURE:
+            return {...state};
         default:
             return state;
     }

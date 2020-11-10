@@ -1,4 +1,4 @@
-import {loginConstants} from '../constants/userConstants';
+import {loginConstants,editPasswordConstants} from '../constants/userConstants';
 import {userService} from '../services/userService';
 import history from '../history';
 import { alertActions } from './alertActions';
@@ -14,6 +14,7 @@ export const login = ({username, password}) => {
                     history.push('/profile');
                 },
                 error => {
+            
                     dispatch(failure(error.toString()));
                     dispatch(alertActions.error(error.toString()));
                 }
@@ -25,6 +26,29 @@ export const login = ({username, password}) => {
     function failure(error) { return { type: loginConstants.LOGIN_FAILURE, error } }
 }
 
+export const editPassword = ({oldPassword,newPassword,repeatedNewPassword}) => {
+    return dispatch => {
+        dispatch(request());
+
+        userService.editPassword(oldPassword,newPassword,repeatedNewPassword)
+            .then(
+                res => { 
+                    dispatch(success());
+                    dispatch(alertActions.success(res));
+                    logout();
+                },
+                error => {
+                    console.log()
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+
+    function request() { return { type: editPasswordConstants.EDIT_PASSWORD_REQUEST} }
+    function success() { return { type: editPasswordConstants.EDIT_PASSWORD_SUCCESS} }
+    function failure() { return { type: editPasswordConstants.EDIT_PASSWORD_FAILURE} }
+}
 
 
 export const logout = () => {

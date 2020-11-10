@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, Button, InputGroup, FormControl,Nav} from 'react-bootstrap';
 import {connect} from 'react-redux';
-import {changePage} from '../../actions/filterActions';
+
 
 
 class PaginationBar extends React.Component {
@@ -129,17 +129,17 @@ class PaginationBar extends React.Component {
 
     changePage(page) {
         console.log("Wywołano dla strony",page-1)
-        this.props.dispatch(changePage(page-1))
+        this.props.dispatch(this.props.changePage(page-1))
     }
 
     handleMoveLeft(page) {
         console.log(page - (this.state.pageNeighbours * 2) - 1)
-        this.props.dispatch(changePage(page- 1 - (this.state.pageNeighbours * 2) - 1))
+        this.props.dispatch(this.props.changePage(page- 1 - (this.state.pageNeighbours * 2) - 1))
     }
 
     handleMoveRight(page) {
         console.log(page- 1 + (this.state.pageNeighbours * 2) + 1);
-        this.props.dispatch(changePage(page + (this.state.pageNeighbours * 2) + 1))
+        this.props.dispatch(this.props.changePage(page + (this.state.pageNeighbours * 2) + 1))
     }
 
     render() {
@@ -154,7 +154,7 @@ class PaginationBar extends React.Component {
 
 const mapStateToProps = (state,ownProps) => {
     return {
-        paginationInfo: state.pagination.paginationInfo
+        paginationInfo: ownProps.paginationInfo
     }
 }
 

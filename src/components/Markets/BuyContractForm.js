@@ -50,7 +50,7 @@ class BuyContractForm extends React.Component {
         <div className="img-box">
         {this.state.imageFile && (<Image className="img" src={this.state.imageFile} rounded/>)}
         </div> */}
-        <Field type="number" min="1" max="100" name="maxPrice" label="Podaj maksymalną cenę 1 akcji" component={this.renderInput} />
+        <Field type="number" max="1" name="maxPrice" label="Podaj maksymalną cenę 1 akcji" component={this.renderInput} />
         <Field type="number" min="1" max="1000" name="countOfShares"  label="Ile akcji chcesz kupić" component={this.renderInput} />
         <div style={{display:"inline-block"}}>
         <Button className="form-button" variant="primary" type="submit">

@@ -64,6 +64,24 @@ export default (state = [], action) => {
                 return newArray_five;
         case marketsConstants.MAKE_MARKET_PUBLIC_FAILURE:
                 return [...state]
+        case marketsConstants.SOLVE_SINGLE_BET_MARKET_REQUEST:
+            return [...state]
+        case marketsConstants.SOLVE_SINGLE_BET_MARKET_SUCCESS:
+            const index_six = state.findIndex(market => market.marketId === action.payload.marketId)
+                const newArray_six = [...state]
+                newArray_six[index_six] = action.payload
+                return newArray_six;
+        case marketsConstants.SOLVE_SINGLE_BET_MARKET_FAILURE:
+                return [...state]
+        case marketsConstants.SOLVE_MULTI_BET_MARKET_REQUEST:
+            return [...state]
+        case marketsConstants.SOLVE_MULTI_BET_MARKET_SUCCESS:
+            const index_seven = state.findIndex(market => market.marketId === action.payload.marketId)
+                const newArray_seven = [...state]
+                newArray_seven[index_seven] = action.payload
+                return newArray_seven;
+        case marketsConstants.SOLVE_MULTI_BET_MARKET_FAILURE:
+                return [...state]
         default:
             return state;
     }

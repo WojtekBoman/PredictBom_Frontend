@@ -1,11 +1,11 @@
 import {contractConstants} from '../constants/contractConstants';
-import {marketsConstants} from '../constants/marketsConstants';
 import {betsConstants} from '../constants/betsConstants';
 import { betsService} from '../services/contractService';
 import history from '../history';
 import { alertActions } from './alertActions';
 import _ from 'lodash';
 import { playerConstants } from '../constants/playerConstants';
+import {updateContractPagination} from './paginationActions';
 
 export const buyContract = (betId,marketId, contractOption,{maxPrice, countOfShares}) => {
 
@@ -31,13 +31,14 @@ export const buyContract = (betId,marketId, contractOption,{maxPrice, countOfSha
     function failure(error) { return { type: contractConstants.BUY_CONTRACT_FAILURE, error } }
 }
 
-export const fetchFilteredContracts = (contractOption,marketTitle,marketCategories=[],sortedBy,page,pageSize) => {
+export const fetchFilteredContracts = (contractStatus,contractOption,betTitle,marketTitle,marketCategories,sortedBy,page,pageSize) => {
     return dispatch => {
         dispatch(request());
-        betsService.fetchFilteredContracts(contractOption,marketTitle,marketCategories=[],sortedBy,page,pageSize)
+        betsService.fetchFilteredContracts(contractStatus,contractOption,betTitle,marketTitle,marketCategories,sortedBy,page,pageSize)
             .then(
                 res => { 
                     dispatch(success(res.content));
+                    dispatch(updateContractPagination(_.omit(res,['content'])))
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -51,13 +52,14 @@ export const fetchFilteredContracts = (contractOption,marketTitle,marketCategori
     function failure(error) { return { type: contractConstants.FETCH_CONTRACTS_FAILURE, error } }
 }
 
-export const fetchContracts = (contractOption,marketTitle,marketCategories=[],sortedBy,page,pageSize) => {
+export const fetchContracts = (page,pageSize) => {
     return dispatch => {
         dispatch(request());
-        betsService.fetchContracts(contractOption,marketTitle,marketCategories=[],sortedBy,page,pageSize)
+        betsService.fetchContracts(page,pageSize)
             .then(
                 res => { 
                     dispatch(success(res.content));
+                    dispatch(updateContractPagination(_.omit(res,['content'])))
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -71,16 +73,34 @@ export const fetchContracts = (contractOption,marketTitle,marketCategories=[],so
     function failure(error) { return { type: contractConstants.FETCH_CONTRACTS_FAILURE, error } }
 }
 
-export const fetchContractDetails = (betId) => {
+export const fetchBetPrice = (betId,option) => {
+    return dispatch => {
+        dispatch(request(betId))
+        betsService.fetchLastPrice(betId,option) 
+            .then(
+                betPrice => {
+                    dispatch(success(betPrice));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            )
+    };
+
+
+    function request(betPrice) { return { type: betsConstants.FETCH_BET_PRICE_REQUEST,payload:betPrice  } }
+    function success(betPrice) { return { type: betsConstants.FETCH_BET_PRICE_SUCCESS,payload: betPrice } }
+    function failure(error) { return { type: betsConstants.FETCH_BET_PRICE_FAILURE, error } }
+}
+
+export const fetchContractDetails = (id) => {
     return dispatch => {
         dispatch(request());
-        betsService.fetchContractDetails(betId)
+        betsService.fetchContractDetails(id)
             .then(
                 res => { 
-                    console.log("Wczytane dane",res);
-                    // dispatch(alertActions.success(res.info));
-                    dispatch(fetchMarket(res.predictionMarket));
-                    dispatch(fetchBet(res.bet));
+                    dispatch(success(res));
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -92,7 +112,46 @@ export const fetchContractDetails = (betId) => {
     function request() { return { type: contractConstants.FETCH_CONTRACT_DETAILS_REQUEST} }
     function success(payload) { return { type: contractConstants.FETCH_CONTRACT_DETAILS_SUCCESS, payload } }
     function failure(error) { return { type: contractConstants.FETCH_CONTRACT_DETAILS_FAILURE, error } }
-    function fetchBet(bet) { return { type: betsConstants.FETCH_BET,payload: bet } }
-    function fetchMarket(market) { return { type: marketsConstants.FETCH_MARKET_SUCCESS,payload: market } }
+}
 
+export const addOffer = (contractId,countOfShares,sellPrice) => {
+    return dispatch => {
+        dispatch(request());
+        betsService.addOffer(contractId,countOfShares,sellPrice)
+            .then(
+                res => { 
+                    console.log(res);
+                    dispatch(success(res));
+                    history.push(`/contracts/details/${contractId}`);
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+
+    function request() { return { type: contractConstants.ADD_OFFER_REQUEST} }
+    function success(payload) { return { type: contractConstants.ADD_OFFER_SUCCESS, payload } }
+    function failure(error) { return { type: contractConstants.ADD_OFFER_FAILURE, error } }
+}
+
+export const deleteOffer = (offerId) => {
+    return dispatch => {
+        dispatch(request());
+        betsService.deleteOffer(offerId)
+            .then(
+                res => { 
+                    dispatch(success(res));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+
+    function request() { return { type: contractConstants.DELETE_OFFER_REQUEST} }
+    function success(payload) { return { type: contractConstants.DELETE_OFFER_SUCCESS, payload } }
+    function failure(error) { return { type: contractConstants.DELETE_OFFER_FAILURE, error } }
 }

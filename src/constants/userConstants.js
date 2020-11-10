@@ -11,4 +11,8 @@ export const loginConstants = {
     LOGOUT: 'LOGOUT'
 }
 
-
+export const editPasswordConstants = {
+    EDIT_PASSWORD_REQUEST: 'EDIT_PASSWORD_REQUEST',
+    EDIT_PASSWORD_SUCCESS: 'EDIT_PASSWORD_SUCCESS',
+    EDIT_PASSWORD_FAILURE: 'EDIT_PASSWORD_FAILURE',
+}

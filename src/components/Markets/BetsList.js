@@ -37,7 +37,7 @@ class BetsList extends React.Component {
 
         return(
             <div>
-                {this.props.bets.map(bet => <Bet published={this.props.published} bestYesPrice={bet.bestYesPrice} bestNoPrice={bet.bestNoPrice} key={bet.id} betId={bet.id} marketId={this.props.marketId} chosenOption={bet.chosenOption} />)}
+                {this.props.bets.map(bet => <Bet correctBetId={this.props.correctBetId} correctBetOption={this.props.correctBetOption} published={this.props.published} bestYesPrice={bet.bestYesPrice} bestNoPrice={bet.bestNoPrice} key={bet.id} betId={bet.id} marketId={this.props.marketId} chosenOption={bet.chosenOption} />)}
             </div>
         )
     }

@@ -13,6 +13,28 @@ import { Image, Item,Card,Icon } from 'semantic-ui-react'
 
 class Contract extends React.Component {
 
+  state = {
+    borderColor:"",
+    status:"",
+    iconName:""
+  }
+
+  componentDidMount() {
+    switch(this.props.contractStatus.toLowerCase()) {
+      case "pending":
+        this.setState({borderColor:"black",status:"Oczekujący",iconName:"clock"});
+        break;
+      case "won":
+        this.setState({borderColor:"green",status:"Wygrany",iconName:"trophy"});
+        break;
+      case "lost":
+        this.setState({borderColor:"red",status:"Przegrany",iconName:"close"});
+        break;
+      default:
+        this.setState({borderColor:"black",status:"Oczekujący",iconName:"clock"});
+    }
+  }
+
 
     setCover = (category) => {
       switch(category){
@@ -46,6 +68,20 @@ class Contract extends React.Component {
   
   }
 
+  renderCardBorder = (status) => {
+    switch(status.toLowerCase()) {
+      case "pending":
+        return "black";
+      case "won":
+        return "green";
+      case "lost":
+        return "red";
+      default:
+        return "black" ;
+    }
+  }
+
+
   renderContractContent = () => {
 
 //     return(
@@ -73,7 +109,7 @@ class Contract extends React.Component {
         <Figure>
         <Figure.Image style={{width: "100%",
     height: "15vw",
-    objectFit: "cover"}} className="img" src={this.props.market.marketCover ? (`data:image/jpeg;base64,${this.props.market.marketCover.data}`) : (this.setCover(this.props.market.marketCategory))} rounded/>
+    objectFit: "cover"}} className="img" src={this.props.marketInfo.marketCover ? (`data:image/jpeg;base64,${this.props.marketInfo.marketCover.data}`) : (this.setCover(this.props.marketInfo.marketCategory))} rounded/>
   <Figure.Caption>
     Nulla vitae elit libero, a pharetra augue mollis interdum.
   </Figure.Caption>
@@ -83,24 +119,28 @@ class Contract extends React.Component {
   
     render() {
           return(
-            <Card style={{margin:"0 auto"}}>
-              <LinkContainer to={`/contracts/details/${this.props.betId}`}>
+            <Card style={{margin:"0 auto"}} fluid color={this.state.borderColor}>
+              <LinkContainer to={`/contracts/details/${this.props.id}`}>
     <Image style={{width: "100%",
     height: "15vw",
-    objectFit: "cover"}} className="img" src={this.props.market.marketCover ? (`data:image/jpeg;base64,${this.props.market.marketCover.data}`) : (this.setCover(this.props.market.category))} />
+    objectFit: "cover"}} className="img" src={this.props.marketInfo.marketCover ? (`data:image/jpeg;base64,${this.props.marketInfo.marketCover.data}`) : (this.setCover(this.props.marketInfo.category))} />
     </LinkContainer>
     <Card.Content>
-          <Card.Header>{this.props.market.bets[0].chosenOption}</Card.Header>
+          <Card.Header>{this.props.bet.chosenOption}</Card.Header>
             {this.props.contractOption ? <Card.Header>Kontrakt na tak</Card.Header> : <Card.Header>Kontrakt na nie</Card.Header>}
-      <Card.Meta>{this.props.market.topic}</Card.Meta>
-      <Card.Description>
-        {this.props.market.description}
-      </Card.Description>
+      <Card.Meta>{this.props.marketInfo.topic}</Card.Meta>
+   
     </Card.Content>
     <Card.Content extra>
       <a>
         <Icon name='money bill alternate outline' />
         Liczba akcji: {this.props.countOfContracts}
+      </a>
+    </Card.Content>
+    <Card.Content extra>
+      <a>
+        <Icon name={this.state.iconName} />
+        {this.state.status}
       </a>
     </Card.Content>
   </Card>)

@@ -11,6 +11,16 @@ const fetchPlayer = (username) => {
     return fetch(`http://localhost:8080/player/${username}`,reqOptions).then((res) => handleResponse(res));
 }
 
+const fetchRanking = () => {
+
+    const reqOptions = {
+        method: 'GET',
+        headers: authHeader()
+    }
+
+    return fetch(`http://localhost:8080/player/ranking`,reqOptions).then((res) => handleResponse(res));
+}
+
 const handleResponse = (res) => {
 
     return res
@@ -33,5 +43,6 @@ const handleResponse = (res) => {
 }
 
 export const playerService = {
-    fetchPlayer
+    fetchPlayer,
+    fetchRanking
 };

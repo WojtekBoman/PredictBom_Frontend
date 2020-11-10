@@ -41,3 +41,9 @@ export const changePageSize = (pageSize) => {
         payload: pageSize
     }
 }
+
+export const clearFilters = () => {
+    return{
+        type: filterConstants.CLEAR_FILTERS
+    }
+}

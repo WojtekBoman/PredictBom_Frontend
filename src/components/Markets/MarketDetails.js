@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Container,Spinner} from 'react-bootstrap';
 import {fetchMarket} from '../../actions/marketActions';
 import BetsList from './BetsList';
+import MarketTrendChart from './MarketTrendChart';
 
 class MarketDetails extends React.Component {
 
@@ -29,7 +30,7 @@ class MarketDetails extends React.Component {
 
     renderBetsList = () => {
         return(
-            <BetsList bets={this.props.currentMarket.bets}
+            <BetsList correctBetId={this.props.currentMarket.correctBetId} correctBetOption={this.props.currentMarket.correctBetOption} bets={this.props.currentMarket.bets}
             marketId={this.props.match.params.id} />
         )
 } 
@@ -51,9 +52,14 @@ class MarketDetails extends React.Component {
                         <h4>Zakłady</h4>
                         {this.renderBetsList()}
                     </div>
+                    <MarketTrendChart bets={this.props.currentMarket.bets} betId={67} option={true} />
                 </Container>
                 );
         }
+    }
+
+    renderChart = () => {
+      
     }
 
     render() {

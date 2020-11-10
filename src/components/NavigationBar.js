@@ -61,9 +61,9 @@ class NavigationBar extends React.Component {
                     Oferty
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/contracts">
+              <LinkContainer to="/transactions">
                 <Nav.Link>
-                    Kontrakty
+                    Transakcje
                 </Nav.Link>
               </LinkContainer>
           </Nav>
@@ -74,6 +74,7 @@ class NavigationBar extends React.Component {
     renderUnloggedUserPanel() {
       return(
       <Nav className="mr-auto">
+
       <LinkContainer to="/rejestracja">
         <Nav.Link>Rejestracja</Nav.Link>
       </LinkContainer>
@@ -99,7 +100,6 @@ class NavigationBar extends React.Component {
     }
 
     render(){
-      console.log(this.props.player)
         return(
         <Navbar bg="primary" variant="dark" sticky="top">
             <LinkContainer to='/'>

@@ -12,7 +12,6 @@ export const fetchPlayer = (username) => {
                     dispatch(success(user));
                 },
                 error => {
-                    console.log(error);
                     dispatch(failure(error.toString()));
                     dispatch(alertActions.error(error.toString()));
                 }

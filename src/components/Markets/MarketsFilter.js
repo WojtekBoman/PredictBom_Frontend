@@ -44,7 +44,7 @@ class MarketsFilter extends React.Component {
     
         return(
             <div>
-                <Form.Label><h4>Rozmiar strony</h4></Form.Label>
+                <Form.Label><h5>Rozmiar strony</h5></Form.Label>
                 <Form.Control as="select" onChange={this.handlePageSize}>
                     {this.range(2,20,2).map(number => 
                          <option key={number} value={number}>{number}</option>)}
@@ -64,7 +64,7 @@ class MarketsFilter extends React.Component {
 
         return(
             <div className="mb-3">
-                 <h4>Kategorie</h4>
+                 <h5>Kategorie</h5>
                 <Form.Group>
                     {categories.map(category => 
                 <Form.Check
@@ -85,7 +85,7 @@ class MarketsFilter extends React.Component {
         console.log(this.state.filters);
         return (
             <div>
-             <Form.Label><h4>Sortuj według</h4></Form.Label>
+             <Form.Label><h5>Sortuj według</h5></Form.Label>
                 <Form.Control as="select" onChange={this.handleSort}>
                 <option value={"createdDate,desc"}>Od najnowszych</option>
                 <option value={"createdDate,asc"}>Od najstarszych</option>

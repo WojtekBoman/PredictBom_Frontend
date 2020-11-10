@@ -21,6 +21,12 @@ import Contract from './PlayerComponents/Contract';
 import EditMarketPage from './Markets/EditMarketPage';
 import SolveMarketPage from './Markets/SolveMarketPage';
 import ContractDetails from './PlayerComponents/ContractDetails';
+import ContractPage from './PlayerComponents/ContractPage';
+import EditPasswordPage from './User/EditPasswordPage';
+import AddOffer from './PlayerComponents/SelectContractToAddOffer';
+import AddOfferPage from './Offers/AddOfferPage';
+import BetOffers from './Offers/BetOffers';
+import Ranking from './PlayerComponents/Ranking';
 
 
 const App = () => {
@@ -34,10 +40,15 @@ const App = () => {
                     <Route path="/login" component={LoginPage} />
                     <Route path="/rejestracja" component={RegisterPage} />
                     <Route path="/resetPassword" component={ResetPasswordPage} />
-                    <Route path="/resetPasswordWithToken" component={ResetPasswordWithToken} />
+                    <Route path="/resetPasswordWithToken" component={ResetPasswordWithToken} /> 
+                    <Route path="/ranking" component={Ranking} /> 
+                    <PrivateRoute path="/offers/bet/:id/:option" component={BetOffers} />
+                    <PrivateRoute path="/offers/selectContract" component={AddOffer} />
+                    <PrivateRoute path="/offers/new/:id" component={AddOfferPage} />
+                    <PrivateRoute path="/editPassword" component={EditPasswordPage} />
                     <PrivateRoute path="/profile" component={ProfilePage} />
                     <PrivateRoute path="/contracts/details/:id" component={ContractDetails} />
-                    <PrivateRoute path="/contracts" component={ContractList} />
+                    <PrivateRoute path="/contracts" component={ContractPage} />
                     <PrivateRoute path="/markets/new" component={CreateMarketPage}/>
                     <PrivateRoute path="/markets/details/:id" component={MarketDetails}/>
                     <PrivateRoute path="/markets/editCover/:id" component={MarketCoverPage}/>

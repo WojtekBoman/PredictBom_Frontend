@@ -8,6 +8,7 @@ import {alertActions} from '../../actions/alertActions';
 import Loader from 'react-loader-spinner';
 import BuyContractForm from './BuyContractForm';
 import _ from 'lodash';
+import { LinkContainer } from 'react-router-bootstrap';
 
 class Bet extends React.Component {
 
@@ -21,10 +22,20 @@ class Bet extends React.Component {
     state={
         submitted:false,
         contractOption:null,
+        backgroundColor:"blue"
     }
 
     componentDidMount() {
-       if(!this.props.betPrice) this.props.fetchBetPrice(this.props.betId);
+       if(!this.props.betPrice)
+       { this.props.fetchBetPrice(this.props.betId) } 
+       else {
+        if(this.props.correctBetId == 0 && this.props.correctBetId == this.props.betId) {
+            this.props.correctBetOption ? this.setState({backgroundColor:"green"}) : this.setState({backgroundColor:"red"})
+        }else{
+          this.setState({backgroundColor:"red"})
+        }
+       }
+      
     }
 
     hideForm = () => {
@@ -58,7 +69,7 @@ class Bet extends React.Component {
 
 
     renderPrice() {
-        if(this.props.betPrice){
+        if(this.props.betPrice && this.props.correctBetId == 0){
             return(
                 <Row className="text-center">
                 <Col sm={4}>
@@ -70,12 +81,16 @@ class Bet extends React.Component {
                    
                 </Col>
                 <Col>
-                <Button style={{marginBottom:"10px"}}>
+                <LinkContainer style={{marginBottom:"10px"}} to={`/offers/bet/${this.props.betId}/${true}`}>
+                <Button >
                         Przeglądaj oferty na tak
                 </Button>
+                </LinkContainer>
+                <LinkContainer to={`/offers/bet/${this.props.betId}/${false}`}>
                 <Button>
                         Przeglądaj oferty na nie
                 </Button>
+                </LinkContainer>
                 </Col>
                 <Col sm={4}>
                     <h5>Cena nie</h5>
@@ -86,6 +101,14 @@ class Bet extends React.Component {
                 </Col>
                
             </Row>
+            )
+        }else{
+            return(<div>
+                {this.props.correctBetId == this.props.betId ? 
+                <div>{this.props.correctBetOption ? <h5>Zakład poprawny dla opcji na tak</h5> : <h5>Zakład poprawny dla opcji na nie</h5>}</div> 
+                : 
+                <div>{!this.props.correctBetOption ? <h5>Zakład poprawny dla opcji na tak</h5> : <h5>Zakład poprawny dla opcji na nie</h5>}</div>
+                }</div>
             )
         }
     }
@@ -115,7 +138,7 @@ class Bet extends React.Component {
         console.log(this.state);
         return(
             <div>
-            <Segment color="blue" style={{margin:"10px"}}>
+            <Segment color={this.state.backgroundColor} style={{margin:"10px"}}>
             <h2 className="ui header">{this.props.chosenOption}</h2>
             {window.location.href.includes("editBets") && !this.props.published && (<Button className="close-button" onClick={this.onClickDeleteBet}>{this.renderButtonContent()}</Button>)}
             {this.renderPrice()}

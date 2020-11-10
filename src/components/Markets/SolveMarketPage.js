@@ -38,9 +38,6 @@ class SolveMarketPage extends React.Component {
             <div className="text-center">
                 {this.compareDates(this.props.currentMarket.predictedEndDate)}
                 {this.renderChooseCorrectBetForm()}
-                <Button style={{marginTop:"20px"}}>
-                    Zakończ rynek
-                </Button>
             </div>
         )
     }
@@ -83,9 +80,7 @@ class SolveMarketPage extends React.Component {
                         <hr className="my-4"></hr>
                     </div>
                     <div>   
-                        
                         {this.renderSolveMarketInfo()}
-            
                     </div>
                 </div>
                 );
@@ -97,7 +92,7 @@ class SolveMarketPage extends React.Component {
 
     renderChooseCorrectBetForm = () => {
         if(this.props.currentMarket){
-            return(<div>{this.props.currentMarket.bets.length > 1 ? <SolveMultiBetMarketForm bets={this.props.currentMarket.bets}/> : <SolveSingleBetMarketForm bets={this.props.currentMarket.bets} />}</div>)
+            return(<div>{this.props.currentMarket.bets.length > 1 ? <SolveMultiBetMarketForm bets={this.props.currentMarket.bets} marketId={this.props.currentMarket.marketId}/> : <SolveSingleBetMarketForm bets={this.props.currentMarket.bets}  marketId={this.props.currentMarket.marketId}/>}</div>)
         }
     }
 

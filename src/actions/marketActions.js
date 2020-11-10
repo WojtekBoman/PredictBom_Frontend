@@ -79,7 +79,6 @@ export const setMarketCover = (marketId, marketCover) => {
             .then(
                 res => {
                     dispatch(success(res.predictionMarket));
-                    dispatch(alertActions.success(res.info));
                     history.push('/markets')
                 },
                 error => {
@@ -183,4 +182,48 @@ export const makePublic = (marketId) => {
     function request(market) { return { type: marketsConstants.MAKE_MARKET_PUBLIC_REQUEST,payload:market  } }
     function success(market) { return { type: marketsConstants.MAKE_MARKET_PUBLIC_SUCCESS,payload:market } }
     function failure(error) { return { type: marketsConstants.MAKE_MARKET_PUBLIC_FAILURE, error } }
+}
+
+export const solveMultiBetMarket = (marketId,betId) => {
+    return dispatch => {
+        dispatch(request(marketId));
+        marketService.solveMultiBetMarket(marketId,betId)
+            .then(
+                res => {
+                    dispatch(success(res.predictionMarket));
+                    dispatch(alertActions.success(res.info));
+                    history.push('/markets');
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            )
+    }
+
+    function request(market) { return { type: marketsConstants.SOLVE_MULTI_BET_MARKET_REQUEST,payload:market  } }
+    function success(market) { return { type: marketsConstants.SOLVE_MULTI_BET_MARKET_SUCCESS,payload:market } }
+    function failure(error) { return { type: marketsConstants.SOLVE_MULTI_BET_MARKET_FAILURE, error } }
+}
+
+export const solveSingleBetMarket = (marketId,betId,correctBetOption) => {
+    return dispatch => {
+        dispatch(request(marketId));
+        marketService.solveSingleBetMarket(marketId,betId,correctBetOption)
+            .then(
+                res => {
+                    dispatch(success(res.predictionMarket));
+                    dispatch(alertActions.success(res.info));
+                    history.push('/markets');
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            )
+    }
+
+    function request(market) { return { type: marketsConstants.SOLVE_SINGLE_BET_MARKET_REQUEST,payload:market  } }
+    function success(market) { return { type: marketsConstants.SOLVE_SINGLE_BET_MARKET_SUCCESS,payload:market } }
+    function failure(error) { return { type: marketsConstants.SOLVE_SINGLE_BET_MARKET_FAILURE, error } }
 }

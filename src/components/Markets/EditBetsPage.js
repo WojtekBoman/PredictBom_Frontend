@@ -99,7 +99,7 @@ onSubmit = (formValues) => {
 
 renderBetsList = () => {
         return(
-            <BetsList bets={this.props.currentMarket.bets}
+            <BetsList bets={this.props.currentMarket.bets} correctBetId={this.props.currentMarket.correctBetId}
             published={this.props.currentMarket.published} marketId={this.props.match.params.id} />
         )
 } 
@@ -140,10 +140,10 @@ renderBetsList = () => {
                 <Field onChange={this.checkIsEmptyField} type="text" label="Dodawanie zakładu" name="chosenOption" component={this.renderInput} placeholder="Wprowadź tytuł zakładu"></Field>
                 <Row>
                     <Col sm={6}>
-                    <Field type="number" label="Podaj cenę kontraktu na tak" max="100" name="yesPrice" component={this.renderInput} placeholder="Podaj cenę kontraktu na tak"></Field>
+                    <Field type="number" label="Podaj cenę kontraktu na tak" max="1" name="yesPrice" component={this.renderInput} placeholder="Podaj cenę kontraktu na tak"></Field>
                     </Col>
                     <Col sm={6}>
-                    <Field type="number" label="Podaj cenę kontraktu na nie" max="100" name="noPrice" component={this.renderInput} placeholder="Podaj cenę kontraktu na nie"></Field>
+                    <Field type="number" label="Podaj cenę kontraktu na nie" max="1" name="noPrice" component={this.renderInput} placeholder="Podaj cenę kontraktu na nie"></Field>
                     </Col>
                 </Row>
                     <Button variant="primary" type="submit">
@@ -192,7 +192,8 @@ const validate = formValues => {
     }
   })
 
-    if((parseInt(formValues.yesPrice) + parseInt(formValues.noPrice)) > 100) {
+    const betsSumValue = (parseFloat(formValues.yesPrice) + parseFloat(formValues.noPrice));
+    if(betsSumValue > 1.10 || betsSumValue < 1) {
         console.log(formValues)
         errors['yesPrice'] = "Różnica między cenami na tak i nie może wynosić maksymalnie 10 $";
     }

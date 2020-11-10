@@ -103,6 +103,7 @@ class CreateMarketPage extends React.Component {
     }
 
     resetForm = () => {
+      this.setState({resetButtonDisable:true})
       this.props.reset();
     }
       

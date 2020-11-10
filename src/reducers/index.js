@@ -12,6 +12,12 @@ import { reducer as formReducer } from 'redux-form';
 import playerReducer from './playerReducer';
 import contractReducer from './contractReducer';
 import betReducer from './betReducer';
+import filterContractReducer from './filterContractReducer';
+import offerReducer from './offerReducer';
+import rankingReducer from './rankingReducer';
+import transactionReducer from './transactionReducer';
+import filterTransactionConstants from './filterTransactionReducer';
+import filterTransactionReducer from './filterTransactionReducer';
 
 export default combineReducers({
    login: loginReducer,
@@ -19,6 +25,7 @@ export default combineReducers({
    markets: marketsReducer,
    register: registerReducer,
    filter: filterReducer,
+   filterContracts:filterContractReducer,
    alert: alertReducer,
    loading: loadingReducer,
    pagination: paginationReducer,
@@ -26,5 +33,9 @@ export default combineReducers({
    betPrice: betPriceReducer,
    bets:betReducer,
    player:playerReducer,
-   contracts: contractReducer
+   contracts: contractReducer,
+   offers: offerReducer,
+   ranking: rankingReducer,
+   transactions: transactionReducer,
+   transactionsFilter: filterTransactionReducer
 });

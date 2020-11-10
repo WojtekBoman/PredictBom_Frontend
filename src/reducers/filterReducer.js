@@ -16,6 +16,8 @@ export default (state = initialState, action) => {
             return {...state,pageSize:action.payload,page:0}
         case filterConstants.UPDATE_CURRENT_PAGE:
             return {...state,page:action.payload}
+        case filterConstants.CLEAR_FILTERS:
+            return {...initialState};
         default:
             return state;
     }
