@@ -11,7 +11,7 @@ class ProfilePage extends React.Component {
 
     componentDidMount() {
         if(this.props.user.roles[0] === "ROLE_PLAYER") {
-            console.log(this.props.user)
+         
             this.props.fetchPlayer(this.props.user.username)
         }
     }

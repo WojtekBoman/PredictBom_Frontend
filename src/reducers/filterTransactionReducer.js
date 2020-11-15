@@ -1,6 +1,6 @@
 import {filterTransactionConstants} from '../constants/filterTransactionConstants';
 
-const initialState = {marketTitle:'',betTitle:'',contractStatus:'',contractOption:0,selectedCategories:[],sortedBy:['transactionDate','desc'],page:0,pageSize:10}
+const initialState = {marketTitle:'',betTitle:'',option:0,selectedCategories:[],sortedBy:['transactionDate','desc'],page:0,pageSize:10}
 
 export default (state = initialState, action) => {
     switch(action.type) {

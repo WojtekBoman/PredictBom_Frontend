@@ -16,7 +16,7 @@ class SolveMarketPage extends React.Component {
     renderBetsList = () => {
         return(
             <BetsList bets={this.props.currentMarket.bets}
-            marketId={this.props.match.params.id} />
+            marketId={this.props.match.params.id} correctBetId={this.props.currentMarket.correctBetId} />
         )
 } 
 

@@ -56,9 +56,21 @@ class NavigationBar extends React.Component {
                     Rynki
                 </Nav.Link>
               </LinkContainer>
+              <NavDropdown title="Oferty">
+              <LinkContainer to="/offers/selectContract">
+                <NavDropdown.Item >
+                    Dodaj nową ofertę
+                </NavDropdown.Item>
+              </LinkContainer>
               <LinkContainer to="/offers">
+                <NavDropdown.Item >
+                    Twoje oferty
+                </NavDropdown.Item>
+              </LinkContainer>
+            </NavDropdown>
+            <LinkContainer to="/contracts">
                 <Nav.Link>
-                    Oferty
+                    Kontrakty
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/transactions">

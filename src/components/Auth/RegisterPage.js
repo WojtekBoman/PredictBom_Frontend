@@ -64,7 +64,7 @@ class RegisterPage extends React.Component {
     }
 
     render(){
-        console.log(this.props);
+
         return(
             <Container className="bg-light border rounded shadow-container form-container">
             <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>

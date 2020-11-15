@@ -18,6 +18,7 @@ import rankingReducer from './rankingReducer';
 import transactionReducer from './transactionReducer';
 import filterTransactionConstants from './filterTransactionReducer';
 import filterTransactionReducer from './filterTransactionReducer';
+import filterOffersReducer from './filterOffersReducer';
 
 export default combineReducers({
    login: loginReducer,
@@ -37,5 +38,6 @@ export default combineReducers({
    offers: offerReducer,
    ranking: rankingReducer,
    transactions: transactionReducer,
-   transactionsFilter: filterTransactionReducer
+   transactionsFilter: filterTransactionReducer,
+   filterOffers: filterOffersReducer
 });

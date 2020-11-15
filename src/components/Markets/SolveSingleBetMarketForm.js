@@ -83,7 +83,7 @@ class SolveSingleBetMarketForm extends React.Component {
     }
 
     onSubmit = (formValues) => {
-        console.log(this.props,formValues)
+     
         this.props.solveSingleBetMarket(this.props.marketId,this.props.bets[0].id,formValues.correctBetOption);
     }
 

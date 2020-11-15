@@ -63,7 +63,6 @@ class CheckTokenPage extends React.Component {
 }
 
   onSubmit = (formValues) => {
-    console.log(formValues);
     this.props.checkToken(formValues);
 }
 

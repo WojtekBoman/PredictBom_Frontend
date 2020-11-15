@@ -108,7 +108,6 @@ class MarketsList extends React.Component {
 
 
     render() {
-        console.log("render marketslist")
         return(
             <div style={{marginTop:"20px"}}>
                 <SearchBar search={updateSearch}/>

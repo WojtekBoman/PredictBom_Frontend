@@ -4,6 +4,8 @@ import {Container,Spinner} from 'react-bootstrap';
 import {fetchMarket} from '../../actions/marketActions';
 import BetsList from './BetsList';
 import MarketTrendChart from './MarketTrendChart';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faSadTear,faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 
 class MarketDetails extends React.Component {
 
@@ -34,6 +36,16 @@ class MarketDetails extends React.Component {
             marketId={this.props.match.params.id} />
         )
 } 
+    
+    renderNotFoundMessage() {
+        if(this.props.alert.payload)
+        return (
+        <Container className="text-center bg-light border rounded shadow-container create-market-container">
+            <FontAwesomeIcon icon={faSadTear} size={"9x"}/>
+        <h2>{this.props.alert.payload}</h2>
+        </Container>
+        )
+    }
 
     renderMarketPage = () => {
         if(this.props.currentMarket){
@@ -66,6 +78,7 @@ class MarketDetails extends React.Component {
         return(
         <div>
             {this.renderLoading()}
+            {this.renderNotFoundMessage()}
             {this.renderMarketPage()}
         </div>
         )
@@ -75,7 +88,8 @@ class MarketDetails extends React.Component {
 const mapStateToProps = (state,ownProps) => {
     return {
         loadingMarket: state.loading.FETCH_MARKET,
-        currentMarket: state.markets.find(market => market.marketId == ownProps.match.params.id) 
+        currentMarket: state.markets.find(market => market.marketId == ownProps.match.params.id),
+        alert: state.alert 
     }
 }
 

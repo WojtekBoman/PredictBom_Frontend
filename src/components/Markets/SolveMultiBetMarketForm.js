@@ -16,12 +16,12 @@ class SolveMultiBetMarketForm extends React.Component {
 
     handleCorrectBetId = (e) => {
         this.setState({correctBetId:e.target.value})
-        console.log(this.state)
+    
     }
 
     handleSubmit(e){
         e.preventDefault();
-        console.log(this.state);
+       
     }
     
     getOptions() {
@@ -89,7 +89,7 @@ class SolveMultiBetMarketForm extends React.Component {
     }
 
     onSubmit = (formValues) => {
-        console.log(this.props,formValues)
+        
         this.props.solveMultiBetMarket(this.props.marketId,formValues.correctBetId);
     }
 

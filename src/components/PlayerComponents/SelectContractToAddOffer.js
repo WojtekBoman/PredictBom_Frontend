@@ -5,22 +5,22 @@ import ContractFilter from './ContractFilter';
 import ContractList from './ContractList';
 import {Range} from 'react-range';
 
-class AddOffer extends React.Component {
+class SelectContractToAddOffer extends React.Component {
 
     render() {
         return(
             <Container className="bg-light border rounded shadow-container create-market-container">
                 <header>
-                    <h4>Tworzenie oferty</h4>
+                    <h2>Twoje oferty</h2>
                     <p className="text-muted">Wybierz kontrakt z którego chcesz dodać ofertę i w szczegółach kontraktu wybierz opcję "Dodaj ofertę"</p>
                     <hr className="my-4"></hr>
                 </header>
                 <Row>
                     <Col sm={12} md={3}>
-                        <ContractFilter />
+                        <ContractFilter offerPage={true} />
                     </Col>
                     <Col sm={12} md={9}>
-                        <ContractList />
+                        <ContractList offerPage={true} />
                     </Col>
                 </Row>
             </Container>
@@ -28,4 +28,4 @@ class AddOffer extends React.Component {
     }
 }
 
-export default AddOffer;
+export default SelectContractToAddOffer;

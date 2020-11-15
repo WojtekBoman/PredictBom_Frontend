@@ -19,3 +19,9 @@ export const clearFilters = () => {
         type: filterContractConstants.CLEAR_FILTERS
     }
 }
+
+export const setStatusPending = () => {
+    return {
+        type: filterContractConstants.SET_STATUS_PENDING
+    }
+}

@@ -8,6 +8,8 @@ export default (state = {}, action) => {
             return {...state,paginationContractInfo:action.payload};
         case paginationConstants.UPDATE_TRANSACTION_PAGINATION:
             return {...state,transactionPagination: action.payload}
+        case paginationConstants.UPDATE_OFFERS_PAGINATION:
+            return {...state,offersPagination: action.payload}
         default:
             return state;
     }

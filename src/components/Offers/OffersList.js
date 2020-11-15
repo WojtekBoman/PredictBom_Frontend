@@ -3,10 +3,13 @@ import {connect} from 'react-redux';
 import {Table} from 'react-bootstrap';
 import Offer from './Offer';
 
+
 class OffersList extends React.Component {
 
     render() {
+ 
         return(
+            <div>
             <Table striped bordered hover>
             <thead>
                 <tr>
@@ -20,6 +23,8 @@ class OffersList extends React.Component {
                 {this.props.offers.map(offer => <Offer isOwner={this.props.isOwner} offerId={offer.id} countOfShares={offer.countOfContracts} price={offer.valueOfShares} createdDate={offer.createdDate}/>)}
             </tbody>
             </Table>
+       
+            </div>
         )
     }
 }

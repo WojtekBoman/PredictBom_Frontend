@@ -48,7 +48,7 @@ class MakeMarketPublicPage extends React.Component {
         return(
             <div>
             <h4>Zakłady</h4>
-            <BetsList bets={this.props.currentMarket.bets}
+            <BetsList correctBetId={this.props.currentMarket.correctBetId} bets={this.props.currentMarket.bets}
             marketId={this.props.match.params.id} />
             
             </div>

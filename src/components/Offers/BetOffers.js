@@ -3,8 +3,10 @@ import { Container, Table,Modal,Form,Button } from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {fetchOffers} from '../../actions/offerActions';
 import BuyOfferModal from './BuyOfferModal';
+import PaginationBar from '../Markets/PaginationBar';
+import {updateOfferPagination} from '../../actions/paginationActions';
 import Offer from './Offer';
-
+import {changePage} from '../../actions/filterOfferActions';
 
 class BetOffers extends React.Component {
 
@@ -16,9 +18,17 @@ class BetOffers extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.match.params.id,this.props.match.params.option);
-        this.props.fetchOffers(this.props.match.params.id,this.props.match.params.option);
+        this.props.fetchOffers(this.props.match.params.id,this.props.match.params.option,this.props.filter.page,this.props.filter.pageSize);
     }
+
+    componentDidUpdate(prevProps,prevState) {
+        if(!(JSON.stringify(this.props.filter)===JSON.stringify(prevProps.filter))){
+            this.props.fetchOffers(this.props.match.params.id,this.props.match.params.option,this.props.filter.page,this.props.filter.pageSize);
+        }
+        
+    }
+
+
 
     handleClose = () => {
         this.setState({showModalForm:false})
@@ -29,7 +39,7 @@ class BetOffers extends React.Component {
     }
 
     render() {
-        console.log(this.props.offers);
+   
         return (
             <Container className="bg-light border rounded shadow-container create-market-container">
                 <header><h4>Oferty</h4></header>
@@ -51,6 +61,7 @@ class BetOffers extends React.Component {
                         </Table>
                     )}
                 </div>
+                <PaginationBar paginationInfo={this.props.pagination} changePage={changePage}/>
                <BuyOfferModal id={this.state.id} maxValue={this.state.maxValue} handleClose={this.handleClose} showModalForm={this.state.showModalForm} />
             </Container>
         )
@@ -59,8 +70,10 @@ class BetOffers extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        offers: state.offers
+        offers: state.offers,
+        pagination: state.pagination.offersPagination,
+        filter: state.filterOffers
     }
 }
 
-export default connect(mapStateToProps,{fetchOffers})(BetOffers)
+export default connect(mapStateToProps,{fetchOffers,updateOfferPagination})(BetOffers)

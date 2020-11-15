@@ -93,7 +93,7 @@ class MarketCoverPage extends React.Component {
   
 
   onSubmit = (marketCover) => {
-    console.log(marketCover);
+
       this.props.setMarketCover(this.props.match.params.id,marketCover);
   }
 
@@ -106,7 +106,7 @@ class MarketCoverPage extends React.Component {
   }
 
     render() {
-        console.log(this.state);
+  
         return(
             <Container className="bg-light border rounded shadow-container create-market-container">
                 <h3>Edytuj zdjęcie</h3>

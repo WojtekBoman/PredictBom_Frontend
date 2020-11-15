@@ -148,7 +148,7 @@ class ContractFilter extends React.Component {
     render() {
         return (
             <Form style={{width:"100%"}}>
-                {this.renderContractStatusFilter()}
+                {!this.props.offerPage && this.renderContractStatusFilter()}
                 {this.renderMarketTitleFilter()}
                 {this.renderBetTitleFilter()}
                 {this.renderSortFilter()}

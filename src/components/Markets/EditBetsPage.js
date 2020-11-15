@@ -194,7 +194,6 @@ const validate = formValues => {
 
     const betsSumValue = (parseFloat(formValues.yesPrice) + parseFloat(formValues.noPrice));
     if(betsSumValue > 1.10 || betsSumValue < 1) {
-        console.log(formValues)
         errors['yesPrice'] = "Różnica między cenami na tak i nie może wynosić maksymalnie 10 $";
     }
 

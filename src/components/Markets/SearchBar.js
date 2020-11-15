@@ -32,7 +32,7 @@ class SearchBar extends React.Component {
 }
 
 const mapStateToProps = (state,ownProps) => {
-    console.log(ownProps);
+
     return{
         search: ownProps.search
     }

@@ -1,12 +1,12 @@
 import authHeader from '../helpers/authHeader';
 
-const fetchOffers = (betId,option) => {
+const fetchOffers = (betId,option,page,size) => {
     const reqOptions = {
         method: 'GET',
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:8080/offers?betId=${betId}&option=${option}&page=${0}&size=${50}`,reqOptions).then(res => handleOffers(res));
+    return fetch(`http://localhost:8080/offers?betId=${betId}&option=${option}&page=${page}&size=${size}`,reqOptions).then(res => handleOffers(res));
 }
 
 const buyShares = (offerId,countOfShares) => {
@@ -24,8 +24,9 @@ const handleResponse = (res) => {
     .text()
     .then(text => {
         const data = text && JSON.parse(text);
+        console.log(data)
         if(!res.ok) {
-            let error = (data && data.error) || res.statusText;
+            let error = data.info;
             return Promise.reject(error);
         }
         return data;
@@ -39,7 +40,6 @@ const handleOffers = res => {
     .then(markets =>{
         const data = markets && JSON.parse(markets);
         if(!res.ok) {
-            
             let error = (data && data.error) || res.statusText;
             return Promise.reject(error);
         }

@@ -27,6 +27,8 @@ import AddOffer from './PlayerComponents/SelectContractToAddOffer';
 import AddOfferPage from './Offers/AddOfferPage';
 import BetOffers from './Offers/BetOffers';
 import Ranking from './PlayerComponents/Ranking';
+import TransactionsPage from './Transactions/TransactionsPage'
+import SelectContractToAddOffer from './PlayerComponents/SelectContractToAddOffer';
 
 
 const App = () => {
@@ -36,14 +38,15 @@ const App = () => {
             <Router history={history}>
             <NavigationBar />
             <Switch>
-            <PrivateRoute exact path="/" component={HomePage} />
+            <Route exact path="/" component={HomePage} />
                     <Route path="/login" component={LoginPage} />
                     <Route path="/rejestracja" component={RegisterPage} />
                     <Route path="/resetPassword" component={ResetPasswordPage} />
                     <Route path="/resetPasswordWithToken" component={ResetPasswordWithToken} /> 
                     <Route path="/ranking" component={Ranking} /> 
+                    <PrivateRoute path="/transactions" component={TransactionsPage} />
                     <PrivateRoute path="/offers/bet/:id/:option" component={BetOffers} />
-                    <PrivateRoute path="/offers/selectContract" component={AddOffer} />
+                    <PrivateRoute path="/offers/selectContract" component={SelectContractToAddOffer} />
                     <PrivateRoute path="/offers/new/:id" component={AddOfferPage} />
                     <PrivateRoute path="/editPassword" component={EditPasswordPage} />
                     <PrivateRoute path="/profile" component={ProfilePage} />

@@ -62,7 +62,7 @@ class ChangePasswordWithTokenPage extends React.Component {
 }
 
   onSubmit = (formValues) => {
-    console.log(formValues,this.props.token);
+
     this.props.changePasswordWithToken(formValues,this.props.token)
 }
 

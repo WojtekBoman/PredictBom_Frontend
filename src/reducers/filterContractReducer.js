@@ -4,6 +4,8 @@ const initialState = {marketTitle:'',betTitle:'',contractStatus:'',contractOptio
 
 export default (state = initialState, action) => {
     switch(action.type) {
+        case filterContractConstants.SET_STATUS_PENDING: 
+            return {...state,contractStatus:"PENDING"}
         case filterContractConstants.UPDATE_FILTERS:
             return {...state,...action.payload};
         case filterContractConstants.CLEAR_FILTERS:

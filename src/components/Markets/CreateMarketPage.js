@@ -13,17 +13,17 @@ class CreateMarketPage extends React.Component {
     }
 
     componentDidMount() {
-      this.props.initialize({marketCategory:'sport'})
+      this.props.initialize({marketCategory:'SPORT'})
     }
 
     getOptions() {
       return(
         [
-          {val:"sport",text:"Sport",key:1,selected:"selected"},
-          {val:"gosp",text:"Gospodarka",key:2},
-          {val:"cel",text:"Celebryci",key:3},
-          {val:"pol",text:"Polityka",key:4},
-          {val:"inne",text:"Inne",key:5}
+          {val:"SPORT",text:"Sport",key:1},
+          {val:"GOSPODARKA",text:"Gospodarka",key:2},
+          {val:"CELEBRYCI",text:"Celebryci",key:3},
+          {val:"POLITYKA",text:"Polityka",key:4},
+          {val:"INNE",text:"Inne",key:5}
         ]
       )
     }
@@ -98,7 +98,7 @@ class CreateMarketPage extends React.Component {
 }
 
       onSubmit = (formValues) => {
-        console.log(formValues);
+  
         this.props.createMarket(formValues);
     }
 
@@ -117,8 +117,8 @@ class CreateMarketPage extends React.Component {
             <Container className="bg-light border rounded shadow-container create-market-container">
                 <h3>Krok 1 - Tworzenie rynku</h3>
                 <Form onSubmit={this.props.handleSubmit(this.onSubmit)} encType="multipart/form-data">
-                <Field onChange={this.checkIsEmptyField} type="text" label="Tytuł rynku" name="marketTitle" component={this.renderInput} placeholder="Wprowadź tytuł rynku prognostycznego"></Field>
-                <Field onChange={this.checkIsEmptyField} helpText="Jeżeli nie wiesz kiedy może zakończyć się dany rynek nie wypełniaj tego pola" type="date" label="Przewidywana data zakończenia rynku" name="predictedDateEnd" component={this.renderInput}></Field>
+                <Field type="text" label="Tytuł rynku" name="marketTitle" component={this.renderInput} placeholder="Wprowadź tytuł rynku prognostycznego"></Field>
+                <Field helpText="Jeżeli nie wiesz kiedy może zakończyć się dany rynek nie wypełniaj tego pola" type="date" label="Przewidywana data zakończenia rynku" name="predictedDateEnd" component={this.renderInput}></Field>
                 <Field name="marketCategory" label="Wybierz kategorię rynku" options={this.getOptions()} component={this.renderSelectField}/>
                 {/* <Field validate={this.validateImageFormat} type="file" name="marketCover" component={this.renderFileInput} />
                 <div className="img-box">
@@ -157,13 +157,6 @@ const validate = formValues => {
       }
 
   }
-
-  if(formValues.marketCover) {
-      if(!formValues.marketCover.type.includes("image")){
-        errors['marketCover'] = "Wybierz plik który jest obrazem";
-      }
-  }
-
   return errors
 }
 

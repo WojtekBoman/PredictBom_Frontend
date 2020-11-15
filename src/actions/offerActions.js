@@ -3,16 +3,18 @@ import {offerConstants} from '../constants/offerConstants';
 import {alertActions} from './alertActions';
 import {playerConstants} from '../constants/playerConstants';
 import {contractConstants} from '../constants/contractConstants';
+import {updateOfferPagination} from './paginationActions';
 import history from '../history';
+import _ from 'lodash';
 
-export const fetchOffers = (betId,option) => {
+export const fetchOffers = (betId,option,page,size) => {
     return dispatch => {
         dispatch(request())
-        offerService.fetchOffers(betId,option) 
+        offerService.fetchOffers(betId,option,page,size) 
             .then(
                 bets => {
                     dispatch(success(bets.content));
-                    // dispatch(updatePagination(_.omit(markets,['content'])))
+                    dispatch(updateOfferPagination(_.omit(bets,['content'])))
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -40,6 +42,7 @@ export const buyShares = (offerId,countOfShares) => {
                     history.push('/contracts');
                 },
                 error => {
+                    console.log(error);
                     dispatch(failure(error.toString()));
                     dispatch(alertActions.error(error.toString()));
                 }

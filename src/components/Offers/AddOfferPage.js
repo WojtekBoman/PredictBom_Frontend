@@ -51,7 +51,7 @@ class AddOfferPage extends React.Component {
     }
 
     handleSubmit = (e) => {
-        console.log(this.state);
+    
         if(this.state.countOfShares > 0 && this.state.sellPrice){
             this.props.addOffer(this.props.match.params.id,this.state.countOfShares,this.state.sellPrice);
         } else{

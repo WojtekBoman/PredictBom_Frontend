@@ -38,7 +38,6 @@ export const editPassword = ({oldPassword,newPassword,repeatedNewPassword}) => {
                     logout();
                 },
                 error => {
-                    console.log()
                     dispatch(failure(error.toString()));
                     dispatch(alertActions.error(error.toString()));
                 }

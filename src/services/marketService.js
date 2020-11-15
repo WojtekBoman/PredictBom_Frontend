@@ -42,7 +42,7 @@ const fetchMarket = (marketId) => {
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:8080/markets/${marketId}`,reqOptions).then(res => handleMarkets(res));
+    return fetch(`http://localhost:8080/markets/${marketId}`,reqOptions).then(res => handleMarket(res));
 }
 
 export const fetchBetPrice = (betId) => {
@@ -136,13 +136,32 @@ const handleMarkets = res => {
     })
 }
 
+const handleMarket = res => {
+   
+    return res
+    .text()
+    .then(market =>{
+        console.log(market)
+        const data = market && JSON.parse(market);
+        if(!res.ok) {
+            
+            let error = (data && data.error) || res.statusText;
+            return Promise.reject(market);
+        }
+        return data;
+    })
+}
+
 
 const handleResponse = (res) => {
     return res
     .text()
     .then(text => {
+        console.log(text)
         const data = text && JSON.parse(text);
+        
         if(!data.predictionMarket){
+            
             let error = data.info;
             return Promise.reject(error);
         }

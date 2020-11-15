@@ -26,7 +26,7 @@ const handleResponse = (res) => {
     return res
     .text()
     .then(text => {
-        console.log(text);
+      
         const data = text && JSON.parse(text);
         if(!res.ok) {
             // if(res.status === 401) {

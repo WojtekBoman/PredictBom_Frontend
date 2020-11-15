@@ -60,7 +60,7 @@ export const fetchMarket = (marketId) => {
                     dispatch(success(market));
                 },
                 error => {
-                    dispatch(failure(error.toString()));
+                    dispatch(failure(error));
                     dispatch(alertActions.error(error.toString()));
                 }
             )
@@ -96,7 +96,6 @@ export const setMarketCover = (marketId, marketCover) => {
 
 export const addBet = (marketId,yesPrice, noPrice,chosenOption) => {
     return dispatch => {
-        console.log(marketId,chosenOption);
         dispatch(request(marketId));
         marketService.addBet(marketId,yesPrice,noPrice,chosenOption)
             .then(

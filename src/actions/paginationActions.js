@@ -13,3 +13,17 @@ export const updateContractPagination = (paginationValues) => {
         payload: paginationValues
     }
 }
+
+export const updateTransactionPagination = (paginationValues) => {
+    return {
+        type: paginationConstants.UPDATE_TRANSACTION_PAGINATION,
+        payload: paginationValues
+    }
+}
+
+export const updateOfferPagination = (paginationValues) => {
+    return {
+        type: paginationConstants.UPDATE_OFFERS_PAGINATION,
+        payload: paginationValues
+    }
+}

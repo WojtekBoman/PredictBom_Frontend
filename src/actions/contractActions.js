@@ -120,7 +120,7 @@ export const addOffer = (contractId,countOfShares,sellPrice) => {
         betsService.addOffer(contractId,countOfShares,sellPrice)
             .then(
                 res => { 
-                    console.log(res);
+                   
                     dispatch(success(res));
                     history.push(`/contracts/details/${contractId}`);
                 },
@@ -155,3 +155,4 @@ export const deleteOffer = (offerId) => {
     function success(payload) { return { type: contractConstants.DELETE_OFFER_SUCCESS, payload } }
     function failure(error) { return { type: contractConstants.DELETE_OFFER_FAILURE, error } }
 }
+

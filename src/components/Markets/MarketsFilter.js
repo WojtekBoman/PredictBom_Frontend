@@ -36,7 +36,6 @@ class MarketsFilter extends React.Component {
     }
 
     handlePageSize = (e) => {
-        console.log(e.target.value);
         this.props.dispatch(changePageSize(parseInt(e.target.value)));
     }
 
@@ -82,7 +81,6 @@ class MarketsFilter extends React.Component {
 
     render() {
 
-        console.log(this.state.filters);
         return (
             <div>
              <Form.Label><h5>Sortuj według</h5></Form.Label>

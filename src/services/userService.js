@@ -71,7 +71,6 @@ const handleTextResponse = (textResponse) => {
     return textResponse
     .text()
     .then(text => {
-        console.log(text);
         if(!textResponse.ok) {
             // if(res.status === 401) {
             //     logout();
@@ -91,7 +90,7 @@ const handleLoginResponse = (res) => {
     return res
     .text()
     .then(text => {
-        console.log(text);
+     
         const data = text && JSON.parse(text);
         if(!res.ok) {
             // if(res.status === 401) {
@@ -100,8 +99,7 @@ const handleLoginResponse = (res) => {
             // }
             
             let error = (data && data.error) || res.statusText;
-            console.log(text);
-            console.log(error);
+          
             return Promise.reject(error);
         }
         
@@ -114,7 +112,7 @@ const handleResponse = (res) => {
     return res
     .text()
     .then(text => {
-        console.log(text);
+      
         const data = text && JSON.parse(text);
         if(!res.ok) {
             // if(res.status === 401) {
@@ -123,8 +121,7 @@ const handleResponse = (res) => {
             // }
             
             let error = (data && data.message) || res.statusText;
-            console.log(text);
-            console.log(error);
+       
             return Promise.reject(error);
         }
         

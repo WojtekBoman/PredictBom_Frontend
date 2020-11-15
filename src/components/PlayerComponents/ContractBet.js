@@ -24,7 +24,7 @@ class ContractBet extends React.Component {
     }
 
     renderPrice = () => {
-        if(this.props.betPrice) {
+        if(this.props.betPrice && !((typeof this.props.loading !== 'undefined') && this.props.loading.pending)) {
             return <div>{this.props.contractOption ? <h4>Ostatnia cena: {this.props.betPrice.yesPrice}</h4> : <h4>Ostatnia cena: {this.props.betPrice.noPrice}</h4>}</div>;
         }
     }

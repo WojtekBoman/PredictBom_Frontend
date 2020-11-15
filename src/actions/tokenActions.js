@@ -14,7 +14,7 @@ export const sendToken = ({emailToReset}) => {
                     history.push('/resetPasswordWithToken')
                 },
                 error => {
-                    console.log(error);
+                   
                     dispatch(failure(error.toString()));
                     dispatch(alertActions.error(error.toString()));
                 }
@@ -39,7 +39,7 @@ export const checkToken = ({token}) => {
                     // history.push('/resetPasswordWithToken')
                 },
                 error => {
-                    console.log(error);
+                   
                     dispatch(failure(error.toString()));
                     dispatch(alertActions.error(error.toString()));
                 }
@@ -62,7 +62,7 @@ export const changePasswordWithToken = ({newPassword,repeatedPassword},token) =>
                     history.push("/login");
                 },
                 error => {
-                    console.log(error);
+                    
                     dispatch(failure(error.toString()));
                     dispatch(alertActions.error(error.toString()));
                 }

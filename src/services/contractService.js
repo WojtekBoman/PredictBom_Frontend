@@ -24,7 +24,7 @@ const fetchFilteredContracts = (contractStatus,contractOption,betTitle,marketTit
         method: 'GET',
         headers: authHeader()
     }
-    console.log(contractStatus);
+
     return fetch(`http://localhost:8080/contracts/filtered?contractStatus=${contractStatus}&contractOption=${contractOption}&betTitle=${betTitle}&marketTitle=${marketTitle}&${marketCategoryParams}&page=${page}&size=${pageSize}&sortAttribute=${sortedBy[0]}&sortDirection=${sortedBy[1]}`,reqOptions).then(res => handleResponse(res));
 }
 
@@ -50,7 +50,7 @@ const fetchLastPrice = (betId,option) => {
         method: 'GET',
         headers: authHeader()
     };
-    console.log(betId,option);
+  
     return fetch(`http://localhost:8080/contracts/lastBetPrice?betId=${betId}&option=${option}`,reqOptions).then(res => handleResponse(res));
 }
 
@@ -109,7 +109,7 @@ const handleBuying = (res) => {
     .text()
     .then(text => {
         const data = text && JSON.parse(text);
-        console.log(text);
+     
         if(!data.purchaser){
             let error = data.info;
             return Promise.reject(error);

@@ -23,7 +23,6 @@ class BetsList extends React.Component {
     }
     
     render(){
-        console.log("Bets",this.props.bets);
 
         if(this.props.bets == null){
             return(

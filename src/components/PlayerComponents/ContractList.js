@@ -7,14 +7,14 @@ import {faSadTear,faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import Loader from 'react-loader-spinner';
 import Contract from './Contract';
 import PaginationBar from '../Markets/PaginationBar';
-import {changeContractPage, clearFilters} from '../../actions/filterContractActions';
+import {changeContractPage, clearFilters, setStatusPending} from '../../actions/filterContractActions';
 import { alertActions } from '../../actions/alertActions';
-
 
 class ContractList extends React.Component {
 
     
     componentDidMount() {
+        if(this.props.offerPage) this.props.setStatusPending();
         this.props.fetchFilteredContracts(this.props.filter.contractStatus,this.props.filter.contractOption,this.props.filter.betTitle,this.props.filter.marketTitle,this.props.filter.selectedCategories,this.props.filter.sortedBy,this.props.filter.page,this.props.filter.pageSize);
     }
 
@@ -112,4 +112,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps,{fetchContracts,fetchFilteredContracts,clear:alertActions.clear,clearFilters})(ContractList)
+export default connect(mapStateToProps,{fetchContracts,fetchFilteredContracts,clear:alertActions.clear,clearFilters,setStatusPending})(ContractList)

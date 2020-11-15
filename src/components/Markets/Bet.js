@@ -26,17 +26,17 @@ class Bet extends React.Component {
     }
 
     componentDidMount() {
-       if(!this.props.betPrice)
-       { this.props.fetchBetPrice(this.props.betId) } 
-       else {
-        if(this.props.correctBetId == 0 && this.props.correctBetId == this.props.betId) {
+      
+        this.props.fetchBetPrice(this.props.betId)
+
+        if(this.props.correctBetId > 0)
+         if(this.props.correctBetId == this.props.betId) {
             this.props.correctBetOption ? this.setState({backgroundColor:"green"}) : this.setState({backgroundColor:"red"})
         }else{
           this.setState({backgroundColor:"red"})
         }
        }
-      
-    }
+    
 
     hideForm = () => {
         this.setState({contractOption:null});
@@ -67,9 +67,16 @@ class Bet extends React.Component {
         this.props.deleteBet(this.props.marketId,this.props.betId)
     }
 
+    renderNotFoundMessage = () => {
+        if(!this.props.betPrice && this.props.alert) {
+            
+        }
+    }
+
 
     renderPrice() {
-        if(this.props.betPrice && this.props.correctBetId == 0){
+        if(this.props.correctBetId == 0){
+            if(this.props.betPrice){
             return(
                 <Row className="text-center">
                 <Col sm={4}>
@@ -102,6 +109,7 @@ class Bet extends React.Component {
                
             </Row>
             )
+            }
         }else{
             return(<div>
                 {this.props.correctBetId == this.props.betId ? 
@@ -114,7 +122,7 @@ class Bet extends React.Component {
     }
 
     renderLoadingPrice() {
-        if ((typeof this.props.loadingPrice !== 'undefined') && this.props.loadingPrice.pending) {
+        if (!this.props.betPrice && !this.props.alert) {
             return(
             <div className="text-center">
             <Loader
@@ -135,7 +143,6 @@ class Bet extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return(
             <div>
             <Segment color={this.state.backgroundColor} style={{margin:"10px"}}>

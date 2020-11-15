@@ -128,22 +128,22 @@ class PaginationBar extends React.Component {
       }
 
     changePage(page) {
-        console.log("Wywołano dla strony",page-1)
+  
         this.props.dispatch(this.props.changePage(page-1))
     }
 
     handleMoveLeft(page) {
-        console.log(page - (this.state.pageNeighbours * 2) - 1)
+
         this.props.dispatch(this.props.changePage(page- 1 - (this.state.pageNeighbours * 2) - 1))
     }
 
     handleMoveRight(page) {
-        console.log(page- 1 + (this.state.pageNeighbours * 2) + 1);
+     
         this.props.dispatch(this.props.changePage(page + (this.state.pageNeighbours * 2) + 1))
     }
 
     render() {
-      console.log(this.props);
+    
         return (
             <div>
                 {this.renderPagination()}
