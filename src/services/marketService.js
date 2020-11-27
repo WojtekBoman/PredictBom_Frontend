@@ -2,17 +2,30 @@ import authHeader from '../helpers/authHeader';
 import authHeaderImgReq from '../helpers/authHeaderImgReq'
 
 
-const createMarket = (marketTitle, marketCategory, predictedDateEnd,description) => {
+const createMarket = (topic, category, predictedEndDate,description) => {
   
     const reqOptions = {
         method: 'POST',
         headers: authHeader(),
-        body: JSON.stringify({marketTitle,marketCategory,predictedDateEnd,description})
+        body: JSON.stringify({topic, category, predictedEndDate,description})
+    };
+
+    console.log(reqOptions)
+
+    return fetch('http://localhost:8080/markets/new', reqOptions).then((res) => handleResponse(res))
+}
+
+const editMarket = (marketId,topic, category, predictedEndDate,description) => {
+  
+    const reqOptions = {
+        method: 'PUT',
+        headers: authHeader(),
+        body: JSON.stringify({topic, category, predictedEndDate,description})
     };
 
     
 
-    return fetch('http://localhost:8080/markets/new', reqOptions).then((res) => handleResponse(res))
+    return fetch(`http://localhost:8080/markets/edit/${marketId}`, reqOptions).then((res) => handleResponse(res))
 }
 
 const fetchMarkets = (typeOfMarkets,marketTitle,marketCategories=[],sortedBy,page,pageSize) => {
@@ -73,13 +86,15 @@ const setMarketCover = (marketId,{marketCover}) => {
     return fetch(`http://localhost:8080/markets/marketCover/${marketId}`,reqOptions).then(res => handleResponse(res));
 }
 
-export const addBet = (marketId,yesPrice,noPrice,chosenOption) => {
+export const addBet = (marketId,yesPrice,noPrice,chosenOption,shares) => {
     
     const reqOptions = {
         method: 'POST',
         headers: authHeader(),
-        body: JSON.stringify({marketId,yesPrice,noPrice,chosenOption})
+        body: JSON.stringify({marketId,yesPrice,noPrice,chosenOption,shares})
     };
+
+    console.log(JSON.stringify({marketId,yesPrice,noPrice,chosenOption,shares}));
 
    return fetch(`http://localhost:8080/markets/addBet`,reqOptions).then(res => handleResponse(res));
 }
@@ -179,6 +194,7 @@ const handleResponse = (res) => {
 
 export const marketService = {
     createMarket,
+    editMarket,
     fetchMarkets,
     fetchMarket,
     fetchBetPrice,

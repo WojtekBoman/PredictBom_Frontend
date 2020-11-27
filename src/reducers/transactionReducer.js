@@ -15,6 +15,8 @@ export default (state = [], action) => {
             return [...action.payload];
         case transactionConstants.FETCH_FILTERED_TRANSACTIONS_FAILURE:
             return [...state];    
+        case transactionConstants.CLEAR_TRANSACTIONS:
+            return []    
         default:
             return [...state];
     }

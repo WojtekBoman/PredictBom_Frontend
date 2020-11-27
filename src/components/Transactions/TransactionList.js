@@ -3,18 +3,20 @@ import {Row,Col} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import TransactionsFilter from './TransactionsFilter';
 import {fetchFilteredTransactions} from '../../actions/transactionActions';
+import {clearFilters} from '../../actions/filterTransactionActions'
 import Transaction from './Transaction'
 import { Button, Image, Item } from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faSadTear,faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import {changeTransactionPage} from '../../actions/filterTransactionActions';
+import {clearPagination} from '../../actions/paginationActions';
 import Loader from 'react-loader-spinner';
 import PaginationBar from '../Markets/PaginationBar';
 
 class TransactionList extends React.Component {
 
     componentDidMount() {
-        this.props.fetchFilteredTransactions(this.props.type,this.props.filter.option,this.props.filter.betTitle,this.props.filter.marketTitle,this.props.filter.selectedCategories,this.props.filter.page,this.props.filter.pageSize,this.props.filter.sortedBy)
+        this.props.fetchFilteredTransactions(this.props.type,0,"","",[],0,this.props.filter.pageSize,this.props.filter.sortedBy)
     }
 
     componentDidUpdate(prevProps) {
@@ -23,6 +25,10 @@ class TransactionList extends React.Component {
             this.props.fetchFilteredTransactions(this.props.type,this.props.filter.option,this.props.filter.betTitle,this.props.filter.marketTitle,this.props.filter.selectedCategories,this.props.filter.page,this.props.filter.pageSize,this.props.filter.sortedBy)
         }
         
+    }
+
+    componentWillUnmount(){
+        this.props.clearFilters()
     }
 
     renderNotFoundMessage() {
@@ -127,4 +133,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps,{fetchFilteredTransactions})(TransactionList);
+export default connect(mapStateToProps,{fetchFilteredTransactions,clearFilters,clearPagination})(TransactionList);

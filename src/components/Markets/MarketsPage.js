@@ -11,9 +11,9 @@ class MarketsPage extends React.Component {
 
     
     render() {
-        if(this.props.user && this.props.user.roles[0] === "ROLE_MODERATOR") {
-          return <ModeratorMarketsPage/>
-        }
+        // if(this.props.user && this.props.user.roles[0] === "ROLE_MODERATOR") {
+        //   return <ModeratorMarketsPage/>
+        // }
 
         return (
 

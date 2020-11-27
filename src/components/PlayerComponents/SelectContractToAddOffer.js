@@ -12,7 +12,7 @@ class SelectContractToAddOffer extends React.Component {
             <Container className="bg-light border rounded shadow-container create-market-container">
                 <header>
                     <h2>Twoje oferty</h2>
-                    <p className="text-muted">Wybierz kontrakt z którego chcesz dodać ofertę i w szczegółach kontraktu wybierz opcję "Dodaj ofertę"</p>
+                    <p className="text-muted">Wybierz kontrakt w celu zarządzania ofertami</p>
                     <hr className="my-4"></hr>
                 </header>
                 <Row>

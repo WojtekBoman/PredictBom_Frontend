@@ -2,8 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Container, Tab, Tabs} from 'react-bootstrap';
 import TransactionList from './TransactionList';
+import {clearTransactions} from '../../actions/transactionActions';
 
 class TransactionsPage extends React.Component {
+
+    componentWillUnmount() {
+      this.props.clearTransactions()
+    }
 
     render() {
         return(
@@ -25,4 +30,4 @@ class TransactionsPage extends React.Component {
     }
 }
 
-export default connect()(TransactionsPage);
+export default connect(null,{clearTransactions})(TransactionsPage);

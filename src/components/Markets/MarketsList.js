@@ -18,7 +18,7 @@ import {updateSearch} from '../../actions/filterActions';
 class MarketsList extends React.Component {
 
     componentDidMount() {
-        this.props.fetchMarkets(this.props.typeOfMarkets,this.props.filter.marketTitle,this.props.filter.selectedCategories,this.props.filter.sortedBy,this.props.filter.page,this.props.filter.pageSize);
+        this.props.fetchMarkets(this.props.typeOfMarkets,"",this.props.filter.selectedCategories,this.props.filter.sortedBy,0,this.props.filter.pageSize);
     }
 
     componentWillUnmount() {
@@ -28,7 +28,6 @@ class MarketsList extends React.Component {
 
     componentDidUpdate(prevProps,prevState) {
         if(!(JSON.stringify(this.props.filter)===JSON.stringify(prevProps.filter))){
- 
             this.props.fetchMarkets(this.props.typeOfMarkets,this.props.filter.marketTitle,this.props.filter.selectedCategories,this.props.filter.sortedBy,this.props.filter.page,this.props.filter.pageSize);
         }
         

@@ -21,17 +21,34 @@ class ProfilePage extends React.Component {
             case "ROLE_PLAYER":
                 return(
                     <div>
+
+                        <LinkContainer to="/markets">
                             <Button className="profile-button" variant="outline-dark">Przeglądaj rynki</Button>
+                        </LinkContainer>
+                        <LinkContainer to="/contracts">
                             <Button className="profile-button" variant="outline-dark">Przeglądaj kontrakty</Button>
+                        </LinkContainer>
+                        <LinkContainer to="/offers">
                             <Button className="profile-button" variant="outline-dark">Przeglądaj twoje oferty</Button>
+                        </LinkContainer>
+                        <LinkContainer to="/transactions">
                             <Button className="profile-button" variant="outline-dark">Przeglądaj transakcje</Button>
+                        </LinkContainer>
+                            
                     </div>
                 )
             case "ROLE_MODERATOR":
                 return(
                     <div>
-                        <Button className="profile-button" variant="outline-dark">Przeglądaj swoje rynki</Button>
+                        <LinkContainer to="/markets/private">
+                        <Button className="profile-button" variant="outline-dark">Przeglądaj nieopublikowane rynki</Button>
+                        </LinkContainer>
+                        <LinkContainer to="/markets">
+                        <Button className="profile-button" variant="outline-dark">Przeglądaj publiczne rynki</Button>
+                        </LinkContainer>
+                        <LinkContainer to="/markets/new">
                         <Button className="profile-button" variant="outline-dark">Dodaj nowy rynek</Button>
+                        </LinkContainer>
                     </div>
                 )
             case "ROLE_ADMIN":
@@ -56,15 +73,14 @@ class ProfilePage extends React.Component {
                         <h5><b>Imię:</b> {this.props.user.firstName}</h5>
                         <h5><b>Nazwisko:</b> {this.props.user.surname}</h5>
                         <h5><b>Email:</b> {this.props.user.email}</h5>
+                        {this.props.player.budget && (<h5><b>Budżet:</b>{Math.round((this.props.player.budget + Number.EPSILON) * 100) / 100}</h5>)}
                     </Col>
                 </Row>
                 <hr className="my-4"></hr>
                 <div className="text-center">
-                <LinkContainer to="/markets">
-                <Button className="profile-button" variant="outline-dark">Przeglądaj swoje rynki</Button>
-                </LinkContainer>
-                <LinkContainer to="/markets/new">
-                <Button className="profile-button" variant="outline-dark">Dodaj nowy rynek</Button>
+                {this.renderContentByRole(this.props.user.roles[0])}
+                <LinkContainer to="/ranking">
+                <Button className="profile-button" variant="outline-dark">Wyświetl ranking</Button>
                 </LinkContainer>
                 <LinkContainer to="/editPassword">
                 <Button className="profile-button" variant="outline-dark">Zmień hasło</Button>
@@ -79,7 +95,8 @@ class ProfilePage extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.login.user
+        user: state.login.user,
+        player: state.player
     }
 }
 

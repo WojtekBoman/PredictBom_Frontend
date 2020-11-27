@@ -46,3 +46,9 @@ export const fetchFilteredTransactions = (type,option,betTitle, marketTitle, mar
     function success(payload) { return { type: transactionConstants.FETCH_FILTERED_TRANSACTIONS_SUCCESS, payload } }
     function failure(error) { return { type: transactionConstants.FETCH_FILTERED_TRANSACTIONS_FAILURE, error } }
 }
+
+export const clearTransactions = () => {
+    return {
+        type: transactionConstants.CLEAR_TRANSACTIONS
+    }
+}

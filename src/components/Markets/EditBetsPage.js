@@ -22,6 +22,7 @@ class EditBetsPage extends React.Component {
 
     componentDidMount() {
         if(!this.props.currentMarket) this.props.fetchMarket(this.props.match.params.id)
+        this.props.initialize({shares:10000});
     }
 
     renderButtonContent() {
@@ -62,11 +63,11 @@ class EditBetsPage extends React.Component {
         )
   }
 
-  renderInput = ({input, label,meta,type,placeholder,as,helpText,rows,max}) => {
+  renderInput = ({input, label,meta,type,placeholder,as,helpText,rows,max,min}) => {
     return (
     <Form.Group>
     <Form.Label>{label}</Form.Label>
-    <Form.Control {...input} max={max} as={as} type={type} placeholder={placeholder} rows={rows}/>
+    <Form.Control {...input} min={min} max={max} as={as} type={type} placeholder={placeholder} rows={rows}/>
     {this.renderError(meta)}
     {helpText && (<Form.Text className="text-muted">{helpText}</Form.Text>)}    
     </Form.Group>
@@ -94,7 +95,7 @@ renderError({error,touched}) {
 // }
 
 onSubmit = (formValues) => {
-    this.props.addBet(this.props.match.params.id,formValues.yesPrice,formValues.noPrice,formValues.chosenOption)
+    this.props.addBet(this.props.match.params.id,formValues.yesPrice,formValues.noPrice,formValues.chosenOption,formValues.shares)
 }
 
 renderBetsList = () => {
@@ -146,6 +147,7 @@ renderBetsList = () => {
                     <Field type="number" label="Podaj cenę kontraktu na nie" max="1" name="noPrice" component={this.renderInput} placeholder="Podaj cenę kontraktu na nie"></Field>
                     </Col>
                 </Row>
+                        <Field component={this.renderInput} name="shares" min={10000} max={100000} step={1} type="number" label="Podaj poczatkowa liczbę akcji wystawionych na sprzedaż"/>
                     <Button variant="primary" type="submit">
                         {this.renderButtonContent()}
                     </Button>
@@ -185,7 +187,7 @@ renderBetsList = () => {
 
 const validate = formValues => {
     const errors = {};
-    const requiredFields = [ 'chosenOption','yesPrice','noPrice']
+    const requiredFields = [ 'chosenOption','yesPrice','noPrice','shares']
     requiredFields.forEach(field => {
     if (!formValues[ field ]) {
       errors[ field ] = 'To pole jest wymagane'

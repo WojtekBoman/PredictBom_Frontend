@@ -7,7 +7,7 @@ class AddOfferPage extends React.Component {
     
     state = {
         sellPrice:0.5,
-        countOfShares:0,
+        countOfShares:1,
         info:""
     }
 

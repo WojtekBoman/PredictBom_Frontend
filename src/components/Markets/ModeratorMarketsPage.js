@@ -28,18 +28,18 @@ class ModeratorMarketsPage extends React.Component {
 
           <Container className="bg-light border rounded shadow-container create-market-container">
             <header>
-              <h2>Rynki prognostyczne</h2>
+              <h2>Nieopublikowane rynki prognostyczne</h2>
             </header>
             <Tabs id="controlled-tab-example" style={{marginTop:"15px"}}>
-            <Tab eventKey="private" title="Prywatne" unmountOnExit>
+            <Tab eventKey="private" title="Wszystkie" unmountOnExit>
             <MarketsList typeOfMarkets="/private" search={this.state.search}/>
             </Tab>
-            <Tab eventKey="filteredWaitingForBets" title="Rynki bez zakładów" unmountOnExit>
+            <Tab eventKey="filteredWaitingForBets" title="Bez zakładów" unmountOnExit>
             <MarketsList typeOfMarkets="/filteredWaitingForBets" search={this.state.search}/>
             </Tab>
-            <Tab eventKey="public" title="Opublikowane" unmountOnExit>
+            {/* <Tab eventKey="public" title="Opublikowane" unmountOnExit>
             <MarketsList typeOfMarkets="/public" search={this.state.search}/>
-            </Tab>
+            </Tab> */}
 
             
           </Tabs>

@@ -31,6 +31,17 @@ body {
     width:60%
 }
 
+@media (max-width: 800px) {
+    .create-market-container{
+        width:100%
+    }
+
+    .form-container, .profile-container {
+        width: 100%;
+    }
+    
+}
+
 .login-alert{
     margin-top:10px;
 }

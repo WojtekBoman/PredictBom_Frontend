@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Container,Form,Spinner,Alert,Button} from 'react-bootstrap'; 
-import {fetchMarket} from '../../actions/marketActions';
+import {fetchMarket,editMarket} from '../../actions/marketActions';
 import {reduxForm,Field} from 'redux-form';
 
 class EditMarketPage extends React.Component {
@@ -97,6 +97,7 @@ class EditMarketPage extends React.Component {
 
     onSubmit = (formValues) => {
         console.log(formValues);
+        this.props.editMarket(this.props.match.params.id,formValues);
     }
 
     renderForm() {
@@ -171,10 +172,11 @@ const formWrapped = reduxForm(
 const mapStateToProps = (state, ownProps) => {
     return {
         loadingMarket: state.loading.FETCH_MARKET,
+        loading: state.loading.EDIT_MARKET,
         currentMarket: state.markets.find(market => market.marketId == ownProps.match.params.id),
         alert: state.alert,
         initialValues: state.markets.find(market => market.marketId == ownProps.match.params.id)
     }
 }
 
-export default connect(mapStateToProps,{fetchMarket})(formWrapped);
+export default connect(mapStateToProps,{fetchMarket,editMarket})(formWrapped);

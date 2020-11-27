@@ -36,8 +36,8 @@ class Contract extends React.Component {
   }
 
 
-    setCover = (category) => {
-      switch(category){
+    setCover = () => {
+      switch(this.props.marketInfo.marketCategory){
           case "SPORT":
             return sportBackground;
           case "CELEBRYCI":

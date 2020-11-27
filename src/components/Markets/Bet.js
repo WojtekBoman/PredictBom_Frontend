@@ -27,7 +27,7 @@ class Bet extends React.Component {
 
     componentDidMount() {
       
-        this.props.fetchBetPrice(this.props.betId)
+        if(this.props.correctBetId == 0) this.props.fetchBetPrice(this.props.betId)
 
         if(this.props.correctBetId > 0)
          if(this.props.correctBetId == this.props.betId) {
@@ -122,7 +122,7 @@ class Bet extends React.Component {
     }
 
     renderLoadingPrice() {
-        if (!this.props.betPrice && !this.props.alert) {
+        if ((!this.props.betPrice && this.props.correctBetId == 0) && !this.props.alert) {
             return(
             <div className="text-center">
             <Loader

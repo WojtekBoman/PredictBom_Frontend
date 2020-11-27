@@ -45,7 +45,7 @@ class MarketsFilter extends React.Component {
             <div>
                 <Form.Label><h5>Rozmiar strony</h5></Form.Label>
                 <Form.Control as="select" onChange={this.handlePageSize}>
-                    {this.range(2,20,2).map(number => 
+                    {this.range(10,30,10).map(number => 
                          <option key={number} value={number}>{number}</option>)}
                 </Form.Control>
             </div>

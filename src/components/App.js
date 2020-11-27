@@ -45,21 +45,22 @@ const App = () => {
                     <Route path="/resetPasswordWithToken" component={ResetPasswordWithToken} /> 
                     <Route path="/ranking" component={Ranking} /> 
                     <PrivateRoute path="/transactions" component={TransactionsPage} />
-                    <PrivateRoute path="/offers/bet/:id/:option" component={BetOffers} />
-                    <PrivateRoute path="/offers/selectContract" component={SelectContractToAddOffer} />
+                    <Route path="/offers/bet/:id/:option" component={BetOffers} />
                     <PrivateRoute path="/offers/new/:id" component={AddOfferPage} />
+                    <PrivateRoute path="/offers" component={SelectContractToAddOffer} />
                     <PrivateRoute path="/editPassword" component={EditPasswordPage} />
                     <PrivateRoute path="/profile" component={ProfilePage} />
                     <PrivateRoute path="/contracts/details/:id" component={ContractDetails} />
                     <PrivateRoute path="/contracts" component={ContractPage} />
                     <PrivateRoute path="/markets/new" component={CreateMarketPage}/>
-                    <PrivateRoute path="/markets/details/:id" component={MarketDetails}/>
+                    <Route path="/markets/details/:id" component={MarketDetails}/>
                     <PrivateRoute path="/markets/editCover/:id" component={MarketCoverPage}/>
                     <PrivateRoute path="/markets/editBets/:id" component={EditBetsPage} />
                     <PrivateRoute path="/markets/editMarket/:id" component={EditMarketPage} />
                     <PrivateRoute path="/markets/solveMarket/:id" component={SolveMarketPage} />
                     <PrivateRoute path="/markets/makePublic/:id" component={MakeMarketPublicPage} />
-                    <PrivateRoute path="/markets/" component={MarketsPage}/>
+                    <PrivateRoute path="/markets/private" component={ModeratorMarketsPage}/>
+                    <Route path="/markets/" component={MarketsPage}/>
                     <Redirect from="*" to="/" />
             </Switch>
             </Router>

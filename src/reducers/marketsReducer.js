@@ -80,8 +80,15 @@ export default (state = [], action) => {
                 const newArray_seven = [...state]
                 newArray_seven[index_seven] = action.payload
                 return newArray_seven;
-        case marketsConstants.SOLVE_MULTI_BET_MARKET_FAILURE:
+        case marketsConstants.EDIT_MARKET_REQUEST:
                 return [...state]
+        case marketsConstants.EDIT_MARKET_SUCCESS:
+                return [...state]        
+        case marketsConstants.EDIT_MARKET_FAILURE:
+            const index_eight = state.findIndex(market => market.marketId === action.payload.marketId)
+                const newArray_eight = [...state]
+                newArray_seven[index_eight] = action.payload
+                return newArray_eight;        
         default:
             return state;
     }

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Container,Form } from 'react-bootstrap';
+import { Container,Form,Row,Col } from 'react-bootstrap';
 import {connect} from 'react-redux';
-import {fetchTransactions} from '../../actions/transactionActions';
+import {fetchTransactions,clearTransactions} from '../../actions/transactionActions';
 import {Line} from 'react-chartjs-2';
 import LineChart from './LineChart';
 import Loader from 'react-loader-spinner';
@@ -10,6 +10,7 @@ class MarketTrendChart extends React.Component {
 
     state = {
         currentBet:this.props.bets[0].id,
+        currentOption: true,
         timeAgo:1
     }
 
@@ -31,9 +32,12 @@ class MarketTrendChart extends React.Component {
         this.props.fetchTransactions(this.state.currentBet,this.props.option,today);
     }
 
+    componentWillUnmount() {
+        this.props.clearTransactions()
+    }
 
     onChangeTimeAgo = (e) => {
-        this.setState({timeAgo:e.target.value})
+      
         var today = new Date();
         today.setDate(today.getDate() - e.target.value)
         var dd = String(today.getDate()).padStart(2, '0');
@@ -41,13 +45,18 @@ class MarketTrendChart extends React.Component {
         var yyyy = today.getFullYear();
 
         today = mm + '-' + dd + '-' + yyyy;
-        console.log(today)
-        this.props.fetchTransactions(this.state.currentBet,this.props.option,today);
+        this.setState({timeAgo:today})
+        this.props.fetchTransactions(this.state.currentBet,this.state.currentOption,today);
     }
 
     onChangeBet = (e) => {
         this.setState({currentBet:e.target.value})
-        this.props.fetchTransactions(e.target.value,this.props.option,this.props.timeAgo);
+        this.props.fetchTransactions(e.target.value,this.state.currentOption,this.state.timeAgo);
+    }
+
+    onChangeBetOption = (e) => {
+        this.setState({currentOption:e.target.value})
+        this.props.fetchTransactions(this.state.currentBet,e.target.value,this.state.timeAgo);
     }
     
     renderLoading() {
@@ -67,13 +76,30 @@ class MarketTrendChart extends React.Component {
     renderMarketFilter() {
         return(
             <div>
+                <h5>
+                    Zakład
+                </h5>
                 <Form.Control as="select" onChange={this.onChangeBet}>
                 {this.props.bets.map(bet => <option value={bet.id}>
                     {bet.chosenOption}
                 </option>)}
                 </Form.Control>
-                <hr className="my-4"></hr>
-                {this.renderTimeAgoFilter()}
+             
+            </div>
+        )
+    }
+
+    renderBetOptionFilter() {
+        return(
+            <div>
+                <h5>
+                    Opcja zakładu
+                </h5>
+                <Form.Control as="select" onChange={this.onChangeBetOption}>
+                <option value={true}>Opcja na tak</option>
+                <option value={false}>Opcja na nie</option>
+                </Form.Control>
+               
             </div>
         )
     }
@@ -87,11 +113,17 @@ class MarketTrendChart extends React.Component {
         ]
 
         return(
+            <div>
+                <h5>
+                    Przedział czasowy
+                </h5>
             <Form.Control as="select" onChange={this.onChangeTimeAgo}>
             {times.map(time => <option value={time.value}>
                 {time.text}
             </option>)}
             </Form.Control>
+          
+            </div>
         )
 
     }
@@ -106,7 +138,18 @@ class MarketTrendChart extends React.Component {
                 </header>
                 {this.props.transactions && (
                     <div>
-                    {this.renderMarketFilter()}
+                        <Row>
+                            <Col sm={4}>
+                            {this.renderMarketFilter()}
+                            </Col>
+                            <Col sm={4}>
+                            {this.renderBetOptionFilter()}    
+                            </Col>
+                            <Col sm={4}>
+                            {this.renderTimeAgoFilter()}
+                            </Col>
+                        </Row>
+                    <hr className="my-4"></hr>
                     {this.renderLoading()}    
                 <LineChart transactions={this.props.transactions} color="#3E517A" title={"Cena akcji"} />
                     </div>)}
@@ -125,4 +168,4 @@ const mapStateToProps = (state,ownProps) => {
     }
 }
 
-export default connect(mapStateToProps,{fetchTransactions})(MarketTrendChart)
+export default connect(mapStateToProps,{fetchTransactions, clearTransactions})(MarketTrendChart)

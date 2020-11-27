@@ -10,6 +10,8 @@ export default (state = {}, action) => {
             return {...state,transactionPagination: action.payload}
         case paginationConstants.UPDATE_OFFERS_PAGINATION:
             return {...state,offersPagination: action.payload}
+        case paginationConstants.CLEAR_PAGINATION:
+            return {};     
         default:
             return state;
     }

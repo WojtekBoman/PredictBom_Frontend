@@ -27,3 +27,9 @@ export const updateOfferPagination = (paginationValues) => {
         payload: paginationValues
     }
 }
+
+export const clearPagination = () => {
+    return {
+        type: paginationConstants.CLEAR_PAGINATION
+    }
+}

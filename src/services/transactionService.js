@@ -7,7 +7,7 @@ const fetchTransactions = (betId,option,timeAgo) => {
         headers: authHeader()
     }
 
-
+    console.log("OPSZYN",option)
     return fetch(`http://localhost:8080/transactions/chart?betId=${betId}&option=${option}&timeAgo=${timeAgo}`,reqOptions).then((res) => handleResponse(res));
 }
 

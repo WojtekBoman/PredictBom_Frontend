@@ -27,11 +27,24 @@ class NavigationBar extends React.Component {
       // window.location.reload();
     }
 
+    renderRankingLink() {
+      return(
+        <LinkContainer to="/ranking">
+          <Nav.Link>Ranking</Nav.Link>
+        </LinkContainer>
+      )
+    }
+
     renderUserPanel() {
       switch(this.props.login.user.roles[0]) {
         case "ROLE_MODERATOR":
           return(
             <Nav className="mr-auto">
+              <LinkContainer to="/profile">
+                <Nav.Link>
+                  {this.props.login.user.username}
+                </Nav.Link>
+              </LinkContainer>  
             <Nav.Link onClick={this.logout.bind(this)}>Wyloguj się</Nav.Link>
             <NavDropdown title="Rynki">
               <LinkContainer to="/markets/new">
@@ -41,33 +54,37 @@ class NavigationBar extends React.Component {
               </LinkContainer>
               <LinkContainer to="/markets">
                 <NavDropdown.Item >
-                    Zarządzaj rynkami
+                    Rynki publiczne
+                </NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to="/markets/private">
+                <NavDropdown.Item >
+                    Rynki nieopublikowane
                 </NavDropdown.Item>
               </LinkContainer>
             </NavDropdown>
+            {this.renderRankingLink()}
             </Nav>
           )
         case "ROLE_PLAYER":
           return ( 
           <Nav className="mr-auto">
+             <LinkContainer to="/profile">
+                <Nav.Link>
+                  {this.props.login.user.username}
+                </Nav.Link>
+              </LinkContainer> 
           <Nav.Link onClick={this.logout.bind(this)}>Wyloguj się</Nav.Link>
           <LinkContainer to="/markets">
                 <Nav.Link>
                     Rynki
                 </Nav.Link>
               </LinkContainer>
-              <NavDropdown title="Oferty">
-              <LinkContainer to="/offers/selectContract">
-                <NavDropdown.Item >
-                    Dodaj nową ofertę
-                </NavDropdown.Item>
-              </LinkContainer>
               <LinkContainer to="/offers">
-                <NavDropdown.Item >
-                    Twoje oferty
-                </NavDropdown.Item>
+                <Nav.Link>
+                    Oferty
+                </Nav.Link>
               </LinkContainer>
-            </NavDropdown>
             <LinkContainer to="/contracts">
                 <Nav.Link>
                     Kontrakty
@@ -78,6 +95,7 @@ class NavigationBar extends React.Component {
                     Transakcje
                 </Nav.Link>
               </LinkContainer>
+              {this.renderRankingLink()}
           </Nav>
         )
       }
@@ -93,7 +111,12 @@ class NavigationBar extends React.Component {
       <LinkContainer to="/login">
         <Nav.Link>Logowanie</Nav.Link>
       </LinkContainer>
-     
+      <LinkContainer to="/markets">
+                <Nav.Link>
+                    Rynki
+                </Nav.Link>
+              </LinkContainer>
+      {this.renderRankingLink()}
       </Nav>
       )
       
@@ -113,7 +136,7 @@ class NavigationBar extends React.Component {
 
     render(){
         return(
-        <Navbar bg="primary" variant="dark" sticky="top">
+        <Navbar bg="primary" variant="dark" sticky="top" collapseOnSelect>
             <LinkContainer to='/'>
             <Navbar.Brand>PredictBom</Navbar.Brand>
             </LinkContainer>

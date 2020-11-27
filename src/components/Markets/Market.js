@@ -67,6 +67,13 @@ const Market = (props) => {
          </Button>
          </LinkContainer>
       )}
+        {props.bets && !props.published && (
+         <LinkContainer className="market-card-buttons" to={`/markets/editMarket/${props.marketId}`}>
+         <Button>
+           Edytuj dane rynku
+         </Button>
+         </LinkContainer>
+      )}
       {props.published && (
           <LinkContainer className="market-card-buttons" to={`/markets/solveMarket/${props.marketId}`}>
           <Button>

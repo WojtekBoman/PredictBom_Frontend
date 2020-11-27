@@ -6,16 +6,39 @@ import {betsConstants} from '../constants/betsConstants';
 import {updatePagination} from './paginationActions';
 import _ from 'lodash';
 
-export const createMarket = ({marketTitle,marketCategory,predictedDateEnd = "",description}) => {
+export const createMarket = ({topic,category,predictedEndDate = "",description}) => {
 
     return dispatch => {
-        dispatch(request({ marketTitle }));
+        dispatch(request({ topic }));
 
-        marketService.createMarket(marketTitle,marketCategory,predictedDateEnd,description)
+        marketService.createMarket(topic,category,predictedEndDate,description)
             .then(
                 res => { 
                     dispatch(success(res.predictionMarket));
                     history.push(`editBets/${res.predictionMarket.marketId}`);
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+
+    function request(market) { return { type: marketsConstants.CREATE_MARKET_REQUEST,payload:market  } }
+    function success(market) { return { type: marketsConstants.CREATE_MARKET_SUCCESS, payload:market } }
+    function failure(error) { return { type: marketsConstants.CREATE_MARKET_FAILURE, error } }
+}
+
+export const editMarket = (marketId,{topic,category,predictedEndDate = "",description}) => {
+
+    return dispatch => {
+        dispatch(request({ marketId }));
+        console.log("Category",category)
+        marketService.editMarket(marketId,topic,category,predictedEndDate,description)
+            .then(
+                res => { 
+                    dispatch(success(res.predictionMarket));
+                    history.push('/markets')
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -94,10 +117,10 @@ export const setMarketCover = (marketId, marketCover) => {
 }
 
 
-export const addBet = (marketId,yesPrice, noPrice,chosenOption) => {
+export const addBet = (marketId,yesPrice, noPrice,chosenOption,shares) => {
     return dispatch => {
         dispatch(request(marketId));
-        marketService.addBet(marketId,yesPrice,noPrice,chosenOption)
+        marketService.addBet(marketId,yesPrice,noPrice,chosenOption,shares)
             .then(
                 res => {
                     dispatch(success(res.predictionMarket));
@@ -168,7 +191,6 @@ export const makePublic = (marketId) => {
             .then(
                 res => {
                     dispatch(success(res.predictionMarket));
-                    dispatch(alertActions.success(res.info));
                     history.push('/markets');
                 },
                 error => {

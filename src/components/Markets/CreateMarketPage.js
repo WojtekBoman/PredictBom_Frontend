@@ -13,7 +13,7 @@ class CreateMarketPage extends React.Component {
     }
 
     componentDidMount() {
-      this.props.initialize({marketCategory:'SPORT'})
+      this.props.initialize({category:"SPORT"})
     }
 
     getOptions() {
@@ -98,7 +98,7 @@ class CreateMarketPage extends React.Component {
 }
 
       onSubmit = (formValues) => {
-  
+        console.log(formValues)
         this.props.createMarket(formValues);
     }
 
@@ -115,11 +115,11 @@ class CreateMarketPage extends React.Component {
 
         return(
             <Container className="bg-light border rounded shadow-container create-market-container">
-                <h3>Krok 1 - Tworzenie rynku</h3>
+                <h3>Tworzenie rynku prognostycznego</h3>
                 <Form onSubmit={this.props.handleSubmit(this.onSubmit)} encType="multipart/form-data">
-                <Field type="text" label="Tytuł rynku" name="marketTitle" component={this.renderInput} placeholder="Wprowadź tytuł rynku prognostycznego"></Field>
-                <Field helpText="Jeżeli nie wiesz kiedy może zakończyć się dany rynek nie wypełniaj tego pola" type="date" label="Przewidywana data zakończenia rynku" name="predictedDateEnd" component={this.renderInput}></Field>
-                <Field name="marketCategory" label="Wybierz kategorię rynku" options={this.getOptions()} component={this.renderSelectField}/>
+                <Field type="text" label="Tytuł rynku" name="topic" component={this.renderInput} placeholder="Wprowadź tytuł rynku prognostycznego"></Field>
+                <Field helpText="Jeżeli nie wiesz kiedy może zakończyć się dany rynek nie wypełniaj tego pola" type="date" label="Przewidywana data zakończenia rynku" name="predictedEndDate" component={this.renderInput}></Field>
+                <Field name="category" label="Wybierz kategorię rynku" options={this.getOptions()} component={this.renderSelectField}/>
                 {/* <Field validate={this.validateImageFormat} type="file" name="marketCover" component={this.renderFileInput} />
                 <div className="img-box">
                 {this.state.imageFile && (<Image className="img" src={this.state.imageFile} rounded/>)}
@@ -141,19 +141,19 @@ class CreateMarketPage extends React.Component {
 
 const validate = formValues => {
     const errors = {}
-    const requiredFields = [ 'marketTitle','description']
+    const requiredFields = [ 'topic','description']
     requiredFields.forEach(field => {
     if (!formValues[ field ]) {
       errors[ field ] = 'To pole jest wymagane'
     }
   })
 
-  if(formValues.predictedDateEnd){
-      let predictedDate = new Date(formValues.predictedDateEnd);
+  if(formValues.predictedEndDate){
+      let predictedDate = new Date(formValues.predictedEndDate);
       let dateNow = new Date();
 
       if(predictedDate < dateNow) {
-        errors['predictedDateEnd'] = "Musisz podać datę późniejszą od dzisiejszej";
+        errors['predictedEndDate'] = "Musisz podać datę późniejszą od dzisiejszej";
       }
 
   }
