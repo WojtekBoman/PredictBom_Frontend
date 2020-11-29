@@ -29,6 +29,7 @@ import BetOffers from './Offers/BetOffers';
 import Ranking from './PlayerComponents/Ranking';
 import TransactionsPage from './Transactions/TransactionsPage'
 import SelectContractToAddOffer from './PlayerComponents/SelectContractToAddOffer';
+import DeleteMarketPage from './Markets/DeleteMarketPage';
 
 
 const App = () => {
@@ -59,6 +60,7 @@ const App = () => {
                     <PrivateRoute path="/markets/editMarket/:id" component={EditMarketPage} />
                     <PrivateRoute path="/markets/solveMarket/:id" component={SolveMarketPage} />
                     <PrivateRoute path="/markets/makePublic/:id" component={MakeMarketPublicPage} />
+                    <PrivateRoute path="/markets/delete/:id" component={DeleteMarketPage} />
                     <PrivateRoute path="/markets/private" component={ModeratorMarketsPage}/>
                     <Route path="/markets/" component={MarketsPage}/>
                     <Redirect from="*" to="/" />

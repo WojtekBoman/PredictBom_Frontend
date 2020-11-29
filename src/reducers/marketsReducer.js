@@ -85,10 +85,16 @@ export default (state = [], action) => {
         case marketsConstants.EDIT_MARKET_SUCCESS:
                 return [...state]        
         case marketsConstants.EDIT_MARKET_FAILURE:
-            const index_eight = state.findIndex(market => market.marketId === action.payload.marketId)
+                const index_eight = state.findIndex(market => market.marketId === action.payload.marketId)
                 const newArray_eight = [...state]
                 newArray_seven[index_eight] = action.payload
-                return newArray_eight;        
+                return newArray_eight;      
+        case marketsConstants.DELETE_MARKET_REQUEST:
+                return [...state]
+        case marketsConstants.DELETE_MARKET_SUCCESS:
+                return state.filter(market => market.marketId !== action.payload.marketId)        
+        case marketsConstants.DELETE_MARKET_FAILURE:
+                return [...state]                   
         default:
             return state;
     }

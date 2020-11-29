@@ -64,7 +64,7 @@ class Bet extends React.Component {
 
     onClickDeleteBet = () => {
         this.setState({submitted:true})
-        this.props.deleteBet(this.props.marketId,this.props.betId)
+        this.props.deleteBet(this.props.betId)
     }
 
     renderNotFoundMessage = () => {

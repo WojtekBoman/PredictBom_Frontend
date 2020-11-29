@@ -60,11 +60,17 @@ class MarketDetails extends React.Component {
                         <p>{this.props.currentMarket.description}</p>
                         <hr className="my-4"></hr>
                     </div>
+                    <div className="endDate">
+                        <h4>Przewidywana data zakończenia</h4>
+                        <p>{this.props.currentMarket.predictedEndDate}</p>
+                        <hr className="my-4"></hr>
+                    </div>
                     <div className="bets">
                         <h4>Zakłady</h4>
                         {this.renderBetsList()}
+                        <hr className="my-4"></hr>
                     </div>
-                    <MarketTrendChart bets={this.props.currentMarket.bets} betId={67} option={true} />
+                    <MarketTrendChart bets={this.props.currentMarket.bets} betId={67} option={true} predictedEndDate={this.props.currentMarket.predictedEndDate} correctBetId={this.props.currentMarket.correctBetId}/>
                 </Container>
                 );
         }

@@ -26,11 +26,11 @@ class EditMarketPage extends React.Component {
         )
       }
 
-    renderInput = ({input, label,meta,type,placeholder,as,helpText,rows}) => {
+    renderInput = ({input, label,meta,type,placeholder,as,helpText,rows,disabled}) => {
         return (
         <Form.Group>
         <Form.Label>{label}</Form.Label>
-        <Form.Control {...input} as={as} type={type} placeholder={placeholder} rows={rows}/>
+        <Form.Control {...input} as={as} type={type} placeholder={placeholder} rows={rows} disabled={disabled}/>
         {this.renderError(meta)}
         {helpText && (<Form.Text className="text-muted">{helpText}</Form.Text>)}    
         </Form.Group>
@@ -52,11 +52,12 @@ class EditMarketPage extends React.Component {
         options,
         label,
         type,
+        disabled,
         meta: { touched, error }
       }){return(
         <Form.Group>
         <Form.Label>{label}</Form.Label>
-          <Form.Control {...input} as="select">
+          <Form.Control {...input} as="select" disabled={disabled}>
             {options.map(option => (
               <option value={option.val} key={option.key}>
                 {option.text}
@@ -106,14 +107,14 @@ class EditMarketPage extends React.Component {
             console.log(this.props);
             return(
                 <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                <Field type="text" label="Tytuł rynku" name="topic" component={this.renderInput} placeholder="Wprowadź tytuł rynku prognostycznego"></Field>
+                <Field disabled={this.props.currentMarket.published} type="text" label="Tytuł rynku" name="topic" component={this.renderInput} placeholder="Wprowadź tytuł rynku prognostycznego"></Field>
                 <Field helpText="Jeżeli nie wiesz kiedy może zakończyć się dany rynek nie wypełniaj tego pola" type="date" label="Przewidywana data zakończenia rynku" name="predictedEndDate" component={this.renderInput}></Field>
-                <Field name="category" label="Wybierz kategorię rynku" options={this.getOptions()} component={this.renderSelectField}/>
+                <Field disabled={this.props.currentMarket.published} name="category" label="Wybierz kategorię rynku" options={this.getOptions()} component={this.renderSelectField}/>
                 {/* <Field validate={this.validateImageFormat} type="file" name="marketCover" component={this.renderFileInput} />
                 <div className="img-box">
                 {this.state.imageFile && (<Image className="img" src={this.state.imageFile} rounded/>)}
                 </div> */}
-                <Field as="textarea" rows="5" name="description" label="Krótko opisz rynek i jego zasady" component={this.renderInput} />
+                <Field disabled={this.props.currentMarket.published} as="textarea" rows="5" name="description" label="Krótko opisz rynek i jego zasady" component={this.renderInput} />
                 <Button className="form-button" variant="primary" type="submit">
                   {this.renderButtonContent()}
                 </Button>

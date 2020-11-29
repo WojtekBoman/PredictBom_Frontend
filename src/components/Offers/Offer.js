@@ -34,6 +34,7 @@ class Offer extends React.Component {
                 <td>{this.props.price}</td>
                 <td>{this.props.countOfShares}</td>
                 <td>{this.props.createdDate}</td>
+               {(!this.props.isOwner || window.location.href.includes("offers"))  && <td>{this.props.dealer}</td>} 
                 <td>
                     {this.props.isOwner ? 
                     (<Button onClick={this.deleteOffer} variant="danger">{this.renderButtonContent("Usuń")}</Button>)

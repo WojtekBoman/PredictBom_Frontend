@@ -38,10 +38,15 @@ class MarketTrendChart extends React.Component {
 
     onChangeTimeAgo = (e) => {
       
-        var today = new Date();
+        var today;
+        if(this.props.correctBetId > 0) {
+            today = Date.parse(this.props.predictedEndDate);
+        }else{
+            today = new Date();
+        }
         today.setDate(today.getDate() - e.target.value)
         var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
         var yyyy = today.getFullYear();
 
         today = mm + '-' + dd + '-' + yyyy;
@@ -132,9 +137,8 @@ class MarketTrendChart extends React.Component {
 
         return(
             <div>
-                <header>
+                <header style={{marginBottom:"20px"}}>
                     <h4>Trend rynku</h4>
-                    <hr className="my-4"></hr>
                 </header>
                 {this.props.transactions && (
                     <div>

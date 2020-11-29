@@ -136,16 +136,19 @@ class NavigationBar extends React.Component {
 
     render(){
         return(
-        <Navbar bg="primary" variant="dark" sticky="top" collapseOnSelect>
+        <Navbar bg="primary" variant="dark" expand="lg" sticky="top" collapseOnSelect>
             <LinkContainer to='/'>
             <Navbar.Brand>PredictBom</Navbar.Brand>
             </LinkContainer>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
            {this.props.login.loggedIn ? (
              this.renderUserPanel()
            ) : (
               this.renderUnloggedUserPanel()
            )}
            {this.renderData()}
+           </Navbar.Collapse>
         </Navbar>
         )
     }

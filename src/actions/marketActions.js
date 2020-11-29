@@ -33,7 +33,6 @@ export const editMarket = (marketId,{topic,category,predictedEndDate = "",descri
 
     return dispatch => {
         dispatch(request({ marketId }));
-        console.log("Category",category)
         marketService.editMarket(marketId,topic,category,predictedEndDate,description)
             .then(
                 res => { 
@@ -95,6 +94,28 @@ export const fetchMarket = (marketId) => {
     function failure(error) { return { type: marketsConstants.FETCH_MARKET_FAILURE, error } }
 }
 
+export const deleteMarket = (marketId) => {
+    return dispatch => {
+        dispatch(request(marketId))
+        marketService.deleteMarket(marketId) 
+            .then(
+                market => {
+                    dispatch(success(market));
+                    history.push('/markets/private')
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            )
+    };
+
+
+    function request(market) { return { type: marketsConstants.DELETE_MARKET_REQUEST,payload:market  } }
+    function success(market) { return { type: marketsConstants.DELETE_MARKET_SUCCESS,payload: market } }
+    function failure(error) { return { type: marketsConstants.DELETE_MARKET_FAILURE, error } }
+}
+
 export const setMarketCover = (marketId, marketCover) => {
     return dispatch => {
         dispatch(request(marketId));
@@ -102,7 +123,7 @@ export const setMarketCover = (marketId, marketCover) => {
             .then(
                 res => {
                     dispatch(success(res.predictionMarket));
-                    history.push('/markets')
+                    history.push('/markets/private')
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -161,10 +182,10 @@ export const fetchBetPrice = (betId) => {
     function failure(error) { return { type: betsConstants.FETCH_BET_PRICE_FAILURE, error } }
 }
 
-export const deleteBet = (marketId,betId) => {
+export const deleteBet = (betId) => {
     return dispatch => {
-        dispatch(request(marketId));
-        marketService.deleteBet(marketId,betId) 
+        dispatch(request(betId));
+        marketService.deleteBet(betId) 
             .then(
                 res => {
                     dispatch(success(res.predictionMarket));

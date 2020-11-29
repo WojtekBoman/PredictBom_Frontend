@@ -52,11 +52,12 @@ class BetOffers extends React.Component {
                             <th>Cena akcji [$]</th>
                             <th>Liczba akcji</th>
                             <th>Data wystawienia</th>
+                            <th>Sprzedawca</th>
                             <th>Czynności</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {this.props.offers.map(offer => <Offer onClickShowModal={this.handleShow} offerId={offer.id} countOfShares={offer.countOfContracts} price={offer.valueOfShares} createdDate={offer.createdDate}/>)}
+                            {this.props.offers.map(offer => <Offer isOwner={this.props.user && this.props.user.username === offer.dealer} user={offer.user} dealer={offer.dealer ? offer.dealer : "Organizator rynku"} onClickShowModal={this.handleShow} offerId={offer.id} countOfShares={offer.countOfContracts} price={offer.valueOfShares} createdDate={offer.createdDate}/>)}
                         </tbody>
                         </Table>
                     )}
@@ -72,7 +73,8 @@ const mapStateToProps = state => {
     return {
         offers: state.offers,
         pagination: state.pagination.offersPagination,
-        filter: state.filterOffers
+        filter: state.filterOffers,
+        user: state.login.user
     }
 }
 

@@ -45,7 +45,7 @@ const Market = (props) => {
       <Card.Text>
         {props.description}
       </Card.Text>
-      {props.user.roles[0]==="ROLE_MODERATOR" && (
+      {props.user && props.user.roles[0]==="ROLE_MODERATOR" && (
         <div>
           {!props.published && (
             <LinkContainer className="market-card-buttons" to={`/markets/editCover/${props.marketId}`}>
@@ -67,17 +67,24 @@ const Market = (props) => {
          </Button>
          </LinkContainer>
       )}
-        {props.bets && !props.published && (
+        {/* {props.bets && !props.published && ( */}
          <LinkContainer className="market-card-buttons" to={`/markets/editMarket/${props.marketId}`}>
          <Button>
            Edytuj dane rynku
          </Button>
          </LinkContainer>
-      )}
+      {/* )} */}
       {props.published && (
           <LinkContainer className="market-card-buttons" to={`/markets/solveMarket/${props.marketId}`}>
           <Button>
             Rozwiąż rynek
+          </Button>
+          </LinkContainer>
+      )}
+      {!props.published && (
+          <LinkContainer className="market-card-buttons" to={`/markets/delete/${props.marketId}`}>
+          <Button>
+            Usuń rynek
           </Button>
           </LinkContainer>
       )}
