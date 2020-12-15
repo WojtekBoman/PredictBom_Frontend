@@ -4,6 +4,7 @@ import EditMarketPage from '../Markets/EditMarketPage';
 import {reduxForm, Field} from 'redux-form';
 import { Container, Form,Alert,Spinner,Button } from 'react-bootstrap';
 import {editPassword} from '../../actions/loginActions';
+import BackButton from '../../helpers/BackButton';
 
 class EditPasswordPage extends React.Component {
 
@@ -74,15 +75,16 @@ class EditPasswordPage extends React.Component {
     render(){
         return(
             <Container className="bg-light border rounded shadow-container profile-container">
-                <header>
-                    <h4>Zmiana hasła</h4>
+                <header style={{display:"inline-block"}}>
+                    <BackButton />
+                    <h3 style={{display:"inline-block"}}>Zmiana hasła</h3>
                     <hr className="my-4"></hr>
                 </header>
                 <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
                 <Field onChange={this.checkIsEmptyField} type="password" label="Stare hasło" name="oldPassword" component={this.renderInput} placeholder="Wprowadź stare hasło"></Field>
                 <Field onChange={this.checkIsEmptyField} type="password" label="Nowe hasło" name="newPassword" component={this.renderInput} placeholder="Wprowadź nowe hasło"></Field>
-                <Field onChange={this.checkIsEmptyField} type="password" label="Powtórz nowe hasło" name="repeatNewPassword" component={this.renderInput} placeholder="Powtórz nowe hasło"></Field>
-                <Button className="form-button" variant="primary" type="submit">
+                <Field onChange={this.checkIsEmptyField} type="password" label="Powtórz nowe hasło" name="repeatedNewPassword" component={this.renderInput} placeholder="Powtórz nowe hasło"></Field>
+                <Button id="submitNewPassword" className="form-button" variant="primary" type="submit">
                     {this.renderButtonContent()}
                 </Button>
                 <Button className="form-button" variant="primary" type="reset" onClick={this.resetForm} disabled={this.state.resetButtonDisable}>
@@ -97,7 +99,7 @@ class EditPasswordPage extends React.Component {
 
 const validate = formValues => {
     const errors = {}
-    const requiredFields = ['oldPassword', 'newPassword','repeatNewPassword']
+    const requiredFields = ['oldPassword', 'newPassword','repeatedNewPassword']
     requiredFields.forEach(field => {
     if (!formValues[ field ]) {
       errors[ field ] = 'To pole jest wymagane'

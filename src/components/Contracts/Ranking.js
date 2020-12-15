@@ -4,12 +4,18 @@ import {connect} from 'react-redux';
 import {fetchRanking} from '../../actions/rankingActions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faTrophy} from '@fortawesome/free-solid-svg-icons';
+import {alertActions} from '../../actions/alertActions';
+import BackButton from '../../helpers/BackButton';
 
 
 class Ranking extends React.Component {
 
     componentDidMount() {
         this.props.fetchRanking();
+    }
+
+    componentWillUnmount(){
+        this.props.clear();
     }
 
     renderLoading = () => {
@@ -43,10 +49,11 @@ class Ranking extends React.Component {
         if(this.props.ranking && !((typeof this.props.loading !== 'undefined') && this.props.loading.pending)){
             return(
                 <Container className="bg-light border rounded shadow-container create-market-container">
-                    <header>
-                        <h4>Top 100 graczy</h4>
-                        <hr className="my-4"></hr>
+                    <header style={{display:"inline-block"}}>
+                        <BackButton />
+                        <h2 style={{display:"inline-block"}}>Top 100 graczy</h2>
                     </header>
+                    <hr className="my-4"></hr>
                     <Table striped bordered hover>
                         <thead>
                         <th>
@@ -91,4 +98,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps,{fetchRanking})(Ranking);
+export default connect(mapStateToProps,{fetchRanking,clear:alertActions.clear})(Ranking);

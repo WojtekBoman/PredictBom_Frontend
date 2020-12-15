@@ -17,13 +17,13 @@ const  setCover = (category) => {
     switch(category){
         case "SPORT":
           return sportBackground;
-        case "CELEBRYCI":
+        case "CELEBRITIES":
           return celebryciBackground;
-        case "POLITYKA":
+        case "POLICY":
           return politykaBackground;
-        case "GOSPODARKA":
+        case "ECONOMY":
           return gospodarkaBackground;
-        case "INNE":
+        case "OTHER":
           return inneBackground;
         default:
           return inneBackground;
@@ -57,7 +57,7 @@ const Market = (props) => {
 
       <LinkContainer className="market-card-buttons" to={`/markets/editBets/${props.marketId}`}>
       <Button>
-        Edytuj Zakłady
+          {!props.published ? <span>Zarządzaj zakładami</span> : <span>Dodaj zakład</span>}
       </Button>
       </LinkContainer>
       {props.bets && !props.published && (

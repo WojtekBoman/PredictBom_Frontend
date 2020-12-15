@@ -92,7 +92,7 @@ export default (state = [], action) => {
         case marketsConstants.DELETE_MARKET_REQUEST:
                 return [...state]
         case marketsConstants.DELETE_MARKET_SUCCESS:
-                return state.filter(market => market.marketId !== action.payload.marketId)        
+                return state.filterMarkets(market => market.marketId !== action.payload.marketId)        
         case marketsConstants.DELETE_MARKET_FAILURE:
                 return [...state]                   
         default:

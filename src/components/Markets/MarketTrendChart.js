@@ -40,7 +40,8 @@ class MarketTrendChart extends React.Component {
       
         var today;
         if(this.props.correctBetId > 0) {
-            today = Date.parse(this.props.predictedEndDate);
+            let timestamp = Date.parse(this.props.endDate);
+            today = new Date(timestamp);
         }else{
             today = new Date();
         }
@@ -86,7 +87,7 @@ class MarketTrendChart extends React.Component {
                 </h5>
                 <Form.Control as="select" onChange={this.onChangeBet}>
                 {this.props.bets.map(bet => <option value={bet.id}>
-                    {bet.chosenOption}
+                    {bet.title}
                 </option>)}
                 </Form.Control>
              

@@ -6,7 +6,8 @@ import {buyShares} from '../../actions/offerActions';
 class BuyOfferModal extends React.Component {
 
     state = {
-        countOfShares:1
+        shares:1,
+        showTypeInfo: false
     }
 
     renderInfo() {
@@ -16,7 +17,14 @@ class BuyOfferModal extends React.Component {
             </Alert>
         }
     }
-
+ 
+    renderTypeInfo() {
+        if(this.state.showTypeInfo){
+            return <Alert className="login-alert" variant="danger">
+                Podaj liczbę całkowitą
+            </Alert>
+        }
+    }
     
     renderButtonContent() {
         if ((typeof this.props.loading !== 'undefined') && this.props.loading.pending) {
@@ -39,11 +47,18 @@ class BuyOfferModal extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.buyShares(this.props.id,this.state.countOfShares);
+        console.log(typeof(this.state.shares))
+        if(typeof(this.state.shares) == "number"){
+            this.setState({showTypeInfo:false})
+            this.props.buyShares(this.props.id,this.state.shares);
+        }else{
+            this.setState({showTypeInfo:true,shares:1})
+        }
+      
     }
 
-    onChangeCountOfContracts = e => {
-        this.setState({countOfShares:e.target.value});
+    onChangeShares = e => {
+        this.setState({shares:e.target.value});
     }
 
     render() {
@@ -62,12 +77,13 @@ class BuyOfferModal extends React.Component {
             <Form.Group controlId="formBasicRange">
                 <Form.Label><h4>Liczba akcji</h4></Form.Label>
                 <p className="text-muted">Wprowadź ile akcji chcesz kupić</p>
-                <Form.Control min={1} max={this.props.maxValue} value={this.state.countOfShares} onChange={this.onChangeCountOfContracts}  type="number"/>
+                <Form.Control min={1} step={1} max={this.props.maxValue} value={this.state.shares} onChange={this.onChangeShares}  type="number"/>
                 <Button onClick={this.handleSubmit} variant="primary" style={{marginTop:"10px"}}>
                     {this.renderButtonContent()}
                 </Button>
             </Form.Group>
             {this.renderInfo()}
+            {this.renderTypeInfo()}
         </Form>
         </Modal.Body>
         <Modal.Footer>

@@ -36,6 +36,7 @@
     "redux-form-dropzone": "0.0.1",
     "redux-thunk": "^2.3.0",
     "rsuite": "^4.8.4",
+    "selenium-webdriver": "^4.0.0-alpha.7",
     "semantic-ui-react": "^2.0.0"
   },
   "scripts": {

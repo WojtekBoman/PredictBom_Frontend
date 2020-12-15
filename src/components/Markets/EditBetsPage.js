@@ -11,13 +11,14 @@ import {alertActions} from '../../actions/alertActions';
 import {Link} from "react-router-dom"
 import { LinkContainer } from 'react-router-bootstrap';
 import { Line, Circle } from 'rc-progress';
+import BackButton from '../../helpers/BackButton';
 
 class EditBetsPage extends React.Component {
     
     state = {
         marketId: this.props.match.params.id,
-        chosenOption: "",
-        showModal:false,
+        // title: "",
+        // showModal:false,
     }
 
     componentDidMount() {
@@ -45,16 +46,20 @@ class EditBetsPage extends React.Component {
     }
   
     renderInfo() {
-
+        if(this.props.alert.payload) {
+            return <Alert className="login-alert" variant="danger">
+                {this.props.alert.payload}
+            </Alert>
+        }
     
       return (
-          <Modal show={this.props.alert.payload != undefined} onHide={this.props.clear}>
-            <Modal.Header closeButton>
+          <Modal id="modal" show={this.props.alert.payload != undefined} onHide={this.props.clear}>
+            <Modal.Header  closeButton>
               <Modal.Title>Zakłady</Modal.Title>
             </Modal.Header>
             <Modal.Body>{this.props.alert.payload}</Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={this.props.clear}>
+              <Button id="buttonCloseModal" variant="secondary" onClick={this.props.clear}>
                 Powrót
               </Button>
 
@@ -95,7 +100,7 @@ renderError({error,touched}) {
 // }
 
 onSubmit = (formValues) => {
-    this.props.addBet(this.props.match.params.id,formValues.yesPrice,formValues.noPrice,formValues.chosenOption,formValues.shares)
+    this.props.addBet(this.props.match.params.id,formValues.yesPrice,formValues.noPrice,formValues.title,formValues.shares)
 }
 
 renderBetsList = () => {
@@ -125,7 +130,7 @@ renderBetsList = () => {
     renderNextStepButton = () => {
         if(this.props.currentMarket.bets) {
             return(<LinkContainer to={`/markets/makePublic/${this.props.match.params.id}`}>
-                <Button variant="primary" type="submit">
+                <Button id="confirmBetsButton" variant="primary" type="submit">
                         Zatwierdź zakłady
                 </Button>
             </LinkContainer>)
@@ -136,9 +141,13 @@ renderBetsList = () => {
         if(this.props.currentMarket){
             return(
                 <Container className="bg-light border rounded shadow-container create-market-container">
-                <h3>{this.props.currentMarket.topic}</h3>
+                <header style={{display:"inline-block"}}>
+                <BackButton />
+                <h2 style={{display:"inline-block"}}>{this.props.currentMarket.topic}</h2>
+                </header>
+                <hr className="my-4"></hr>
                 <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                <Field onChange={this.checkIsEmptyField} type="text" label="Dodawanie zakładu" name="chosenOption" component={this.renderInput} placeholder="Wprowadź tytuł zakładu"></Field>
+                <Field onChange={this.checkIsEmptyField} type="text" label="Dodawanie zakładu" name="title" component={this.renderInput} placeholder="Wprowadź tytuł zakładu"></Field>
                 <Row>
                     <Col sm={6}>
                     <Field type="number" label="Podaj cenę kontraktu na tak" max="1" name="yesPrice" component={this.renderInput} placeholder="Podaj cenę kontraktu na tak"></Field>
@@ -148,7 +157,7 @@ renderBetsList = () => {
                     </Col>
                 </Row>
                         <Field component={this.renderInput} name="shares" min={10000} max={100000} step={1} type="number" label="Podaj poczatkowa liczbę akcji wystawionych na sprzedaż"/>
-                    <Button variant="primary" type="submit">
+                    <Button id="addBetButton" variant="primary" type="submit">
                         {this.renderButtonContent()}
                     </Button>
                 </Form>
@@ -178,7 +187,6 @@ renderBetsList = () => {
             {this.renderLoading()}
             {this.renderFailedToFetch()}
             {this.renderPageContent()}
-            {this.renderInfo()}
             {/* {this.renderFailedFetch()} */}
             </div>
            )
@@ -187,7 +195,7 @@ renderBetsList = () => {
 
 const validate = formValues => {
     const errors = {};
-    const requiredFields = [ 'chosenOption','yesPrice','noPrice','shares']
+    const requiredFields = [ 'title','yesPrice','noPrice','shares']
     requiredFields.forEach(field => {
     if (!formValues[ field ]) {
       errors[ field ] = 'To pole jest wymagane'

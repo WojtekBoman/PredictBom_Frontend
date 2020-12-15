@@ -14,8 +14,7 @@ class ContractList extends React.Component {
 
     
     componentDidMount() {
-        if(this.props.offerPage) this.props.setStatusPending();
-        this.props.fetchFilteredContracts(this.props.filter.contractStatus,this.props.filter.contractOption,this.props.filter.betTitle,this.props.filter.marketTitle,this.props.filter.selectedCategories,this.props.filter.sortedBy,this.props.filter.page,this.props.filter.pageSize);
+        this.fetchContracts();
     }
 
     componentWillUnmount() {
@@ -25,9 +24,18 @@ class ContractList extends React.Component {
 
     componentDidUpdate(prevProps) {
         if(!(JSON.stringify(this.props.filter)===JSON.stringify(prevProps.filter))){
-            this.props.fetchFilteredContracts(this.props.filter.contractStatus,this.props.filter.contractOption,this.props.filter.betTitle,this.props.filter.marketTitle,this.props.filter.selectedCategories,this.props.filter.sortedBy,this.props.filter.page,this.props.filter.pageSize);
+            this.fetchContracts();
         }
         
+    }
+
+    fetchContracts() {
+        if(this.props.offerPage){
+            // this.props.setStatusPending();
+            this.props.fetchFilteredContracts("PENDING",this.props.filter.contractOption,this.props.filter.betTitle,this.props.filter.marketTitle,this.props.filter.selectedCategories,this.props.filter.sortedBy,this.props.filter.page,this.props.filter.pageSize);
+        } else{
+            this.props.fetchFilteredContracts(this.props.filter.contractStatus,this.props.filter.contractOption,this.props.filter.betTitle,this.props.filter.marketTitle,this.props.filter.selectedCategories,this.props.filter.sortedBy,this.props.filter.page,this.props.filter.pageSize);
+        }
     }
 
     renderNotFoundMessage() {
@@ -48,6 +56,14 @@ class ContractList extends React.Component {
         }
     }
 
+    returnObjectSize = (obj) => {
+        var size = 0, key;
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) size++;
+        }
+        return size;
+    }
+
     renderContractList() {
         if(this.props.contracts.length > 0) {
             return(
@@ -55,7 +71,7 @@ class ContractList extends React.Component {
                 <Row style={{width:"100%",margin:"0 auto"}}>
                     {this.props.contracts.map(contract => 
                     <Col xs={12} md={6} className="d-flex align-items-stretch" key={contract.id} style={{margin:"10px 0"}}>
-                        <Contract id={contract.id} bet={contract.bet} contractStatus={contract.contractStatus} marketInfo={contract.marketInfo} valueOfShares={contract.valueOfShares} countOfContracts={contract.countOfContracts} contractOption={contract.contractOption} betId={contract.betId}/>
+                        <Contract id={contract.id} offersSize={contract.offers !== null ? `Liczba ofert: ${contract.offers.length}` : 'Brak ofert'} bet={contract.bet} contractStatus={contract.contractStatus} marketInfo={contract.marketInfo} price={contract.price} shares={contract.shares} contractOption={contract.contractOption} betId={contract.betId}/>
                     </Col>
                     )}
                 </Row>

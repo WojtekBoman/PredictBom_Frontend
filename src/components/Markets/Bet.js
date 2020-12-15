@@ -27,7 +27,7 @@ class Bet extends React.Component {
 
     componentDidMount() {
       
-        if(this.props.correctBetId == 0) this.props.fetchBetPrice(this.props.betId)
+        this.props.fetchBetPrice(this.props.betId);
 
         if(this.props.correctBetId > 0)
          if(this.props.correctBetId == this.props.betId) {
@@ -75,12 +75,12 @@ class Bet extends React.Component {
 
 
     renderPrice() {
-        if(this.props.correctBetId == 0){
-            if(this.props.betPrice){
+        if(this.props.betPrice){
+            if(this.props.correctBetId == 0){
             return(
                 <Row className="text-center">
                 <Col sm={4}>
-                    <h5>Cena tak</h5>
+                    <h5>Ostatnia cena tak</h5>
                     <h6>{this.props.betPrice.yesPrice} $</h6>
                     {(!_.isEmpty(this.props.player)) && (<Button variant={"success"} onClick={() => this.setState({contractOption:true})}>
                         Kup
@@ -100,7 +100,7 @@ class Bet extends React.Component {
                 </LinkContainer>
                 </Col>
                 <Col sm={4}>
-                    <h5>Cena nie</h5>
+                    <h5>Ostatnia cena nie</h5>
                     <h6>{this.props.betPrice.noPrice} $</h6>
                     {(!_.isEmpty(this.props.player)) && ( <Button variant={"danger"} onClick={() => this.setState({contractOption:false})}>
                         Kup
@@ -110,14 +110,25 @@ class Bet extends React.Component {
             </Row>
             )
             }
-        }else{
-            return(<div>
-                {this.props.correctBetId == this.props.betId ? 
-                <div>{this.props.correctBetOption ? <h5>Zakład poprawny dla opcji na tak</h5> : <h5>Zakład poprawny dla opcji na nie</h5>}</div> 
-                : 
-                <div>{!this.props.correctBetOption ? <h5>Zakład poprawny dla opcji na tak</h5> : <h5>Zakład poprawny dla opcji na nie</h5>}</div>
-                }</div>
-            )
+            else{
+                return(<div>
+                    {this.props.correctBetId == this.props.betId ? 
+                    <div>{this.props.correctBetOption ? <h5>Zakład poprawny dla opcji na tak</h5> : <h5>Zakład poprawny dla opcji na nie</h5>}</div> 
+                    : 
+                    <div>{!this.props.correctBetOption ? <h5>Zakład poprawny dla opcji na tak</h5> : <h5>Zakład poprawny dla opcji na nie</h5>}</div>
+                    }
+                    <hr className="my-4"></hr>
+                    <Row>
+                        <Col sm={6}>
+                        {this.props.betPrice.yesPrice > 0 ? <p>Ostatnia cena na tak: {this.props.betPrice.yesPrice}</p> : <p>Nie dokonano zakupu kontraktów na opcję "tak"</p>}
+                        </Col>
+                        <Col>
+                        {this.props.betPrice.noPrice > 0 ? <p>Ostatnia cena na nie: {this.props.betPrice.noPrice}</p> : <p>Nie dokonano zakupu kontraktów na opcję "nie"</p>}
+                        </Col>
+                    </Row>
+                    </div>
+                )
+            }
         }
     }
 
@@ -135,9 +146,9 @@ class Bet extends React.Component {
     }
 
     renderBuyForm = () => {
-        if(this.state.contractOption != null){
+        if(this.state.contractOption != null && this.props.player){
             return(
-               <BuyContractForm marketId={this.props.marketId} betId={this.props.betId} contractOption={this.state.contractOption} hideForm={this.hideForm}/>
+               <BuyContractForm budget={this.props.player.budget} marketId={this.props.marketId} betId={this.props.betId} contractOption={this.state.contractOption} hideForm={this.hideForm}/>
             )
         }
     }
@@ -146,7 +157,7 @@ class Bet extends React.Component {
         return(
             <div>
             <Segment color={this.state.backgroundColor} style={{margin:"10px"}}>
-            <h2 className="ui header">{this.props.chosenOption}</h2>
+            <h2 className="ui header">{this.props.title}</h2>
             {window.location.href.includes("editBets") && !this.props.published && (<Button className="close-button" onClick={this.onClickDeleteBet}>{this.renderButtonContent()}</Button>)}
             {this.renderPrice()}
             {this.renderLoadingPrice()}

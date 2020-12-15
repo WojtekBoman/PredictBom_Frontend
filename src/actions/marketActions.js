@@ -6,12 +6,12 @@ import {betsConstants} from '../constants/betsConstants';
 import {updatePagination} from './paginationActions';
 import _ from 'lodash';
 
-export const createMarket = ({topic,category,predictedEndDate = "",description}) => {
+export const createMarket = ({topic,category,endDate = "",description}) => {
 
     return dispatch => {
         dispatch(request({ topic }));
 
-        marketService.createMarket(topic,category,predictedEndDate,description)
+        marketService.createMarket(topic,category,endDate,description)
             .then(
                 res => { 
                     dispatch(success(res.predictionMarket));
@@ -29,11 +29,11 @@ export const createMarket = ({topic,category,predictedEndDate = "",description})
     function failure(error) { return { type: marketsConstants.CREATE_MARKET_FAILURE, error } }
 }
 
-export const editMarket = (marketId,{topic,category,predictedEndDate = "",description}) => {
+export const editMarket = (marketId,{topic,category,endDate = "",description}) => {
 
     return dispatch => {
         dispatch(request({ marketId }));
-        marketService.editMarket(marketId,topic,category,predictedEndDate,description)
+        marketService.editMarket(marketId,topic,category,endDate,description)
             .then(
                 res => { 
                     dispatch(success(res.predictionMarket));
@@ -138,15 +138,15 @@ export const setMarketCover = (marketId, marketCover) => {
 }
 
 
-export const addBet = (marketId,yesPrice, noPrice,chosenOption,shares) => {
+export const addBet = (marketId,yesPrice, noPrice,title,shares) => {
     return dispatch => {
         dispatch(request(marketId));
-        marketService.addBet(marketId,yesPrice,noPrice,chosenOption,shares)
+        marketService.addBet(marketId,yesPrice,noPrice,title,shares)
             .then(
                 res => {
                     dispatch(success(res.predictionMarket));
                     dispatch(addBetPrice(res.betPrice))
-                    dispatch(alertActions.success(res.info));
+                    // dispatch(alertActions.success(res.info));
                 },
                 error => {
                     dispatch(failure(error.toString()));

@@ -1,10 +1,10 @@
 import authHeader from '../helpers/authHeader';
 
-const buyContract = (betId,marketId, contractOption, maxPrice, countOfShares) => {
+const buyContract = (betId,marketId, contractOption, maxPrice, shares) => {
     const reqOptions = {
         method: 'POST',
         headers: authHeader(),
-        body: JSON.stringify({betId, marketId, contractOption, maxPrice, countOfShares})
+        body: JSON.stringify({betId, marketId, contractOption, maxPrice, shares})
     };
 
     return fetch('http://localhost:8080/markets/buyContract',reqOptions).then(res => handleBuying(res));
@@ -54,12 +54,12 @@ const fetchLastPrice = (betId,option) => {
     return fetch(`http://localhost:8080/contracts/lastBetPrice?betId=${betId}&option=${option}`,reqOptions).then(res => handleResponse(res));
 }
 
-const addOffer = (contractId,countOfShares,sellPrice) => {
+const addOffer = (contractId,shares,price) => {
     
     const reqOptions = {
         method:'POST',
         headers: authHeader(),
-        body:JSON.stringify({contractId,countOfShares,sellPrice})
+        body:JSON.stringify({contractId,shares,price})
     };
 
     return fetch('http://localhost:8080/contracts/addOffer',reqOptions).then(res => handleContractDetails(res));
@@ -91,15 +91,11 @@ const handleContractDetails = (res) => {
     return res
     .text()
     .then(text => {
-        const data = text && JSON.parse(text);
-        // if(!data.predictionMarket){
-        //     let error = data.info;
-        //     return Promise.reject(error);
-        // }
+        
         if(!res.ok) {
-            let error = (data && data.error) || res.statusText;
-            return Promise.reject(error);
+            return Promise.reject(text);
         }
+        const data = text && JSON.parse(text);
         return data;
     });
 }
@@ -109,7 +105,10 @@ const handleBuying = (res) => {
     .text()
     .then(text => {
         const data = text && JSON.parse(text);
-     
+        if(res.status === 500) {
+            return Promise.reject("W tym momencie dużo osób próbuje złożyć zamówienie, spróbuj ponownie za chwilę")
+        }
+
         if(!data.purchaser){
             let error = data.info;
             return Promise.reject(error);

@@ -47,7 +47,7 @@ class ProfilePage extends React.Component {
                         <Button className="profile-button" variant="outline-dark">Przeglądaj publiczne rynki</Button>
                         </LinkContainer>
                         <LinkContainer to="/markets/new">
-                        <Button className="profile-button" variant="outline-dark">Dodaj nowy rynek</Button>
+                        <Button id="addNewMarket" className="profile-button" variant="outline-dark">Dodaj nowy rynek</Button>
                         </LinkContainer>
                     </div>
                 )
@@ -73,7 +73,7 @@ class ProfilePage extends React.Component {
                         <h5><b>Imię:</b> {this.props.user.firstName}</h5>
                         <h5><b>Nazwisko:</b> {this.props.user.surname}</h5>
                         <h5><b>Email:</b> {this.props.user.email}</h5>
-                        {this.props.player.budget && (<h5><b>Budżet:</b>{Math.round((this.props.player.budget + Number.EPSILON) * 100) / 100}</h5>)}
+                        {this.props.player.budget && (<h5><b>Budżet: </b>{Math.round((this.props.player.budget + Number.EPSILON) * 100) / 100} $</h5>)}
                     </Col>
                 </Row>
                 <hr className="my-4"></hr>
@@ -83,7 +83,7 @@ class ProfilePage extends React.Component {
                 <Button className="profile-button" variant="outline-dark">Wyświetl ranking</Button>
                 </LinkContainer>
                 <LinkContainer to="/editPassword">
-                <Button className="profile-button" variant="outline-dark">Zmień hasło</Button>
+                <Button id="openEditPasswordButton" className="profile-button" variant="outline-dark">Zmień hasło</Button>
                 </LinkContainer>
                 <Button onClick={() => this.props.logout()} className="profile-button" variant="outline-dark">Wyloguj się</Button>
                 </div>

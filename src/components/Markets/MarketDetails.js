@@ -1,13 +1,44 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Container,Spinner} from 'react-bootstrap';
+import {Button, Col, Container,Image,Row,Spinner} from 'react-bootstrap';
 import {fetchMarket} from '../../actions/marketActions';
 import BetsList from './BetsList';
 import MarketTrendChart from './MarketTrendChart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faSadTear,faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
+import sportBackground from '../../img/sportBackground.png';
+import celebryciBackground from '../../img/celebryciBackground.jpg';
+import politykaBackground from '../../img/politykaBackground.jpg';
+import gospodarkaBackground from '../../img/gospodarkaBackground.jpg';
+import inneBackground from '../../img/inneBackground.png';
+import {faSadTear,faExclamationCircle,faArrowCircleLeft} from '@fortawesome/free-solid-svg-icons';
+import { LinkContainer } from 'react-router-bootstrap';
+import BackButton from '../../helpers/BackButton';
+import { alertActions } from '../../actions/alertActions';
 
 class MarketDetails extends React.Component {
+
+    componentWillUnmount() {
+        this.props.clear();
+    }
+
+    setCover = (category) => {
+
+        switch(category){
+            case "SPORT":
+          return sportBackground;
+        case "CELEBRITIES":
+          return celebryciBackground;
+        case "POLICY":
+          return politykaBackground;
+        case "ECONOMY":
+          return gospodarkaBackground;
+        case "OTHER":
+          return inneBackground;
+        default:
+          return inneBackground;
+    
+        }
+    }
 
     componentDidMount() {
         if(!this.props.currentMarket) this.props.fetchMarket(this.props.match.params.id);
@@ -38,7 +69,7 @@ class MarketDetails extends React.Component {
 } 
     
     renderNotFoundMessage() {
-        if(this.props.alert.payload)
+        if(this.props.alert.payload && this.props.alert.type !== "ALERT_BUYING")
         return (
         <Container className="text-center bg-light border rounded shadow-container create-market-container">
             <FontAwesomeIcon icon={faSadTear} size={"9x"}/>
@@ -51,34 +82,52 @@ class MarketDetails extends React.Component {
         if(this.props.currentMarket){
             return(
                 <Container className="bg-light border rounded shadow-container create-market-container">
-                    <header>
-                        <h2>{this.props.currentMarket.topic}</h2>
+                    <header style={{display:"inline-block"}}>
+                        <BackButton />
+                        <h2 style={{display:"inline-block"}}>{this.props.currentMarket.topic}</h2>
                         <hr className="my-4"></hr>
                     </header>
-                    <div className="rules">
+                    <Row>
+                        <Col sm={6}>
+                        <Image variant="top" src={this.props.currentMarket.marketCover ? (`data:image/jpeg;base64,${this.props.currentMarket.marketCover.data}`) : (this.setCover(this.props.currentMarket.category))} style={{width: "100%",
+                        objectFit:"cover"
+                        }}/>
+                        </Col>
+                        <Col sm={6}>
+                        <div className="rules">
                         <h4>Zasady rynku</h4>
                         <p>{this.props.currentMarket.description}</p>
                         <hr className="my-4"></hr>
                     </div>
                     <div className="endDate">
                         <h4>Przewidywana data zakończenia</h4>
-                        <p>{this.props.currentMarket.predictedEndDate}</p>
+                        {this.props.currentMarket.endDate.substring(0,4)==='3000' ? <p>Nieokreślona</p> : <p>{this.props.currentMarket.endDate}</p>}
                         <hr className="my-4"></hr>
                     </div>
+                        </Col>
+                    </Row>
+                    <hr className="my-4"></hr>
                     <div className="bets">
                         <h4>Zakłady</h4>
                         {this.renderBetsList()}
-                        <hr className="my-4"></hr>
+                        {!this.props.currentMarket.bets && (
+                             <LinkContainer className="text-center" to={`/markets/editBets/${this.props.currentMarket.marketId}`}>
+                             <Button>
+                               Dodaj zakłady
+                             </Button>
+                             </LinkContainer>
+                        )}
                     </div>
-                    <MarketTrendChart bets={this.props.currentMarket.bets} betId={67} option={true} predictedEndDate={this.props.currentMarket.predictedEndDate} correctBetId={this.props.currentMarket.correctBetId}/>
+                    <hr className="my-4"></hr>
+                    {this.props.currentMarket.bets && (
+                        <MarketTrendChart bets={this.props.currentMarket.bets} betId={67} option={true} endDate={this.props.currentMarket.endDate} correctBetId={this.props.currentMarket.correctBetId}/>
+                    )}
+                    
                 </Container>
                 );
         }
     }
 
-    renderChart = () => {
-      
-    }
 
     render() {
         return(
@@ -99,4 +148,4 @@ const mapStateToProps = (state,ownProps) => {
     }
 }
 
-export default connect(mapStateToProps,{fetchMarket})(MarketDetails);
+export default connect(mapStateToProps,{fetchMarket,clear:alertActions.clear})(MarketDetails);

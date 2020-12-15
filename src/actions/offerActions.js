@@ -30,11 +30,11 @@ export const fetchOffers = (betId,option,page,size) => {
 }
 
 
-export const buyShares = (offerId,countOfShares) => {
+export const buyShares = (offerId,shares) => {
 
     return dispatch => {
         dispatch(request({ offerId }));
-        offerService.buyShares(offerId,countOfShares)
+        offerService.buyShares(offerId,shares)
             .then(
                 res => { 
                     dispatch(success(res.boughtContract));

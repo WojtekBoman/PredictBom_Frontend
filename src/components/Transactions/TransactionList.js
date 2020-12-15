@@ -16,13 +16,30 @@ import PaginationBar from '../Markets/PaginationBar';
 class TransactionList extends React.Component {
 
     componentDidMount() {
-        this.props.fetchFilteredTransactions(this.props.type,0,"","",[],0,this.props.filter.pageSize,this.props.filter.sortedBy)
+        this.props.fetchFilteredTransactions(
+            this.props.type,
+            this.props.filter.option,
+            this.props.filter.betTitle,
+            this.props.filter.marketTitle,
+            this.props.filter.selectedCategories,
+            this.props.filter.page,
+            this.props.filter.pageSize,
+            this.props.filter.sortedBy)
     }
 
+    
     componentDidUpdate(prevProps) {
         if(!(JSON.stringify(this.props.filter)===JSON.stringify(prevProps.filter))){
          
-            this.props.fetchFilteredTransactions(this.props.type,this.props.filter.option,this.props.filter.betTitle,this.props.filter.marketTitle,this.props.filter.selectedCategories,this.props.filter.page,this.props.filter.pageSize,this.props.filter.sortedBy)
+            this.props.fetchFilteredTransactions(
+                this.props.type,
+                this.props.filter.option,
+                this.props.filter.betTitle,
+                this.props.filter.marketTitle,
+                this.props.filter.selectedCategories,
+                this.props.filter.page,
+                this.props.filter.pageSize,
+                this.props.filter.sortedBy)
         }
         
     }
@@ -82,7 +99,7 @@ class TransactionList extends React.Component {
         if(this.props.transactions.length > 0){
             return(
                 <Item.Group divided>
-                    {this.props.transactions.map(transaction => <Transaction transactionDate={transaction.transactionDate} purchaser={transaction.purchaser} dealer={transaction.dealer ? transaction.dealer : "Organizator rynku"} option={transaction.option} price={transaction.price} countOfShares={transaction.countOfShares} bet={transaction.bet} marketInfo={transaction.marketInfo}/> )}
+                    {this.props.transactions.map(transaction => <Transaction transactionDate={transaction.transactionDate} purchaser={transaction.purchaser} dealer={transaction.dealer ? transaction.dealer : "Organizator rynku"} option={transaction.option} price={transaction.price} shares={transaction.shares} bet={transaction.bet} marketInfo={transaction.marketInfo}/> )}
                 </Item.Group>
                 )
         }else{

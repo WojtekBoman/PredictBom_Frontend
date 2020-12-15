@@ -25,14 +25,13 @@ export default combineReducers({
    form: formReducer,
    markets: marketsReducer,
    register: registerReducer,
-   filter: filterReducer,
+   filterMarkets: filterReducer,
    filterContracts:filterContractReducer,
    alert: alertReducer,
    loading: loadingReducer,
    pagination: paginationReducer,
    token: tokenReducer,
    betPrice: betPriceReducer,
-   bets:betReducer,
    player:playerReducer,
    contracts: contractReducer,
    offers: offerReducer,
@@ -41,3 +40,8 @@ export default combineReducers({
    transactionsFilter: filterTransactionReducer,
    filterOffers: filterOffersReducer
 });
+
+
+
+
+

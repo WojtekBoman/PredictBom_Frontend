@@ -9,13 +9,13 @@ const fetchOffers = (betId,option,page,size) => {
     return fetch(`http://localhost:8080/offers?betId=${betId}&option=${option}&page=${page}&size=${size}`,reqOptions).then(res => handleOffers(res));
 }
 
-const buyShares = (offerId,countOfShares) => {
+const buyShares = (offerId,shares) => {
     const reqOption = {
         method:'POST',
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:8080/offers/buy?offerId=${offerId}&countOfShares=${countOfShares}`,reqOption).then(res => handleResponse(res));
+    return fetch(`http://localhost:8080/offers/buy?offerId=${offerId}&shares=${shares}`,reqOption).then(res => handleResponse(res));
 } 
 
 

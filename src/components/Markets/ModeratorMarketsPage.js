@@ -5,6 +5,7 @@ import MarketsFilter from './MarketsFilter'
 import SearchBar from './SearchBar'
 import {connect} from 'react-redux';
 import {alertActions} from '../../actions/alertActions';
+import BackButton from '../../helpers/BackButton';
 
 
 
@@ -27,9 +28,11 @@ class ModeratorMarketsPage extends React.Component {
         return (
 
           <Container className="bg-light border rounded shadow-container create-market-container">
-            <header>
-              <h2>Nieopublikowane rynki prognostyczne</h2>
+            <header style={{display:"inline-block"}}>
+              <BackButton />
+              <h2 style={{display:"inline-block"}}>Nieopublikowane rynki prognostyczne</h2>
             </header>
+            <hr className="my-4"></hr>
             <Tabs id="controlled-tab-example" style={{marginTop:"15px"}}>
             <Tab eventKey="private" title="Wszystkie" unmountOnExit>
             <MarketsList typeOfMarkets="/private" search={this.state.search}/>

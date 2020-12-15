@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Col,Button } from 'react-bootstrap';
 import {connect} from 'react-redux';
-import {updateContractFilters} from '../../actions/filterContractActions';
+import {updateContractFilters, clearFilters} from '../../actions/filterContractActions';
 
 class ContractFilter extends React.Component {
 
@@ -145,6 +145,20 @@ class ContractFilter extends React.Component {
         this.props.updateContractFilters(this.state)
     }
 
+    resetFilters = () => {
+        this.setState({
+            selectedCategories: [],
+            marketTitle:"",
+            betTitle:"",
+            page:0,
+            contractStatus:"",
+            pageSize:10,
+            contractOption:0,
+            sortedBy:["modifiedDate","desc"]
+        })
+        this.props.clearFilters();
+    } 
+
     render() {
         return (
             <Form style={{width:"100%"}}>
@@ -163,4 +177,4 @@ class ContractFilter extends React.Component {
     }
 }
 
-export default connect(null,{updateContractFilters})(ContractFilter);
+export default connect(null,{updateContractFilters,clearFilters})(ContractFilter);

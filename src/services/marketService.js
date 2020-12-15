@@ -2,12 +2,12 @@ import authHeader from '../helpers/authHeader';
 import authHeaderImgReq from '../helpers/authHeaderImgReq'
 
 
-const createMarket = (topic, category, predictedEndDate,description) => {
+const createMarket = (topic, category, endDate,description) => {
   
     const reqOptions = {
         method: 'POST',
         headers: authHeader(),
-        body: JSON.stringify({topic, category, predictedEndDate,description})
+        body: JSON.stringify({topic, category, endDate,description})
     };
 
     console.log(reqOptions)
@@ -15,12 +15,12 @@ const createMarket = (topic, category, predictedEndDate,description) => {
     return fetch('http://localhost:8080/markets/new', reqOptions).then((res) => handleResponse(res))
 }
 
-const editMarket = (marketId,topic, category, predictedEndDate,description) => {
+const editMarket = (marketId,topic, category, endDate,description) => {
   
     const reqOptions = {
         method: 'PUT',
         headers: authHeader(),
-        body: JSON.stringify({topic, category, predictedEndDate,description})
+        body: JSON.stringify({topic, category, endDate,description})
     };
 
     
@@ -86,15 +86,15 @@ const setMarketCover = (marketId,{marketCover}) => {
     return fetch(`http://localhost:8080/markets/marketCover/${marketId}`,reqOptions).then(res => handleResponse(res));
 }
 
-export const addBet = (marketId,yesPrice,noPrice,chosenOption,shares) => {
+export const addBet = (marketId,yesPrice,noPrice,title,shares) => {
     
     const reqOptions = {
         method: 'POST',
         headers: authHeader(),
-        body: JSON.stringify({marketId,yesPrice,noPrice,chosenOption,shares})
+        body: JSON.stringify({marketId,yesPrice,noPrice,title,shares})
     };
 
-    console.log(JSON.stringify({marketId,yesPrice,noPrice,chosenOption,shares}));
+    console.log(JSON.stringify({marketId,yesPrice,noPrice,title,shares}));
 
    return fetch(`http://localhost:8080/markets/addBet`,reqOptions).then(res => handleResponse(res));
 }
@@ -164,13 +164,12 @@ const handleMarket = res => {
     return res
     .text()
     .then(market =>{
-        console.log(market)
-        const data = market && JSON.parse(market);
+    
         if(!res.ok) {
-            
-            let error = (data && data.error) || res.statusText;
             return Promise.reject(market);
         }
+        const data = market && JSON.parse(market);
+       
         return data;
     })
 }

@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import {login} from '../../actions/loginActions';
 import { alertActions } from '../../actions/alertActions';
 import { Link } from 'react-router-dom';
+import BackButton from '../../helpers/BackButton';
+
 
 
 
@@ -25,11 +27,11 @@ class LoginPage extends React.Component {
     }
 
 
-    renderInput = ({input, label,meta,type,placeholder}) => {
+    renderInput = ({input, label,meta,type,placeholder,id}) => {
         return (
         <Form.Group>
         <Form.Label>{label}</Form.Label>
-        <Form.Control {...input} type={type} placeholder={placeholder}/>
+        <Form.Control id={id} {...input} type={type} placeholder={placeholder}/>
         {this.renderError(meta)}
         </Form.Group>
         )
@@ -70,14 +72,18 @@ class LoginPage extends React.Component {
         return(
             <Container className="bg-light border rounded shadow-container form-container">
             <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                <h2>Logowanie</h2>
+                <header style={{display:"inline-block"}}>
+                    <BackButton />
+                    <h2 style={{display:"inline-block"}}>Logowanie</h2>
+                </header>
+                <hr className="my-4"></hr>
                     <Field type="text" label="Nazwa użytkownika" name="username" component={this.renderInput} placeholder="Wprowadź nazwę użytkownika"></Field>
                     <Form.Text className="text-muted">
                     Zapewniamy że twoje dane będą bezpieczne 
                     </Form.Text>
                     <Field type="password" label="Hasło" name="password" component={this.renderInput} placeholder="Wprowadź hasło"></Field>
                     
-                <Button variant="primary" type="submit">
+                <Button id="loginButton" variant="primary" type="submit">
                     {this.renderButtonContent()}
                 </Button>
         </Form>

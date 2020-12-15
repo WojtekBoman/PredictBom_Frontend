@@ -11,18 +11,18 @@ import {faMoneyBillWave,faCalendarPlus, faCalendar,faShoppingCart} from '@fortaw
 const setCover = (category) => {
 
     switch(category){
-        case "SPORT":
-          return sportBackground;
-        case "CELEBRYCI":
-          return celebryciBackground;
-        case "POLITYKA":
-          return politykaBackground;
-        case "GOSPODARKA":
-          return gospodarkaBackground;
-        case "INNE":
-          return inneBackground;
-        default:
-          return inneBackground;
+      case "SPORT":
+        return sportBackground;
+      case "CELEBRITIES":
+        return celebryciBackground;
+      case "POLICY":
+        return politykaBackground;
+      case "ECONOMY":
+        return gospodarkaBackground;
+      case "OTHER":
+        return inneBackground;
+      default:
+        return inneBackground;
 
     }
 }
@@ -40,9 +40,9 @@ const Transaction = (props) => {
     <Item.Content>
         <Item.Header>{props.marketInfo.topic}</Item.Header>
         <Item.Meta>
-        <h4>{props.bet.chosenOption}</h4>
+        <h4>{props.bet.title}</h4>
         <h5>{props.option ? "Opcja na tak" : "Opcja na nie"}</h5>
-        <span className='price'><FontAwesomeIcon icon={faMoneyBillWave}></FontAwesomeIcon> Liczba akcji: {props.countOfShares}</span>
+        <span className='price'><FontAwesomeIcon icon={faMoneyBillWave}></FontAwesomeIcon> Liczba akcji: {props.shares}</span>
         <span className='stay'><FontAwesomeIcon icon={faMoneyBillWave}></FontAwesomeIcon> Cena za 1 akcję: {props.price}</span>
           <hr className="my-3"></hr>
         <span className='price'><FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon>Data transakcji: {props.transactionDate}</span>

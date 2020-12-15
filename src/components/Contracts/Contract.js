@@ -38,18 +38,18 @@ class Contract extends React.Component {
 
     setCover = () => {
       switch(this.props.marketInfo.marketCategory){
-          case "SPORT":
-            return sportBackground;
-          case "CELEBRYCI":
-            return celebryciBackground;
-          case "POLITYKA":
-            return politykaBackground;
-          case "GOSPODARKA":
-            return gospodarkaBackground;
-          case "INNE":
-            return inneBackground;
-          default:
-            return inneBackground;
+        case "SPORT":
+          return sportBackground;
+        case "CELEBRITIES":
+          return celebryciBackground;
+        case "POLICY":
+          return politykaBackground;
+        case "ECONOMY":
+          return gospodarkaBackground;
+        case "OTHER":
+          return inneBackground;
+        default:
+          return inneBackground;
   
       }
   }
@@ -92,10 +92,10 @@ class Contract extends React.Component {
 //           <Col md="8">
 //             <Card.Body>
 //               <Card.Title>{this.props.market.topic}</Card.Title>
-//               <Card.Subtitle style={{marginTop:"10px"}}>{this.props.market.bets[0].chosenOption} </Card.Subtitle>
+//               <Card.Subtitle style={{marginTop:"10px"}}>{this.props.market.bets[0].title} </Card.Subtitle>
 //               <Card.Subtitle style={{marginTop:"10px"}}>{this.props.contractOption ? <p>Wybrana opcja na tak</p> : <p>Wybrana opcja na nie</p>}</Card.Subtitle>
-//               <Card.Subtitle style={{marginTop:"10px"}}>Liczba akcji: {this.props.countOfContracts}</Card.Subtitle>
-//               <Card.Subtitle style={{marginTop:"10px"}}>Wartość akcji: {this.props.valueOfShares}</Card.Subtitle>
+//               <Card.Subtitle style={{marginTop:"10px"}}>Liczba akcji: {this.props.shares}</Card.Subtitle>
+//               <Card.Subtitle style={{marginTop:"10px"}}>Wartość akcji: {this.props.price}</Card.Subtitle>
 //               <Card.Text>
 //               {this.props.market.description}
 //               </Card.Text>
@@ -126,7 +126,7 @@ class Contract extends React.Component {
     objectFit: "cover"}} className="img" src={this.props.marketInfo.marketCover ? (`data:image/jpeg;base64,${this.props.marketInfo.marketCover.data}`) : (this.setCover(this.props.marketInfo.category))} />
     </LinkContainer>
     <Card.Content>
-          <Card.Header>{this.props.bet.chosenOption}</Card.Header>
+          <Card.Header>{this.props.bet.title}</Card.Header>
             {this.props.contractOption ? <Card.Header>Kontrakt na tak</Card.Header> : <Card.Header>Kontrakt na nie</Card.Header>}
       <Card.Meta>{this.props.marketInfo.topic}</Card.Meta>
    
@@ -134,9 +134,17 @@ class Contract extends React.Component {
     <Card.Content extra>
       <a>
         <Icon name='money bill alternate outline' />
-        Liczba akcji: {this.props.countOfContracts}
+          {this.props.shares > 0 ? <span>Liczba akcji: {this.props.shares}</span> : <span>Wszystkie akcje w sprzedaży</span>}
       </a>
     </Card.Content>
+    {this.props.contractStatus === "PENDING" && (
+       <Card.Content extra>
+       <a>
+         <Icon name="sellsy" />
+         {this.props.offersSize}
+       </a>
+     </Card.Content>
+    )}
     <Card.Content extra>
       <a>
         <Icon name={this.state.iconName} />

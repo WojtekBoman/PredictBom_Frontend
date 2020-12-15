@@ -4,17 +4,19 @@ import {Container,Row,Col} from 'react-bootstrap';
 import ContractFilter from './ContractFilter';
 import ContractList from './ContractList';
 import {Range} from 'react-range';
+import BackButton from '../../helpers/BackButton';
 
-class SelectContractToAddOffer extends React.Component {
+class UserOfferPage extends React.Component {
 
     render() {
         return(
             <Container className="bg-light border rounded shadow-container create-market-container">
-                <header>
-                    <h2>Twoje oferty</h2>
+                <header style={{display:"inline-block"}}>
+                    <BackButton />
+                    <h2 style={{display:"inline-block"}}>Twoje oferty</h2>
                     <p className="text-muted">Wybierz kontrakt w celu zarządzania ofertami</p>
-                    <hr className="my-4"></hr>
                 </header>
+                <hr className="my-4"></hr>
                 <Row>
                     <Col sm={12} md={3}>
                         <ContractFilter offerPage={true} />
@@ -28,4 +30,4 @@ class SelectContractToAddOffer extends React.Component {
     }
 }
 
-export default SelectContractToAddOffer;
+export default UserOfferPage;

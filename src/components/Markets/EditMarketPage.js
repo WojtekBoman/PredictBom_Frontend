@@ -18,7 +18,7 @@ class EditMarketPage extends React.Component {
         return(
           [
             {val:"SPORT",text:"Sport",key:1},
-            {val:"GOSPODARKA",text:"Gospodarka",key:2},
+            {val:"GOSPODARKA",text:"ECONOMY",key:2},
             {val:"CELEBRYCI",text:"Celebryci",key:3},
             {val:"POLITYKA",text:"Polityka",key:4},
             {val:"INNE",text:"Inne",key:5}
@@ -108,7 +108,7 @@ class EditMarketPage extends React.Component {
             return(
                 <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
                 <Field disabled={this.props.currentMarket.published} type="text" label="Tytuł rynku" name="topic" component={this.renderInput} placeholder="Wprowadź tytuł rynku prognostycznego"></Field>
-                <Field helpText="Jeżeli nie wiesz kiedy może zakończyć się dany rynek nie wypełniaj tego pola" type="date" label="Przewidywana data zakończenia rynku" name="predictedEndDate" component={this.renderInput}></Field>
+                <Field helpText="Jeżeli nie wiesz kiedy może zakończyć się dany rynek nie wypełniaj tego pola" type="date" label="Przewidywana data zakończenia rynku" name="endDate" component={this.renderInput}></Field>
                 <Field disabled={this.props.currentMarket.published} name="category" label="Wybierz kategorię rynku" options={this.getOptions()} component={this.renderSelectField}/>
                 {/* <Field validate={this.validateImageFormat} type="file" name="marketCover" component={this.renderFileInput} />
                 <div className="img-box">

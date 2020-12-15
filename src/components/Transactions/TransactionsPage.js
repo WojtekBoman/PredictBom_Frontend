@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Container, Tab, Tabs} from 'react-bootstrap';
 import TransactionList from './TransactionList';
 import {clearTransactions} from '../../actions/transactionActions';
+import BackButton from '../../helpers/BackButton';
 
 class TransactionsPage extends React.Component {
 
@@ -13,8 +14,9 @@ class TransactionsPage extends React.Component {
     render() {
         return(
             <Container className="bg-light border rounded shadow-container create-market-container">
-            <header>
-              <h2>Transakcje</h2>
+            <header style={{display:"inline-block"}}>
+              <BackButton />
+              <h2 style={{display:"inline-block"}}>Transakcje</h2>
             </header>
             <Tabs id="controlled-tab-example" style={{marginTop:"15px"}}>
             <Tab eventKey="home" title="Zakup" unmountOnExit>

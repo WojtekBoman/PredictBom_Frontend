@@ -4,6 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
 import {register} from '../../actions/registerActions';
 import {alertActions} from '../../actions/alertActions';
+import BackButton from '../../helpers/BackButton';
 
 class RegisterPage extends React.Component {
 
@@ -68,7 +69,11 @@ class RegisterPage extends React.Component {
         return(
             <Container className="bg-light border rounded shadow-container form-container">
             <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                <h2>Dołącz do PredictBom</h2>
+                <header style={{display:"inline-block"}}>
+                <BackButton />
+                <h2 style={{display:"inline-block"}}>Dołącz do PredictBom</h2>
+                </header>
+                <hr className="my-4"></hr>
                     <Field type="text" label="Nazwa użytkownika" name="username" component={this.renderInput} placeholder="Wprowadź nazwę użytkownika"></Field>
                     <Form.Text className="text-muted">
                     Zapewniamy że twoje dane będą bezpieczne 

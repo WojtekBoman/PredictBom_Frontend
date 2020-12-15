@@ -15,7 +15,7 @@ import BetsList from './BetsList';
 class MakeMarketPublicPage extends React.Component {
 
     componentDidMount() {
-        if(!this.props.currentMarket) this.props.fetchMarket(this.props.match.params.id);
+       this.props.fetchMarket(this.props.match.params.id);
     }
 
     setCover = (category) => {
@@ -76,12 +76,12 @@ class MakeMarketPublicPage extends React.Component {
     }
 
     renderMarketContent = () => {
-        if(this.props.currentMarket){
+        if(this.props.currentMarket && !this.props.currentMarket.published){
             return(
                 <div>
-                    <h3>{this.props.currentMarket.topic}</h3>
-                    {this.props.currentMarket.marketCover && (<Image className="img" src={typeof(this.props.currentMarket.marketCover) !== 'undefined' ? (`data:image/jpeg;base64,${this.props.currentMarket.marketCover.data}`) : (this.setCover(this.props.currentMarket.marketCategory))} rounded/>)}
-                    <h5>Przewidywana data zakończenia - {this.props.currentMarket.predictedEndDate}</h5>
+                    <h4>{this.props.currentMarket.topic}</h4>
+                    {this.props.currentMarket.marketCover && (<Image style={{margin:"0 auto"}} className="img" src={typeof(this.props.currentMarket.marketCover) !== 'undefined' ? (`data:image/jpeg;base64,${this.props.currentMarket.marketCover.data}`) : (this.setCover(this.props.currentMarket.marketCategory))} rounded/>)}
+                    <h5>Przewidywana data zakończenia - {this.props.currentMarket.endDate}</h5>
                     <hr className="my-4"></hr>                   
                     {this.renderBetsList()}
                     <hr className="my-4"></hr>   
@@ -102,7 +102,7 @@ class MakeMarketPublicPage extends React.Component {
     renderLoading = () => {
         if((typeof this.props.loadingMarket !== 'undefined') && this.props.loadingMarket.pending) {
             return(
-                <Container className="text-center bg-light border rounded shadow-container create-market-container">
+               <div className="text-center">
                     <Spinner
                     as="span"
                     animation="border"
@@ -111,7 +111,7 @@ class MakeMarketPublicPage extends React.Component {
                     aria-hidden="true"
                     />
                     <h3>Pobieranie danych rynku</h3>
-                </Container>
+             </div>
             )
         }
     }
@@ -135,7 +135,13 @@ class MakeMarketPublicPage extends React.Component {
         }
     }
 
-   
+    renderInfo() {
+        if(this.props.alert.payload) {
+            return <Alert className="login-alert" variant="danger">
+                {this.props.alert.payload}
+            </Alert>
+        }
+    }
 
     render() {
         return(
@@ -147,6 +153,7 @@ class MakeMarketPublicPage extends React.Component {
                 <hr className="my-4"></hr>
                 {this.renderLoading()}
                 {this.renderMarketContent()}
+                {this.renderInfo()}
             </Container>
         )
     }

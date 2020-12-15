@@ -7,11 +7,11 @@ import _ from 'lodash';
 import { playerConstants } from '../constants/playerConstants';
 import {updateContractPagination} from './paginationActions';
 
-export const buyContract = (betId,marketId, contractOption,{maxPrice, countOfShares}) => {
+export const buyContract = (betId,marketId, contractOption,{maxPrice, shares}) => {
 
     return dispatch => {
         dispatch(request({ betId }));
-        betsService.buyContract(betId,marketId, contractOption,maxPrice, countOfShares)
+        betsService.buyContract(betId,marketId, contractOption,maxPrice, shares)
             .then(
                 res => { 
                     dispatch(success(res.boughtContract));
@@ -20,7 +20,7 @@ export const buyContract = (betId,marketId, contractOption,{maxPrice, countOfSha
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(alertActions.buyingError(error.toString()));
                 }
             );
     };
@@ -114,10 +114,10 @@ export const fetchContractDetails = (id) => {
     function failure(error) { return { type: contractConstants.FETCH_CONTRACT_DETAILS_FAILURE, error } }
 }
 
-export const addOffer = (contractId,countOfShares,sellPrice) => {
+export const addOffer = (contractId,shares,price) => {
     return dispatch => {
         dispatch(request());
-        betsService.addOffer(contractId,countOfShares,sellPrice)
+        betsService.addOffer(contractId,shares,price)
             .then(
                 res => { 
                    
@@ -146,7 +146,7 @@ export const deleteOffer = (offerId) => {
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(alertActions.deleteAlert(error.toString()));
                 }
             );
     };

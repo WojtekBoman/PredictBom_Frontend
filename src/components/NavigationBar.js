@@ -40,12 +40,6 @@ class NavigationBar extends React.Component {
         case "ROLE_MODERATOR":
           return(
             <Nav className="mr-auto">
-              <LinkContainer to="/profile">
-                <Nav.Link>
-                  {this.props.login.user.username}
-                </Nav.Link>
-              </LinkContainer>  
-            <Nav.Link onClick={this.logout.bind(this)}>Wyloguj się</Nav.Link>
             <NavDropdown title="Rynki">
               <LinkContainer to="/markets/new">
                 <NavDropdown.Item >
@@ -69,12 +63,7 @@ class NavigationBar extends React.Component {
         case "ROLE_PLAYER":
           return ( 
           <Nav className="mr-auto">
-             <LinkContainer to="/profile">
-                <Nav.Link>
-                  {this.props.login.user.username}
-                </Nav.Link>
-              </LinkContainer> 
-          <Nav.Link onClick={this.logout.bind(this)}>Wyloguj się</Nav.Link>
+      
           <LinkContainer to="/markets">
                 <Nav.Link>
                     Rynki
@@ -82,7 +71,7 @@ class NavigationBar extends React.Component {
               </LinkContainer>
               <LinkContainer to="/offers">
                 <Nav.Link>
-                    Oferty
+                    Twoje oferty
                 </Nav.Link>
               </LinkContainer>
             <LinkContainer to="/contracts">
@@ -105,11 +94,11 @@ class NavigationBar extends React.Component {
       return(
       <Nav className="mr-auto">
 
-      <LinkContainer to="/rejestracja">
+      <LinkContainer to="/register">
         <Nav.Link>Rejestracja</Nav.Link>
       </LinkContainer>
       <LinkContainer to="/login">
-        <Nav.Link>Logowanie</Nav.Link>
+        <Nav.Link id="linkToLogin">Logowanie</Nav.Link>
       </LinkContainer>
       <LinkContainer to="/markets">
                 <Nav.Link>
@@ -123,13 +112,17 @@ class NavigationBar extends React.Component {
     }
 
     renderData = () => {
-      if(!_.isEmpty(this.props.player)){
+      if(this.props.login.loggedIn){
         return(
-          <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text style={{marginRight:"10px"}}>
-              <FontAwesomeIcon icon={faMoneyBillWave} /> Budżet: {Math.round((this.props.player.budget + Number.EPSILON) * 100) / 100} 
-          </Navbar.Text>
-        </Navbar.Collapse>
+       <Nav>
+          <LinkContainer to="/profile">
+                <Nav.Link>
+                  {this.props.login.user.username}
+                </Nav.Link>
+              </LinkContainer> 
+          <Nav.Link onClick={this.logout.bind(this)}>Wyloguj się</Nav.Link>
+              {!_.isEmpty(this.props.player) && <Navbar.Text><FontAwesomeIcon icon={faMoneyBillWave} /> Budżet: {Math.round((this.props.player.budget + Number.EPSILON) * 100) / 100} $</Navbar.Text>}
+        </Nav>
         )
       }
     }
@@ -140,8 +133,9 @@ class NavigationBar extends React.Component {
             <LinkContainer to='/'>
             <Navbar.Brand>PredictBom</Navbar.Brand>
             </LinkContainer>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Toggle id="navbar-toggle" aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
+
            {this.props.login.loggedIn ? (
              this.renderUserPanel()
            ) : (

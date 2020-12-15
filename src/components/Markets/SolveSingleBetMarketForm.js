@@ -7,7 +7,7 @@ import {solveSingleBetMarket} from '../../actions/marketActions';
 class SolveSingleBetMarketForm extends React.Component {
 
     state = {
-        chosenOption:null
+        title:null
     }
 
     componentDidMount() {
@@ -16,7 +16,7 @@ class SolveSingleBetMarketForm extends React.Component {
 
     getOptions() {
         const options = [
-            {val:0,text:`Wybierz prawidłową opcję dla zakładu "${this.props.bets[0].chosenOption}"`,key:1,selected:"selected"},
+            {val:0,text:`Wybierz prawidłową opcję dla zakładu "${this.props.bets[0].title}"`,key:1,selected:"selected"},
             {val:true,text:"Wybierz opcję na tak",key:2},
             {val:false,text:"Wybierz opcję na nie",key:3}
         ];
@@ -90,7 +90,7 @@ class SolveSingleBetMarketForm extends React.Component {
     render() {
         return(
             <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-            <Field name="correctBetOption" label={`Wybierz prawidłową opcję dla zakładu "${this.props.bets[0].chosenOption}"`} options={this.getOptions()} component={this.renderSelectField}/>
+            <Field name="correctBetOption" label={`Wybierz prawidłową opcję dla zakładu "${this.props.bets[0].title}"`} options={this.getOptions()} component={this.renderSelectField}/>
             <Button className="form-button" variant="primary" type="submit">
               {this.renderButtonContent()}
             </Button>

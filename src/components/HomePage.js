@@ -1,6 +1,8 @@
 import React from 'react';
 import {Container,Row,Col,Image,Button} from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import Poland from '../img/Poland.png'
+import {connect} from 'react-redux';
 
 class HomePage extends React.Component {
 
@@ -13,28 +15,61 @@ class HomePage extends React.Component {
                     </header>
                     <Row>
                         <Col sm={6}>
+                            <div className="advantages home-info">
                             <h4>Dlaczego warto do nas dołączyć ?</h4>
                             <p className="text-muted">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.    
+                            <strong>PredictBom jest darmową aplikacją związaną z rynkami prognostycznymi.</strong> Weź udział w rynkach dotyczących najciekawszych wydarzeń dziejących się w naszym kraju z zakresu kilku kategorii.
                             </p>
+                            </div>
+                            <div className="rules home-info">
+                            <h4>Zasady gry</h4>
+                            <p className="text-muted">
+                            Gracze PredictBom otrzymują możliwość obrotu akcjami na wielu interesujących rynkach prognoz. Ceny akcji wahają się między 0 a 1 $, gdzie za każdą akcję na poprawną opcję zakładową otrzymują 1 $. Wykaż się umiejętnosciami prognostycznymi i kupuj akcje po jak najbardziej korzystnych cenach i sprzedawaj je aby jak najbardziej zwiększyć swój budżet.
+                            Zakupione akcje znajdziesz w zakładce kontrakty. Aby gra była uczciwa i najbogatsi gracze nie wykupowali wszystkich akcji dla danego rynku, <strong>dziennie możliwy jest zakup 1000 akcji na wybraną opcję zakładową.</strong>
+                            </p>
+                            </div>
+                            <div className="bonus home-info">
+                            <h4>Odwiedzaj nas codziennie aby odebrać bonus !</h4>
+                            <p className="text-muted">
+                            Nie zawsze będziesz dobrze obstawiać, aby odzyskać budżet odwiedzaj nas codziennie!<strong> Przy pierwszym logowaniu każdego dnia otrzymasz 100$.</strong>
+                            </p>
+                            </div>
                         </Col>
                         <Col sm={6}>
                         <Image className="toMarket" variant="top" src={Poland} style={{width: "100%",
                             objectFit: "cover"}}/>
                         </Col>
                     </Row>
-                    <div className="text-center">
-                        <Button variant="dark" style={{marginRight:"10px"}}>
+                    {!this.props.loggedIn && (
+                        <div className="text-center">
+                        <LinkContainer to="/register" style={{marginRight:"10px"}}>
+                        <Button variant="dark">
                             Załóż konto
                         </Button>
+                        </LinkContainer>
+                        <LinkContainer to="/login">
                         <Button variant="dark">
                             Zaloguj się 
                         </Button>
+                        </LinkContainer>
                     </div>
+                    )}
+                    <div className="text-center">
+                         <LinkContainer to="/markets" style={{margin:"5px"}}>
+                        <Button variant="dark">
+                            Przeglądaj dostępne rynki
+                        </Button>
+                        </LinkContainer>
+                        </div>
             </Container>
         )
     }
 }
 
-export default HomePage;
+const mapStateToProps = (state) => {
+    return {
+        loggedIn: state.login.loggedIn
+    }
+}
+
+export default connect(mapStateToProps)(HomePage);

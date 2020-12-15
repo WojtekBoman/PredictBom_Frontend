@@ -1,25 +1,34 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Tab,TabContainer,Tabs,Row,Col,Nav, Container} from 'react-bootstrap';
+import {Tab,TabContainer,Tabs,Row,Col,Nav, Container, Button} from 'react-bootstrap';
 import MarketsList from './MarketsList';
 import MarketsFilter from './MarketsFilter'
 import ModeratorMarketsPage from './ModeratorMarketsPage';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faArrowCircleLeft} from '@fortawesome/free-solid-svg-icons';
 import SearchBar from './SearchBar'
 import {updateSearch} from '../../actions/filterActions';
+import history from '../../history';
+
 
 class MarketsPage extends React.Component {
 
-    
-    render() {
-        // if(this.props.user && this.props.user.roles[0] === "ROLE_MODERATOR") {
-        //   return <ModeratorMarketsPage/>
-        // }
+    renderBackButton() {
+      return(
+        <FontAwesomeIcon style={{display:"inline-block", marginRight:"10px"}} className="back-icon" icon={faArrowCircleLeft} size={"2x"} onClick={() => history.goBack()}>
+        </FontAwesomeIcon>
+        )
+    }      
 
+    render() {
+     
         return (
 
           <Container className="bg-light border rounded shadow-container create-market-container">
-            <header>
-              <h2>Rynki prognostyczne</h2>
+                 
+            <header style={{display:"inline-block"}} >
+              {this.renderBackButton()}
+              <h2 style={{display:"inline-block"}}>Rynki prognostyczne</h2>
             </header>
             <Tabs id="controlled-tab-example" style={{marginTop:"15px"}}>
             <Tab eventKey="home" title="Trwające" unmountOnExit>

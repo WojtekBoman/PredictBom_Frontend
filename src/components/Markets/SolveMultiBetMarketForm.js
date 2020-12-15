@@ -26,7 +26,7 @@ class SolveMultiBetMarketForm extends React.Component {
     
     getOptions() {
         const options = [{val:0,text:"Wybierz zakład",key:1,selected:"selected"}];
-        for(let i = 0; i < this.props.bets.length; i++) options.push({val:this.props.bets[i].id,text:this.props.bets[i].chosenOption,key:i+1});
+        for(let i = 0; i < this.props.bets.length; i++) options.push({val:this.props.bets[i].id,text:this.props.bets[i].title,key:i+1});
         return options;
       }
 

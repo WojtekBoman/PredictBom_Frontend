@@ -103,7 +103,7 @@ class MarketsFilter extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        selectedCategories: state.filter.selectedCategories
+        selectedCategories: state.filterMarkets.selectedCategories
     }
 }
 

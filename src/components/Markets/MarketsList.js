@@ -130,7 +130,7 @@ const mapStateToProps = (state,ownProps) => {
         typeOfMarkets: ownProps.typeOfMarkets,
         markets: Object.values(state.markets),
         loading: state.loading.FETCH_MARKETS,
-        filter: state.filter,
+        filter: state.filterMarkets,
         alert: state.alert,
         paginationInfo: state.pagination.paginationInfo
     }

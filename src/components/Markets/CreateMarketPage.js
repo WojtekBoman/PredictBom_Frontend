@@ -3,7 +3,7 @@ import {Alert,Container,Form, Button,Spinner} from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
 import {createMarket} from '../../actions/marketActions';
-import MarketProgressBar from './MarketProgressBar';
+import BackButton from '../../helpers/BackButton';
 
 
 class CreateMarketPage extends React.Component {
@@ -20,19 +20,19 @@ class CreateMarketPage extends React.Component {
       return(
         [
           {val:"SPORT",text:"Sport",key:1},
-          {val:"GOSPODARKA",text:"Gospodarka",key:2},
-          {val:"CELEBRYCI",text:"Celebryci",key:3},
-          {val:"POLITYKA",text:"Polityka",key:4},
-          {val:"INNE",text:"Inne",key:5}
+          {val:"ECONOMY",text:"Gospodarka",key:2},
+          {val:"CELEBRITIES",text:"Celebryci",key:3},
+          {val:"POLICY",text:"Polityka",key:4},
+          {val:"OTHER",text:"Inne",key:5}
         ]
       )
     }
 
-    renderInput = ({input, label,meta,type,placeholder,as,helpText,rows}) => {
+    renderInput = ({input, label,meta,type,placeholder,as,helpText,rows,id}) => {
         return (
         <Form.Group>
         <Form.Label>{label}</Form.Label>
-        <Form.Control {...input} as={as} type={type} placeholder={placeholder} rows={rows}/>
+        <Form.Control id={id} {...input} as={as} type={type} placeholder={placeholder} rows={rows}/>
         {this.renderError(meta)}
         {helpText && (<Form.Text className="text-muted">{helpText}</Form.Text>)}    
         </Form.Group>
@@ -60,7 +60,7 @@ class CreateMarketPage extends React.Component {
         <Form.Label>{label}</Form.Label>
           <Form.Control {...input} as="select">
             {options.map(option => (
-              <option value={option.val} key={option.key}>
+              <option id={option.val} value={option.val} key={option.key}>
                 {option.text}
               </option>
             ))}
@@ -115,17 +115,21 @@ class CreateMarketPage extends React.Component {
 
         return(
             <Container className="bg-light border rounded shadow-container create-market-container">
-                <h3>Tworzenie rynku prognostycznego</h3>
+              <header style={{display:"inline-block"}}>
+                <BackButton />
+                <h2 style={{display:"inline-block"}}>Tworzenie rynku prognostycznego</h2>
+                </header>  
+                <hr className="my-4"></hr>
                 <Form onSubmit={this.props.handleSubmit(this.onSubmit)} encType="multipart/form-data">
                 <Field type="text" label="Tytuł rynku" name="topic" component={this.renderInput} placeholder="Wprowadź tytuł rynku prognostycznego"></Field>
-                <Field helpText="Jeżeli nie wiesz kiedy może zakończyć się dany rynek nie wypełniaj tego pola" type="date" label="Przewidywana data zakończenia rynku" name="predictedEndDate" component={this.renderInput}></Field>
+                <Field helpText="Jeżeli nie wiesz kiedy może zakończyć się dany rynek nie wypełniaj tego pola" type="date" label="Przewidywana data zakończenia rynku" name="endDate" component={this.renderInput}></Field>
                 <Field name="category" label="Wybierz kategorię rynku" options={this.getOptions()} component={this.renderSelectField}/>
                 {/* <Field validate={this.validateImageFormat} type="file" name="marketCover" component={this.renderFileInput} />
                 <div className="img-box">
                 {this.state.imageFile && (<Image className="img" src={this.state.imageFile} rounded/>)}
                 </div> */}
-                <Field as="textarea" rows="5" name="description" label="Krótko opisz rynek i jego zasady" component={this.renderInput} />
-                <Button className="form-button" variant="primary" type="submit">
+                <Field as="textarea" rows="5" id="description" name="description" label="Krótko opisz rynek i jego zasady" component={this.renderInput} />
+                <Button id="createMarketButton" className="form-button" variant="primary" type="submit">
                   {this.renderButtonContent()}
                 </Button>
                 <Button className="form-button" variant="primary" type="reset" onClick={this.resetForm} disabled={this.state.resetButtonDisable}>
@@ -148,12 +152,12 @@ const validate = formValues => {
     }
   })
 
-  if(formValues.predictedEndDate){
-      let predictedDate = new Date(formValues.predictedEndDate);
+  if(formValues.endDate){
+      let predictedDate = new Date(formValues.endDate);
       let dateNow = new Date();
 
       if(predictedDate < dateNow) {
-        errors['predictedEndDate'] = "Musisz podać datę późniejszą od dzisiejszej";
+        errors['endDate'] = "Musisz podać datę późniejszą od dzisiejszej";
       }
 
   }
