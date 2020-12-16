@@ -64,8 +64,12 @@ const App = () => {
                     <PrivateRoute path="/markets/private" component={ModeratorMarketsPage}/>
                     <Route path="/markets/" component={MarketsPage}/>
                     <Redirect from="*" to="/" />
+                    
             </Switch>
             </Router>
+            <div className="footer" style={{marginTop:"20px"}}>
+                footer
+            </div>
         </div>
     )
 }

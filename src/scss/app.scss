@@ -5,7 +5,7 @@ $fullHeight: 100vh;
 
 body {
     background-image: $background;
-    height: $fullHeight;
+    // height: $fullHeight;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -30,6 +30,7 @@ body {
 
 .create-market-container{
     width:60%;
+    margin-bottom: 100px;
 }
 
 @media (max-width: 800px) {

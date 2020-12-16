@@ -31,11 +31,11 @@ class Offer extends React.Component {
 
     deleteOffer = () => {
         this.props.deleteOffer(this.props.offerId);
-        this.setState({submitted:true})
     }
 
+    
+
     render(){
-        console.log(this.props);
         return(
             <tr>
                 <td>{this.props.price}</td>
@@ -60,7 +60,8 @@ class Offer extends React.Component {
 const mapStateToProps = state => {
     return {
         loading: state.loading.DELETE_OFFER,
-        user: state.login.user
+        user: state.login.user,
+        alert: state.alert
     }
 }
 

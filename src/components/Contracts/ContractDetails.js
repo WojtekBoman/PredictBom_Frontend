@@ -66,14 +66,27 @@ class ContractDetails extends React.Component {
         }
     }
 
-    handleModalClose() {
-        this.setState({showModal:false})
+    handleModalClose = () => {
+        this.props.clear();
     }
 
-    renderInfo() {
-        if(this.props.alert.type == "ALERT_DELETING" && this.props.alert.payload){
+    renderDeletingLoading = () => {
         return(
-            <Modal show={this.state.showModal} onHide={this.handleModalClose}>
+            <Modal show={(typeof this.props.deleting !== 'undefined') && this.props.deleting.pending}>
+            <Modal.Body className="text-center">
+            <h3>Usuwanie</h3>
+                <Loader
+                     type="TailSpin"
+                     color="black"
+                /></Modal.Body>
+          </Modal>
+        )
+    }
+
+    renderInfo = () => {
+
+        return(
+            <Modal show={this.props.alert.type == "ALERT_DELETING"} onHide={this.handleModalClose}>
             <Modal.Header closeButton>
               <Modal.Title>Nie udało się usunąć oferty</Modal.Title>
             </Modal.Header>
@@ -85,7 +98,7 @@ class ContractDetails extends React.Component {
             </Modal.Footer>
           </Modal>
         )
-        }
+
     }
 
     renderContractStatus = (status) => {
@@ -125,7 +138,7 @@ class ContractDetails extends React.Component {
                 <Col sm={6}>
                 <div>
                     <h4>Liczba akcji</h4>
-                    <h4>{this.props.contract.shares}</h4>
+                    <h4>{this.props.contract.shares > 0 ? <span>{this.props.contract.shares}</span> : <span>Wszystkie akcje w sprzedaży</span>}</h4>
                 </div>
                 <hr className="my-4"></hr>
                 <div>
@@ -144,7 +157,7 @@ class ContractDetails extends React.Component {
                     {this.renderOffers()}
                     {this.props.contract && 
                 <div style={{display:"inline-block"}}>
-                    {this.props.contract.shares && (
+                    {this.props.contract.shares > 0 && (
                         <LinkContainer style={{marginRight:"5px"}} to={`/offers/new/${this.props.match.params.id}`}>
                         <Button variant="primary">
                             Dodaj ofertę
@@ -208,6 +221,7 @@ class ContractDetails extends React.Component {
             {this.renderLoading()}
             {this.renderContent()}
             {this.renderInfo()}
+            {this.renderDeletingLoading()}
             {this.renderNotFoundMessage()}
         </div>
         )
@@ -217,6 +231,7 @@ class ContractDetails extends React.Component {
 const mapStateToProps = (state,ownProps) => {
     return {
         loading: state.loading.FETCH_CONTRACT_DETAILS,
+        deleting: state.loading.DELETE_OFFER,
         alert: state.alert,
         contract: state.contracts.find(contract => contract.id == ownProps.match.params.id),
         user: state.login.user

@@ -47,13 +47,8 @@ class BuyOfferModal extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(typeof(this.state.shares))
-        if(typeof(this.state.shares) == "number"){
-            this.setState({showTypeInfo:false})
-            this.props.buyShares(this.props.id,this.state.shares);
-        }else{
-            this.setState({showTypeInfo:true,shares:1})
-        }
+         this.props.buyShares(this.props.id,this.state.shares);
+        
       
     }
 
@@ -73,24 +68,27 @@ class BuyOfferModal extends React.Component {
         <Modal.Title>Zakup akcji</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Form>
+        <Form onSubmit={this.handleSubmit}> 
             <Form.Group controlId="formBasicRange">
                 <Form.Label><h4>Liczba akcji</h4></Form.Label>
                 <p className="text-muted">Wprowadź ile akcji chcesz kupić</p>
-                <Form.Control min={1} step={1} max={this.props.maxValue} value={this.state.shares} onChange={this.onChangeShares}  type="number"/>
-                <Button onClick={this.handleSubmit} variant="primary" style={{marginTop:"10px"}}>
+                <Form.Control min={1} step="1" max={this.props.maxValue} value={this.state.shares} onChange={this.onChangeShares}  type="number"/>
+                <hr className="my-4"></hr>
+                <div style={{marginTop:"10px"}}>
+                <Button type="submit" variant="primary" style={{marginRight:"10px"}}>
                     {this.renderButtonContent()}
+                    
                 </Button>
+                <Button variant="secondary" onClick={() => this.props.handleClose()}>
+                    Zamknij
+                </Button>
+                </div>
             </Form.Group>
             {this.renderInfo()}
             {this.renderTypeInfo()}
+          
         </Form>
         </Modal.Body>
-        <Modal.Footer>
-        <Button variant="secondary" onClick={() => this.props.handleClose()}>
-            Zamknij
-        </Button>
-        </Modal.Footer>
     </Modal>
         )
     }

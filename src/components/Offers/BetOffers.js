@@ -89,7 +89,7 @@ class BetOffers extends React.Component {
     }
 
     render() {
-        console.log(this.props.user);
+        
         return (
             <Container className="bg-light border rounded shadow-container create-market-container">
                 <header style={{display:"inline-block"}}>
