@@ -14,7 +14,7 @@ import { Image, Item,Card,Icon } from 'semantic-ui-react'
 class Contract extends React.Component {
 
   state = {
-    borderColor:"",
+    borderColor:"black",
     status:"",
     iconName:""
   }
@@ -83,27 +83,6 @@ class Contract extends React.Component {
 
 
   renderContractContent = () => {
-
-//     return(
-//     <Row className="no-gutters">
-//     <Col md="4">
-//           {this.props.market.marketCover && (<Card.Img className="img" src={typeof(this.props.market.marketCover) !== 'undefined' ? (`data:image/jpeg;base64,${this.props.market.marketCover.data}`) : (this.setCover(this.props.market.marketCategory))} rounded/>)}
-//           </Col>
-//           <Col md="8">
-//             <Card.Body>
-//               <Card.Title>{this.props.market.topic}</Card.Title>
-//               <Card.Subtitle style={{marginTop:"10px"}}>{this.props.market.bets[0].title} </Card.Subtitle>
-//               <Card.Subtitle style={{marginTop:"10px"}}>{this.props.contractOption ? <p>Wybrana opcja na tak</p> : <p>Wybrana opcja na nie</p>}</Card.Subtitle>
-//               <Card.Subtitle style={{marginTop:"10px"}}>Liczba akcji: {this.props.shares}</Card.Subtitle>
-//               <Card.Subtitle style={{marginTop:"10px"}}>Wartość akcji: {this.props.price}</Card.Subtitle>
-//               <Card.Text>
-//               {this.props.market.description}
-//               </Card.Text>
-//               <Button>Button</Button>
-//             </Card.Body>
-//           </Col>
-// </Row>
-//     )
 
       return(
         <Figure>

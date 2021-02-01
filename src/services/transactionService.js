@@ -1,6 +1,5 @@
 import authHeader from '../helpers/authHeader';
-
-const API_URL = 'http://localhost:8080';
+import {baseURL} from '../api/baseURL';
 
 const fetchTransactions = (betId,option,timeAgo) => {
 
@@ -8,7 +7,7 @@ const fetchTransactions = (betId,option,timeAgo) => {
         method: 'GET',
         headers: authHeader()
     }
-    return fetch(`http://localhost:8080/transactions/chart?betId=${betId}&option=${option}&timeAgo=${timeAgo}`,reqOptions).then((res) => handleResponse(res));
+    return fetch(`${baseURL}/transactions/chart?betId=${betId}&option=${option}&timeAgo=${timeAgo}`,reqOptions).then((res) => handleResponse(res));
 }
 
 const fetchTransactionsFiltered = (type,option,betTitle, marketTitle, marketCategories=[],page,pageSize, sortedBy) => {
@@ -27,7 +26,7 @@ const fetchTransactionsFiltered = (type,option,betTitle, marketTitle, marketCate
         headers: authHeader()
     }
 
-    return fetch(`${API_URL}/transactions/${type}?option=${option}&betTitle=${betTitle}&marketTitle=${marketTitle}&${marketCategoryParams}&sortAttribute=${sortedBy[0]}&sortDirection=${sortedBy[1]}&page=${page}&size=${pageSize}`,reqOptions).then((res) => handleResponse(res));
+    return fetch(`${baseURL}/transactions/${type}?option=${option}&betTitle=${betTitle}&marketTitle=${marketTitle}&${marketCategoryParams}&sortAttribute=${sortedBy[0]}&sortDirection=${sortedBy[1]}&page=${page}&size=${pageSize}`,reqOptions).then((res) => handleResponse(res));
 }
 
 const handleResponse = (res) => {

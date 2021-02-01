@@ -12,6 +12,7 @@ import BetsList from './BetsList';
 
 
 
+
 class MakeMarketPublicPage extends React.Component {
 
     componentDidMount() {
@@ -80,7 +81,7 @@ class MakeMarketPublicPage extends React.Component {
             return(
                 <div>
                     <h4>{this.props.currentMarket.topic}</h4>
-                    {this.props.currentMarket.marketCover && (<Image style={{margin:"0 auto"}} className="img" src={typeof(this.props.currentMarket.marketCover) !== 'undefined' ? (`data:image/jpeg;base64,${this.props.currentMarket.marketCover.data}`) : (this.setCover(this.props.currentMarket.marketCategory))} rounded/>)}
+                    {this.props.currentMarket.marketCover && (<Image style={{margin:"10px auto"}} className="img" src={typeof(this.props.currentMarket.marketCover) !== 'undefined' ? (`data:image/jpeg;base64,${this.props.currentMarket.marketCover.data}`) : (this.setCover(this.props.currentMarket.marketCategory))} rounded/>)}
                     <h5>Przewidywana data zakończenia - {this.props.currentMarket.endDate}</h5>
                     <hr className="my-4"></hr>                   
                     {this.renderBetsList()}
@@ -100,7 +101,7 @@ class MakeMarketPublicPage extends React.Component {
     }
 
     renderLoading = () => {
-        if((typeof this.props.loadingMarket !== 'undefined') && this.props.loadingMarket.pending) {
+        if(!this.props.currentMarket && (typeof this.props.loadingMarket !== 'undefined') && this.props.loadingMarket.pending) {
             return(
                <div className="text-center">
                     <Spinner

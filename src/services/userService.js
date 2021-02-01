@@ -1,4 +1,5 @@
 import authHeader from "../helpers/authHeader";
+import {baseURL} from '../api/baseURL';
 
 const login = (username,password) => {
     const reqOptions = {
@@ -27,7 +28,7 @@ const register = (username,firstName,surname,email,password) => {
         body: JSON.stringify({username,firstName,surname,email,password})
     };
 
-    return fetch(`http://localhost:8080/api/auth/signup`, reqOptions).then((res) => handleResponse(res));;
+    return fetch(`${baseURL}/api/auth/signup`, reqOptions).then((res) => handleResponse(res));;
 
 }
 
@@ -36,7 +37,7 @@ const sendToken = (email) => {
         method: 'POST',
         headers: {'Content-Type': 'application/json'}
     }
-    return fetch(`http://localhost:8080/api/auth/user/resetPassword?username=${email}`,reqOptions).then(res => handleTextResponse(res));
+    return fetch(`${baseURL}/api/auth/user/resetPassword?username=${email}`,reqOptions).then(res => handleTextResponse(res));
 }
 
 const checkToken = (token) => {
@@ -44,7 +45,7 @@ const checkToken = (token) => {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
     }
-    return fetch(`http://localhost:8080/api/auth/user/changePassword?token=${token}`,reqOptions).then(res => handleTextResponse(res));
+    return fetch(`${baseURL}/api/auth/user/changePassword?token=${token}`,reqOptions).then(res => handleTextResponse(res));
 }
 
 const changePasswordWithToken = (newPassword,repeatedPassword,token) => {
@@ -54,7 +55,7 @@ const changePasswordWithToken = (newPassword,repeatedPassword,token) => {
         body: JSON.stringify({newPassword,repeatedPassword,token})
     }
 
-    return fetch('http://localhost:8080/api/auth/user/changePassword',reqOptions).then(res => handleTextResponse(res));
+    return fetch(`${baseURL}/api/auth/user/changePassword`,reqOptions).then(res => handleTextResponse(res));
 }
 
 const editPassword = (oldPassword,newPassword,repeatedNewPassword) => {
@@ -64,7 +65,7 @@ const editPassword = (oldPassword,newPassword,repeatedNewPassword) => {
         body: JSON.stringify({oldPassword,newPassword,repeatedNewPassword})
     }
 
-    return fetch('http://localhost:8080/api/auth/user/editPassword',reqOptions).then(res => handleTextResponse(res));
+    return fetch(`${baseURL}/api/auth/user/editPassword`,reqOptions).then(res => handleTextResponse(res));
 }
 
 const handleTextResponse = (textResponse) => {
@@ -72,11 +73,6 @@ const handleTextResponse = (textResponse) => {
     .text()
     .then(text => {
         if(!textResponse.ok) {
-            // if(res.status === 401) {
-            //     logout();
-            //     // window.location.reload(true);
-            // }
-
             let error = (text) || textResponse.statusText;
             return Promise.reject(error);
         }
@@ -93,11 +89,7 @@ const handleLoginResponse = (res) => {
      
         const data = text && JSON.parse(text);
         if(!res.ok) {
-            // if(res.status === 401) {
-            //     logout();
-            //     // window.location.reload(true);
-            // }
-            
+
             let error = (data && data.error) || res.statusText;
           
             return Promise.reject(error);

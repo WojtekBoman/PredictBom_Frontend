@@ -7,6 +7,7 @@ import {buyContract} from '../../actions/contractActions';
 import {alertActions} from '../../actions/alertActions';
 
 
+
 class BuyContractForm extends React.Component {
 
     componentDidMount() {
@@ -50,13 +51,8 @@ class BuyContractForm extends React.Component {
     renderForm = () => {
         return(
             <div>
-            <hr></hr>
             <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
                 <h4>Wybrana opcja na {this.props.contractOption ? <span>tak</span> : <span>nie</span>}</h4>
-        {/* <Field validate={this.validateImageFormat} type="file" name="marketCover" component={this.renderFileInput} />
-        <div className="img-box">
-        {this.state.imageFile && (<Image className="img" src={this.state.imageFile} rounded/>)}
-        </div> */}
         <Form.Text style={{fontSize:"15px"}}>Podaj swoje kryteria zakupu akcji a system wyszuka dla ciebie najlepsze oferty. Iloczyn maksymalnej ceny za jedną akcję i ich liczby nie powinien przekraczać wartości twojego budżetu! Pamiętaj także o limicie zakupów do 1000 akcji dziennie.</Form.Text>
         <hr className="my-4"></hr>
         <Field type="number" max="1" name="maxPrice" label="Podaj maksymalną cenę 1 akcji" component={this.renderInput} />

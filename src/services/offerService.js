@@ -1,4 +1,5 @@
 import authHeader from '../helpers/authHeader';
+import {baseURL} from '../api/baseURL';
 
 const fetchOffers = (betId,option,page,size) => {
     const reqOptions = {
@@ -6,7 +7,7 @@ const fetchOffers = (betId,option,page,size) => {
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:8080/offers?betId=${betId}&option=${option}&page=${page}&size=${size}`,reqOptions).then(res => handleOffers(res));
+    return fetch(`${baseURL}/offers?betId=${betId}&option=${option}&page=${page}&size=${size}`,reqOptions).then(res => handleOffers(res));
 }
 
 const buyShares = (offerId,shares) => {
@@ -15,7 +16,7 @@ const buyShares = (offerId,shares) => {
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:8080/offers/buy?offerId=${offerId}&shares=${shares}`,reqOption).then(res => handleResponse(res));
+    return fetch(`${baseURL}/offers/buy?offerId=${offerId}&shares=${shares}`,reqOption).then(res => handleResponse(res));
 } 
 
 

@@ -10,9 +10,9 @@ import celebryciBackground from '../../img/celebryciBackground.jpg';
 import politykaBackground from '../../img/politykaBackground.jpg';
 import gospodarkaBackground from '../../img/gospodarkaBackground.jpg';
 import inneBackground from '../../img/inneBackground.png';
-import {faSadTear,faExclamationCircle,faArrowCircleLeft} from '@fortawesome/free-solid-svg-icons';
+import {faSadTear} from '@fortawesome/free-solid-svg-icons';
 import { LinkContainer } from 'react-router-bootstrap';
-import BackButton from '../../helpers/BackButton';
+import BackHeader from '../BackHeader';
 import { alertActions } from '../../actions/alertActions';
 
 class MarketDetails extends React.Component {
@@ -82,11 +82,8 @@ class MarketDetails extends React.Component {
         if(this.props.currentMarket){
             return(
                 <Container className="bg-light border rounded shadow-container create-market-container">
-                    <header style={{display:"inline-block"}}>
-                        <BackButton />
-                        <h2 style={{display:"inline-block"}}>{this.props.currentMarket.topic}</h2>
-                        <hr className="my-4"></hr>
-                    </header>
+                    <BackHeader title={this.props.currentMarket.topic} />
+                    <hr className="my-4"></hr>
                     <Row>
                         <Col sm={6}>
                         <Image variant="top" src={this.props.currentMarket.marketCover ? (`data:image/jpeg;base64,${this.props.currentMarket.marketCover.data}`) : (this.setCover(this.props.currentMarket.category))} style={{width: "100%",
@@ -102,7 +99,6 @@ class MarketDetails extends React.Component {
                     <div className="endDate">
                         <h4>Przewidywana data zakończenia</h4>
                         {this.props.currentMarket.endDate.substring(0,4)==='3000' ? <p>Nieokreślona</p> : <p>{this.props.currentMarket.endDate}</p>}
-                        <hr className="my-4"></hr>
                     </div>
                         </Col>
                     </Row>
@@ -120,7 +116,7 @@ class MarketDetails extends React.Component {
                     </div>
                     <hr className="my-4"></hr>
                     {this.props.currentMarket.bets && (
-                        <MarketTrendChart bets={this.props.currentMarket.bets} betId={67} option={true} endDate={this.props.currentMarket.endDate} correctBetId={this.props.currentMarket.correctBetId}/>
+                        <MarketTrendChart bets={this.props.currentMarket.bets} option={true} endDate={this.props.currentMarket.endDate} correctBetId={this.props.currentMarket.correctBetId}/>
                     )}
                     
                 </Container>

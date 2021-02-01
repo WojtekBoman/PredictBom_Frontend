@@ -5,7 +5,7 @@ import {fetchRanking} from '../../actions/rankingActions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faTrophy} from '@fortawesome/free-solid-svg-icons';
 import {alertActions} from '../../actions/alertActions';
-import BackButton from '../../helpers/BackButton';
+import BackHeader from '../BackHeader';
 
 
 class Ranking extends React.Component {
@@ -49,10 +49,7 @@ class Ranking extends React.Component {
         if(this.props.ranking && !((typeof this.props.loading !== 'undefined') && this.props.loading.pending)){
             return(
                 <Container className="bg-light border rounded shadow-container create-market-container">
-                    <header style={{display:"inline-block"}}>
-                        <BackButton />
-                        <h2 style={{display:"inline-block"}}>Top 100 graczy</h2>
-                    </header>
+                    <BackHeader title="Top 100 graczy" />
                     <hr className="my-4"></hr>
                     <Table striped bordered hover>
                         <thead>

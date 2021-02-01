@@ -1,5 +1,7 @@
 import authHeader from '../helpers/authHeader';
 import authHeaderImgReq from '../helpers/authHeaderImgReq'
+import {handleResponse} from '../helpers/HandleResponse';
+import {baseURL} from '../api/baseURL';
 
 
 const createMarket = (topic, category, endDate,description) => {
@@ -10,9 +12,7 @@ const createMarket = (topic, category, endDate,description) => {
         body: JSON.stringify({topic, category, endDate,description})
     };
 
-    console.log(reqOptions)
-
-    return fetch('http://localhost:8080/markets/new', reqOptions).then((res) => handleResponse(res))
+    return fetch(`${baseURL}/markets/new`, reqOptions).then((res) => handleResponse(res))
 }
 
 const editMarket = (marketId,topic, category, endDate,description) => {
@@ -25,7 +25,7 @@ const editMarket = (marketId,topic, category, endDate,description) => {
 
     
 
-    return fetch(`http://localhost:8080/markets/edit/${marketId}`, reqOptions).then((res) => handleResponse(res))
+    return fetch(`${baseURL}/markets/edit/${marketId}`, reqOptions).then((res) => handleResponse(res))
 }
 
 const fetchMarkets = (typeOfMarkets,marketTitle,marketCategories=[],sortedBy,page,pageSize) => {
@@ -46,7 +46,7 @@ const fetchMarkets = (typeOfMarkets,marketTitle,marketCategories=[],sortedBy,pag
     }
 
 
-    return fetch(`http://localhost:8080/markets${typeOfMarkets}?marketTitle=${marketTitle}&${marketCategoryParams}&page=${page}&size=${pageSize}&sortAttribute=${sortedBy[0]}&sortDirection=${sortedBy[1]}`,reqOptions).then((res) => handleMarkets(res));
+    return fetch(`${baseURL}/markets${typeOfMarkets}?marketTitle=${marketTitle}&${marketCategoryParams}&page=${page}&size=${pageSize}&sortAttribute=${sortedBy[0]}&sortDirection=${sortedBy[1]}`,reqOptions).then((res) => handleResponse(res));
 }
 
 const fetchMarket = (marketId) => {
@@ -55,7 +55,7 @@ const fetchMarket = (marketId) => {
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:8080/markets/${marketId}`,reqOptions).then(res => handleMarket(res));
+    return fetch(`${baseURL}/markets/${marketId}`,reqOptions).then(res => handleResponse(res));
 }
 
 export const fetchBetPrice = (betId) => {
@@ -63,16 +63,9 @@ export const fetchBetPrice = (betId) => {
         method: 'GET',
         headers: authHeader(),
     };
-    return fetch(`http://localhost:8080/markets/betPrice/${betId}`,reqOptions).then(res => handleMarkets(res));
+    return fetch(`${baseURL}/markets/betPrice/${betId}`,reqOptions).then(res => handleResponse(res));
 }
 
-const solveMarket = (marketId,betId) => {
-    const reqOptions = {
-        method: 'GET',
-        headers: authHeader(),
-    };
-    return fetch(`http://localhost:8080/markets/solveMarket?marketId=${marketId}&betId=${betId}`,reqOptions).then(res => handleMarkets(res));
-}
 
 const setMarketCover = (marketId,{marketCover}) => {
     const data = new FormData();
@@ -83,7 +76,7 @@ const setMarketCover = (marketId,{marketCover}) => {
         body: data
     }
 
-    return fetch(`http://localhost:8080/markets/marketCover/${marketId}`,reqOptions).then(res => handleResponse(res));
+    return fetch(`${baseURL}/markets/marketCover/${marketId}`,reqOptions).then(res => handleResponse(res));
 }
 
 export const addBet = (marketId,yesPrice,noPrice,title,shares) => {
@@ -96,7 +89,7 @@ export const addBet = (marketId,yesPrice,noPrice,title,shares) => {
 
     console.log(JSON.stringify({marketId,yesPrice,noPrice,title,shares}));
 
-   return fetch(`http://localhost:8080/markets/addBet`,reqOptions).then(res => handleResponse(res));
+   return fetch(`${baseURL}/markets/addBet`,reqOptions).then(res => handleResponse(res));
 }
 
 export const deleteBet = (betId) => {
@@ -105,7 +98,7 @@ export const deleteBet = (betId) => {
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:8080/markets/deleteBet?betId=${betId}`,reqOptions).then(res => handleResponse(res));
+    return fetch(`${baseURL}/markets/deleteBet?betId=${betId}`,reqOptions).then(res => handleResponse(res));
 }
 
 export const solveMultiBetMarket = (marketId,betId) => {
@@ -114,7 +107,7 @@ export const solveMultiBetMarket = (marketId,betId) => {
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:8080/markets/solveMultiBetMarket?marketId=${marketId}&betId=${betId}`,reqOptions).then(res => handleResponse(res));
+    return fetch(`${baseURL}/markets/solveMultiBetMarket?marketId=${marketId}&betId=${betId}`,reqOptions).then(res => handleResponse(res));
 }
 
 export const solveSingleBetMarket = (marketId,betId,correctOption) => {
@@ -123,7 +116,7 @@ export const solveSingleBetMarket = (marketId,betId,correctOption) => {
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:8080/markets/solveSingleBetMarket?marketId=${marketId}&betId=${betId}&correctOption=${correctOption}`,reqOptions).then(res => handleResponse(res));
+    return fetch(`${baseURL}/markets/solveSingleBetMarket?marketId=${marketId}&betId=${betId}&correctOption=${correctOption}`,reqOptions).then(res => handleResponse(res));
 }
 
 const makePublic = (marketId) => {
@@ -132,7 +125,7 @@ const makePublic = (marketId) => {
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:8080/markets/makePublic?marketId=${marketId}`,reqOptions).then(res => handleResponse(res));
+    return fetch(`${baseURL}/markets/makePublic?marketId=${marketId}`,reqOptions).then(res => handleResponse(res));
 }
 
 const deleteMarket = (marketId) => {
@@ -141,63 +134,38 @@ const deleteMarket = (marketId) => {
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:8080/markets/delete?marketId=${marketId}`,reqOptions).then(res => handleResponse(res));
+    return fetch(`${baseURL}/markets/delete?marketId=${marketId}`,reqOptions).then(res => handleResponse(res));
 }
 
-const handleMarkets = res => {
+// const handleMarkets = res => {
    
-    return res
-    .text()
-    .then(markets =>{
-        const data = markets && JSON.parse(markets);
-        if(!res.ok) {
+//     return res
+//     .text()
+//     .then(markets =>{
+//         const data = markets && JSON.parse(markets);
+//         if(!res.ok) {
             
-            let error = (data && data.error) || res.statusText;
-            return Promise.reject(error);
-        }
-        return data;
-    })
-}
+//             let error = (data && data.error) || res.statusText;
+//             return Promise.reject(error);
+//         }
+//         return data;
+//     })
+// }
 
-const handleMarket = res => {
+// const handleMarket = res => {
    
-    return res
-    .text()
-    .then(market =>{
+//     return res
+//     .text()
+//     .then(market =>{
     
-        if(!res.ok) {
-            return Promise.reject(market);
-        }
-        const data = market && JSON.parse(market);
+//         if(!res.ok) {
+//             return Promise.reject(market);
+//         }
+//         const data = market && JSON.parse(market);
        
-        return data;
-    })
-}
-
-
-const handleResponse = (res) => {
-    return res
-    .text()
-    .then(text => {
-        console.log(text)
-        const data = text && JSON.parse(text);
-        
-        if(!data.predictionMarket){
-            
-            let error = data.info;
-            return Promise.reject(error);
-        }
-        if(!res.ok) {
-          
-            
-            let error = (data && data.error) || res.statusText;
-            return Promise.reject(error);
-        }
-        return data;
-    });
-}
-
-
+//         return data;
+//     })
+// }
 
 export const marketService = {
     createMarket,

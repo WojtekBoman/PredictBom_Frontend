@@ -9,6 +9,7 @@ import {faArrowCircleLeft} from '@fortawesome/free-solid-svg-icons';
 import SearchBar from './SearchBar'
 import {updateSearch} from '../../actions/filterActions';
 import history from '../../history';
+import BackHeader from '../BackHeader';
 
 
 class MarketsPage extends React.Component {
@@ -25,11 +26,7 @@ class MarketsPage extends React.Component {
         return (
 
           <Container className="bg-light border rounded shadow-container create-market-container">
-                 
-            <header style={{display:"inline-block"}} >
-              {this.renderBackButton()}
-              <h2 style={{display:"inline-block"}}>Rynki prognostyczne</h2>
-            </header>
+            <BackHeader title="Rynki prognostyczne" />
             <Tabs id="controlled-tab-example" style={{marginTop:"15px"}}>
             <Tab eventKey="home" title="Trwające" unmountOnExit>
               <MarketsList title="Trwające rynki" typeOfMarkets="/"/>

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Container,Form,Spinner,Alert,Button} from 'react-bootstrap'; 
 import {fetchMarket,editMarket} from '../../actions/marketActions';
 import {reduxForm,Field} from 'redux-form';
+import BackHeader from '../BackHeader';
 
 class EditMarketPage extends React.Component {
 
@@ -103,24 +104,15 @@ class EditMarketPage extends React.Component {
 
     renderForm() {
         if(this.props.currentMarket) {
-
-            console.log(this.props);
             return(
                 <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
                 <Field disabled={this.props.currentMarket.published} type="text" label="Tytuł rynku" name="topic" component={this.renderInput} placeholder="Wprowadź tytuł rynku prognostycznego"></Field>
                 <Field helpText="Jeżeli nie wiesz kiedy może zakończyć się dany rynek nie wypełniaj tego pola" type="date" label="Przewidywana data zakończenia rynku" name="endDate" component={this.renderInput}></Field>
                 <Field disabled={this.props.currentMarket.published} name="category" label="Wybierz kategorię rynku" options={this.getOptions()} component={this.renderSelectField}/>
-                {/* <Field validate={this.validateImageFormat} type="file" name="marketCover" component={this.renderFileInput} />
-                <div className="img-box">
-                {this.state.imageFile && (<Image className="img" src={this.state.imageFile} rounded/>)}
-                </div> */}
                 <Field disabled={this.props.currentMarket.published} as="textarea" rows="5" name="description" label="Krótko opisz rynek i jego zasady" component={this.renderInput} />
                 <Button className="form-button" variant="primary" type="submit">
                   {this.renderButtonContent()}
                 </Button>
-                {/* <Button className="form-button" variant="primary" type="reset" onClick={this.resetForm} disabled={this.state.resetButtonDisable}>
-                  Cofnij zmiany
-                </Button> */}
                 </Form>
             )
         }
@@ -129,10 +121,7 @@ class EditMarketPage extends React.Component {
     render() {
         return(
             <Container className="bg-light border rounded shadow-container create-market-container">
-                <header>
-                    <h2>Edytuj rynek</h2>
-                    <hr className="my-4"></hr>
-                </header>
+                <BackHeader title="Edytuj rynek" />
                 {this.renderForm()}
             </Container>
         )

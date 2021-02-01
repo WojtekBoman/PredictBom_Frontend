@@ -1,129 +1,82 @@
-import React from 'react';
-import {Alert,Container,Form, Button,Spinner} from 'react-bootstrap';
-import { Field, reduxForm } from 'redux-form';
-import {connect} from 'react-redux';
-import {login} from '../../actions/loginActions';
-import { alertActions } from '../../actions/alertActions';
-import { Link } from 'react-router-dom';
-import BackButton from '../../helpers/BackButton';
-
-
-
+import React from "react";
+import {Container, Form, Button } from "react-bootstrap";
+import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import { login } from "../../actions/loginActions";
+import { alertActions } from "../../actions/alertActions";
+import { Link } from "react-router-dom";
+import {renderInput, renderInfo} from '../../helpers/FormInputs';
+import { renderButtonContent } from "../../helpers/LoadingContent";
+import BackHeader from '../BackHeader';
 
 class LoginPage extends React.Component {
+  componentWillUnmount() {
+    this.props.clear();
+  }
 
-    componentWillUnmount() {
-        this.props.clear();
-    }
+  onSubmit = (formValues) => {
+    this.props.login(formValues);
+  };
 
-    renderError({error,touched}) {
-        if(touched && error) {
-            return(
-                <Alert variant='danger'>
-                    {error}
-                </Alert>
-            )
-        }
-    }
+  render() {
+    return (
+      <Container className="bg-light border rounded shadow-container form-container">
+        <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+          <BackHeader title="Logowanie" />
+          <hr className="my-4"></hr>
+          <Field
+            type="text"
+            label="Nazwa użytkownika"
+            name="username"
+            component={renderInput}
+            placeholder="Wprowadź nazwę użytkownika"
+          ></Field>
+          <Form.Text className="text-muted">
+            Zapewniamy że twoje dane będą bezpieczne
+          </Form.Text>
+          <Field
+            type="password"
+            label="Hasło"
+            name="password"
+            component={renderInput}
+            placeholder="Wprowadź hasło"
+          ></Field>
 
-
-    renderInput = ({input, label,meta,type,placeholder,id}) => {
-        return (
-        <Form.Group>
-        <Form.Label>{label}</Form.Label>
-        <Form.Control id={id} {...input} type={type} placeholder={placeholder}/>
-        {this.renderError(meta)}
-        </Form.Group>
-        )
-    }
-
-    onSubmit = (formValues) => {
-        this.props.login(formValues)
-    }
-
-    renderInfo() {
-        if(this.props.alert.payload) {
-            return <Alert className="login-alert" variant="danger">
-                {this.props.alert.payload}
-            </Alert>
-        }
-    }
-
-    renderButtonContent() {
-        if ((typeof this.props.loading !== 'undefined') && this.props.loading.pending) {
-            return (
-                <div>
-                <Spinner
-                as="span"
-                animation="border"
-                size="sm"
-                role="status"
-                aria-hidden="true"
-                />
-                Ładowanie...
-                </div>
-            )
-        }else{
-            return "Zatwierdź"
-        }
-    }
-
-    render(){
-        return(
-            <Container className="bg-light border rounded shadow-container form-container">
-            <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                <header style={{display:"inline-block"}}>
-                    <BackButton />
-                    <h2 style={{display:"inline-block"}}>Logowanie</h2>
-                </header>
-                <hr className="my-4"></hr>
-                    <Field type="text" label="Nazwa użytkownika" name="username" component={this.renderInput} placeholder="Wprowadź nazwę użytkownika"></Field>
-                    <Form.Text className="text-muted">
-                    Zapewniamy że twoje dane będą bezpieczne 
-                    </Form.Text>
-                    <Field type="password" label="Hasło" name="password" component={this.renderInput} placeholder="Wprowadź hasło"></Field>
-                    
-                <Button id="loginButton" variant="primary" type="submit">
-                    {this.renderButtonContent()}
-                </Button>
+          <Button id="loginButton" variant="primary" type="submit">
+            {renderButtonContent(this.props.loading,"Zaloguj się")}
+          </Button>
         </Form>
         <Link to="/resetPassword">Zapomniałeś hasła ?</Link>
-        {this.renderInfo()}
-        </Container>
-
-        )
-    }
+        {renderInfo(this.props.alert)}
+      </Container>
+    );
+  }
 }
 
+const validate = (formValues) => {
+  const errors = {};
 
-const validate = formValues => {
-    const errors = {};
+  if (!formValues.username) {
+    errors.username = "Musisz podać nazwę użytkownika";
+  }
 
-    if(!formValues.username) {
-        errors.username = 'Musisz podać nazwę użytkownika';
-    }
+  if (!formValues.password) {
+    errors.password = "Musisz podać hasło";
+  }
 
-    if(!formValues.password) {
-        errors.password = 'Musisz podać hasło';
-    }
+  return errors;
+};
 
-    return errors;
-}
+const mapStateToProps = (state) => {
+  return {
+    alert: state.alert,
+    loading: state.loading.LOGIN,
+  };
+};
 
-const mapStateToProps = state => {
-    return {
-        alert: state.alert,
-        loading: state.loading.LOGIN
-        }
-}
+const formWrapped = reduxForm({
+  form: "loginForm",
+  validate,
+})(LoginPage);
 
-const formWrapped = reduxForm(
-    {
-        form:'loginForm',
-        validate
-    }
-)(LoginPage);
-
-const {clear} = alertActions;
-
-export default connect(mapStateToProps,{login,clear})(formWrapped);
+export default connect(mapStateToProps, { login, clear: alertActions.clear })(formWrapped);

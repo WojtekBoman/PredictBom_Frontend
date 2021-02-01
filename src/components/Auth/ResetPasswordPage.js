@@ -1,67 +1,12 @@
 import React from 'react'
 import {Container,Form,Alert,Spinner,Button} from 'react-bootstrap';
+import {renderInput, renderInfo} from '../../helpers/FormInputs';
+import { renderButtonContent } from "../../helpers/LoadingContent";
 import { Field, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
 import {sendToken} from '../../actions/tokenActions';
 
-
 class ResetPasswordPage extends React.Component {
-
-    renderInput = ({input, label,meta,type,placeholder,as,helpText,rows}) => {
-        return (
-        <Form.Group>
-        <Form.Label>{label}</Form.Label>
-        <Form.Control {...input} as={as} type={type} placeholder={placeholder} rows={rows}/>
-        {this.renderError(meta)}
-        {helpText && (<Form.Text className="text-muted">{helpText}</Form.Text>)}    
-        </Form.Group>
-        )
-    }
-
-    renderError({error,touched}) {
-        if(touched && error) {
-            return(
-                <Alert variant='danger'>
-                    {error}
-                </Alert>
-            )
-        }
-    }
-
-    renderButtonContent() {
-        if ((typeof this.props.loading !== 'undefined') && this.props.loading.pending) {
-            return (
-                <div>
-                <Spinner
-                as="span"
-                animation="border"
-                size="sm"
-                role="status"
-                aria-hidden="true"
-                />
-                Ładowanie...
-                </div>
-            )
-        }else{
-            return "Zatwierdź"
-        }
-    }
-  
-    renderInfo() {
-      if(this.props.alert.payload) {
-          return <Alert className="login-alert" variant="danger">
-              {this.props.alert.payload}
-          </Alert>
-      }
-  }
-
-  renderInfo() {
-    if(this.props.alert.payload) {
-        return <Alert className="login-alert" variant="danger">
-            {this.props.alert.payload}
-        </Alert>
-    }
-}
 
   onSubmit = (formValues) => {
     this.props.sendToken(formValues);
@@ -75,12 +20,12 @@ class ResetPasswordPage extends React.Component {
             </header>
             <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
             <Field onChange={this.checkIsEmptyField}
-            helpText="Na podany adres e-mail zostanie wysłany token do resetu hasła" type="text" name="emailToReset" component={this.renderInput} placeholder="Adres e-mail konta"></Field>
+            helpText="Na podany adres e-mail zostanie wysłany token do resetu hasła" type="text" name="emailToReset" component={renderInput} placeholder="Adres e-mail konta"></Field>
                     <Button variant="primary" type="submit">
-                        {this.renderButtonContent()}
+                        {renderButtonContent(this.props.loading,"Zatwierdź")}
                     </Button>
             </Form>
-            {this.renderInfo()}
+            {renderInfo(this.props.alert)}
         </Container>
         )
     }

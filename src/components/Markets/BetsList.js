@@ -8,10 +8,6 @@ import { marketsConstants } from '../../constants/marketsConstants';
 
 class BetsList extends React.Component {
 
-    componentDidMount() {
-        
-    }
-
     renderNotFoundInfo() {
         return(
         <div>

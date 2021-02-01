@@ -14,8 +14,8 @@ export const createMarket = ({topic,category,endDate = "",description}) => {
         marketService.createMarket(topic,category,endDate,description)
             .then(
                 res => { 
-                    dispatch(success(res.predictionMarket));
-                    history.push(`editBets/${res.predictionMarket.marketId}`);
+                    dispatch(success(res));
+                    history.push(`editBets/${res.marketId}`);
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -36,7 +36,7 @@ export const editMarket = (marketId,{topic,category,endDate = "",description}) =
         marketService.editMarket(marketId,topic,category,endDate,description)
             .then(
                 res => { 
-                    dispatch(success(res.predictionMarket));
+                    dispatch(success(res));
                     history.push('/markets')
                 },
                 error => {
@@ -100,8 +100,8 @@ export const deleteMarket = (marketId) => {
         marketService.deleteMarket(marketId) 
             .then(
                 market => {
-                    dispatch(success(market));
                     history.push('/markets/private')
+                    dispatch(success(market));
                 },
                 error => {
                     dispatch(failure(error));
@@ -122,7 +122,7 @@ export const setMarketCover = (marketId, marketCover) => {
         marketService.setMarketCover(marketId,marketCover)
             .then(
                 res => {
-                    dispatch(success(res.predictionMarket));
+                    dispatch(success(res));
                     history.push('/markets/private')
                 },
                 error => {
@@ -188,8 +188,7 @@ export const deleteBet = (betId) => {
         marketService.deleteBet(betId) 
             .then(
                 res => {
-                    dispatch(success(res.predictionMarket));
-                    dispatch(alertActions.success(res.info));
+                    dispatch(success(res));
                     dispatch(deleteBetPrice(betId));
                 },
                 error => {
@@ -211,7 +210,7 @@ export const makePublic = (marketId) => {
         marketService.makePublic(marketId) 
             .then(
                 res => {
-                    dispatch(success(res.predictionMarket));
+                    dispatch(success(res));
                     history.push('/markets');
                 },
                 error => {
@@ -232,8 +231,7 @@ export const solveMultiBetMarket = (marketId,betId) => {
         marketService.solveMultiBetMarket(marketId,betId)
             .then(
                 res => {
-                    dispatch(success(res.predictionMarket));
-                    dispatch(alertActions.success(res.info));
+                    dispatch(success(res));
                     history.push('/markets');
                 },
                 error => {
@@ -254,8 +252,7 @@ export const solveSingleBetMarket = (marketId,betId,correctBetOption) => {
         marketService.solveSingleBetMarket(marketId,betId,correctBetOption)
             .then(
                 res => {
-                    dispatch(success(res.predictionMarket));
-                    dispatch(alertActions.success(res.info));
+                    dispatch(success(res));
                     history.push('/markets');
                 },
                 error => {

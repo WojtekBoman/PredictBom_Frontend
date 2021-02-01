@@ -11,6 +11,7 @@ import celebryciBackground from '../../img/celebryciBackground.jpg';
 import politykaBackground from '../../img/politykaBackground.jpg';
 import gospodarkaBackground from '../../img/gospodarkaBackground.jpg';
 import inneBackground from '../../img/inneBackground.png';
+import BackHeader from '../BackHeader';
 
 class SolveMarketPage extends React.Component {
 
@@ -69,7 +70,6 @@ class SolveMarketPage extends React.Component {
     compareDates(endDate) {
         var dateOne = new Date(endDate);    
         var dateTwo = new Date();    
-         //Note: 04 is month i.e. May    
         if (dateOne > dateTwo) {    
             return(
                 <div>
@@ -89,10 +89,7 @@ class SolveMarketPage extends React.Component {
         if(this.props.currentMarket){
             return(
                 <div>
-                    <header>
-                        <h2>Rozwiąż rynek "{this.props.currentMarket.topic}"</h2>
-                        <hr className="my-4"></hr>
-                    </header>
+                    <BackHeader title={`Rozwiąż rynek "${this.props.currentMarket.topic}"`} />
                     <Row>
                         <Col sm={6}>
                         <Image variant="top" src={this.props.currentMarket.marketCover ? (`data:image/jpeg;base64,${this.props.currentMarket.marketCover.data}`) : (this.setCover(this.props.currentMarket.category))} style={{width: "100%",

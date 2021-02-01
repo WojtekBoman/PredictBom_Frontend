@@ -1,4 +1,5 @@
 import authHeader from '../helpers/authHeader';
+import {baseURL} from '../api/baseURL';
 
 const buyContract = (betId,marketId, contractOption, maxPrice, shares) => {
     const reqOptions = {
@@ -7,7 +8,7 @@ const buyContract = (betId,marketId, contractOption, maxPrice, shares) => {
         body: JSON.stringify({betId, marketId, contractOption, maxPrice, shares})
     };
 
-    return fetch('http://localhost:8080/markets/buyContract',reqOptions).then(res => handleBuying(res));
+    return fetch(`${baseURL}/markets/buyContract`,reqOptions).then(res => handleBuying(res));
 }
 
 const fetchFilteredContracts = (contractStatus,contractOption,betTitle,marketTitle,marketCategories=[],sortedBy,page,pageSize) => {
@@ -25,7 +26,7 @@ const fetchFilteredContracts = (contractStatus,contractOption,betTitle,marketTit
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:8080/contracts/filtered?contractStatus=${contractStatus}&contractOption=${contractOption}&betTitle=${betTitle}&marketTitle=${marketTitle}&${marketCategoryParams}&page=${page}&size=${pageSize}&sortAttribute=${sortedBy[0]}&sortDirection=${sortedBy[1]}`,reqOptions).then(res => handleResponse(res));
+    return fetch(`${baseURL}/contracts/filtered?contractStatus=${contractStatus}&contractOption=${contractOption}&betTitle=${betTitle}&marketTitle=${marketTitle}&${marketCategoryParams}&page=${page}&size=${pageSize}&sortAttribute=${sortedBy[0]}&sortDirection=${sortedBy[1]}`,reqOptions).then(res => handleResponse(res));
 }
 
 const fetchContracts = (page,pageSize) => {
@@ -34,7 +35,7 @@ const fetchContracts = (page,pageSize) => {
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:8080/contracts?page=${page}&size=${pageSize}`,reqOptions).then(res => handleResponse(res));
+    return fetch(`${baseURL}/contracts?page=${page}&size=${pageSize}`,reqOptions).then(res => handleResponse(res));
 }
 
 const fetchContractDetails = (betId) => {
@@ -42,7 +43,7 @@ const fetchContractDetails = (betId) => {
         method: 'GET',
         headers: authHeader()
     };
-    return fetch(`http://localhost:8080/contracts/${betId}`,reqOptions).then(res => handleContractDetails(res));
+    return fetch(`${baseURL}/contracts/${betId}`,reqOptions).then(res => handleContractDetails(res));
 }
 
 const fetchLastPrice = (betId,option) => {
@@ -51,7 +52,7 @@ const fetchLastPrice = (betId,option) => {
         headers: authHeader()
     };
   
-    return fetch(`http://localhost:8080/contracts/lastBetPrice?betId=${betId}&option=${option}`,reqOptions).then(res => handleResponse(res));
+    return fetch(`${baseURL}/contracts/lastBetPrice?betId=${betId}&option=${option}`,reqOptions).then(res => handleResponse(res));
 }
 
 const addOffer = (contractId,shares,price) => {
@@ -62,7 +63,7 @@ const addOffer = (contractId,shares,price) => {
         body:JSON.stringify({contractId,shares,price})
     };
 
-    return fetch('http://localhost:8080/contracts/addOffer',reqOptions).then(res => handleContractDetails(res));
+    return fetch(`${baseURL}/contracts/addOffer`,reqOptions).then(res => handleContractDetails(res));
 }
 
 const deleteOffer = (offerId) => {
@@ -71,7 +72,7 @@ const deleteOffer = (offerId) => {
         headers: authHeader()
     };
 
-    return fetch(`http://localhost:8080/contracts/deleteOffer?offerId=${offerId}`,reqOptions).then(res => handleContractDetails(res));
+    return fetch(`${baseURL}/contracts/deleteOffer?offerId=${offerId}`,reqOptions).then(res => handleContractDetails(res));
 }
 
 const handleResponse = (res) => {

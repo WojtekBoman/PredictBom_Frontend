@@ -31,7 +31,6 @@ class ContractList extends React.Component {
 
     fetchContracts() {
         if(this.props.offerPage){
-            // this.props.setStatusPending();
             this.props.fetchFilteredContracts("PENDING",this.props.filter.contractOption,this.props.filter.betTitle,this.props.filter.marketTitle,this.props.filter.selectedCategories,this.props.filter.sortedBy,this.props.filter.page,this.props.filter.pageSize);
         } else{
             this.props.fetchFilteredContracts(this.props.filter.contractStatus,this.props.filter.contractOption,this.props.filter.betTitle,this.props.filter.marketTitle,this.props.filter.selectedCategories,this.props.filter.sortedBy,this.props.filter.page,this.props.filter.pageSize);

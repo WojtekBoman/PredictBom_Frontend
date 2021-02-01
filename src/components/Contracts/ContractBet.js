@@ -37,8 +37,6 @@ class ContractBet extends React.Component {
                  <Col sm={9}>
             <h2 className="ui header">{this.props.title}</h2>
             {this.props.contractOption ? <h4>Kontrakt na tak</h4> : <h4>Kontrakt na nie</h4>}
-            {/* {this.renderPrice()}
-            {this.renderLoadingPrice()} */}
                 </Col>
                 <Col sm={3}>
                     {this.renderLoading()}

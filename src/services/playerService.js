@@ -1,4 +1,5 @@
 import authHeader from '../helpers/authHeader';
+import {baseURL} from '../api/baseURL';
 
 const fetchPlayer = (username) => {
 
@@ -8,7 +9,7 @@ const fetchPlayer = (username) => {
     }
 
 
-    return fetch(`http://localhost:8080/player/${username}`,reqOptions).then((res) => handleResponse(res));
+    return fetch(`${baseURL}/player/${username}`,reqOptions).then((res) => handleResponse(res));
 }
 
 const fetchRanking = () => {
@@ -18,7 +19,7 @@ const fetchRanking = () => {
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:8080/player/ranking`,reqOptions).then((res) => handleResponse(res));
+    return fetch(`${baseURL}/player/ranking`,reqOptions).then((res) => handleResponse(res));
 }
 
 const handleResponse = (res) => {
@@ -29,11 +30,6 @@ const handleResponse = (res) => {
       
         const data = text && JSON.parse(text);
         if(!res.ok) {
-            // if(res.status === 401) {
-            //     logout();
-            //     // window.location.reload(true);
-            // }
-
             let error = (data && data.message) || res.statusText;
             return Promise.reject(error);
         }

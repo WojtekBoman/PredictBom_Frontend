@@ -26,10 +26,10 @@ class MarketTrendChart extends React.Component {
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();
 
-        today = mm + '-' + dd + '-' + yyyy;
-        console.log(today)
-
-        this.props.fetchTransactions(this.state.currentBet,this.props.option,today);
+        today = yyyy + '-' + mm + '-' + dd;
+        console.log(this.state.currentBet,this.state.currentOption,today)
+        this.setState({timeAgo:today})
+        this.props.fetchTransactions(this.state.currentBet,this.state.currentOption,today);
     }
 
     componentWillUnmount() {
@@ -50,13 +50,15 @@ class MarketTrendChart extends React.Component {
         var mm = String(today.getMonth() + 1).padStart(2, '0');
         var yyyy = today.getFullYear();
 
-        today = mm + '-' + dd + '-' + yyyy;
+        today = yyyy + '-' + mm + '-' + dd;
         this.setState({timeAgo:today})
+        console.log(this.state.currentBet,this.state.currentOption,today)
         this.props.fetchTransactions(this.state.currentBet,this.state.currentOption,today);
     }
 
     onChangeBet = (e) => {
         this.setState({currentBet:e.target.value})
+        console.log(e.target.value,this.state.currentOption,this.state.timeAgo)
         this.props.fetchTransactions(e.target.value,this.state.currentOption,this.state.timeAgo);
     }
 

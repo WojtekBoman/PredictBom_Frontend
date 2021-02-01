@@ -3,66 +3,15 @@ import {connect} from 'react-redux';
 import {Container, Form, Button, Spinner,Alert} from 'react-bootstrap';
 import {Field,reduxForm} from 'redux-form';
 import {changePasswordWithToken} from '../../actions/tokenActions';
+import {
+    renderInput,
+    renderInfo
+  } from "../../helpers/FormInputs";
+  import { renderButtonContent } from "../../helpers/LoadingContent";
 
 class ChangePasswordWithTokenPage extends React.Component {
-    renderInput = ({input, label,meta,type,placeholder,as,helpText,rows}) => {
-        return (
-        <Form.Group>
-        <Form.Label>{label}</Form.Label>
-        <Form.Control {...input} as={as} type={type} placeholder={placeholder} rows={rows}/>
-        {this.renderError(meta)}
-        {helpText && (<Form.Text className="text-muted">{helpText}</Form.Text>)}    
-        </Form.Group>
-        )
-    }
-
-    renderError({error,touched}) {
-        if(touched && error) {
-            return(
-                <Alert variant='danger'>
-                    {error}
-                </Alert>
-            )
-        }
-    }
-
-    renderButtonContent() {
-        if ((typeof this.props.loading !== 'undefined') && this.props.loading.pending) {
-            return (
-                <div>
-                <Spinner
-                as="span"
-                animation="border"
-                size="sm"
-                role="status"
-                aria-hidden="true"
-                />
-                Ładowanie...
-                </div>
-            )
-        }else{
-            return "Zatwierdź"
-        }
-    }
-  
-    renderInfo() {
-      if(this.props.alert.payload) {
-          return <Alert className="login-alert" variant="danger">
-              {this.props.alert.payload}
-          </Alert>
-      }
-  }
-
-  renderInfo() {
-    if(this.props.alert.payload) {
-        return <Alert className="login-alert" variant="danger">
-            {this.props.alert.payload}
-        </Alert>
-    }
-}
 
   onSubmit = (formValues) => {
-
     this.props.changePasswordWithToken(formValues,this.props.token)
 }
 
@@ -73,13 +22,13 @@ class ChangePasswordWithTokenPage extends React.Component {
                 <h2>Wprowadź nowe hasło dla swojego konta</h2>
             </header>
             <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-            <Field type="password" name="newPassword" component={this.renderInput} placeholder="Wprowadź hasło"></Field>
-            <Field type="password" name="repeatedPassword" component={this.renderInput} placeholder="Powtórz hasło"></Field>
+            <Field type="password" name="newPassword" component={renderInput} placeholder="Wprowadź hasło"></Field>
+            <Field type="password" name="repeatedPassword" component={renderInput} placeholder="Powtórz hasło"></Field>
                     <Button variant="primary" type="submit">
-                        {this.renderButtonContent()}
+                        {renderButtonContent(this.props.loading, "Zmień hasło")}
                     </Button>
             </Form>
-            {this.renderInfo()}
+            {renderInfo(this.props.alert)}
         </Container>
         )
     }

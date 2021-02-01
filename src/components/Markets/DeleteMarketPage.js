@@ -4,6 +4,13 @@ import { Alert, Button, Container, Spinner } from 'react-bootstrap';
 import {fetchMarket,deleteMarket} from '../../actions/marketActions';
 import { LinkContainer } from 'react-router-bootstrap';
 import Loader from 'react-loader-spinner';
+import BackHeader from '../BackHeader';
+import {
+    renderInput,
+    renderInfo,
+    renderSelectField,
+  } from "../../helpers/FormInputs";
+  import { renderButtonContent } from "../../helpers/LoadingContent";
 
 class DeleteMarketPage extends React.Component {
 
@@ -12,35 +19,8 @@ class DeleteMarketPage extends React.Component {
         this.props.fetchMarket(this.props.match.params.id);
     }
 
-    renderButtonContent() {
-        if ((typeof this.props.loading !== 'undefined') && this.props.loading.pending) {
-            return (
-                <div>
-                <Spinner
-                as="span"
-                animation="border"
-                size="sm"
-                role="status"
-                aria-hidden="true"
-                />
-                Ładowanie...
-                </div>
-            )
-        }else{
-            return "Zatwierdź"
-        }
-    }
-  
-    renderInfo() {
-      if(this.props.alert.payload) {
-          return <Alert className="login-alert" variant="danger">
-              {this.props.alert.payload}
-          </Alert>
-      }
-  }
-
     renderLoading() {
-        if(typeof(this.props.loadingMarket) !== "undefined" && this.props.loadingMarket.pending){
+        if((typeof this.props.loadingMarket !== 'undefined') && this.props.loadingMarket.pending && !this.props.currentMarket){
             return(
                 <div className="text-center">
                 <Loader
@@ -70,7 +50,7 @@ class DeleteMarketPage extends React.Component {
             <div>
                 <h4>Czy na pewno chcesz usunąć rynek ?</h4>
                 <Button onClick={() => this.props.deleteMarket(this.props.match.params.id)}>
-                    {this.renderButtonContent()}
+                    {renderButtonContent(this.props.loading,"Usuń rynek")}
                 </Button>
             </div>
         )
@@ -91,10 +71,8 @@ class DeleteMarketPage extends React.Component {
     render() {
         return(
         <Container className="bg-light border rounded shadow-container create-market-container">
-            <header>
-                <h4>Usuwanie rynku</h4>
-                <hr className="my-4"></hr>
-            </header>
+            <BackHeader title="Usuwanie rynku" />
+            <hr className="my-4"></hr>
             {this.renderLoading()}
             {this.renderContent()}
         </Container>
