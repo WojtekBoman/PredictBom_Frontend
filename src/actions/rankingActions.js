@@ -1,6 +1,5 @@
 import {rankingConstants} from '../constants/rankingConstants';
 import {playerService} from '../services/playerService';
-import history from '../history';
 import { alertActions } from './alertActions';
 
 export const fetchRanking = () => {

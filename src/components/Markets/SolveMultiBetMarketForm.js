@@ -1,8 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Form, Button, Spinner, Alert } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import { solveMultiBetMarket } from "../../actions/marketActions";
+import {renderInfo} from '../../helpers/FormInputs';
+import {renderButtonContent} from '../../helpers/LoadingContent'; 
 
 class SolveMultiBetMarketForm extends React.Component {
   state = {
@@ -62,38 +64,6 @@ class SolveMultiBetMarketForm extends React.Component {
     }
   }
 
-  renderButtonContent() {
-    if (
-      typeof this.props.loading !== "undefined" &&
-      this.props.loading.pending
-    ) {
-      return (
-        <div>
-          <Spinner
-            as="span"
-            animation="border"
-            size="sm"
-            role="status"
-            aria-hidden="true"
-          />
-          Ładowanie...
-        </div>
-      );
-    } else {
-      return "Zatwierdź";
-    }
-  }
-
-  renderInfo() {
-    if (this.props.alert.payload) {
-      return (
-        <Alert className="login-alert" variant="danger">
-          {this.props.alert.payload}
-        </Alert>
-      );
-    }
-  }
-
   onSubmit = (formValues) => {
     this.props.solveMultiBetMarket(
       this.props.marketId,
@@ -111,9 +81,9 @@ class SolveMultiBetMarketForm extends React.Component {
           component={this.renderSelectField}
         />
         <Button className="form-button" variant="primary" type="submit">
-          {this.renderButtonContent()}
+          {renderButtonContent(this.props.loading,"Zatwierdź")}
         </Button>
-        {this.renderInfo()}
+        {renderInfo(this.props.alert)}
       </Form>
     );
   }

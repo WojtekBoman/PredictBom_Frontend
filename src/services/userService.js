@@ -1,5 +1,6 @@
 import authHeader from "../helpers/authHeader";
 import {baseURL} from '../api/baseURL';
+import {handleResponse} from '../helpers/HandleResponse';
 
 const login = (username,password) => {
     const reqOptions = {
@@ -9,7 +10,7 @@ const login = (username,password) => {
     };
 
     return fetch('http://localhost:8080/api/auth/signin', reqOptions)
-        .then(handleLoginResponse)
+        .then(handleResponse)
         .then(user => {
             localStorage.setItem('user', JSON.stringify(user));
 
@@ -99,27 +100,27 @@ const handleLoginResponse = (res) => {
     });
 }
 
-const handleResponse = (res) => {
+// const handleResponse = (res) => {
 
-    return res
-    .text()
-    .then(text => {
+//     return res
+//     .text()
+//     .then(text => {
       
-        const data = text && JSON.parse(text);
-        if(!res.ok) {
-            // if(res.status === 401) {
-            //     logout();
-            //     // window.location.reload(true);
-            // }
+//         const data = text && JSON.parse(text);
+//         if(!res.ok) {
+//             // if(res.status === 401) {
+//             //     logout();
+//             //     // window.location.reload(true);
+//             // }
             
-            let error = (data && data.message) || res.statusText;
+//             let error = (data && data.message) || res.statusText;
        
-            return Promise.reject(error);
-        }
+//             return Promise.reject(error);
+//         }
         
-        return data;
-    });
-}
+//         return data;
+//     });
+// }
 
 
 

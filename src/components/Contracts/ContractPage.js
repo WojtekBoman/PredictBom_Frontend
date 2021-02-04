@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Tab,Row,Col,Nav, Container} from 'react-bootstrap';
+import {Tab,Row,Col, Container} from 'react-bootstrap';
 import ContractFilter from './ContractFilter'
 import ContractList from './ContractList'
 import BackHeader from '../BackHeader';

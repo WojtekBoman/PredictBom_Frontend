@@ -1,17 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  Alert,
   Container,
   Form,
   Button,
-  Spinner,
-  Image,
-  Input,
+  Image
 } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
 import { setMarketCover } from "../../actions/marketActions";
 import BackHeader from "../BackHeader";
+import { renderFileInput } from "../../helpers/FormInputs";
+import { renderButtonContent } from "../../helpers/LoadingContent";
 
 class MarketCoverPage extends React.Component {
   constructor(props) {
@@ -23,27 +22,6 @@ class MarketCoverPage extends React.Component {
   state = {
     resetButtonDisable: true,
     imageFile: null,
-  };
-
-  renderError({ error, touched }) {
-    if (touched && error) {
-      return <Alert variant="danger">{error}</Alert>;
-    }
-  }
-
-  renderFileInput = ({ input, type, meta, accept }) => {
-    const { mimeType } = this.props;
-    return (
-      <div>
-        <input
-          name={input.name}
-          type={type}
-          accept={accept}
-          onChange={(event) => this.handleChange(event, input)}
-        />
-        {this.renderError(meta)}
-      </div>
-    );
   };
 
   handleChange = (event, input) => {
@@ -64,35 +42,6 @@ class MarketCoverPage extends React.Component {
       imageObject.src = localImageUrl;
     }
   };
-
-  renderButtonContent() {
-    if (
-      typeof this.props.loading !== "undefined" &&
-      this.props.loading.pending
-    ) {
-      return (
-        <div>
-          <Spinner
-            as="span"
-            animation="border"
-            size="sm"
-            role="status"
-            aria-hidden="true"
-          />
-          Ładowanie...
-        </div>
-      );
-    } else {
-      return "Zatwierdź";
-    }
-  }
-
-  // renderInfo() {
-  //   if(!this.state.imageFile) {
-  //       return <Alert className="login-alert" variant="danger">
-  //           {"Musisz dodać zdjęcie"}
-  //       </Alert>
-  //   }
 
   onSubmit = (marketCover) => {
     this.props.setMarketCover(this.props.match.params.id, marketCover);
@@ -120,7 +69,8 @@ class MarketCoverPage extends React.Component {
             accept="image/*"
             type="file"
             name="marketCover"
-            component={this.renderFileInput}
+            component={renderFileInput}
+            methodToHandle={this.handleChange}
           />
           <div className="img-box">
             {this.state.imageFile && (
@@ -128,7 +78,7 @@ class MarketCoverPage extends React.Component {
             )}
           </div>
           <Button className="form-button" variant="primary" type="submit">
-            {this.renderButtonContent()}
+            {renderButtonContent(this.props.loading,"Zatwierdź")}
           </Button>
           <Button
             className="form-button"

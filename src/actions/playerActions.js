@@ -1,6 +1,5 @@
 import {playerConstants} from '../constants/playerConstants';
 import {playerService} from '../services/playerService';
-import history from '../history';
 import { alertActions } from './alertActions';
 
 export const fetchPlayer = (username) => {

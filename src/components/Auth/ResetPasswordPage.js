@@ -1,5 +1,5 @@
 import React from 'react'
-import {Container,Form,Alert,Spinner,Button} from 'react-bootstrap';
+import {Container,Form,Button} from 'react-bootstrap';
 import {renderInput, renderInfo} from '../../helpers/FormInputs';
 import { renderButtonContent } from "../../helpers/LoadingContent";
 import { Field, reduxForm } from 'redux-form';

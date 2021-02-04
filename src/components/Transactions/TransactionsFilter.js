@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Form, Button} from 'react-bootstrap'
 import {updateTransactionFilters} from '../../actions/filterTransactionActions';
+import {renderCategoryFilter} from '../../helpers/MarketCategories';
  
 class TransactionsFilter extends React.Component {
 
@@ -16,32 +17,6 @@ class TransactionsFilter extends React.Component {
         sortedBy:["transactionDate","desc"]
     }
 
-    renderCategoryFilter() {
-        const categories = [
-            {label:"Sport",value:"sport"},
-            {label:"Celebryci",value:"cel"},
-            {label:"Polityka",value:"pol"},
-            {label:"Gospodarka",value:"gosp"},
-            {label:"Inne",value:"inne"}
-        ]
-
-        return(
-            <div>
-                <h4>Kategorie</h4>
-                <Form.Group>
-                    {categories.map(category => 
-                <Form.Check
-                 onClick={this.handleCategory}
-                    key={category.value}
-                    label={category.label}
-                    value={category.value}
-                    name="checkbox"
-                    type="checkbox"
-                 />)}
-                </Form.Group>
-            </div>
-        )
-    }
 
     handleOption = (e) => {
         this.setState({option:e.target.value});
@@ -137,7 +112,7 @@ class TransactionsFilter extends React.Component {
                 {this.renderBetTitleFilter()}
                 {this.renderSortFilter()}
                 {this.renderContractOptionFilter()}
-                {this.renderCategoryFilter()}
+                {renderCategoryFilter(this.handleCategory)}
             <hr className="my-4"></hr>
             <Button onClick={this.handleSubmit} variant="dark">
                 Zatwierdź

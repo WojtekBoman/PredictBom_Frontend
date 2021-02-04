@@ -11,12 +11,10 @@ import betPriceReducer from './betPriceReducer';
 import { reducer as formReducer } from 'redux-form';
 import playerReducer from './playerReducer';
 import contractReducer from './contractReducer';
-import betReducer from './betReducer';
 import filterContractReducer from './filterContractReducer';
 import offerReducer from './offerReducer';
 import rankingReducer from './rankingReducer';
 import transactionReducer from './transactionReducer';
-import filterTransactionConstants from './filterTransactionReducer';
 import filterTransactionReducer from './filterTransactionReducer';
 import filterOffersReducer from './filterOffersReducer';
 

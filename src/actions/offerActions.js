@@ -42,9 +42,8 @@ export const buyShares = (offerId,shares) => {
                     history.push('/contracts');
                 },
                 error => {
-                    console.log(error);
                     dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    dispatch(alertActions.buyingError(error.toString()));
                 }
             );
     };

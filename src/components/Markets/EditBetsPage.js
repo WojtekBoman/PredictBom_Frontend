@@ -18,7 +18,7 @@ import BetsList from "./BetsList";
 import { alertActions } from "../../actions/alertActions";
 import { LinkContainer } from "react-router-bootstrap";
 import BackHeader from "../BackHeader";
-import { renderInput, renderInfo } from "../../helpers/FormInputs";
+import { renderInput, renderInfoWithClose } from "../../helpers/FormInputs";
 import { renderButtonContent } from "../../helpers/LoadingContent";
 
 class EditBetsPage extends React.Component {
@@ -29,6 +29,10 @@ class EditBetsPage extends React.Component {
   componentDidMount() {
     this.props.fetchMarket(this.props.match.params.id);
     this.props.initialize({ shares: 10000 });
+  }
+
+  componentWillUnmount() {
+    this.props.clear();
   }
 
   renderInfo() {
@@ -86,11 +90,12 @@ class EditBetsPage extends React.Component {
 
   renderLoading = () => {
     if (
+      !this.props.currentMarket &&
       typeof this.props.loadingMarket !== "undefined" &&
-      this.props.loadingMarket.pending && this.props.currentMarket
+      this.props.loadingMarket.pending
     ) {
       return (
-        <Container className="text-center bg-light border rounded shadow-container create-market-container">
+        <div className="text-center">
           <Spinner
             as="span"
             animation="border"
@@ -99,7 +104,7 @@ class EditBetsPage extends React.Component {
             aria-hidden="true"
           />
           <h3>Pobieranie danych rynku</h3>
-        </Container>
+        </div>
       );
     }
   };
@@ -117,9 +122,12 @@ class EditBetsPage extends React.Component {
   };
 
   renderPageContent() {
-    if (this.props.currentMarket) {
+    if (
+      this.props.currentMarket &&
+      this.props.currentMarket.correctBetId == 0
+    ) {
       return (
-        <Container className="bg-light border rounded shadow-container create-market-container">
+        <div>
           <BackHeader title={this.props.currentMarket.topic} />
           <hr className="my-4"></hr>
           <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
@@ -163,13 +171,13 @@ class EditBetsPage extends React.Component {
               label="Podaj poczatkowa liczbę akcji wystawionych na sprzedaż"
             />
             <Button id="addBetButton" variant="primary" type="submit">
-              {renderButtonContent(this.props.addingLoading,"Dodaj zakład")}
+              {renderButtonContent(this.props.addingLoading, "Dodaj zakład")}
             </Button>
           </Form>
-          {this.renderInfo()}
+          {renderInfoWithClose(this.props.alert, this.props.clear)}
           {this.renderBetsList()}
           {this.renderNextStepButton()}
-        </Container>
+        </div>
       );
     }
   }
@@ -181,24 +189,24 @@ class EditBetsPage extends React.Component {
       !this.props.loadingMarket.pending
     ) {
       return (
-        <Container className="text-center bg-light border rounded shadow-container create-market-container">
+        <div>
           <FontAwesomeIcon icon={faTimesCircle} size={"6x"} />
           <h2>
             Wystąpił błąd pobierania danych. Odśwież stronę i spróbuj ponownie
           </h2>
-        </Container>
+        </div>
       );
     }
   }
 
   render() {
     return (
-      <div>
+      <Container className="bg-light border rounded shadow-container create-market-container">
         {this.renderLoading()}
         {this.renderFailedToFetch()}
         {this.renderPageContent()}
         {/* {this.renderFailedFetch()} */}
-      </div>
+      </Container>
     );
   }
 }
@@ -214,6 +222,13 @@ const validate = (formValues) => {
 
   const betsSumValue =
     parseFloat(formValues.yesPrice) + parseFloat(formValues.noPrice);
+
+  if (parseFloat(formValues.yesPrice) <= 0)
+    errors["yesPrice"] = "Cena musi być wartością dodatnią większą od zera";
+
+  if (parseFloat(formValues.noPrice) <= 0)
+    errors["noPrice"] = "Cena musi być wartością dodatnią większą od zera";
+
   if (betsSumValue > 1.1 || betsSumValue < 1) {
     errors["yesPrice"] =
       "Różnica między cenami na tak i nie może wynosić maksymalnie 10 $";

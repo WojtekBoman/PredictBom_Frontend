@@ -56,9 +56,9 @@ class MarketsFilter extends React.Component {
         const categories = [
             {label:"Sport",value:"sport"},
             {label:"Celebryci",value:"cel"},
-            {label:"Polityka",value:"pol"},
-            {label:"Gospodarka",value:"gosp"},
-            {label:"Inne",value:"inne"}
+            {label:"Polityka",value:"policy"},
+            {label:"Gospodarka",value:"eco"},
+            {label:"Inne",value:"other"}
         ]
 
         return(

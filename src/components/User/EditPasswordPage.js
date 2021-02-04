@@ -5,7 +5,7 @@ import { Container, Form, Button } from "react-bootstrap";
 import { renderInput, renderInfo } from "../../helpers/FormInputs";
 import { renderButtonContent } from "../../helpers/LoadingContent";
 import { editPassword } from "../../actions/loginActions";
-import BackButton from "../../helpers/BackButton";
+import BackHeader from "../BackHeader";
 
 class EditPasswordPage extends React.Component {
   state = {
@@ -29,10 +29,7 @@ class EditPasswordPage extends React.Component {
   render() {
     return (
       <Container className="bg-light border rounded shadow-container profile-container">
-        <header style={{ display: "inline-block" }}>
-          <BackButton />
-          <h3 style={{ display: "inline-block" }}>Zmiana hasła</h3>
-        </header>
+        <BackHeader title="Zmiana hasła" />
         <hr className="my-4"></hr>
         <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <Field

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Table,Modal,Form,Button } from 'react-bootstrap';
+import { Container, Table } from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {fetchOffers} from '../../actions/offerActions';
 import BuyOfferModal from './BuyOfferModal';
@@ -7,9 +7,12 @@ import PaginationBar from '../Markets/PaginationBar';
 import {updateOfferPagination} from '../../actions/paginationActions';
 import Offer from './Offer';
 import {changePage} from '../../actions/filterOfferActions';
-import BackButton from '../../helpers/BackButton';
+import BackHeader from '../BackHeader';
 import {alertActions} from '../../actions/alertActions';
 import Loader from 'react-loader-spinner';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
+import _ from 'lodash';
 
 class BetOffers extends React.Component {
 
@@ -56,8 +59,13 @@ class BetOffers extends React.Component {
         }
     }
 
-    renderInfo() {
-
+    renderFailedToFetch() {
+        if(this.props.alert.payload && this.props.alert.type !== "ALERT_BUYING") {
+           return <div className="text-center">
+            <FontAwesomeIcon icon={faExclamationCircle} size={"9x"}/>
+            <h2>{this.props.alert.payload}</h2>
+            </div>
+        }
     }
 
     renderContent() {
@@ -73,7 +81,7 @@ class BetOffers extends React.Component {
                             <th>Liczba akcji</th>
                             <th>Data wystawienia</th>
                             <th>Sprzedawca</th>
-                            {this.props.user && (<th>Czynności</th>)}
+                            {!_.isEmpty(this.props.player) && (<th>Czynności</th>)}
                             </tr>
                         </thead>
                         <tbody>
@@ -92,13 +100,11 @@ class BetOffers extends React.Component {
         
         return (
             <Container className="bg-light border rounded shadow-container create-market-container">
-                <header style={{display:"inline-block"}}>
-                    <BackButton />
-                    <h2 style={{display:"inline-block"}}>Oferty</h2>
-                    </header>
+                <BackHeader title="Oferty" />
                 <hr className="my-4"></hr>
                 {this.renderLoading()}
                 {this.renderContent()}
+                {this.renderFailedToFetch()}
                <BuyOfferModal id={this.state.id} maxValue={this.state.maxValue} handleClose={this.handleClose} showModalForm={this.state.showModalForm} />
             </Container>
         )
@@ -111,6 +117,7 @@ const mapStateToProps = state => {
         pagination: state.pagination.offersPagination,
         filter: state.filterOffers,
         user: state.login.user,
+        player: state.player,
         loading: state.loading.FETCH_OFFERS,
         alert: state.alert
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Container, Form, Button, Spinner,Alert} from 'react-bootstrap';
+import {Container, Form, Button} from 'react-bootstrap';
 import {Field,reduxForm} from 'redux-form';
 import {changePasswordWithToken} from '../../actions/tokenActions';
 import {

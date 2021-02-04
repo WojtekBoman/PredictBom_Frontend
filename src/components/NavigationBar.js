@@ -2,10 +2,8 @@ import React from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoneyBillWave, faStar } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { faMoneyBillWave } from "@fortawesome/free-solid-svg-icons";
 import { logout } from "../actions/loginActions";
-import history from "../history";
 import { fetchPlayer } from "../actions/playerActions";
 import _ from "lodash";
 
@@ -15,7 +13,7 @@ class NavigationBar extends React.Component {
   componentDidMount() {
     if (
       this.props.login.loggedIn &&
-      this.props.login.user.roles[0] === "ROLE_PLAYER"
+      this.props.login.user.roles.includes("ROLE_PLAYER")
     ) {
       this.props.fetchPlayer(this.props.login.user.username);
     }

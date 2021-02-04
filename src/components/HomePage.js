@@ -56,7 +56,7 @@ class HomePage extends React.Component {
           </Col>
           <Col sm={6}>
             <Image
-              className="toMarket"
+    
               variant="top"
               src={Poland}
               style={{ width: "100%", objectFit: "cover" }}

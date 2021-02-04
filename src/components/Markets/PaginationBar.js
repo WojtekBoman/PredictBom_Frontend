@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button, InputGroup, FormControl, Nav } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 import { connect } from "react-redux";
 
 class PaginationBar extends React.Component {
@@ -51,21 +51,21 @@ class PaginationBar extends React.Component {
         // handle: (1) < {5 6} [7] {8 9} (10)
         case hasLeftSpill && !hasRightSpill: {
           const extraPages = this.range(startPage - spillOffset, startPage - 1);
-          pages = ["LEFT", ...extraPages, ...pages];
+          pages = [LEFT_PAGE, ...extraPages, ...pages];
           break;
         }
 
         // handle: (1) {2 3} [4] {5 6} > (10)
         case !hasLeftSpill && hasRightSpill: {
           const extraPages = this.range(endPage + 1, endPage + spillOffset);
-          pages = [...pages, ...extraPages, "RIGHT"];
+          pages = [...pages, ...extraPages, RIGHT_PAGE];
           break;
         }
 
         // handle: (1) < {4 5} [6] {7 8} > (10)
         case hasLeftSpill && hasRightSpill:
         default: {
-          pages = [LEFT_PAGE, ...pages, "RIGHT"];
+          pages = [LEFT_PAGE, ...pages, RIGHT_PAGE];
           break;
         }
       }
@@ -80,7 +80,7 @@ class PaginationBar extends React.Component {
     if (this.props.paginationInfo) {
       if (
         !this.props.paginationInfo.totalPages ||
-        this.props.paginationInfo.totalPages === 1
+        this.props.paginationInfo.totalPages == 1
       )
         return null;
 
@@ -94,7 +94,7 @@ class PaginationBar extends React.Component {
         <Nav aria-label="Countries Pagination" className="text-center">
           <ul className="pagination">
             {pages.map((page, index) => {
-              if (page === "LEFT")
+              if (page == LEFT_PAGE)
                 return (
                   <li key={index} className="page-item">
                     <Nav.Link
@@ -108,7 +108,7 @@ class PaginationBar extends React.Component {
                   </li>
                 );
 
-              if (page === "RIGHT")
+              if (page == RIGHT_PAGE)
                 return (
                   <Nav.Item key={index} className="page-item">
                     <Nav.Link
@@ -125,7 +125,7 @@ class PaginationBar extends React.Component {
               return (
                 <Nav.Item
                   key={index}
-                  className={`page-item${number === page - 1 ? " active" : ""}`}
+                  className={`page-item${number == page - 1 ? " active" : ""}`}
                 >
                   <Nav.Link
                     className="page-link"

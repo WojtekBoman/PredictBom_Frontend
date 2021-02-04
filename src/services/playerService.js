@@ -1,5 +1,6 @@
 import authHeader from '../helpers/authHeader';
 import {baseURL} from '../api/baseURL';
+import {handleResponse} from '../helpers/HandleResponse';
 
 const fetchPlayer = (username) => {
 
@@ -22,21 +23,21 @@ const fetchRanking = () => {
     return fetch(`${baseURL}/player/ranking`,reqOptions).then((res) => handleResponse(res));
 }
 
-const handleResponse = (res) => {
+// const handleResponse = (res) => {
 
-    return res
-    .text()
-    .then(text => {
+//     return res
+//     .text()
+//     .then(text => {
       
-        const data = text && JSON.parse(text);
-        if(!res.ok) {
-            let error = (data && data.message) || res.statusText;
-            return Promise.reject(error);
-        }
+//         const data = text && JSON.parse(text);
+//         if(!res.ok) {
+//             let error = (data && data.message) || res.statusText;
+//             return Promise.reject(error);
+//         }
         
-        return data;
-    });
-}
+//         return data;
+//     });
+// }
 
 export const playerService = {
     fetchPlayer,

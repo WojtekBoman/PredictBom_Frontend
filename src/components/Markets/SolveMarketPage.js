@@ -1,41 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Container,Button,Form, Row, Col, Image} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 import {fetchMarket} from '../../actions/marketActions';
 import Loader from 'react-loader-spinner';
 import BetsList from './BetsList';
 import SolveSingleBetMarketForm from './SolveSingleBetMarketForm';
 import SolveMultiBetMarketForm from './SolveMultiBetMarketForm';
-import sportBackground from '../../img/sportBackground.png';
-import celebryciBackground from '../../img/celebryciBackground.jpg';
-import politykaBackground from '../../img/politykaBackground.jpg';
-import gospodarkaBackground from '../../img/gospodarkaBackground.jpg';
-import inneBackground from '../../img/inneBackground.png';
 import BackHeader from '../BackHeader';
 
 class SolveMarketPage extends React.Component {
 
     componentDidMount() {
         if(!this.props.currentMarket) this.props.fetchMarket(this.props.match.params.id);
-    }
-
-    setCover = (category) => {
-
-        switch(category){
-            case "SPORT":
-                return sportBackground;
-              case "CELEBRITIES":
-                return celebryciBackground;
-              case "POLICY":
-                return politykaBackground;
-              case "ECONOMY":
-                return gospodarkaBackground;
-              case "OTHER":
-                return inneBackground;
-              default:
-                return inneBackground;
-    
-        }
     }
 
     renderBetsList = () => {
@@ -46,7 +22,7 @@ class SolveMarketPage extends React.Component {
 } 
 
     renderLoadingMarket() {
-        if ((typeof this.props.loadingMarket !== 'undefined') && this.props.loadingMarket.pending) {
+        if (!this.props.currentMarket &&(typeof this.props.loadingMarket !== 'undefined') && this.props.loadingMarket.pending) {
             return(
             <div className="text-center">
             <Loader
@@ -60,7 +36,7 @@ class SolveMarketPage extends React.Component {
 
     renderSolveMarketInfo = () => {
         return(
-            <div className="text-center">
+            <div>
                 {this.compareDates(this.props.currentMarket.endDate)}
                 {this.renderChooseCorrectBetForm()}
             </div>
@@ -73,13 +49,13 @@ class SolveMarketPage extends React.Component {
         if (dateOne > dateTwo) {    
             return(
                 <div>
-                    Jeszcze nie nadeszła przewidywana data zakończenia. Na pewno chcesz zakończyć rynek ?
+                    <h4>Jeszcze nie nadeszła przewidywana data zakończenia. Na pewno chcesz zakończyć rynek ?</h4>
                 </div>
             )    
          }else {    
             return(
                 <div>
-                    Rynek powinien się już zakończyć
+                    <h4>Rynek powinien się już zakończyć</h4>
                 </div>
             )       
          }    
@@ -90,7 +66,8 @@ class SolveMarketPage extends React.Component {
             return(
                 <div>
                     <BackHeader title={`Rozwiąż rynek "${this.props.currentMarket.topic}"`} />
-                    <Row>
+                    <hr className="my-4"></hr>
+                    {/* <Row>
                         <Col sm={6}>
                         <Image variant="top" src={this.props.currentMarket.marketCover ? (`data:image/jpeg;base64,${this.props.currentMarket.marketCover.data}`) : (this.setCover(this.props.currentMarket.category))} style={{width: "100%",
                         objectFit:"cover"
@@ -114,7 +91,7 @@ class SolveMarketPage extends React.Component {
                         <h4>Zakłady</h4>
                         {this.renderBetsList()}
                         <hr className="my-4"></hr>
-                    </div>
+                    </div> */}
                     <div>   
                         {this.renderSolveMarketInfo()}
                     </div>

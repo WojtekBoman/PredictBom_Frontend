@@ -5,7 +5,7 @@ $fullHeight: 100vh;
 
 body {
     background-image: $background;
-    // height: $fullHeight;
+    height: auto;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -15,8 +15,10 @@ body {
 .container {
     margin: $containerMargin;
     padding: $containerPadding;
-    
+    margin-bottom: 200px;
 }
+
+
 
 .edit-market-button{
     margin: 10px;
@@ -59,15 +61,20 @@ body {
     // font-size: 20px;
 }
 
-.img {
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-}
+// .img {
+//     max-width: 100%;
+//     max-height: 100%;
+//     display: block;
+// }
 
-.img-box{
-    margin: 10px auto;
-    width: 90%;
+// .img-box{
+//     margin: 10px auto;
+//     width: 90%;
+// }
+
+.img-cover {
+    width: "100%";
+    object-fit: "cover"
 }
 
 .market-buttons-group {

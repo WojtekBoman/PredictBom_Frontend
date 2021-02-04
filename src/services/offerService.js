@@ -1,54 +1,32 @@
-import authHeader from '../helpers/authHeader';
-import {baseURL} from '../api/baseURL';
+import authHeader from "../helpers/authHeader";
+import { baseURL } from "../api/baseURL";
+import { handleResponse, handleBuying } from "../helpers/HandleResponse";
 
-const fetchOffers = (betId,option,page,size) => {
-    const reqOptions = {
-        method: 'GET',
-        headers: authHeader()
-    }
+const fetchOffers = (betId, option, page, size) => {
+  const reqOptions = {
+    method: "GET",
+    headers: authHeader(),
+  };
 
-    return fetch(`${baseURL}/offers?betId=${betId}&option=${option}&page=${page}&size=${size}`,reqOptions).then(res => handleOffers(res));
-}
+  return fetch(
+    `${baseURL}/offers?betId=${betId}&option=${option}&page=${page}&size=${size}`,
+    reqOptions
+  ).then((res) => handleResponse(res));
+};
 
-const buyShares = (offerId,shares) => {
-    const reqOption = {
-        method:'POST',
-        headers: authHeader()
-    }
+const buyShares = (offerId, shares) => {
+  const reqOption = {
+    method: "POST",
+    headers: authHeader(),
+  };
 
-    return fetch(`${baseURL}/offers/buy?offerId=${offerId}&shares=${shares}`,reqOption).then(res => handleResponse(res));
-} 
-
-
-const handleResponse = (res) => {
-    return res
-    .text()
-    .then(text => {
-        const data = text && JSON.parse(text);
-        console.log(data)
-        if(!res.ok) {
-            let error = data.info;
-            return Promise.reject(error);
-        }
-        return data;
-    });
-}
-
-const handleOffers = res => {
-   
-    return res
-    .text()
-    .then(markets =>{
-        const data = markets && JSON.parse(markets);
-        if(!res.ok) {
-            let error = (data && data.error) || res.statusText;
-            return Promise.reject(error);
-        }
-        return data;
-    })
-}
+  return fetch(
+    `${baseURL}/offers/buy?offerId=${offerId}&shares=${shares}`,
+    reqOption
+  ).then((res) => handleBuying(res));
+};
 
 export const offerService = {
-    fetchOffers,
-    buyShares
-}
+  fetchOffers,
+  buyShares,
+};

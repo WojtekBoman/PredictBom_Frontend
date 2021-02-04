@@ -17,7 +17,7 @@ import { logout } from "../../actions/loginActions";
 
 class ProfilePage extends React.Component {
   componentDidMount() {
-    if (this.props.user.roles[0] === "ROLE_PLAYER") {
+    if (this.props.user.roles.includes("ROLE_PLAYER")) {
       this.props.fetchPlayer(this.props.user.username);
     }
   }

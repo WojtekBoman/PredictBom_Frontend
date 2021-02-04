@@ -86,7 +86,7 @@ class MarketsList extends React.Component {
                 <Row style={{width:"100%"}}>
                     {this.props.markets.map(market => 
                     <Col xs={12} sm={6} className="d-flex align-items-stretch" style={{margin:"20px 0"}} key={market.marketId}>
-                        <Market marketId={market.marketId} published={market.published} marketTitle={market.topic} description={market.description} marketCategory={market.category} marketCover={market.marketCover} createdDate={market.createdDate} bets={market.bets}/>
+                        <Market author={market.author} marketId={market.marketId} published={market.published} marketTitle={market.topic} description={market.description} marketCategory={market.category} marketCover={market.marketCover} createdDate={market.createdDate} bets={market.bets} correctBetId={market.correctBetId}/>
                     </Col>
                     )}
                     <PaginationBar paginationInfo={this.props.paginationInfo} changePage={changePage}/>

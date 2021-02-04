@@ -27,7 +27,7 @@ class Bet extends React.Component {
     this.props.fetchBetPrice(this.props.betId);
 
     if (this.props.correctBetId > 0)
-      if (this.props.correctBetId == this.props.betId) {
+      if (this.props.correctBetId === this.props.betId) {
         this.props.correctBetOption
           ? this.setState({ backgroundColor: "green" })
           : this.setState({ backgroundColor: "red" });
@@ -77,7 +77,7 @@ class Bet extends React.Component {
 
   renderPrice() {
     if (this.props.betPrice) {
-      if (this.props.correctBetId == 0) {
+      if (this.props.correctBetId === 0) {
         return (
           <Row className="text-center">
             <Col sm={4}>
@@ -120,7 +120,7 @@ class Bet extends React.Component {
       } else {
         return (
           <div>
-            {this.props.correctBetId == this.props.betId ? (
+            {this.props.correctBetId === this.props.betId ? (
               <div>
                 {this.props.correctBetOption ? (
                   <h5>Zakład poprawny dla opcji na tak</h5>
@@ -163,7 +163,7 @@ class Bet extends React.Component {
   renderLoadingPrice() {
     if (
       !this.props.betPrice &&
-      this.props.correctBetId == 0 &&
+      this.props.correctBetId === 0 &&
       !this.props.alert
     ) {
       return (

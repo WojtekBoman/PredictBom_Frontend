@@ -3,54 +3,12 @@ import { connect } from "react-redux";
 import { Modal, Button, Form, Alert, Spinner } from "react-bootstrap";
 import { buyShares } from "../../actions/offerActions";
 import { renderButtonContent } from "../../helpers/LoadingContent";
+import { renderInfo } from "../../helpers/FormInputs";
 
 class BuyOfferModal extends React.Component {
   state = {
-    shares: 1,
-    showTypeInfo: false,
+    shares: 1
   };
-
-  renderInfo() {
-    if (this.props.alert.payload) {
-      return (
-        <Alert className="login-alert" variant="danger">
-          {this.props.alert.payload}
-        </Alert>
-      );
-    }
-  }
-
-  renderTypeInfo() {
-    if (this.state.showTypeInfo) {
-      return (
-        <Alert className="login-alert" variant="danger">
-          Podaj liczbę całkowitą
-        </Alert>
-      );
-    }
-  }
-
-  renderButtonContent() {
-    if (
-      typeof this.props.loading !== "undefined" &&
-      this.props.loading.pending
-    ) {
-      return (
-        <div>
-          <Spinner
-            as="span"
-            animation="border"
-            size="sm"
-            role="status"
-            aria-hidden="true"
-          />
-          Ładowanie...
-        </div>
-      );
-    } else {
-      return "Zatwierdź";
-    }
-  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -94,7 +52,7 @@ class BuyOfferModal extends React.Component {
                   variant="primary"
                   style={{ marginRight: "10px" }}
                 >
-                  {renderButtonContent(this.props.loading)}
+                  {renderButtonContent(this.props.loading,"Zakup akcje")}
                 </Button>
                 <Button
                   variant="secondary"
@@ -104,8 +62,7 @@ class BuyOfferModal extends React.Component {
                 </Button>
               </div>
             </Form.Group>
-            {this.renderInfo()}
-            {this.renderTypeInfo()}
+            {renderInfo(this.props.alert)}
           </Form>
         </Modal.Body>
       </Modal>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Container, Form, Button, Spinner } from "react-bootstrap";
+import { Alert, Form } from "react-bootstrap";
 
 export const renderInput = ({
   input,
@@ -39,7 +39,7 @@ export const renderSelectField = ({
   label,
   type,
   disabled,
-  meta: { touched, error }
+  meta
 }) => {return(
   <Form.Group>
   <Form.Label>{label}</Form.Label>
@@ -50,7 +50,7 @@ export const renderSelectField = ({
         </option>
       ))}
     </Form.Control>
-    {touched && error && <span>{error}</span>}
+    {renderError(meta)}
   </Form.Group>
 );
       }
@@ -64,6 +64,20 @@ export const renderInfo = (alert) => {
       );
     }
   }
+
+ export const renderFileInput = ({ input, type, meta, accept, methodToHandle }) => {
+    return (
+      <div>
+        <input
+          name={input.name}
+          type={type}
+          accept={accept}
+          onChange={(event) => methodToHandle(event, input)}
+        />
+        {renderError(meta)}
+      </div>
+    );
+  };
 
   export const renderInfoWithClose = (alert,clear) => {
     if (alert.payload) {
