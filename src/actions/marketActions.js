@@ -21,7 +21,7 @@ export const createMarket = ({
         history.push(`editBets/${res.marketId}`);
       },
       (error) => {
-        dispatch(failure(error.toString()));
+        dispatch(failure());
         dispatch(alertActions.error(error.toString()));
       }
     );
@@ -33,8 +33,8 @@ export const createMarket = ({
   function success(market) {
     return { type: marketsConstants.CREATE_MARKET_SUCCESS, payload: market };
   }
-  function failure(error) {
-    return { type: marketsConstants.CREATE_MARKET_FAILURE, error };
+  function failure() {
+    return { type: marketsConstants.CREATE_MARKET_FAILURE };
   }
 };
 
@@ -49,10 +49,12 @@ export const editMarket = (
       .then(
         (res) => {
           dispatch(success(res));
-          res.published ? history.push("/markets") : history.push("/markets/private");
+          res.published
+            ? history.push("/markets")
+            : history.push("/markets/private");
         },
         (error) => {
-          dispatch(failure(error.toString()));
+          dispatch(failure());
           dispatch(alertActions.error(error.toString()));
         }
       );
@@ -64,8 +66,8 @@ export const editMarket = (
   function success(market) {
     return { type: marketsConstants.CREATE_MARKET_SUCCESS, payload: market };
   }
-  function failure(error) {
-    return { type: marketsConstants.CREATE_MARKET_FAILURE, error };
+  function failure() {
+    return { type: marketsConstants.CREATE_MARKET_FAILURE };
   }
 };
 
@@ -78,16 +80,7 @@ export const fetchMarkets = (
   pageSize
 ) => {
   return (dispatch) => {
-    dispatch(
-      request(
-        typeOfMarkets,
-        marketTitle,
-        marketCategories,
-        sortedBy,
-        page,
-        pageSize
-      )
-    );
+    dispatch(request());
     marketService
       .fetchMarkets(
         typeOfMarkets,
@@ -103,26 +96,26 @@ export const fetchMarkets = (
           dispatch(updatePagination(_.omit(markets, ["content"])));
         },
         (error) => {
-          dispatch(failure(error.toString()));
+          dispatch(failure());
           dispatch(alertActions.error(error.toString()));
         }
       );
   };
 
-  function request(markets) {
-    return { type: marketsConstants.FETCH_MARKETS_REQUEST, payload: markets };
+  function request() {
+    return { type: marketsConstants.FETCH_MARKETS_REQUEST };
   }
   function success(markets) {
     return { type: marketsConstants.FETCH_MARKETS_SUCCESS, payload: markets };
   }
-  function failure(error) {
-    return { type: marketsConstants.FETCH_MARKETS_FAILURE, error };
+  function failure() {
+    return { type: marketsConstants.FETCH_MARKETS_FAILURE };
   }
 };
 
 export const fetchMarket = (marketId) => {
   return (dispatch) => {
-    dispatch(request(marketId));
+    dispatch(request());
     marketService.fetchMarket(marketId).then(
       (market) => {
         dispatch(success(market));
@@ -134,93 +127,92 @@ export const fetchMarket = (marketId) => {
     );
   };
 
-  function request(market) {
-    return { type: marketsConstants.FETCH_MARKET_REQUEST, payload: market };
+  function request() {
+    return { type: marketsConstants.FETCH_MARKET_REQUEST };
   }
   function success(market) {
     return { type: marketsConstants.FETCH_MARKET_SUCCESS, payload: market };
   }
-  function failure(error) {
-    return { type: marketsConstants.FETCH_MARKET_FAILURE, error };
+  function failure() {
+    return { type: marketsConstants.FETCH_MARKET_FAILURE };
   }
 };
 
 export const deleteMarket = (marketId) => {
   return (dispatch) => {
-    dispatch(request(marketId));
+    dispatch(request());
     marketService.deleteMarket(marketId).then(
       (market) => {
         history.push("/markets/private");
         dispatch(success(market));
       },
       (error) => {
-        dispatch(failure(error));
+        dispatch(failure());
         dispatch(alertActions.error(error.toString()));
       }
     );
   };
 
-  function request(market) {
-    return { type: marketsConstants.DELETE_MARKET_REQUEST, payload: market };
+  function request() {
+    return { type: marketsConstants.DELETE_MARKET_REQUEST };
   }
   function success(market) {
     return { type: marketsConstants.DELETE_MARKET_SUCCESS, payload: market };
   }
-  function failure(error) {
-    return { type: marketsConstants.DELETE_MARKET_FAILURE, error };
+  function failure() {
+    return { type: marketsConstants.DELETE_MARKET_FAILURE };
   }
 };
 
 export const setMarketCover = (marketId, marketCover) => {
   return (dispatch) => {
-    dispatch(request(marketId));
+    dispatch(request());
     marketService.setMarketCover(marketId, marketCover).then(
       (res) => {
         dispatch(success(res));
         history.push("/markets/private");
       },
       (error) => {
-        dispatch(failure(error.toString()));
+        dispatch(failure());
         dispatch(alertActions.error(error.toString()));
       }
     );
   };
 
-  function request(market) {
-    return { type: marketsConstants.SET_MARKET_COVER_REQUEST, payload: market };
+  function request() {
+    return { type: marketsConstants.SET_MARKET_COVER_REQUEST };
   }
   function success(market) {
     return { type: marketsConstants.SET_MARKET_COVER_SUCCESS, payload: market };
   }
-  function failure(error) {
-    return { type: marketsConstants.SET_MARKET_COVER_FAILURE, error };
+  function failure() {
+    return { type: marketsConstants.SET_MARKET_COVER_FAILURE };
   }
 };
 
 export const addBet = (marketId, yesPrice, noPrice, title, shares) => {
   return (dispatch) => {
-    dispatch(request(marketId));
+    dispatch(request());
     marketService.addBet(marketId, yesPrice, noPrice, title, shares).then(
       (res) => {
         dispatch(success(res.predictionMarket));
         dispatch(addBetPrice(res.betPrice));
-        // dispatch(alertActions.success(res.info));
       },
       (error) => {
-        dispatch(failure(error.toString()));
+        dispatch(failure());
         dispatch(alertActions.error(error.toString()));
       }
     );
   };
 
-  function request(market) {
-    return { type: marketsConstants.ADD_BET_REQUEST, payload: market };
+  function request() {
+    return { type: marketsConstants.ADD_BET_REQUEST };
   }
   function success(market) {
     return { type: marketsConstants.ADD_BET_SUCCESS, payload: market };
   }
-  function failure(error) {
-    return { type: marketsConstants.ADD_BET_FAILURE, error };
+  function failure() {
+    return { type: marketsConstants.ADD_BET_FAILURE };
   }
   function addBetPrice(betPrice) {
     return { type: betsConstants.FETCH_BET_PRICE_SUCCESS, payload: betPrice };
@@ -229,7 +221,7 @@ export const addBet = (marketId, yesPrice, noPrice, title, shares) => {
 
 export const fetchBetPrice = (betId) => {
   return (dispatch) => {
-    dispatch(request(betId));
+    dispatch(request());
     marketService.fetchBetPrice(betId).then(
       (betPrice) => {
         dispatch(success(betPrice));
@@ -241,40 +233,40 @@ export const fetchBetPrice = (betId) => {
     );
   };
 
-  function request(betPrice) {
-    return { type: betsConstants.FETCH_BET_PRICE_REQUEST, payload: betPrice };
+  function request() {
+    return { type: betsConstants.FETCH_BET_PRICE_REQUEST };
   }
   function success(betPrice) {
     return { type: betsConstants.FETCH_BET_PRICE_SUCCESS, payload: betPrice };
   }
-  function failure(error) {
-    return { type: betsConstants.FETCH_BET_PRICE_FAILURE, error };
+  function failure() {
+    return { type: betsConstants.FETCH_BET_PRICE_FAILURE };
   }
 };
 
 export const deleteBet = (betId) => {
   return (dispatch) => {
-    dispatch(request(betId));
+    dispatch(request());
     marketService.deleteBet(betId).then(
       (res) => {
         dispatch(success(res));
         dispatch(deleteBetPrice(betId));
       },
       (error) => {
-        dispatch(failure(error.toString()));
+        dispatch(failure());
         dispatch(alertActions.error(error.toString()));
       }
     );
   };
 
-  function request(market) {
-    return { type: marketsConstants.DELETE_BET_REQUEST, payload: market };
+  function request() {
+    return { type: marketsConstants.DELETE_BET_REQUEST };
   }
   function success(market) {
     return { type: marketsConstants.DELETE_BET_SUCCESS, payload: market };
   }
-  function failure(error) {
-    return { type: marketsConstants.DELETE_BET_FAILURE, error };
+  function failure() {
+    return { type: marketsConstants.DELETE_BET_FAILURE };
   }
   function deleteBetPrice(betId) {
     return { type: betsConstants.DELETE_BET, payload: betId };
@@ -283,23 +275,22 @@ export const deleteBet = (betId) => {
 
 export const makePublic = (marketId) => {
   return (dispatch) => {
-    dispatch(request(marketId));
+    dispatch(request());
     marketService.makePublic(marketId).then(
       (res) => {
         dispatch(success(res));
         history.push("/markets");
       },
       (error) => {
-        dispatch(failure(error.toString()));
+        dispatch(failure());
         dispatch(alertActions.error(error.toString()));
       }
     );
   };
 
-  function request(market) {
+  function request() {
     return {
       type: marketsConstants.MAKE_MARKET_PUBLIC_REQUEST,
-      payload: market,
     };
   }
   function success(market) {
@@ -308,30 +299,29 @@ export const makePublic = (marketId) => {
       payload: market,
     };
   }
-  function failure(error) {
-    return { type: marketsConstants.MAKE_MARKET_PUBLIC_FAILURE, error };
+  function failure() {
+    return { type: marketsConstants.MAKE_MARKET_PUBLIC_FAILURE };
   }
 };
 
 export const solveMultiBetMarket = (marketId, betId) => {
   return (dispatch) => {
-    dispatch(request(marketId));
+    dispatch(request());
     marketService.solveMultiBetMarket(marketId, betId).then(
       (res) => {
         dispatch(success(res));
         history.push("/markets");
       },
       (error) => {
-        dispatch(failure(error.toString()));
+        dispatch(failure());
         dispatch(alertActions.error(error.toString()));
       }
     );
   };
 
-  function request(market) {
+  function request() {
     return {
       type: marketsConstants.SOLVE_MULTI_BET_MARKET_REQUEST,
-      payload: market,
     };
   }
   function success(market) {
@@ -340,30 +330,29 @@ export const solveMultiBetMarket = (marketId, betId) => {
       payload: market,
     };
   }
-  function failure(error) {
-    return { type: marketsConstants.SOLVE_MULTI_BET_MARKET_FAILURE, error };
+  function failure() {
+    return { type: marketsConstants.SOLVE_MULTI_BET_MARKET_FAILURE };
   }
 };
 
 export const solveSingleBetMarket = (marketId, betId, correctBetOption) => {
   return (dispatch) => {
-    dispatch(request(marketId));
+    dispatch(request());
     marketService.solveSingleBetMarket(marketId, betId, correctBetOption).then(
       (res) => {
         dispatch(success(res));
         history.push("/markets");
       },
       (error) => {
-        dispatch(failure(error.toString()));
+        dispatch(failure());
         dispatch(alertActions.error(error.toString()));
       }
     );
   };
 
-  function request(market) {
+  function request() {
     return {
       type: marketsConstants.SOLVE_SINGLE_BET_MARKET_REQUEST,
-      payload: market,
     };
   }
   function success(market) {
@@ -372,7 +361,7 @@ export const solveSingleBetMarket = (marketId, betId, correctBetOption) => {
       payload: market,
     };
   }
-  function failure(error) {
-    return { type: marketsConstants.SOLVE_SINGLE_BET_MARKET_FAILURE, error };
+  function failure() {
+    return { type: marketsConstants.SOLVE_SINGLE_BET_MARKET_FAILURE };
   }
 };

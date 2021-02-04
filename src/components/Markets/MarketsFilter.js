@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Form} from 'react-bootstrap';
 import {selectCategory, unselectCategory,updateSorted, changePageSize} from '../../actions/filterActions';
-// import {filterConstants} from '../../constants/filterConstants';
 
 class MarketsFilter extends React.Component {
 
