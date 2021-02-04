@@ -4,7 +4,7 @@ import history from '../history';
 import { alertActions } from './alertActions';
 
 export const register = ({username,firstName,surname,email,password}) => {
-    console.log(username,password);
+  
     return dispatch => {
         dispatch(request({ username }));
 
@@ -15,7 +15,7 @@ export const register = ({username,firstName,surname,email,password}) => {
                     history.push('/');
                 },
                 error => {
-                    console.log(error);
+                  
                     dispatch(failure(error.toString()));
                     dispatch(alertActions.error(error.toString()));
                 }

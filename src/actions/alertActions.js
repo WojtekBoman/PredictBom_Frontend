@@ -16,20 +16,27 @@ const error = (message) => {
     }
 }
 
+const buyingError = (message) => {
+    return {
+        type: alertConstants.ALERT_BUYING,
+        payload: message
+    }
+}
+
 const clear = () => {
     return {
         type: alertConstants.ALERT_CLEAR
     }
 }
 
-export const clearAction = () => {
+const deleteAlert = (message) => {
     return {
-        type: alertConstants.ALERT_CLEAR
+        type: alertConstants.ALERT_DELETING,
+        payload: message
     }
 }
 
-
 export const alertActions = {
-    success,error,clear
+    success,error,clear,buyingError, deleteAlert
 };
 

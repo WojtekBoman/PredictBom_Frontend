@@ -5,7 +5,7 @@ $fullHeight: 100vh;
 
 body {
     background-image: $background;
-    height: $fullHeight;
+    height: auto;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -15,6 +15,15 @@ body {
 .container {
     margin: $containerMargin;
     padding: $containerPadding;
+    margin-bottom: 200px;
+}
+
+
+
+.edit-market-button{
+    margin: 10px;
+    min-width: 60%;
+    max-width: 90%;
 }
 
 .form-container, .profile-container {
@@ -22,7 +31,19 @@ body {
 }
 
 .create-market-container{
-    width:70%
+    width:60%;
+    margin-bottom: 100px;
+}
+
+@media (max-width: 800px) {
+    .create-market-container{
+        width:100%
+    }
+
+    .form-container, .profile-container {
+        width: 100%;
+    }
+    
 }
 
 .login-alert{
@@ -33,15 +54,27 @@ body {
     margin:0 5px;
 }
 
-.img {
+.profile-button {
+    width: 70%;
     max-width: 100%;
-    max-height: 100%;
-    display: block;
+    margin: 8px auto;
+    // font-size: 20px;
 }
 
-.img-box{
-    margin: 10px auto;
-    width: 90%;
+// .img {
+//     max-width: 100%;
+//     max-height: 100%;
+//     display: block;
+// }
+
+// .img-box{
+//     margin: 10px auto;
+//     width: 90%;
+// }
+
+.img-cover {
+    width: "100%";
+    object-fit: "cover"
 }
 
 .market-buttons-group {
@@ -52,4 +85,53 @@ body {
 .market-button{
     float: left;
     margin: 10px 10px 10px 0px;
+}
+
+.market-card-buttons{
+    margin: 5px;
+    display: block;
+}
+
+.toMarket{
+    cursor: pointer;
+}
+
+/* Inactive tab */
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff !important;
+    background-color: black !important;
+}
+
+.nav-pills .nav-link.hover, .nav-pills .show>.nav-link {
+    color: #fff !important;
+    background-color: grey !important;
+}
+
+
+.nav-pills a {
+        color: black;
+        text-decoration: none;
+        background-color: transparent;
+}
+
+.nav-pills a:hover {
+    color: white;
+    text-decoration: none;
+    background-color: #292b2c;
+}
+
+.close-button {
+    margin-top: 5px;
+    margin-right: 5px;
+    position:absolute;
+    top:0;
+    right:0;
+}
+
+.back-icon:hover{
+    cursor: pointer;
+}
+
+.home-info {
+    margin-bottom: 20px;
 }

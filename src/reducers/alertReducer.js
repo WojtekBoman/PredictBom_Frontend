@@ -1,20 +1,39 @@
-import {alertConstants} from '../constants/alertConstants';
+import { alertConstants } from "../constants/alertConstants";
 
 export default (state = {}, action) => {
-    switch(action.type) {
-        case alertConstants.ALERT_SUCCESS:
-            return {
-                type: alertConstants.ALERT_SUCCESS,
-                payload: action.payload
-            }
-        case alertConstants.ALERT_ERROR:
-            return {
-                type: alertConstants.ALERT_ERROR,
-                payload: action.payload
-            }
-        case alertConstants.ALERT_CLEAR:
-            return {}
-        default:
-            return state;
+  switch (action.type) {
+    case alertConstants.ALERT_SUCCESS:
+      return {
+        type: alertConstants.ALERT_SUCCESS,
+        payload: action.payload,
+      };
+    case alertConstants.ALERT_ERROR:
+      if (action.payload === "TypeError: Failed to fetch") {
+        return {
+          type: alertConstants.ALERT_ERROR,
+          payload: "Serwer nie odpowiada, spróbuj ponownie później!",
+        };
+      }
+
+      return {
+        type: alertConstants.ALERT_ERROR,
+        payload: action.payload,
+      };
+    case alertConstants.ALERT_BUYING: {
+      return {
+        type: alertConstants.ALERT_BUYING,
+        payload: action.payload,
+      };
     }
-}
+    case alertConstants.ALERT_DELETING: {
+      return {
+        type: alertConstants.ALERT_DELETING,
+        payload: action.payload,
+      };
+    }
+    case alertConstants.ALERT_CLEAR:
+      return {};
+    default:
+      return state;
+  }
+};
