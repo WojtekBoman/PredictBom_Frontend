@@ -12,6 +12,7 @@ import { faSadTear } from "@fortawesome/free-solid-svg-icons";
 import { alertActions } from "../../actions/alertActions";
 import { displayMarketCover } from "../../helpers/MartketCovers";
 import BackHeader from "../BackHeader";
+import './ContractDetails.scss';
 
 class ContractDetails extends React.Component {
   state = {
@@ -123,7 +124,7 @@ class ContractDetails extends React.Component {
                   this.props.contract.marketInfo.marketCover,
                   this.props.contract.marketInfo.marketCategory
                 )}
-                style={{ width: "100%", maxHeight: "50vw", objectFit: "cover" }}
+                className="contract-cover"
               />
             </Col>
             <Col sm={6}>
@@ -146,16 +147,16 @@ class ContractDetails extends React.Component {
           </Row>
 
           {this.props.contract.contractStatus === "PENDING" ? (
-            <div style={{ marginTop: "10px" }}>
+            <div className="mt-3">
               <h4>Oferty</h4>
               <hr className="my-4"></hr>
               <div>
                 {this.renderOffers()}
                 {this.props.contract && (
-                  <div style={{ display: "inline-block" }}>
+                  <div className="button-container">
                     {this.props.contract.shares > 0 && (
                       <LinkContainer
-                        style={{ marginRight: "5px" }}
+                        className="mr-3"
                         to={`/offers/new/${this.props.match.params.id}`}
                       >
                         <Button variant="primary">Dodaj ofertę</Button>
@@ -172,7 +173,7 @@ class ContractDetails extends React.Component {
             </div>
           ) : (
             <LinkContainer
-              style={{ marginTop: "10px" }}
+              className="mt-3"
               to={`/markets/details/${this.props.contract.bet.marketId}`}
             >
               <Button variant="primary">Wyświetl rynek</Button>

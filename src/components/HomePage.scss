@@ -1,0 +1,22 @@
+$imgWidth: 100%;
+$imgFit: "cover";
+$buttonMargin: "10px";
+
+.img-cover {
+    width: $imgWidth;
+    object-fit: $imgFit;
+}
+
+.link-button {
+    width: 70%;
+    max-width: 100%;
+    margin: 8px auto;
+}
+
+.register-button {
+    margin:5px
+}
+
+.home-info {
+    margin-bottom: 20px;
+}

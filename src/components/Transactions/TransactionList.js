@@ -5,13 +5,14 @@ import TransactionsFilter from './TransactionsFilter';
 import {fetchFilteredTransactions} from '../../actions/transactionActions';
 import {clearFilters} from '../../actions/filterTransactionActions'
 import Transaction from './Transaction'
-import { Button, Image, Item } from 'semantic-ui-react'
+import { Item } from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faSadTear,faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import {changeTransactionPage} from '../../actions/filterTransactionActions';
 import {clearPagination} from '../../actions/paginationActions';
 import Loader from 'react-loader-spinner';
 import PaginationBar from '../Markets/PaginationBar';
+import './TransactionList.scss';
 
 class TransactionList extends React.Component {
 
@@ -99,7 +100,7 @@ class TransactionList extends React.Component {
         if(this.props.transactions.length > 0){
             return(
                 <Item.Group divided>
-                    {this.props.transactions.map(transaction => <Transaction transactionDate={transaction.transactionDate} purchaser={transaction.purchaser} dealer={transaction.dealer ? transaction.dealer : "Organizator rynku"} option={transaction.option} price={transaction.price} shares={transaction.shares} bet={transaction.bet} marketInfo={transaction.marketInfo}/> )}
+                    {this.props.transactions.map(transaction => <Transaction key={transaction.id} transactionDate={transaction.transactionDate} purchaser={transaction.purchaser} dealer={transaction.dealer ? transaction.dealer : "Organizator rynku"} option={transaction.option} price={transaction.price} shares={transaction.shares} bet={transaction.bet} marketInfo={transaction.marketInfo}/> )}
                 </Item.Group>
                 )
         }else{
@@ -110,21 +111,9 @@ class TransactionList extends React.Component {
             )
         }
     }
-
-    // renderList() {
-    //     if(this.props.transactions){
-    //         return(
-    //             <Item.Group divided>
-    //                 {this.props.transactions.map(transaction => <Transaction bet={transaction.bet} marketInfo={transaction.marketInfo}/> )}
-    //             </Item.Group>
-    //         )
-    //     }
-      
-    // }
-
     render() {
         return(
-            <div style={{marginTop:"20px"}}>
+            <div className="transaction-container">
                 <Row>
                     <Col sm={3}>
                         <TransactionsFilter />

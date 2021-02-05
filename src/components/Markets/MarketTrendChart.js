@@ -95,7 +95,7 @@ class MarketTrendChart extends React.Component {
         <Loader
           height={50}
           width={50}
-          style={{ margin: "10px" }}
+          className="m-3"
           type="TailSpin"
           color="black"
         />
@@ -109,7 +109,7 @@ class MarketTrendChart extends React.Component {
         <h5>Zakład</h5>
         <Form.Control as="select" onChange={this.onChangeBet}>
           {this.props.bets.map((bet) => (
-            <option value={bet.id}>{bet.title}</option>
+            <option key={bet.id} value={bet.id}>{bet.title}</option>
           ))}
         </Form.Control>
       </div>
@@ -141,7 +141,7 @@ class MarketTrendChart extends React.Component {
         <h5>Przedział czasowy</h5>
         <Form.Control as="select" onChange={this.onChangeTimeAgo}>
           {times.map((time) => (
-            <option value={time.value}>{time.text}</option>
+            <option key={time.value} value={time.value}>{time.text}</option>
           ))}
         </Form.Control>
       </div>
@@ -151,7 +151,7 @@ class MarketTrendChart extends React.Component {
   render() {
     return (
       <div>
-        <header style={{ marginBottom: "20px" }}>
+        <header className="mb-5">
           <h4>Trend rynku</h4>
         </header>
         {this.props.transactions && (

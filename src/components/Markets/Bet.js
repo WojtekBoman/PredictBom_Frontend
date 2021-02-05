@@ -9,10 +9,10 @@ import Loader from "react-loader-spinner";
 import BuyContractForm from "./BuyContractForm";
 import _ from "lodash";
 import { LinkContainer } from "react-router-bootstrap";
+import './Bet.scss';
 
 class Bet extends React.Component {
   constructor(props) {
-    super(props);
 
     this.hideForm = this.hideForm.bind(this);
   }
@@ -94,7 +94,7 @@ class Bet extends React.Component {
             </Col>
             <Col>
               <LinkContainer
-                style={{ marginBottom: "10px" }}
+                className="mb-3"
                 to={`/offers/bet/${this.props.betId}/${true}`}
               >
                 <Button>Przeglądaj oferty na tak</Button>
@@ -191,7 +191,7 @@ class Bet extends React.Component {
   render() {
     return (
       <div>
-        <Segment color={this.state.backgroundColor} style={{ margin: "10px" }}>
+        <Segment color={this.state.backgroundColor} className="m-3">
           <h2 className="ui header">{this.props.title}</h2>
           {window.location.href.includes("editBets") && !this.props.published && (
             <Button className="close-button" onClick={this.onClickDeleteBet}>

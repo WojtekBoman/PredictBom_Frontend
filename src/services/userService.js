@@ -1,6 +1,6 @@
 import authHeader from "../helpers/authHeader";
 import { baseURL } from "../api/baseURL";
-import { handleResponse } from "../helpers/HandleResponse";
+import { handleResponse, handleLoginResponse } from "../helpers/HandleResponse";
 
 const login = (username, password) => {
   const reqOptions = {
@@ -10,7 +10,7 @@ const login = (username, password) => {
   };
 
   return fetch(`${baseURL}/api/auth/signin`, reqOptions)
-    .then(handleResponse)
+    .then(handleLoginResponse)
     .then((user) => {
       localStorage.setItem("user", JSON.stringify(user));
 
@@ -30,7 +30,7 @@ const register = (username, firstName, surname, email, password) => {
   };
 
   return fetch(`${baseURL}/api/auth/signup`, reqOptions).then((res) =>
-    handleResponse(res)
+    handleLoginResponse(res)
   );
 };
 

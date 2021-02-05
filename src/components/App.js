@@ -86,7 +86,6 @@ const App = () => {
           <Redirect from="*" to="/" />
         </Switch>
       </Router>
-      <div className="footer" style={{ marginTop: "20px" }}></div>
     </div>
   );
 };

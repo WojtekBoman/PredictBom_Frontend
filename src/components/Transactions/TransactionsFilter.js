@@ -107,7 +107,7 @@ class TransactionsFilter extends React.Component {
 
     render() {
         return (
-            <Form style={{width:"100%"}}>
+            <Form>
                 {this.renderMarketTitleFilter()}
                 {this.renderBetTitleFilter()}
                 {this.renderSortFilter()}

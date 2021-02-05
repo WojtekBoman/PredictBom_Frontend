@@ -1,10 +1,23 @@
 export const handleResponse = (res) => {
   return res.text().then((text) => {
     if (!res.ok) {
-      let error = text;
+      let error = text || res.statusText;
       return Promise.reject(error);
     }
     const data = text && JSON.parse(text);
+
+    return data;
+  });
+};
+
+export const handleLoginResponse = (res) => {
+  return res.text().then((text) => {
+    const data = text && JSON.parse(text);
+    if (!res.ok) {
+      let error = (data && data.error) || res.statusText;
+
+      return Promise.reject(error);
+    }
 
     return data;
   });

@@ -75,7 +75,7 @@ class MarketDetails extends React.Component {
               <Image
                 variant="top"
                 src={displayMarketCover(this.props.currentMarket.marketCover,this.props.currentMarket.category)}
-                style={{ width: "100%", objectFit: "cover" }}
+                className="market-cover"
               />
             </Col>
             <Col sm={6}>

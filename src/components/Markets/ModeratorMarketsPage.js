@@ -22,7 +22,7 @@ class ModeratorMarketsPage extends React.Component {
     return (
       <Container className="bg-light border rounded shadow-container create-market-container">
         <BackHeader title="Nieopublikowane rynki prognostyczne" />
-        <Tabs id="controlled-tab-example" style={{ marginTop: "15px" }}>
+        <Tabs id="controlled-tab-example" className="mt-3">
           <Tab eventKey="private" title="Wszystkie" unmountOnExit>
             <MarketsList typeOfMarkets="/private" search={this.state.search} />
           </Tab>

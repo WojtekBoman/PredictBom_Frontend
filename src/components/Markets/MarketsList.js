@@ -12,6 +12,7 @@ import { alertActions } from '../../actions/alertActions';
 import MarketsFilter from './MarketsFilter';
 import SearchBar from './SearchBar'
 import {updateSearch} from '../../actions/filterActions';
+import './MarketsList.scss';
 
 
 
@@ -83,9 +84,9 @@ class MarketsList extends React.Component {
     renderList() {
         if(this.props.markets.length > 0){
             return(
-                <Row style={{width:"100%"}}>
+                <Row className="markets-list">
                     {this.props.markets.map(market => 
-                    <Col xs={12} sm={6} className="d-flex align-items-stretch" style={{margin:"20px 0"}} key={market.marketId}>
+                    <Col xs={12} sm={6} className="d-flex align-items-stretch margin" key={market.marketId}>
                         <Market author={market.author} marketId={market.marketId} published={market.published} marketTitle={market.topic} description={market.description} marketCategory={market.category} marketCover={market.marketCover} createdDate={market.createdDate} bets={market.bets} correctBetId={market.correctBetId}/>
                     </Col>
                     )}
@@ -108,7 +109,7 @@ class MarketsList extends React.Component {
 
     render() {
         return(
-            <div style={{marginTop:"20px"}}>
+            <div className="mt-4">
                 <SearchBar search={updateSearch}/>
                 <Row >
                     <Col sm={3}>

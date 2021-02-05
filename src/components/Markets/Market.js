@@ -6,16 +6,16 @@ import polishStrings from "react-timeago/lib/language-strings/pl";
 import buildFormatter from "react-timeago/lib/formatters/buildFormatter";
 import { connect } from "react-redux";
 import { displayMarketCover } from "../../helpers/MartketCovers";
+import './Market.scss';
 
 const Market = (props) => {
   return (
     <Card>
       <LinkContainer to={`/markets/details/${props.marketId}`}>
         <Card.Img
-          className="toMarket"
           variant="top"
           src={displayMarketCover(props.marketCover,props.marketCategory)}
-          style={{ width: "100%", height: "15vw", objectFit: "cover" }}
+          className="market-cover"
         />
       </LinkContainer>
       <Card.Body>

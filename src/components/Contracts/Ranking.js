@@ -54,7 +54,7 @@ class Ranking extends React.Component {
                     <Table striped bordered hover>
                         <thead>
                         <th>
-                            <FontAwesomeIcon style={{marginRight:"5px"}} icon={faTrophy} />
+                            <FontAwesomeIcon className="mr-1" icon={faTrophy} />
                              Pozycja
                         </th>
                         <th>Użytkownik</th>

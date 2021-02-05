@@ -15,7 +15,7 @@ class MarketsPage extends React.Component {
     return (
       <Container className="bg-light border rounded shadow-container create-market-container">
         <BackHeader title="Rynki prognostyczne" />
-        <Tabs id="controlled-tab-example" style={{ marginTop: "15px" }}>
+        <Tabs id="controlled-tab-example" className="mt-4">
           {/* <Tab eventKey="private" title="Prywatne" unmountOnExit>
             <MarketsList typeOfMarkets="/private" />
           </Tab>

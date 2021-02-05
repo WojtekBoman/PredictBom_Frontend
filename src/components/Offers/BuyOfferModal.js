@@ -46,11 +46,11 @@ class BuyOfferModal extends React.Component {
                 type="number"
               />
               <hr className="my-4"></hr>
-              <div style={{ marginTop: "10px" }}>
+              <div className="mt-3">
                 <Button
                   type="submit"
                   variant="primary"
-                  style={{ marginRight: "10px" }}
+                  className="mr-3"
                 >
                   {renderButtonContent(this.props.loading,"Zakup akcje")}
                 </Button>

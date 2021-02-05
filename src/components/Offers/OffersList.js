@@ -20,7 +20,7 @@ class OffersList extends React.Component {
                 </tr>
             </thead>
             <tbody>
-                {this.props.offers.map(offer => <Offer isOwner={this.props.isOwner} offerId={offer.id} shares={offer.shares} price={offer.price} createdDate={offer.createdDate}/>)}
+                {this.props.offers.map(offer => <Offer key={offer.id} isOwner={this.props.isOwner} offerId={offer.id} shares={offer.shares} price={offer.price} createdDate={offer.createdDate}/>)}
             </tbody>
             </Table>
        
