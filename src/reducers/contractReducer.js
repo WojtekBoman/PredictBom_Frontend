@@ -1,5 +1,4 @@
 import { contractConstants } from "../constants/contractConstants";
-import _, { reduceRight } from "lodash";
 
 const updateArr = (arr, action) => {
   const index = arr.findIndex((contract) => contract.id === action.payload.id);

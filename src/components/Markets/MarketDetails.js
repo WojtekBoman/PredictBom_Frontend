@@ -59,7 +59,7 @@ class MarketDetails extends React.Component {
       return (
         <Container className="text-center bg-light border rounded shadow-container create-market-container">
           <FontAwesomeIcon icon={faSadTear} size={"9x"} />
-          <h2>{this.props.alert.payload}</h2>
+          <h3>{this.props.alert.payload}</h3>
         </Container>
       );
   }
@@ -75,7 +75,7 @@ class MarketDetails extends React.Component {
               <Image
                 variant="top"
                 src={displayMarketCover(this.props.currentMarket.marketCover,this.props.currentMarket.category)}
-                style={{ width: "100%", objectFit: "cover" }}
+                className="market-cover"
               />
             </Col>
             <Col sm={6}>
@@ -136,7 +136,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     loadingMarket: state.loading.FETCH_MARKET,
     currentMarket: state.markets.find(
-      (market) => market.marketId == ownProps.match.params.id
+      (market) => market.marketId.toString() === ownProps.match.params.id
     ),
     alert: state.alert,
   };

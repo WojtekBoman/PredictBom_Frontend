@@ -80,7 +80,7 @@ class PaginationBar extends React.Component {
     if (this.props.paginationInfo) {
       if (
         !this.props.paginationInfo.totalPages ||
-        this.props.paginationInfo.totalPages == 1
+        this.props.paginationInfo.totalPages === 1
       )
         return null;
 
@@ -94,7 +94,7 @@ class PaginationBar extends React.Component {
         <Nav aria-label="Countries Pagination" className="text-center">
           <ul className="pagination">
             {pages.map((page, index) => {
-              if (page == LEFT_PAGE)
+              if (page === LEFT_PAGE)
                 return (
                   <li key={index} className="page-item">
                     <Nav.Link
@@ -108,7 +108,7 @@ class PaginationBar extends React.Component {
                   </li>
                 );
 
-              if (page == RIGHT_PAGE)
+              if (page === RIGHT_PAGE)
                 return (
                   <Nav.Item key={index} className="page-item">
                     <Nav.Link
@@ -125,7 +125,7 @@ class PaginationBar extends React.Component {
               return (
                 <Nav.Item
                   key={index}
-                  className={`page-item${number == page - 1 ? " active" : ""}`}
+                  className={`page-item${number === page - 1 ? " active" : ""}`}
                 >
                   <Nav.Link
                     className="page-link"

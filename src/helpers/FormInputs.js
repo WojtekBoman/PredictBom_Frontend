@@ -58,7 +58,7 @@ export const renderSelectField = ({
 export const renderInfo = (alert) => {
     if (alert.payload) {
       return (
-        <Alert className="login-alert" variant="danger">
+        <Alert className="mt-3" variant="danger">
           {alert.payload}
         </Alert>
       );
@@ -82,7 +82,7 @@ export const renderInfo = (alert) => {
   export const renderInfoWithClose = (alert,clear) => {
     if (alert.payload) {
       return (
-        <Alert className="login-alert" onClose={() => clear()} variant="danger" dismissible>
+        <Alert className="mt-3" onClose={() => clear()} variant="danger" dismissible>
           {alert.payload}
         </Alert>
       );

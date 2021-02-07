@@ -15,7 +15,7 @@ export const login = ({username, password}) => {
                 },
                 error => {
             
-                    dispatch(failure(error.toString()));
+                    dispatch(failure());
                     dispatch(alertActions.error(error.toString()));
                 }
             );
@@ -23,7 +23,7 @@ export const login = ({username, password}) => {
 
     function request(user) { return { type: loginConstants.LOGIN_REQUEST, user } }
     function success(user) { return { type: loginConstants.LOGIN_SUCCESS, user } }
-    function failure(error) { return { type: loginConstants.LOGIN_FAILURE, error } }
+    function failure() { return { type: loginConstants.LOGIN_FAILURE } }
 }
 
 export const editPassword = ({oldPassword,newPassword,repeatedNewPassword}) => {
@@ -38,7 +38,7 @@ export const editPassword = ({oldPassword,newPassword,repeatedNewPassword}) => {
                     logout();
                 },
                 error => {
-                    dispatch(failure(error.toString()));
+                    dispatch(failure());
                     dispatch(alertActions.error(error.toString()));
                 }
             );

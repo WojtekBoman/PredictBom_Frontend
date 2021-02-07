@@ -1,5 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import { Chart } from 'react-chartjs-2';
 
 class LineChart extends React.Component {

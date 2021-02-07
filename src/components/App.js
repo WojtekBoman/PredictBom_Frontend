@@ -28,12 +28,15 @@ import Ranking from "./Contracts/Ranking";
 import TransactionsPage from "./Transactions/TransactionsPage";
 import UserOfferPage from "./Contracts/UserOfferPage";
 import DeleteMarketPage from "./Markets/DeleteMarketPage";
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
 
 const App = () => {
   return (
     <div className="wrapper">
       <Router history={history}>
         <NavigationBar />
+        <ReactNotification />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/login" component={LoginPage} />
@@ -84,9 +87,9 @@ const App = () => {
           />
           <Route path="/markets" component={MarketsPage} />
           <Redirect from="*" to="/" />
+         
         </Switch>
       </Router>
-      <div className="footer" style={{ marginTop: "20px" }}></div>
     </div>
   );
 };

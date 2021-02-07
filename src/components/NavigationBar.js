@@ -69,6 +69,8 @@ class NavigationBar extends React.Component {
             {this.renderRankingLink()}
           </Nav>
         );
+      default:
+        return null;
     }
   }
 

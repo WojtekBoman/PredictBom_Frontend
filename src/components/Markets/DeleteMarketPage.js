@@ -61,8 +61,8 @@ class DeleteMarketPage extends React.Component {
     if (this.props.alert.payload) {
       return (
         <div className="text-center">
-          <FontAwesomeIcon icon={faExclamationCircle} size={"9x"} />
-          <h2>{this.props.alert.payload}</h2>
+          <FontAwesomeIcon icon={faExclamationCircle} size={"6x"} />
+          <h3>{this.props.alert.payload}</h3>
         </div>
       );
     }
@@ -100,7 +100,7 @@ const mapStateToProps = (state, ownProps) => {
     loadingMarket: state.loading.FETCH_MARKET,
     loading: state.loading.DELETE_MARKET,
     currentMarket: state.markets.find(
-      (market) => market.marketId === ownProps.match.params.id
+      (market) => market.marketId.toString() === ownProps.match.params.id
     ),
     alert: state.alert,
   };

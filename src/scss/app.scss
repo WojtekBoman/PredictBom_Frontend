@@ -5,20 +5,18 @@ $fullHeight: 100vh;
 
 body {
     background-image: $background;
-    height: auto;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
+    padding-bottom: 100px;
     }
 
 .container {
     margin: $containerMargin;
     padding: $containerPadding;
-    margin-bottom: 200px;
+    
 }
-
-
 
 .edit-market-button{
     margin: 10px;
@@ -61,20 +59,15 @@ body {
     // font-size: 20px;
 }
 
-// .img {
-//     max-width: 100%;
-//     max-height: 100%;
-//     display: block;
-// }
+.img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
 
-// .img-box{
-//     margin: 10px auto;
-//     width: 90%;
-// }
-
-.img-cover {
-    width: "100%";
-    object-fit: "cover"
+.img-box{
+    margin: 10px auto;
+    width: 90%;
 }
 
 .market-buttons-group {
@@ -128,9 +121,7 @@ body {
     right:0;
 }
 
-.back-icon:hover{
-    cursor: pointer;
-}
+
 
 .home-info {
     margin-bottom: 20px;

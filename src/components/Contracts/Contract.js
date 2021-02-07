@@ -5,6 +5,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import Loader from "react-loader-spinner";
 import { Image, Card, Icon } from "semantic-ui-react";
 import { displayMarketCover } from "../../helpers/MartketCovers";
+import './Contract.scss'
 
 class Contract extends React.Component {
   state = {
@@ -70,10 +71,10 @@ class Contract extends React.Component {
 
   render() {
     return (
-      <Card style={{ margin: "0 auto" }} fluid color={this.state.borderColor}>
+      <Card fluid color={this.state.borderColor}>
         <LinkContainer to={`/contracts/details/${this.props.id}`}>
           <Image
-            style={{ width: "100%", height: "15vw", objectFit: "cover" }}
+            className="contract-cover"
             src={displayMarketCover( this.props.marketInfo.marketCover, this.props.marketInfo.marketCategory)}
           />
         </LinkContainer>

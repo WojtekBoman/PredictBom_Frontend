@@ -12,7 +12,7 @@ class SolveSingleBetMarketForm extends React.Component {
   };
 
   componentDidMount() {
-    this.props.initialize({ correctBetOption: "0" });
+    this.props.initialize({ correctBetOption: 0 });
   }
 
   getOptions() {
@@ -65,7 +65,7 @@ class SolveSingleBetMarketForm extends React.Component {
 const validate = (formValues) => {
   const errors = {};
 
-  if (formValues.correctBetOption == "0")
+  if (formValues.correctBetOption === 0)
     errors["correctBetOption"] = "Wybierz prawidłową opcję !";
   return errors;
 };

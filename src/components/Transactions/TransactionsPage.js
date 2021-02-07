@@ -14,7 +14,7 @@ class TransactionsPage extends React.Component {
     return (
       <Container className="bg-light border rounded shadow-container create-market-container">
         <BackHeader title="Transakcje" />
-        <Tabs id="controlled-tab-example" style={{ marginTop: "15px" }}>
+        <Tabs id="controlled-tab-example" className="mt-3">
           <Tab eventKey="home" title="Zakup" unmountOnExit>
             <TransactionList type="purchaser" />
           </Tab>

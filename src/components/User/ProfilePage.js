@@ -1,11 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  Alert,
   Container,
-  Form,
   Button,
-  Spinner,
   Row,
   Col,
 } from "react-bootstrap";
@@ -14,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { LinkContainer } from "react-router-bootstrap";
 import { logout } from "../../actions/loginActions";
+import './ProfilePage.scss'
 
 class ProfilePage extends React.Component {
   componentDidMount() {
@@ -81,6 +79,8 @@ class ProfilePage extends React.Component {
             </Button>
           </div>
         );
+      default:
+        return null;
     }
   };
 

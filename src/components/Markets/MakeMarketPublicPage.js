@@ -160,7 +160,7 @@ const mapStateToProps = (state, ownProps) => {
     loadingMarket: state.loading.FETCH_MARKET,
     loading: state.loading.MAKE_MARKET_PUBLIC,
     currentMarket: state.markets.find(
-      (market) => market.marketId === ownProps.match.params.id
+      (market) => market.marketId.toString() === ownProps.match.params.id
     ),
   };
 };

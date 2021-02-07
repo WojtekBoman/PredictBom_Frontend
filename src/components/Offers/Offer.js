@@ -49,7 +49,7 @@ class Offer extends React.Component {
                    </LinkContainer>
                </td>
                }
-               {!this.props.isOwner && this.props.user && (<td><Button variant="primary" onClick={() => this.props.onClickShowModal(this.props.shares,this.props.offerId)}>{this.renderButtonContent("Kup")}</Button></td>)}
+               {!this.props.isOwner && this.props.user && this.props.user.roles.includes("ROLE_PLAYER") && (<td><Button variant="primary" onClick={() => this.props.onClickShowModal(this.props.shares,this.props.offerId)}>{this.renderButtonContent("Kup")}</Button></td>)}
                 {this.props.isOwner && !window.location.href.includes("offers") && (<td><Button onClick={this.deleteOffer} variant="danger">{this.renderButtonContent("Usuń")}</Button></td>)}    
             </tr>
         )

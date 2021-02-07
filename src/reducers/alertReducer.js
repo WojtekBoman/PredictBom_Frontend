@@ -10,7 +10,7 @@ export default (state = {}, action) => {
     case alertConstants.ALERT_ERROR:
       if (action.payload === "TypeError: Failed to fetch") {
         return {
-          type: alertConstants.ALERT_ERROR,
+          type: alertConstants.ALERT_CONNECTION_ERROR,
           payload: "Serwer nie odpowiada, spróbuj ponownie później!",
         };
       }

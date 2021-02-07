@@ -6,6 +6,7 @@ import Loader from "react-loader-spinner";
 import { buyContract } from "../../actions/contractActions";
 import { alertActions } from "../../actions/alertActions";
 import {renderInput, renderInfo} from '../../helpers/FormInputs';
+import './BuyContractForm.scss';
 
 class BuyContractForm extends React.Component {
   componentDidMount() {
@@ -26,10 +27,10 @@ class BuyContractForm extends React.Component {
       <div>
         <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <h4>
-            Wybrana opcja na 
-            {this.props.contractOption ? <span>tak</span> : <span>nie</span>}
+            Wybrana opcja na  
+            {this.props.contractOption ? <span> tak</span> : <span> nie</span>}
           </h4>
-          <Form.Text style={{ fontSize: "15px" }}>
+          <Form.Text className="buy-info">
             Podaj swoje kryteria zakupu akcji a system wyszuka dla ciebie
             najlepsze oferty. Iloczyn maksymalnej ceny za jedną akcję i ich
             liczby nie powinien przekraczać wartości twojego budżetu! Pamiętaj
@@ -51,7 +52,7 @@ class BuyContractForm extends React.Component {
             label="Ile akcji chcesz kupić"
             component={renderInput}
           />
-          <div style={{ display: "inline-block" }}>
+          <div className="buy-form-buttons">
             <Button className="form-button" variant="primary" type="submit">
               Kup
             </Button>

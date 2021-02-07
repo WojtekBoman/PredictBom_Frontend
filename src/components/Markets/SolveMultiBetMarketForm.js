@@ -6,6 +6,7 @@ import { solveMultiBetMarket } from "../../actions/marketActions";
 import {renderInfo} from '../../helpers/FormInputs';
 import {renderButtonContent} from '../../helpers/LoadingContent'; 
 
+
 class SolveMultiBetMarketForm extends React.Component {
   state = {
     correctBetId: "",
@@ -92,7 +93,7 @@ class SolveMultiBetMarketForm extends React.Component {
 const validate = (formValues) => {
   const errors = {};
 
-  if (formValues.correctBetId == "0")
+  if (formValues.correctBetId === 0)
     errors["correctBetId"] = "Wybierz zakład !";
   return errors;
 };

@@ -11,7 +11,7 @@ class ContractBet extends React.Component {
     componentDidMount() {
         this.props.fetchBetPrice(this.props.betId,this.props.contractOption);
     }
-    renderLoading = () => {
+    renderLoading= () => {
         if((typeof this.props.loading !== 'undefined') && this.props.loading.pending){
             return (<div>
             <Loader
@@ -24,7 +24,7 @@ class ContractBet extends React.Component {
     }
 
     renderPrice = () => {
-        if(this.props.betPrice && !((typeof this.props.loading !== 'undefined') && this.props.loading.pending)) {
+        if(this.props.betPrice) {
             return <div>{this.props.contractOption ? <h4>Ostatnia cena: {this.props.betPrice.yesPrice}</h4> : <h4>Ostatnia cena: {this.props.betPrice.noPrice}</h4>}</div>;
         }
     }
@@ -32,15 +32,15 @@ class ContractBet extends React.Component {
 
     render() {
         return(
-            <Segment color={this.props.contractOption ? "green" : "red"} style={{margin:"10px"}}>
+            <Segment color={this.props.contractOption ? "green" : "red"} className="mt-3">
              <Row>  
                  <Col sm={9}>
             <h2 className="ui header">{this.props.title}</h2>
             {this.props.contractOption ? <h4>Kontrakt na tak</h4> : <h4>Kontrakt na nie</h4>}
                 </Col>
                 <Col sm={3}>
-                    {this.renderLoading()}
                     {this.renderPrice()}
+                    {this.renderLoading()}
                 </Col>
             </Row> 
             </Segment>

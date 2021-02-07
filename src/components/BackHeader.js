@@ -1,11 +1,12 @@
 import React from "react";
 import BackButton from "../helpers/BackButton";
+import './BackHeader.scss';
 
 const BackHeader = (props) => {
   return (
-    <header style={{ display: "inline-block" }}>
+    <header>
       <BackButton />
-      <h2 style={{ display: "inline-block" }}>{props.title}</h2>
+      <h2>{props.title}</h2>
     </header>
   );
 };
