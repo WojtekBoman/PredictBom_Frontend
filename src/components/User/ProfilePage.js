@@ -79,6 +79,8 @@ class ProfilePage extends React.Component {
             </Button>
           </div>
         );
+      default:
+        return null;
     }
   };
 

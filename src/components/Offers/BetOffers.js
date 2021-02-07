@@ -63,7 +63,7 @@ class BetOffers extends React.Component {
         if(this.props.alert.payload && this.props.alert.type !== "ALERT_BUYING") {
            return <div className="text-center">
             <FontAwesomeIcon icon={faExclamationCircle} size={"9x"}/>
-            <h2>{this.props.alert.payload}</h2>
+            <h3>{this.props.alert.payload}</h3>
             </div>
         }
     }
@@ -85,7 +85,7 @@ class BetOffers extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.props.offers.map(offer => <Offer isOwner={this.props.user && this.props.user.username === offer.dealer} user={offer.user} dealer={offer.dealer ? offer.dealer : "Organizator rynku"} onClickShowModal={this.handleShow} offerId={offer.id} shares={offer.shares} price={offer.price} createdDate={offer.createdDate}/>)}
+                            {this.props.offers.map(offer => <Offer key={offer.id} isOwner={this.props.user && this.props.user.username === offer.dealer} user={offer.user} dealer={offer.dealer ? offer.dealer : "Organizator rynku"} onClickShowModal={this.handleShow} offerId={offer.id} shares={offer.shares} price={offer.price} createdDate={offer.createdDate}/>)}
                         </tbody>
                         </Table>
                     )}

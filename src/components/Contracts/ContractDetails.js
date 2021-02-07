@@ -209,7 +209,7 @@ class ContractDetails extends React.Component {
       return (
         <Container className="text-center bg-light border rounded shadow-container create-market-container">
           <FontAwesomeIcon icon={faSadTear} size={"9x"} />
-          <h2>{this.props.alert.payload}</h2>
+          <h3>{this.props.alert.payload}</h3>
         </Container>
       );
     }
@@ -234,7 +234,7 @@ const mapStateToProps = (state, ownProps) => {
     deleting: state.loading.DELETE_OFFER,
     alert: state.alert,
     contract: state.contracts.find(
-      (contract) => contract.id == ownProps.match.params.id
+      (contract) => contract.id.toString() === ownProps.match.params.id
     ),
     user: state.login.user,
   };

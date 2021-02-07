@@ -81,7 +81,7 @@ class ContractList extends React.Component {
       return (
         <div className="text-center">
           <FontAwesomeIcon icon={faExclamationCircle} size={"9x"} />
-          <h2>{this.props.alert.payload}</h2>
+          <h3>{this.props.alert.payload}</h3>
         </div>
       );
     }

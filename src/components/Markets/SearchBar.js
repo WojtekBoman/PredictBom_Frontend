@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Button, InputGroup, FormControl } from "react-bootstrap";
-import { updateSearch, changePage } from "../../actions/filterActions";
 
 class SearchBar extends React.Component {
   state = {

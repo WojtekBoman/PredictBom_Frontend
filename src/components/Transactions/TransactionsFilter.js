@@ -82,7 +82,7 @@ class TransactionsFilter extends React.Component {
     handleCategory = (e) => {
 
         if(this.state.selectedCategories.includes(e.target.value)) {
-           this.setState({selectedCategories:this.state.selectedCategories.filter(category => category != e.target.value)});
+           this.setState({selectedCategories:this.state.selectedCategories.filter(category => category !== e.target.value)});
         }else{
             this.setState({selectedCategories:[...this.state.selectedCategories,e.target.value]});
         }

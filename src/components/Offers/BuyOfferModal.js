@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Modal, Button, Form, Alert, Spinner } from "react-bootstrap";
+import { Modal, Button, Form } from "react-bootstrap";
 import { buyShares } from "../../actions/offerActions";
 import { renderButtonContent } from "../../helpers/LoadingContent";
 import { renderInfo } from "../../helpers/FormInputs";

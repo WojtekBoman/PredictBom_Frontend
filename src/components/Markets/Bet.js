@@ -13,6 +13,7 @@ import './Bet.scss';
 
 class Bet extends React.Component {
   constructor(props) {
+    super(props);
 
     this.hideForm = this.hideForm.bind(this);
   }

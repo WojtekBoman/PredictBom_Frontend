@@ -1,6 +1,6 @@
 import authHeader from "../helpers/authHeader";
 import { baseURL } from "../api/baseURL";
-import { handleResponse, handleLoginResponse } from "../helpers/HandleResponse";
+import { handleLoginResponse } from "../helpers/HandleResponse";
 
 const login = (username, password) => {
   const reqOptions = {

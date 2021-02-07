@@ -14,6 +14,9 @@ const HomePage = (props) => {
       </header>
       <Row>
         <Col sm={6}>
+          <Image variant="top" src={Poland} className="img-cover" />
+        </Col>
+        <Col sm={6}>
           <div className="advantages home-info">
             <h4>Dlaczego warto do nas dołączyć ?</h4>
             <p className="text-muted">
@@ -46,7 +49,7 @@ const HomePage = (props) => {
             <h4>Odwiedzaj nas codziennie aby odebrać bonus !</h4>
             <p className="text-muted">
               Nie zawsze będziesz dobrze obstawiać, aby odzyskać budżet
-              odwiedzaj nas codziennie!
+              odwiedzaj nas codziennie!{" "}
               <strong>
                 Przy pierwszym logowaniu każdego dnia otrzymasz 100$.
               </strong>
@@ -64,9 +67,6 @@ const HomePage = (props) => {
               <Button variant="dark">Przeglądaj rynki</Button>
             </LinkContainer>
           </div>
-        </Col>
-        <Col sm={6}>
-          <Image variant="top" src={Poland} className="img-cover" />
         </Col>
       </Row>
     </Container>

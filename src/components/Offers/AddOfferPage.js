@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Container, Form, Spinner, Button, Alert } from "react-bootstrap";
+import { Container, Form, Spinner, Button } from "react-bootstrap";
 import { fetchContractDetails, addOffer } from "../../actions/contractActions";
 import BackHeader from "../BackHeader";
 import { renderInfo } from "../../helpers/FormInputs";
@@ -156,7 +156,7 @@ const mapStateToProps = (state, ownProps) => {
     loadingContract: state.loading.FETCH_CONTRACT_DETAILS,
     alert: state.alert,
     contract: state.contracts.find(
-      (contract) => contract.id == ownProps.match.params.id
+      (contract) => contract.id.toString() === ownProps.match.params.id
     ),
   };
 };

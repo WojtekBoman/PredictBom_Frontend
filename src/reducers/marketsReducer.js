@@ -1,5 +1,4 @@
 import { marketsConstants } from "../constants/marketsConstants";
-import _ from "lodash";
 
 const updateArr = (arr, action) => {
   const index = arr.findIndex(
@@ -30,7 +29,7 @@ export default (state = [], action) => {
     case marketsConstants.CREATE_MARKET_REQUEST:
       return [...state];
     case marketsConstants.CREATE_MARKET_SUCCESS:
-      updateArr(state, action);
+      return updateArr(state, action);
     case marketsConstants.CREATE_MARKET_FAILURE:
       return [...state];
     case marketsConstants.SET_MARKET_COVER_REQUEST:

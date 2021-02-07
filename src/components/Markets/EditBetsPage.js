@@ -1,12 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  Alert,
   Container,
   Form,
   Button,
   Spinner,
-  Modal,
   Row,
   Col,
 } from "react-bootstrap";
@@ -33,38 +31,6 @@ class EditBetsPage extends React.Component {
 
   componentWillUnmount() {
     this.props.clear();
-  }
-
-  renderInfo() {
-    if (this.props.alert.payload) {
-      return (
-        <Alert className="login-alert" variant="danger">
-          {this.props.alert.payload}
-        </Alert>
-      );
-    }
-
-    return (
-      <Modal
-        id="modal"
-        show={this.props.alert.payload != undefined}
-        onHide={this.props.clear}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Zakłady</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{this.props.alert.payload}</Modal.Body>
-        <Modal.Footer>
-          <Button
-            id="buttonCloseModal"
-            variant="secondary"
-            onClick={this.props.clear}
-          >
-            Powrót
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    );
   }
 
   onSubmit = (formValues) => {
@@ -124,7 +90,7 @@ class EditBetsPage extends React.Component {
   renderPageContent() {
     if (
       this.props.currentMarket &&
-      this.props.currentMarket.correctBetId == 0
+      this.props.currentMarket.correctBetId === 0
     ) {
       return (
         <div>
@@ -243,7 +209,7 @@ const mapStateToProps = (state, ownProps) => {
     addingLoading: state.loading.ADD_BET,
     loadingMarket: state.loading.FETCH_MARKET,
     currentMarket: state.markets.find(
-      (market) => market.marketId == ownProps.match.params.id
+      (market) => market.marketId.toString() === ownProps.match.params.id
     ),
   };
 };

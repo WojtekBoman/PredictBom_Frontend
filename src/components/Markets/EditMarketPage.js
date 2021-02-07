@@ -114,11 +114,11 @@ const mapStateToProps = (state, ownProps) => {
     loadingMarket: state.loading.FETCH_MARKET,
     loading: state.loading.EDIT_MARKET,
     currentMarket: state.markets.find(
-      (market) => market.marketId == ownProps.match.params.id
+      (market) => market.marketId.toString() === ownProps.match.params.id
     ),
     alert: state.alert,
     initialValues: state.markets.find(
-      (market) => market.marketId == ownProps.match.params.id
+      (market) => market.marketId.toString() === ownProps.match.params.id
     ),
   };
 };
