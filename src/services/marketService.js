@@ -100,8 +100,6 @@ export const addBet = (marketId, yesPrice, noPrice, title, shares) => {
     body: JSON.stringify({ marketId, yesPrice, noPrice, title, shares }),
   };
 
-  console.log(JSON.stringify({ marketId, yesPrice, noPrice, title, shares }));
-
   return fetch(`${baseURL}/markets/addBet`, reqOptions).then((res) =>
     handleResponse(res)
   );

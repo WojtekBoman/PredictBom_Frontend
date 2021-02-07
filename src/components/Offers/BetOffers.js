@@ -85,7 +85,7 @@ class BetOffers extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.props.offers.map(offer => <Offer key={offer.id} isOwner={this.props.user && this.props.user.username === offer.dealer} user={offer.user} dealer={offer.dealer ? offer.dealer : "Organizator rynku"} onClickShowModal={this.handleShow} offerId={offer.id} shares={offer.shares} price={offer.price} createdDate={offer.createdDate}/>)}
+                            {this.props.offers.map(offer => <Offer key={offer.id} isOwner={this.props.user && this.props.user.username === offer.dealer} user={offer.user} dealer={offer.dealer ? offer.dealer : "Organizator rynku"} onClickShowModal={this.handleShow} offerId={offer.id} shares={offer.shares} price={offer.price} createdDate={offer.createdDate} contract={offer.contractId}/>)}
                         </tbody>
                         </Table>
                     )}

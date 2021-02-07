@@ -27,7 +27,6 @@ class CreateMarketPage extends React.Component {
   }
 
   onSubmit = (formValues) => {
-    console.log(formValues);
     this.props.createMarket(formValues);
   };
 

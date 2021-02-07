@@ -44,7 +44,7 @@ class Offer extends React.Component {
                {(!this.props.isOwner || window.location.href.includes("offers"))  && <td>{this.props.dealer}</td>} 
                {(this.props.isOwner && this.props.user && window.location.href.includes("offers")) && 
                <td>
-                   <LinkContainer to="/contracts">
+                   <LinkContainer to={`/contracts/details/${this.props.contract}`}>
                         <Button variant="primary">Wyświetl ofertę</Button>
                    </LinkContainer>
                </td>

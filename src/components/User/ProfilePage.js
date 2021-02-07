@@ -1,17 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  Container,
-  Button,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { Container, Button, Row, Col } from "react-bootstrap";
 import { fetchPlayer } from "../../actions/playerActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { LinkContainer } from "react-router-bootstrap";
 import { logout } from "../../actions/loginActions";
-import './ProfilePage.scss'
+import "./ProfilePage.scss";
 
 class ProfilePage extends React.Component {
   componentDidMount() {

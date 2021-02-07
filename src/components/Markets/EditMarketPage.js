@@ -24,7 +24,6 @@ class EditMarketPage extends React.Component {
   };
 
   onSubmit = (formValues) => {
-    console.log(formValues);
     this.props.editMarket(this.props.match.params.id, formValues);
   };
 
@@ -63,7 +62,7 @@ class EditMarketPage extends React.Component {
             component={renderInput}
           />
           <Button className="form-button" variant="primary" type="submit">
-            {renderButtonContent(this.props.loading,"Zatwierdź")}
+            {renderButtonContent(this.props.loading, "Zatwierdź")}
           </Button>
         </Form>
       );
