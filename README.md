@@ -1,4 +1,4 @@
-#PredictBom 
+# PredictBom_Frontend
 Front-end part of the PredictBom application
 
 ## Table of contents
