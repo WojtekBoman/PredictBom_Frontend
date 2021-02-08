@@ -21,7 +21,7 @@ Project is created with:
 
 ## Functionalities
 * Registration system
-* Creatingforecast markets
+* Creating forecast markets
 * Browsing and filtering markets
 * Buying and selling shares
 * Browsing charts of price changes
