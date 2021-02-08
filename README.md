@@ -30,7 +30,7 @@ Project is created with:
 To run this project, install it locally using npm:
 
 ```
-$ cd ../predictBom_Frontend
+$ cd ../PredictBom_Frontend
 $ npm install
 $ npm start
 ```
