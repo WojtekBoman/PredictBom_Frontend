@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Modal, Button, Form } from "react-bootstrap";
 import { buyShares } from "../../actions/offerActions";
 import { renderButtonContent } from "../../helpers/LoadingContent";
-import { renderInfo } from "../../helpers/FormInputs";
+import { renderInfo } from "../../helpers/InfoComponents";
 
 class BuyOfferModal extends React.Component {
   state = {

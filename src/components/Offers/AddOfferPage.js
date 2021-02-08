@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Container, Form, Spinner, Button } from "react-bootstrap";
 import { fetchContractDetails, addOffer } from "../../actions/contractActions";
 import BackHeader from "../BackHeader";
-import { renderInfo } from "../../helpers/FormInputs";
+import { renderInfo } from "../../helpers/InfoComponents";
 import { renderButtonContent } from "../../helpers/LoadingContent";
 
 class AddOfferPage extends React.Component {

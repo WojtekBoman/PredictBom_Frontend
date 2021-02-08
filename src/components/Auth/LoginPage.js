@@ -5,7 +5,8 @@ import { connect } from "react-redux";
 import { login } from "../../actions/loginActions";
 import { alertActions } from "../../actions/alertActions";
 import { Link } from "react-router-dom";
-import {renderInput, renderInfo} from '../../helpers/FormInputs';
+import {renderInput} from '../../helpers/FormInputs';
+import {renderInfo} from '../../helpers/InfoComponents';
 import { renderButtonContent } from "../../helpers/LoadingContent";
 import BackHeader from '../BackHeader';
 

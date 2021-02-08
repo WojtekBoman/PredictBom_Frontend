@@ -5,7 +5,8 @@ import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import { buyContract } from "../../actions/contractActions";
 import { alertActions } from "../../actions/alertActions";
-import {renderInput, renderInfo} from '../../helpers/FormInputs';
+import {renderInput} from '../../helpers/FormInputs';
+import { renderInfo } from "../../helpers/InfoComponents";
 import './BuyContractForm.scss';
 
 class BuyContractForm extends React.Component {

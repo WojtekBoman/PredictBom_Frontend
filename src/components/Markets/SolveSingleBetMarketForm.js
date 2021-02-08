@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import { solveSingleBetMarket } from "../../actions/marketActions";
-import {renderInfo,renderSelectField} from '../../helpers/FormInputs';
+import {renderSelectField} from '../../helpers/FormInputs';
+import { renderInfo } from "../../helpers/InfoComponents";
 import {renderButtonContent} from '../../helpers/LoadingContent'; 
 
 class SolveSingleBetMarketForm extends React.Component {

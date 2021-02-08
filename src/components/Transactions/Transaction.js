@@ -32,17 +32,17 @@ const Transaction = (props) => {
           </span>
           <hr className="my-3"></hr>
           <span className="price">
-            <FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon>Data
+            <FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> Data
             transakcji: {props.transactionDate}
           </span>
           <hr className="my-3"></hr>
           <span className="dealer">
-            <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>Kupujący:{" "}
+            <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon> Kupujący:{" "}
             {props.purchaser}
           </span>
           <hr className="my-3"></hr>
           <span className="dealer">
-            <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>Sprzedawca:{" "}
+            <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon> Sprzedawca:{" "}
             {props.dealer}
           </span>
         </Item.Meta>

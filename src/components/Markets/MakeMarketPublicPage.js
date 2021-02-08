@@ -4,7 +4,7 @@ import { Container, Image, Spinner, Button } from "react-bootstrap";
 import { fetchMarket, makePublic } from "../../actions/marketActions";
 import { LinkContainer } from "react-router-bootstrap";
 import BetsList from "./BetsList";
-import { renderInfo } from "../../helpers/FormInputs";
+import { renderInfo } from "../../helpers/InfoComponents";
 import { renderButtonContent } from "../../helpers/LoadingContent";
 import { displayMarketCover } from "../../helpers/MartketCovers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

@@ -3,10 +3,16 @@ import { connect } from "react-redux";
 import { Container, Form, Button } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
 import { changePasswordWithToken } from "../../actions/tokenActions";
-import { renderInput, renderInfo } from "../../helpers/FormInputs";
+import { renderInput } from "../../helpers/FormInputs";
+import { renderInfoWithClose } from "../../helpers/InfoComponents";
+import { alertActions } from "../../actions/alertActions";
 import { renderButtonContent } from "../../helpers/LoadingContent";
 
 class ChangePasswordWithTokenPage extends React.Component {
+  componentWillUnmount() {
+    this.props.clear();
+  }
+
   onSubmit = (formValues) => {
     this.props.changePasswordWithToken(formValues, this.props.token);
   };
@@ -34,7 +40,7 @@ class ChangePasswordWithTokenPage extends React.Component {
             {renderButtonContent(this.props.loading, "Zmień hasło")}
           </Button>
         </Form>
-        {renderInfo(this.props.alert)}
+        {renderInfoWithClose(this.props.alert, this.props.clear)}
       </Container>
     );
   }
@@ -67,6 +73,7 @@ const formWrapped = reduxForm({
   validate,
 })(ChangePasswordWithTokenPage);
 
-export default connect(mapStateToProps, { changePasswordWithToken })(
-  formWrapped
-);
+export default connect(mapStateToProps, {
+  changePasswordWithToken,
+  clear: alertActions.clear,
+})(formWrapped);

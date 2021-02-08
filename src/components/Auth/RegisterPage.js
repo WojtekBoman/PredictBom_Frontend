@@ -4,7 +4,8 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { register } from "../../actions/registerActions";
 import { alertActions } from "../../actions/alertActions";
-import { renderInput, renderInfo } from "../../helpers/FormInputs";
+import { renderInput } from "../../helpers/FormInputs";
+import {renderInfo} from '../../helpers/InfoComponents';
 import { renderButtonContent } from "../../helpers/LoadingContent";
 import BackHeader from "../BackHeader";
 

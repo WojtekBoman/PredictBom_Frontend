@@ -16,7 +16,8 @@ import BetsList from "./BetsList";
 import { alertActions } from "../../actions/alertActions";
 import { LinkContainer } from "react-router-bootstrap";
 import BackHeader from "../BackHeader";
-import { renderInput, renderInfoWithClose } from "../../helpers/FormInputs";
+import { renderInput } from "../../helpers/FormInputs";
+import { renderInfoWithClose } from "../../helpers/InfoComponents";
 import { renderButtonContent } from "../../helpers/LoadingContent";
 
 class EditBetsPage extends React.Component {

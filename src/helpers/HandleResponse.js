@@ -37,7 +37,6 @@ export const handleBuying = (res) => {
     //   return Promise.reject(error);
     //}
     if (!res.ok) {
-      console.log(text);
       // let error = (data && data.error) || res.statusText;
       return Promise.reject(text);
     }

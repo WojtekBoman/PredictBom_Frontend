@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 import { Form, Button, Alert } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import { solveMultiBetMarket } from "../../actions/marketActions";
-import {renderInfo} from '../../helpers/FormInputs';
-import {renderButtonContent} from '../../helpers/LoadingContent'; 
-
+import { renderInfo } from "../../helpers/InfoComponents";
+import { renderButtonContent } from "../../helpers/LoadingContent";
 
 class SolveMultiBetMarketForm extends React.Component {
   state = {
@@ -82,7 +81,7 @@ class SolveMultiBetMarketForm extends React.Component {
           component={this.renderSelectField}
         />
         <Button className="form-button" variant="primary" type="submit">
-          {renderButtonContent(this.props.loading,"Zatwierdź")}
+          {renderButtonContent(this.props.loading, "Zatwierdź")}
         </Button>
         {renderInfo(this.props.alert)}
       </Form>

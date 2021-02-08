@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 import { createMarket } from "../../actions/marketActions";
 import {
   renderInput,
-  renderInfoWithClose,
-  renderSelectField,
+  renderSelectField
 } from "../../helpers/FormInputs";
+import { renderInfoWithClose } from "../../helpers/InfoComponents";
 import { renderButtonContent } from "../../helpers/LoadingContent";
 import BackHeader from "../BackHeader";
 import { MarketCategories } from "../../helpers/MarketCategories";

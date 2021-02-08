@@ -7,9 +7,9 @@ import BackHeader from "../BackHeader";
 import { MarketCategories } from "../../helpers/MarketCategories";
 import {
   renderInput,
-  renderInfo,
   renderSelectField,
 } from "../../helpers/FormInputs";
+import {renderInfo} from '../../helpers/InfoComponents';
 import { renderButtonContent } from "../../helpers/LoadingContent";
 
 class EditMarketPage extends React.Component {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { Alert, Form } from "react-bootstrap";
 
 export const renderInput = ({
@@ -39,59 +39,47 @@ export const renderSelectField = ({
   label,
   type,
   disabled,
-  meta
-}) => {return(
-  <Form.Group>
-  <Form.Label>{label}</Form.Label>
-    <Form.Control {...input} as="select" disabled={disabled}>
-      {options.map(option => (
-        <option id={option.val} value={option.val} key={option.key}>
-          {option.text}
-        </option>
-      ))}
-    </Form.Control>
-    {renderError(meta)}
-  </Form.Group>
-);
-      }
+  meta,
+}) => {
+  return (
+    <Form.Group>
+      <Form.Label>{label}</Form.Label>
+      <Form.Control {...input} as="select" disabled={disabled}>
+        {options.map((option) => (
+          <option id={option.val} value={option.val} key={option.key}>
+            {option.text}
+          </option>
+        ))}
+      </Form.Control>
+      {renderError(meta)}
+    </Form.Group>
+  );
+};
 
-export const renderInfo = (alert) => {
-    if (alert.payload) {
-      return (
-        <Alert className="mt-3" variant="danger">
-          {alert.payload}
-        </Alert>
-      );
-    }
+export const renderFileInput = ({
+  input,
+  type,
+  meta,
+  accept,
+  methodToHandle,
+}) => {
+  return (
+    <div>
+      <input
+        name={input.name}
+        type={type}
+        accept={accept}
+        onChange={(event) => methodToHandle(event, input)}
+      />
+      {renderError(meta)}
+    </div>
+  );
+};
+
+
+
+const renderError = ({ error, touched }) => {
+  if (touched && error) {
+    return <Alert variant="danger">{error}</Alert>;
   }
-
- export const renderFileInput = ({ input, type, meta, accept, methodToHandle }) => {
-    return (
-      <div>
-        <input
-          name={input.name}
-          type={type}
-          accept={accept}
-          onChange={(event) => methodToHandle(event, input)}
-        />
-        {renderError(meta)}
-      </div>
-    );
-  };
-
-  export const renderInfoWithClose = (alert,clear) => {
-    if (alert.payload) {
-      return (
-        <Alert className="mt-3" onClose={() => clear()} variant="danger" dismissible>
-          {alert.payload}
-        </Alert>
-      );
-    }
-  }
-
-
-  const renderError = ({ error, touched }) => {
-    if (touched && error) {
-      return <Alert variant="danger">{error}</Alert>;
-    }
-  }
+};
