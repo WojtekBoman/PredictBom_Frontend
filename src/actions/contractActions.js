@@ -24,7 +24,7 @@ export const buyContract = (
           history.push("/contracts");
         },
         (error) => {
-          dispatch(failure(error.toString()));
+          dispatch(failure());
           dispatch(alertActions.buyingError(error.toString()));
         }
       );
@@ -39,8 +39,8 @@ export const buyContract = (
   function success(market) {
     return { type: contractConstants.BUY_CONTRACT_SUCCESS, payload: market };
   }
-  function failure(error) {
-    return { type: contractConstants.BUY_CONTRACT_FAILURE, error };
+  function failure() {
+    return { type: contractConstants.BUY_CONTRACT_FAILURE };
   }
 };
 
@@ -73,7 +73,7 @@ export const fetchFilteredContracts = (
           dispatch(updateContractPagination(_.omit(res, ["content"])));
         },
         (error) => {
-          dispatch(failure(error.toString()));
+          dispatch(failure());
           dispatch(alertActions.error(error.toString()));
         }
       );
@@ -85,8 +85,8 @@ export const fetchFilteredContracts = (
   function success(payload) {
     return { type: contractConstants.FETCH_CONTRACTS_SUCCESS, payload };
   }
-  function failure(error) {
-    return { type: contractConstants.FETCH_CONTRACTS_FAILURE, error };
+  function failure() {
+    return { type: contractConstants.FETCH_CONTRACTS_FAILURE };
   }
 };
 
@@ -99,7 +99,7 @@ export const fetchContracts = (page, pageSize) => {
         dispatch(updateContractPagination(_.omit(res, ["content"])));
       },
       (error) => {
-        dispatch(failure(error.toString()));
+        dispatch(failure());
         dispatch(alertActions.error(error.toString()));
       }
     );
@@ -111,8 +111,8 @@ export const fetchContracts = (page, pageSize) => {
   function success(payload) {
     return { type: contractConstants.FETCH_CONTRACTS_SUCCESS, payload };
   }
-  function failure(error) {
-    return { type: contractConstants.FETCH_CONTRACTS_FAILURE, error };
+  function failure() {
+    return { type: contractConstants.FETCH_CONTRACTS_FAILURE };
   }
 };
 
@@ -124,7 +124,7 @@ export const fetchBetPrice = (betId, option) => {
         dispatch(success(betPrice));
       },
       (error) => {
-        dispatch(failure(error.toString()));
+        dispatch(failure());
         dispatch(alertActions.error(error.toString()));
       }
     );
@@ -136,8 +136,8 @@ export const fetchBetPrice = (betId, option) => {
   function success(betPrice) {
     return { type: betsConstants.FETCH_BET_PRICE_SUCCESS, payload: betPrice };
   }
-  function failure(error) {
-    return { type: betsConstants.FETCH_BET_PRICE_FAILURE, error };
+  function failure() {
+    return { type: betsConstants.FETCH_BET_PRICE_FAILURE };
   }
 };
 
@@ -149,7 +149,7 @@ export const fetchContractDetails = (id) => {
         dispatch(success(res));
       },
       (error) => {
-        dispatch(failure(error.toString()));
+        dispatch(failure());
         dispatch(alertActions.error(error.toString()));
       }
     );
@@ -161,8 +161,8 @@ export const fetchContractDetails = (id) => {
   function success(payload) {
     return { type: contractConstants.FETCH_CONTRACT_DETAILS_SUCCESS, payload };
   }
-  function failure(error) {
-    return { type: contractConstants.FETCH_CONTRACT_DETAILS_FAILURE, error };
+  function failure() {
+    return { type: contractConstants.FETCH_CONTRACT_DETAILS_FAILURE };
   }
 };
 
@@ -175,7 +175,7 @@ export const addOffer = (contractId, shares, price) => {
         history.push(`/contracts/details/${contractId}`);
       },
       (error) => {
-        dispatch(failure(error.toString()));
+        dispatch(failure());
         dispatch(alertActions.error(error.toString()));
       }
     );
@@ -187,8 +187,8 @@ export const addOffer = (contractId, shares, price) => {
   function success(payload) {
     return { type: contractConstants.ADD_OFFER_SUCCESS, payload };
   }
-  function failure(error) {
-    return { type: contractConstants.ADD_OFFER_FAILURE, error };
+  function failure() {
+    return { type: contractConstants.ADD_OFFER_FAILURE };
   }
 };
 
@@ -200,7 +200,7 @@ export const deleteOffer = (offerId) => {
         dispatch(success(res));
       },
       (error) => {
-        dispatch(failure(error.toString()));
+        dispatch(failure());
         dispatch(alertActions.deleteAlert(error.toString()));
       }
     );
@@ -212,7 +212,7 @@ export const deleteOffer = (offerId) => {
   function success(payload) {
     return { type: contractConstants.DELETE_OFFER_SUCCESS, payload };
   }
-  function failure(error) {
-    return { type: contractConstants.DELETE_OFFER_FAILURE, error };
+  function failure() {
+    return { type: contractConstants.DELETE_OFFER_FAILURE };
   }
 };

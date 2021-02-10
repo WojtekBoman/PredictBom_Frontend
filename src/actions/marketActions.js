@@ -121,7 +121,7 @@ export const fetchMarket = (marketId) => {
         dispatch(success(market));
       },
       (error) => {
-        dispatch(failure(error));
+        dispatch(failure());
         dispatch(alertActions.error(error.toString()));
       }
     );
@@ -227,7 +227,7 @@ export const fetchBetPrice = (betId) => {
         dispatch(success(betPrice));
       },
       (error) => {
-        dispatch(failure(error.toString()));
+        dispatch(failure());
         dispatch(alertActions.error(error.toString()));
       }
     );
