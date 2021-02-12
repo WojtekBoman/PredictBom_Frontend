@@ -29,11 +29,11 @@ body {
 }
 
 .create-market-container{
-    width:60%;
+    width:70%;
     margin-bottom: 100px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
     .create-market-container{
         width:100%
     }

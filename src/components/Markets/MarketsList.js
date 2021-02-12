@@ -88,7 +88,7 @@ class MarketsList extends React.Component {
           {this.props.markets.map((market) => (
             <Col
               xs={12}
-              sm={6}
+              md={6}
               className="d-flex align-items-stretch"
               style={{ margin: "20px 0" }}
               key={market.marketId}

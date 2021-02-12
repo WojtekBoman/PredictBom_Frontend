@@ -12,7 +12,7 @@ class TransactionsPage extends React.Component {
 
   render() {
     return (
-      <Container className="bg-light border rounded shadow-container create-market-container">
+      <Container className="bg-light border rounded shadow-container">
         <BackHeader title="Transakcje" />
         <Tabs id="controlled-tab-example" className="mt-3">
           <Tab eventKey="home" title="Zakup" unmountOnExit>

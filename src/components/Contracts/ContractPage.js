@@ -8,7 +8,7 @@ import BackHeader from "../BackHeader";
 class ContractPage extends React.Component {
   render() {
     return (
-      <Container className="bg-light border rounded shadow-container create-market-container">
+      <Container className="bg-light border rounded shadow-container">
         <BackHeader title="Twoje kontrakty" />
         <hr className="my-4"></hr>
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
