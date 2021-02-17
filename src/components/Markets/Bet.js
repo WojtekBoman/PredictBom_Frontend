@@ -9,7 +9,7 @@ import Loader from "react-loader-spinner";
 import BuyContractForm from "./BuyContractForm";
 import _ from "lodash";
 import { LinkContainer } from "react-router-bootstrap";
-import './Bet.scss';
+import "./Bet.scss";
 
 class Bet extends React.Component {
   constructor(props) {
@@ -178,13 +178,16 @@ class Bet extends React.Component {
   renderBuyForm = () => {
     if (this.state.contractOption != null && this.props.player) {
       return (
-        <BuyContractForm
-          budget={this.props.player.budget}
-          marketId={this.props.marketId}
-          betId={this.props.betId}
-          contractOption={this.state.contractOption}
-          hideForm={this.hideForm}
-        />
+        <div>
+          <hr className="my-4"></hr>
+          <BuyContractForm
+            budget={this.props.player.budget}
+            marketId={this.props.marketId}
+            betId={this.props.betId}
+            contractOption={this.state.contractOption}
+            hideForm={this.hideForm}
+          />
+        </div>
       );
     }
   };
