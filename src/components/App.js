@@ -5,7 +5,6 @@ import { PrivateRoute } from "./PrivateRoute";
 import HomePage from "./HomePage";
 import LoginPage from "./Auth/LoginPage";
 import CreateMarketPage from "./Markets/CreateMarketPage";
-import ModeratorMarketsPage from "./Markets/ModeratorMarketsPage";
 import MarketCoverPage from "./Markets/MarketCoverPage";
 import NavigationBar from "./NavigationBar";
 import ProfilePage from "./User/ProfilePage";
@@ -58,7 +57,7 @@ const App = () => {
             component={ContractDetails}
           />
           <PrivateRoute path="/contracts" component={ContractPage} />
-          <PrivateRoute path="/markets/new" component={CreateMarketPage} />
+          <PrivateRoute path="/createMarket" component={CreateMarketPage} />
           <Route path="/markets/details/:id" component={MarketDetails} />
           <PrivateRoute
             path="/markets/editCover/:id"
@@ -81,10 +80,10 @@ const App = () => {
             path="/markets/delete/:id"
             component={DeleteMarketPage}
           />
-          <PrivateRoute
+          {/* <PrivateRoute
             path="/markets/private"
             component={ModeratorMarketsPage}
-          />
+          /> */}
           <Route path="/markets" component={MarketsPage} />
           <Redirect from="*" to="/" />
          

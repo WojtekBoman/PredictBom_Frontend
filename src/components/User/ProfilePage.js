@@ -45,17 +45,12 @@ class ProfilePage extends React.Component {
       case "ROLE_MODERATOR":
         return (
           <div>
-            <LinkContainer to="/markets/private">
-              <Button className="profile-button" variant="outline-dark">
-                Przeglądaj nieopublikowane rynki
-              </Button>
-            </LinkContainer>
             <LinkContainer to="/markets">
               <Button className="profile-button" variant="outline-dark">
-                Przeglądaj publiczne rynki
+                Przeglądaj rynki prognostyczne
               </Button>
             </LinkContainer>
-            <LinkContainer to="/markets/new">
+            <LinkContainer to="/createMarket">
               <Button
                 id="addNewMarket"
                 className="profile-button"

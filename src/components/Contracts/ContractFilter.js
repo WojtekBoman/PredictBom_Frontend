@@ -63,9 +63,9 @@ class ContractFilter extends React.Component {
         <h4>Status kontraktu</h4>
         <Form.Control as="select" onChange={this.handleContractStatus}>
           <option value={""}>Wszystkie</option>
-          <option value={"pending"}>Trwające</option>
-          <option value={"won"}>Wygrane</option>
-          <option value={"lost"}>Przegrane</option>
+          <option value={"PENDING"}>Trwające</option>
+          <option value={"WON"}>Wygrane</option>
+          <option value={"LOST"}>Przegrane</option>
         </Form.Control>
         <hr className="my-4"></hr>
       </div>
@@ -139,7 +139,7 @@ class ContractFilter extends React.Component {
       marketTitle: "",
       betTitle: "",
       page: 0,
-      contractStatus: "",
+      contractStatus: "PENDING",
       pageSize: 10,
       contractOption: 0,
       sortedBy: ["modifiedDate", "desc"],

@@ -143,7 +143,7 @@ export const deleteMarket = (marketId) => {
     dispatch(request());
     marketService.deleteMarket(marketId).then(
       (market) => {
-        history.push("/markets/private");
+        history.push("/markets");
         dispatch(success(market));
       },
       (error) => {
@@ -170,7 +170,7 @@ export const setMarketCover = (marketId, marketCover) => {
     marketService.setMarketCover(marketId, marketCover).then(
       (res) => {
         dispatch(success(res));
-        history.push("/markets/private");
+        history.push(`/markets/details/${marketId}`);
       },
       (error) => {
         dispatch(failure());
@@ -279,7 +279,7 @@ export const makePublic = (marketId) => {
     marketService.makePublic(marketId).then(
       (res) => {
         dispatch(success(res));
-        history.push("/markets");
+        history.push(`/markets/details/${marketId}`);
       },
       (error) => {
         dispatch(failure());
@@ -310,7 +310,7 @@ export const solveMultiBetMarket = (marketId, betId) => {
     marketService.solveMultiBetMarket(marketId, betId).then(
       (res) => {
         dispatch(success(res));
-        history.push("/markets");
+        history.push(`/markets/details/${marketId}`);
       },
       (error) => {
         dispatch(failure());
@@ -341,7 +341,7 @@ export const solveSingleBetMarket = (marketId, betId, correctBetOption) => {
     marketService.solveSingleBetMarket(marketId, betId, correctBetOption).then(
       (res) => {
         dispatch(success(res));
-        history.push("/markets");
+        history.push(`/markets/details/${marketId}`);
       },
       (error) => {
         dispatch(failure());

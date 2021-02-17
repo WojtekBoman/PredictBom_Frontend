@@ -85,7 +85,7 @@ class MarketDetails extends React.Component {
                 <hr className="my-4"></hr>
               </div>
               <div className="endDate">
-                {this.props.correctBetId === 0 ? <h4>Przewidywana data zakończenia</h4> : <h4>Data zakończenia</h4>}
+                {this.props.currentMarket.correctBetId === 0 ? <h4>Przewidywana data zakończenia</h4> : <h4>Data zakończenia</h4>}
                 {this.props.currentMarket.endDate.substring(0, 4) === "3000" ? (
                   <p>Nieokreślona</p>
                 ) : (

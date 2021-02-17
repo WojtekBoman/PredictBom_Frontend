@@ -11,11 +11,11 @@ export const MarketCategories = [
 
 export const renderCategoryFilter = (handleCategory) => {
   const filterCategories = [
-    { label: "Sport", value: "sport", key: 1 },
-    { label: "Celebryci", value: "cel", key: 2 },
-    { label: "Polityka", value: "policy", key: 3 },
-    { label: "Gospodarka", value: "eco", key: 4 },
-    { label: "Inne", value: "other", key: 5 },
+    { label: "Sport", value: "SPORT", key: 1 },
+    { label: "Celebryci", value: "CELEBRITIES", key: 2 },
+    { label: "Polityka", value: "POLICY", key: 3 },
+    { label: "Gospodarka", value: "ECONOMY", key: 4 },
+    { label: "Inne", value: "OTHER", key: 5 },
   ];
 
   return (
