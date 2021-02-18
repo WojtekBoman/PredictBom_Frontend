@@ -56,16 +56,12 @@ export default (state = [], action) => {
       return updateArr(state, action);
     case marketsConstants.MAKE_MARKET_PUBLIC_FAILURE:
       return [...state];
-    case marketsConstants.SOLVE_SINGLE_BET_MARKET_REQUEST:
+    case marketsConstants.SOLVE_MARKET_REQUEST:
       return [...state];
-    case marketsConstants.SOLVE_SINGLE_BET_MARKET_SUCCESS:
+    case marketsConstants.SOLVE_MARKET_SUCCESS:
       return updateArr(state, action);
-    case marketsConstants.SOLVE_SINGLE_BET_MARKET_FAILURE:
+    case marketsConstants.SOLVE_MARKET_FAILURE:
       return [...state];
-    case marketsConstants.SOLVE_MULTI_BET_MARKET_REQUEST:
-      return [...state];
-    case marketsConstants.SOLVE_MULTI_BET_MARKET_SUCCESS:
-      return updateArr(state, action);
     case marketsConstants.EDIT_MARKET_REQUEST:
       return [...state];
     case marketsConstants.EDIT_MARKET_SUCCESS:
