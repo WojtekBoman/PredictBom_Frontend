@@ -6,9 +6,10 @@ import { login } from "../../actions/loginActions";
 import { alertActions } from "../../actions/alertActions";
 import { Link } from "react-router-dom";
 import {renderInput} from '../../helpers/FormInputs';
-import {renderInfo} from '../../helpers/InfoComponents';
+import {renderInfoWithClose,renderInfo} from '../../helpers/InfoComponents';
 import { renderButtonContent } from "../../helpers/LoadingContent";
 import BackHeader from '../BackHeader';
+import {alertConstants} from '../../constants/alertConstants';
 
 class LoginPage extends React.Component {
   componentWillUnmount() {
@@ -18,6 +19,10 @@ class LoginPage extends React.Component {
   onSubmit = (formValues) => {
     this.props.login(formValues);
   };
+
+  renderAlerts = () => {
+    return (this.props.alert && this.props.alert.type === alertConstants.ALERT_SUCCESS_INFO) ? renderInfoWithClose(this.props.alert,this.props.clear,"success") : renderInfo(this.props.alert);
+  }
 
   render() {
     return (
@@ -48,7 +53,7 @@ class LoginPage extends React.Component {
           </Button>
         </Form>
         <Link to="/resetPassword">Zapomniałeś hasła ?</Link>
-        {renderInfo(this.props.alert)}
+        {this.renderAlerts()}
       </Container>
     );
   }

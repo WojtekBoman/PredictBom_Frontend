@@ -2,7 +2,7 @@ import { alertConstants } from "../constants/alertConstants";
 
 const success = (message) => {
   return {
-    type: alertConstants.ALERT_SUCCESS,
+    type: alertConstants.ALERT_SUCCESS_INFO,
     payload: message,
   };
 };

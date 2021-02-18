@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Form, Button, Alert } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
-import { solveMultiBetMarket } from "../../actions/marketActions";
+import { solveMarket } from "../../actions/marketActions";
 import { renderInfo } from "../../helpers/InfoComponents";
 import { renderButtonContent } from "../../helpers/LoadingContent";
 
@@ -19,9 +19,9 @@ class SolveMultiBetMarketForm extends React.Component {
     this.setState({ correctBetId: e.target.value });
   };
 
-  handleSubmit(e) {
-    e.preventDefault();
-  }
+  // handleSubmit(e) {
+  //   e.preventDefault();
+  // }
 
   getOptions() {
     const options = [
@@ -65,7 +65,7 @@ class SolveMultiBetMarketForm extends React.Component {
   }
 
   onSubmit = (formValues) => {
-    this.props.solveMultiBetMarket(
+    this.props.solveMarket(
       this.props.marketId,
       formValues.correctBetId
     );
@@ -104,9 +104,9 @@ const formWrapped = reduxForm({
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.loading.SOLVE_MULTI_BET_MARKET,
+    loading: state.loading.SOLVE_MARKET,
     alert: state.alert,
   };
 };
 
-export default connect(mapStateToProps, { solveMultiBetMarket })(formWrapped);
+export default connect(mapStateToProps, { solveMarket })(formWrapped);

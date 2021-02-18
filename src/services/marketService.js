@@ -68,14 +68,29 @@ const fetchMarket = (marketId) => {
   );
 };
 
-export const fetchBetPrice = (betId) => {
+export const fetchBetPrice = (betId,option) => {
   const reqOptions = {
     method: "GET",
     headers: authHeader(),
   };
-  return fetch(`${baseURL}/markets/betPrice/${betId}`, reqOptions).then((res) =>
+  let url = `${baseURL}/markets/betPrice?betId=${betId}`;
+  if(typeof option !== undefined) url.concat(`?option=${option}`)
+  return fetch(url, reqOptions).then((res) =>
     handleResponse(res)
   );
+};
+
+
+const fetchBetPriceByOption = (betId, option) => {
+  const reqOptions = {
+    method: "GET",
+    headers: authHeader(),
+  };
+
+  return fetch(
+    `${baseURL}/markets/betPrice?betId=${betId}&option=${option}`,
+    reqOptions
+  ).then((res) => handleResponse(res));
 };
 
 const setMarketCover = (marketId, { marketCover }) => {
@@ -117,26 +132,14 @@ export const deleteBet = (betId) => {
   ).then((res) => handleResponse(res));
 };
 
-export const solveMultiBetMarket = (marketId, betId) => {
+export const solveMarket = (marketId, betId, correctOption) => {
   const reqOptions = {
     method: "PUT",
     headers: authHeader(),
   };
 
   return fetch(
-    `${baseURL}/markets/solveMultiBetMarket?marketId=${marketId}&betId=${betId}`,
-    reqOptions
-  ).then((res) => handleResponse(res));
-};
-
-export const solveSingleBetMarket = (marketId, betId, correctOption) => {
-  const reqOptions = {
-    method: "PUT",
-    headers: authHeader(),
-  };
-
-  return fetch(
-    `${baseURL}/markets/solveSingleBetMarket?marketId=${marketId}&betId=${betId}&correctOption=${correctOption}`,
+    `${baseURL}/markets/solveMarket?marketId=${marketId}&betId=${betId}&correctOption=${correctOption}`,
     reqOptions
   ).then((res) => handleResponse(res));
 };
@@ -171,11 +174,11 @@ export const marketService = {
   fetchMarkets,
   fetchMarket,
   fetchBetPrice,
+  fetchBetPriceByOption,
   deleteMarket,
   setMarketCover,
   addBet,
   deleteBet,
   makePublic,
-  solveSingleBetMarket,
-  solveMultiBetMarket,
+  solveMarket
 };

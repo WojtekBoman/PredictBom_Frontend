@@ -83,6 +83,7 @@ class TransactionList extends React.Component {
         }else{
             return(<div>
                 {this.renderList()}
+                {this.renderPagination()}
             </div>)
         }
     }
@@ -121,7 +122,6 @@ class TransactionList extends React.Component {
                     <Col sm={9}>
                         {this.renderContent()}
                         {this.renderInfo()}
-                        {this.renderPagination()}
                     </Col>
                 </Row>
             </div>

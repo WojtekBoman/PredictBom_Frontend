@@ -2,9 +2,9 @@ import { alertConstants } from "../constants/alertConstants";
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case alertConstants.ALERT_SUCCESS:
+    case alertConstants.ALERT_SUCCESS_INFO:
       return {
-        type: alertConstants.ALERT_SUCCESS,
+        type: alertConstants.ALERT_SUCCESS_INFO,
         payload: action.payload,
       };
     case alertConstants.ALERT_ERROR:

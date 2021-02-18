@@ -38,15 +38,15 @@ class NavigationBar extends React.Component {
         return (
           <Nav className="mr-auto">
             <NavDropdown title="Rynki">
-              <LinkContainer to="/markets/new">
+              <LinkContainer to="/createMarket">
                 <NavDropdown.Item>Dodaj nowy rynek</NavDropdown.Item>
               </LinkContainer>
-              <LinkContainer to="/markets">
+              <LinkContainer to="/markets/">
                 <NavDropdown.Item>Rynki publiczne</NavDropdown.Item>
               </LinkContainer>
-              <LinkContainer to="/markets/private">
+              {/* <LinkContainer to="/markets/private">
                 <NavDropdown.Item>Rynki nieopublikowane</NavDropdown.Item>
-              </LinkContainer>
+              </LinkContainer> */}
             </NavDropdown>
             {this.renderRankingLink()}
           </Nav>
