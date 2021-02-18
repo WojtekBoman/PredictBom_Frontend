@@ -11,12 +11,13 @@ import BackHeader from "../BackHeader";
 
 class RegisterPage extends React.Component {
   componentWillUnmount() {
-    this.props.clear();
+    if(this.props.alert && !this.props.alert.type === "ALERT_SUCCESS_INFO") this.props.clear();
   }
 
   onSubmit = (formValues) => {
     this.props.register(formValues);
   };
+
 
   render() {
     return (
@@ -103,6 +104,10 @@ const validate = (formValues) => {
 
   if (formValues.password !== formValues.repeatPassword) {
     errors.repeatPassword = "Podane hasła są różne";
+  }
+
+  if(formValues.password && (formValues.password.length < 6 || formValues.password > 40)) {
+    errors.password = "Hasło musi zawierać od 6 do 40 znaków";
   }
 
   return errors;

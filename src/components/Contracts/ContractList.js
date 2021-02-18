@@ -75,8 +75,7 @@ class ContractList extends React.Component {
 
   renderInfo() {
     if (
-      this.props.alert.payload &&
-      !(typeof this.props.loading !== "undefined" && this.props.loading.pending)
+      this.props.alert.payload
     ) {
       return (
         <div className="text-center">
@@ -145,6 +144,7 @@ class ContractList extends React.Component {
     } else {
       return (
         <div>
+          {this.renderInfo()}
           {this.renderContractList()}
           <div>
             <PaginationBar
@@ -161,7 +161,6 @@ class ContractList extends React.Component {
     return (
       <div>
         {this.renderContent()}
-        {this.renderInfo()}
       </div>
     );
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Segment} from 'semantic-ui-react';
 import {Row,Col} from 'react-bootstrap';
-import {fetchBetPrice} from '../../actions/contractActions';
+import {fetchBetPrice} from '../../actions/marketActions';
 import Loader from 'react-loader-spinner';
 
 

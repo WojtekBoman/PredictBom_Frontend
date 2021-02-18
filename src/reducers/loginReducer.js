@@ -1,6 +1,7 @@
 import {
   loginConstants,
   editPasswordConstants,
+  registerConstants,
 } from "../constants/userConstants";
 
 let user = JSON.parse(localStorage.getItem("user"));
@@ -28,6 +29,18 @@ export default (state = initialState, action) => {
       return { ...state };
     case editPasswordConstants.EDIT_PASSWORD_FAILURE:
       return { ...state };
+    case editPasswordConstants.CHANGE_PASSWORD_WITH_TOKEN_REQUEST:
+      return { ...state };
+    case editPasswordConstants.CHANGE_PASSWORD_WITH_TOKEN_SUCCESS:
+      return { ...state };
+    case editPasswordConstants.CHANGE_PASSWORD_WITH_TOKEN_FAILURE:
+      return { ...state };
+    case registerConstants.REGISTER_REQUEST:
+      return {};
+    case registerConstants.REGISTER_SUCCESS:
+      return {};
+    case registerConstants.REGISTER_FAILURE:
+      return {};
     default:
       return state;
   }

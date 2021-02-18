@@ -57,19 +57,19 @@ export const changePasswordWithToken = ({newPassword,repeatedPassword},token) =>
 
         userService.changePasswordWithToken(newPassword,repeatedPassword,token)
             .then(
-                token => { 
-                    dispatch(success(token));
+                info => { 
+                    dispatch(success());
+                    dispatch(alertActions.success(info))
                     history.push("/login");
                 },
                 error => {
-                    
-                    dispatch(failure(error.toString()));
+                    dispatch(failure());
                     dispatch(alertActions.error(error.toString()));
                 }
             );
     };
 
-    function request(user) { return { type: tokenConstants.CHANGE_PASSWORD_WITH_TOKEN_REQUEST, payload:user } }
-    function success(user) { return { type: tokenConstants.CHANGE_PASSWORD_WITH_TOKEN_SUCCESS, payload:user } }
-    function failure(error) { return { type: tokenConstants.CHANGE_PASSWORD_WITH_TOKEN_FAILURE, payload:error } }
+    function request() { return { type: tokenConstants.CHANGE_PASSWORD_WITH_TOKEN_REQUEST } }
+    function success() { return { type: tokenConstants.CHANGE_PASSWORD_WITH_TOKEN_SUCCESS } }
+    function failure() { return { type: tokenConstants.CHANGE_PASSWORD_WITH_TOKEN_FAILURE } }
 }

@@ -30,7 +30,7 @@ const register = (username, firstName, surname, email, password) => {
   };
 
   return fetch(`${baseURL}/api/auth/signup`, reqOptions).then((res) =>
-    handleLoginResponse(res)
+    handleTextResponse(res)
   );
 };
 
@@ -40,7 +40,7 @@ const sendToken = (email) => {
     headers: { "Content-Type": "application/json" },
   };
   return fetch(
-    `${baseURL}/api/auth/user/resetPassword?username=${email}`,
+    `${baseURL}/api/auth/resetPassword?username=${email}`,
     reqOptions
   ).then((res) => handleTextResponse(res));
 };
@@ -51,7 +51,7 @@ const checkToken = (token) => {
     headers: { "Content-Type": "application/json" },
   };
   return fetch(
-    `${baseURL}/api/auth/user/changePassword?token=${token}`,
+    `${baseURL}/api/auth/checkToken?token=${token}`,
     reqOptions
   ).then((res) => handleTextResponse(res));
 };
@@ -64,7 +64,7 @@ const changePasswordWithToken = (newPassword, repeatedPassword, token) => {
   };
 
   return fetch(
-    `${baseURL}/api/auth/user/changePassword`,
+    `${baseURL}/api/auth/changePassword`,
     reqOptions
   ).then((res) => handleTextResponse(res));
 };
@@ -77,7 +77,7 @@ const editPassword = (oldPassword, newPassword, repeatedNewPassword) => {
   };
 
   return fetch(
-    `${baseURL}/api/auth/user/editPassword`,
+    `${baseURL}/api/auth/editPassword`,
     reqOptions
   ).then((res) => handleTextResponse(res));
 };

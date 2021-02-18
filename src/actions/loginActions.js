@@ -33,9 +33,9 @@ export const editPassword = ({oldPassword,newPassword,repeatedNewPassword}) => {
         userService.editPassword(oldPassword,newPassword,repeatedNewPassword)
             .then(
                 res => { 
+                    dispatch(logout());
                     dispatch(success());
                     dispatch(alertActions.success(res));
-                    logout();
                 },
                 error => {
                     dispatch(failure());

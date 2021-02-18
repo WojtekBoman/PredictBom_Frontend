@@ -304,10 +304,11 @@ export const makePublic = (marketId) => {
   }
 };
 
-export const solveMultiBetMarket = (marketId, betId) => {
+
+export const solveMarket = (marketId, betId, correctBetOption = true) => {
   return (dispatch) => {
     dispatch(request());
-    marketService.solveMultiBetMarket(marketId, betId).then(
+    marketService.solveMarket(marketId, betId, correctBetOption).then(
       (res) => {
         dispatch(success(res));
         history.push(`/markets/details/${marketId}`);
@@ -321,47 +322,16 @@ export const solveMultiBetMarket = (marketId, betId) => {
 
   function request() {
     return {
-      type: marketsConstants.SOLVE_MULTI_BET_MARKET_REQUEST,
+      type: marketsConstants.SOLVE_MARKET_REQUEST,
     };
   }
   function success(market) {
     return {
-      type: marketsConstants.SOLVE_MULTI_BET_MARKET_SUCCESS,
+      type: marketsConstants.SOLVE_MARKET_SUCCESS,
       payload: market,
     };
   }
   function failure() {
-    return { type: marketsConstants.SOLVE_MULTI_BET_MARKET_FAILURE };
-  }
-};
-
-export const solveSingleBetMarket = (marketId, betId, correctBetOption) => {
-  return (dispatch) => {
-    dispatch(request());
-    marketService.solveSingleBetMarket(marketId, betId, correctBetOption).then(
-      (res) => {
-        dispatch(success(res));
-        history.push(`/markets/details/${marketId}`);
-      },
-      (error) => {
-        dispatch(failure());
-        dispatch(alertActions.error(error.toString()));
-      }
-    );
-  };
-
-  function request() {
-    return {
-      type: marketsConstants.SOLVE_SINGLE_BET_MARKET_REQUEST,
-    };
-  }
-  function success(market) {
-    return {
-      type: marketsConstants.SOLVE_SINGLE_BET_MARKET_SUCCESS,
-      payload: market,
-    };
-  }
-  function failure() {
-    return { type: marketsConstants.SOLVE_SINGLE_BET_MARKET_FAILURE };
+    return { type: marketsConstants.SOLVE_MARKET_FAILURE };
   }
 };

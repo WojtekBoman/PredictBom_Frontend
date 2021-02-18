@@ -8,24 +8,25 @@ export const register = ({ username, firstName, surname, email, password }) => {
     dispatch(request({ username }));
 
     userService.register(username, firstName, surname, email, password).then(
-      (user) => {
-        dispatch(success(user));
-        history.push("/");
+      (text) => {
+        dispatch(success());
+        dispatch(alertActions.success(text));
+        history.push("/login");
       },
       (error) => {
-        dispatch(failure(error.toString()));
+        dispatch(failure());
         dispatch(alertActions.error(error.toString()));
       }
     );
   };
 
-  function request(user) {
-    return { type: registerConstants.REGISTER_REQUEST, user };
+  function request() {
+    return { type: registerConstants.REGISTER_REQUEST };
   }
-  function success(user) {
-    return { type: registerConstants.REGISTER_SUCCESS, user };
+  function success() {
+    return { type: registerConstants.REGISTER_SUCCESS };
   }
-  function failure(error) {
-    return { type: registerConstants.REGISTER_FAILURE, error };
+  function failure() {
+    return { type: registerConstants.REGISTER_FAILURE };
   }
 };

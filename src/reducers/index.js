@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
 import loginReducer from "./loginReducer";
-import registerReducer from "./registerReducer";
 import alertReducer from "./alertReducer";
 import loadingReducer from "./loadingReducer";
 import marketsReducer from "./marketsReducer";
@@ -22,7 +21,6 @@ export default combineReducers({
   login: loginReducer,
   form: formReducer,
   markets: marketsReducer,
-  register: registerReducer,
   filterMarkets: filterReducer,
   filterContracts: filterContractReducer,
   alert: alertReducer,

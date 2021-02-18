@@ -68,17 +68,6 @@ const fetchContractDetails = (betId) => {
   );
 };
 
-const fetchLastPrice = (betId, option) => {
-  const reqOptions = {
-    method: "GET",
-    headers: authHeader(),
-  };
-
-  return fetch(
-    `${baseURL}/contracts/lastBetPrice?betId=${betId}&option=${option}`,
-    reqOptions
-  ).then((res) => handleResponse(res));
-};
 
 const addOffer = (contractId, shares, price) => {
   const reqOptions = {
@@ -104,12 +93,11 @@ const deleteOffer = (offerId) => {
   ).then((res) => handleResponse(res));
 };
 
-export const betsService = {
+export const contractService = {
   buyContract,
   fetchFilteredContracts,
   fetchContracts,
   fetchContractDetails,
-  fetchLastPrice,
   addOffer,
   deleteOffer,
 };

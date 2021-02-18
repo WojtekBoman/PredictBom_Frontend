@@ -1,6 +1,5 @@
 import { contractConstants } from "../constants/contractConstants";
-import { betsConstants } from "../constants/betsConstants";
-import { betsService } from "../services/contractService";
+import { contractService } from "../services/contractService";
 import history from "../history";
 import { alertActions } from "./alertActions";
 import _ from "lodash";
@@ -15,7 +14,7 @@ export const buyContract = (
 ) => {
   return (dispatch) => {
     dispatch(request({ betId }));
-    betsService
+    contractService
       .buyContract(betId, marketId, contractOption, maxPrice, shares)
       .then(
         (res) => {
@@ -56,7 +55,7 @@ export const fetchFilteredContracts = (
 ) => {
   return (dispatch) => {
     dispatch(request());
-    betsService
+    contractService
       .fetchFilteredContracts(
         contractStatus,
         contractOption,
@@ -93,7 +92,7 @@ export const fetchFilteredContracts = (
 export const fetchContracts = (page, pageSize) => {
   return (dispatch) => {
     dispatch(request());
-    betsService.fetchContracts(page, pageSize).then(
+    contractService.fetchContracts(page, pageSize).then(
       (res) => {
         dispatch(success(res.content));
         dispatch(updateContractPagination(_.omit(res, ["content"])));
@@ -116,35 +115,10 @@ export const fetchContracts = (page, pageSize) => {
   }
 };
 
-export const fetchBetPrice = (betId, option) => {
-  return (dispatch) => {
-    dispatch(request(betId));
-    betsService.fetchLastPrice(betId, option).then(
-      (betPrice) => {
-        dispatch(success(betPrice));
-      },
-      (error) => {
-        dispatch(failure());
-        dispatch(alertActions.error(error.toString()));
-      }
-    );
-  };
-
-  function request(betPrice) {
-    return { type: betsConstants.FETCH_BET_PRICE_REQUEST, payload: betPrice };
-  }
-  function success(betPrice) {
-    return { type: betsConstants.FETCH_BET_PRICE_SUCCESS, payload: betPrice };
-  }
-  function failure() {
-    return { type: betsConstants.FETCH_BET_PRICE_FAILURE };
-  }
-};
-
 export const fetchContractDetails = (id) => {
   return (dispatch) => {
     dispatch(request());
-    betsService.fetchContractDetails(id).then(
+    contractService.fetchContractDetails(id).then(
       (res) => {
         dispatch(success(res));
       },
@@ -169,7 +143,7 @@ export const fetchContractDetails = (id) => {
 export const addOffer = (contractId, shares, price) => {
   return (dispatch) => {
     dispatch(request());
-    betsService.addOffer(contractId, shares, price).then(
+    contractService.addOffer(contractId, shares, price).then(
       (res) => {
         dispatch(success(res));
         history.push(`/contracts/details/${contractId}`);
@@ -195,7 +169,7 @@ export const addOffer = (contractId, shares, price) => {
 export const deleteOffer = (offerId) => {
   return (dispatch) => {
     dispatch(request());
-    betsService.deleteOffer(offerId).then(
+    contractService.deleteOffer(offerId).then(
       (res) => {
         dispatch(success(res));
       },

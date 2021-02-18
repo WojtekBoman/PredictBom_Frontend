@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
-import { solveSingleBetMarket } from "../../actions/marketActions";
+import { solveMarket } from "../../actions/marketActions";
 import {renderSelectField} from '../../helpers/FormInputs';
 import { renderInfo } from "../../helpers/InfoComponents";
 import {renderButtonContent} from '../../helpers/LoadingContent'; 
@@ -38,7 +38,7 @@ class SolveSingleBetMarketForm extends React.Component {
 //   }
 
   onSubmit = (formValues) => {
-    this.props.solveSingleBetMarket(
+    this.props.solveMarket(
       this.props.marketId,
       this.props.bets[0].id,
       formValues.correctBetOption
@@ -78,9 +78,9 @@ const formWrapped = reduxForm({
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.loading.SOLVE_SINGLE_BET_MARKET,
+    loading: state.loading.SOLVE_MARKET,
     alert: state.alert,
   };
 };
 
-export default connect(mapStateToProps, { solveSingleBetMarket })(formWrapped);
+export default connect(mapStateToProps, { solveMarket })(formWrapped);
