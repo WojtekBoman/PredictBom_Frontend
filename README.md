@@ -1,5 +1,6 @@
 # PredictBom_Frontend
 Front-end part of the PredictBom application
+Live version: 	[Try it](https://wojtekboman.github.io/PredictBom_Frontend)
 
 ## Table of contents
 * [General info](#general-info)
