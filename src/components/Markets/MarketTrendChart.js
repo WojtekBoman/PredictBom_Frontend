@@ -28,9 +28,7 @@ class MarketTrendChart extends React.Component {
     var yyyy = today.getFullYear();
 
     today = yyyy + "-" + mm + "-" + dd;
-    console.log(this.state.currentBet, this.state.currentOption, today);
     this.setState({ timeAgo: today });
-    console.log(today);
     this.props.fetchTransactions(
       this.state.currentBet,
       this.state.currentOption,
@@ -47,7 +45,6 @@ class MarketTrendChart extends React.Component {
     if (this.props.correctBetId > 0) {
       let timestamp = Date.parse(this.props.endDate);
       today = new Date(timestamp);
-      console.log(this.props.endDate);
     } else {
       today = new Date();
     }
@@ -58,8 +55,6 @@ class MarketTrendChart extends React.Component {
 
     today = yyyy + "-" + mm + "-" + dd;
     this.setState({ timeAgo: today });
-    console.log(this.state.currentBet, this.state.currentOption, today);
-    console.log(today);
     this.props.fetchTransactions(
       this.state.currentBet,
       this.state.currentOption,
@@ -69,7 +64,6 @@ class MarketTrendChart extends React.Component {
 
   onChangeBet = (e) => {
     this.setState({ currentBet: e.target.value });
-    console.log(e.target.value, this.state.currentOption, this.state.timeAgo);
     this.props.fetchTransactions(
       e.target.value,
       this.state.currentOption,
