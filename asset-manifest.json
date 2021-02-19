@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/PredictBom_Frontend/static/css/main.cd3d3ff5.chunk.css",
-    "main.js": "/PredictBom_Frontend/static/js/main.e4dd86c8.chunk.js",
-    "main.js.map": "/PredictBom_Frontend/static/js/main.e4dd86c8.chunk.js.map",
+    "main.js": "/PredictBom_Frontend/static/js/main.3abc1d38.chunk.js",
+    "main.js.map": "/PredictBom_Frontend/static/js/main.3abc1d38.chunk.js.map",
     "runtime-main.js": "/PredictBom_Frontend/static/js/runtime-main.5e2458eb.js",
     "runtime-main.js.map": "/PredictBom_Frontend/static/js/runtime-main.5e2458eb.js.map",
     "static/css/2.d43d42b0.chunk.css": "/PredictBom_Frontend/static/css/2.d43d42b0.chunk.css",
-    "static/js/2.9e1eb016.chunk.js": "/PredictBom_Frontend/static/js/2.9e1eb016.chunk.js",
-    "static/js/2.9e1eb016.chunk.js.map": "/PredictBom_Frontend/static/js/2.9e1eb016.chunk.js.map",
+    "static/js/2.77ffe78d.chunk.js": "/PredictBom_Frontend/static/js/2.77ffe78d.chunk.js",
+    "static/js/2.77ffe78d.chunk.js.map": "/PredictBom_Frontend/static/js/2.77ffe78d.chunk.js.map",
     "index.html": "/PredictBom_Frontend/index.html",
-    "precache-manifest.ff6aaec40f72d17f43403ccb42dbc01b.js": "/PredictBom_Frontend/precache-manifest.ff6aaec40f72d17f43403ccb42dbc01b.js",
+    "precache-manifest.3e44f6cc3396e3f7fb064bfa8548f378.js": "/PredictBom_Frontend/precache-manifest.3e44f6cc3396e3f7fb064bfa8548f378.js",
     "service-worker.js": "/PredictBom_Frontend/service-worker.js",
     "static/css/2.d43d42b0.chunk.css.map": "/PredictBom_Frontend/static/css/2.d43d42b0.chunk.css.map",
     "static/css/main.cd3d3ff5.chunk.css.map": "/PredictBom_Frontend/static/css/main.cd3d3ff5.chunk.css.map",
-    "static/js/2.9e1eb016.chunk.js.LICENSE.txt": "/PredictBom_Frontend/static/js/2.9e1eb016.chunk.js.LICENSE.txt",
+    "static/js/2.77ffe78d.chunk.js.LICENSE.txt": "/PredictBom_Frontend/static/js/2.77ffe78d.chunk.js.LICENSE.txt",
     "static/media/Poland.png": "/PredictBom_Frontend/static/media/Poland.f63e26dd.png",
     "static/media/semantic.min.css": "/PredictBom_Frontend/static/media/outline-icons.ef60a4f6.woff",
     "static/media/celebryciBackground.jpg": "/PredictBom_Frontend/static/media/celebryciBackground.7921ca20.jpg",
@@ -24,8 +24,8 @@
   "entrypoints": [
     "static/js/runtime-main.5e2458eb.js",
     "static/css/2.d43d42b0.chunk.css",
-    "static/js/2.9e1eb016.chunk.js",
+    "static/js/2.77ffe78d.chunk.js",
     "static/css/main.cd3d3ff5.chunk.css",
-    "static/js/main.e4dd86c8.chunk.js"
+    "static/js/main.3abc1d38.chunk.js"
   ]
 }
