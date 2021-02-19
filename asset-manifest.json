@@ -1,20 +1,21 @@
 {
   "files": {
     "main.css": "/PredictBom_Frontend/static/css/main.cd3d3ff5.chunk.css",
-    "main.js": "/PredictBom_Frontend/static/js/main.eb010f3e.chunk.js",
-    "main.js.map": "/PredictBom_Frontend/static/js/main.eb010f3e.chunk.js.map",
+    "main.js": "/PredictBom_Frontend/static/js/main.10967f2d.chunk.js",
+    "main.js.map": "/PredictBom_Frontend/static/js/main.10967f2d.chunk.js.map",
     "runtime-main.js": "/PredictBom_Frontend/static/js/runtime-main.5e2458eb.js",
     "runtime-main.js.map": "/PredictBom_Frontend/static/js/runtime-main.5e2458eb.js.map",
-    "static/css/2.58e15d2b.chunk.css": "/PredictBom_Frontend/static/css/2.58e15d2b.chunk.css",
-    "static/js/2.e81a7249.chunk.js": "/PredictBom_Frontend/static/js/2.e81a7249.chunk.js",
-    "static/js/2.e81a7249.chunk.js.map": "/PredictBom_Frontend/static/js/2.e81a7249.chunk.js.map",
+    "static/css/2.d43d42b0.chunk.css": "/PredictBom_Frontend/static/css/2.d43d42b0.chunk.css",
+    "static/js/2.9e1eb016.chunk.js": "/PredictBom_Frontend/static/js/2.9e1eb016.chunk.js",
+    "static/js/2.9e1eb016.chunk.js.map": "/PredictBom_Frontend/static/js/2.9e1eb016.chunk.js.map",
     "index.html": "/PredictBom_Frontend/index.html",
-    "precache-manifest.590a6c0944c0919f0fe12870c75c8c32.js": "/PredictBom_Frontend/precache-manifest.590a6c0944c0919f0fe12870c75c8c32.js",
+    "precache-manifest.a884c27458edfae0b4cd9c3a4f8f92a9.js": "/PredictBom_Frontend/precache-manifest.a884c27458edfae0b4cd9c3a4f8f92a9.js",
     "service-worker.js": "/PredictBom_Frontend/service-worker.js",
-    "static/css/2.58e15d2b.chunk.css.map": "/PredictBom_Frontend/static/css/2.58e15d2b.chunk.css.map",
+    "static/css/2.d43d42b0.chunk.css.map": "/PredictBom_Frontend/static/css/2.d43d42b0.chunk.css.map",
     "static/css/main.cd3d3ff5.chunk.css.map": "/PredictBom_Frontend/static/css/main.cd3d3ff5.chunk.css.map",
-    "static/js/2.e81a7249.chunk.js.LICENSE.txt": "/PredictBom_Frontend/static/js/2.e81a7249.chunk.js.LICENSE.txt",
+    "static/js/2.9e1eb016.chunk.js.LICENSE.txt": "/PredictBom_Frontend/static/js/2.9e1eb016.chunk.js.LICENSE.txt",
     "static/media/Poland.png": "/PredictBom_Frontend/static/media/Poland.f63e26dd.png",
+    "static/media/semantic.min.css": "/PredictBom_Frontend/static/media/outline-icons.ef60a4f6.woff",
     "static/media/celebryciBackground.jpg": "/PredictBom_Frontend/static/media/celebryciBackground.7921ca20.jpg",
     "static/media/gospodarkaBackground.jpg": "/PredictBom_Frontend/static/media/gospodarkaBackground.e29d775f.jpg",
     "static/media/politykaBackground.jpg": "/PredictBom_Frontend/static/media/politykaBackground.e914f677.jpg",
@@ -22,9 +23,9 @@
   },
   "entrypoints": [
     "static/js/runtime-main.5e2458eb.js",
-    "static/css/2.58e15d2b.chunk.css",
-    "static/js/2.e81a7249.chunk.js",
+    "static/css/2.d43d42b0.chunk.css",
+    "static/js/2.9e1eb016.chunk.js",
     "static/css/main.cd3d3ff5.chunk.css",
-    "static/js/main.eb010f3e.chunk.js"
+    "static/js/main.10967f2d.chunk.js"
   ]
 }
