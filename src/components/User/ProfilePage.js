@@ -10,7 +10,7 @@ import "./ProfilePage.scss";
 
 class ProfilePage extends React.Component {
   componentDidMount() {
-    if (this.props.user.roles.includes("ROLE_PLAYER")) {
+    if (this.props.user && this.props.user.roles.includes("ROLE_PLAYER")) {
       this.props.fetchPlayer(this.props.user.username);
     }
   }
@@ -74,64 +74,75 @@ class ProfilePage extends React.Component {
     }
   };
 
-  render() {
-    return (
-      <Container className="bg-light border rounded shadow-container profile-container">
-        <h3>Witaj {this.props.user.username} !</h3>
-        <hr className="my-4"></hr>
-        <Row>
-          <Col sm={6} className="text-center">
-            <FontAwesomeIcon size="6x" icon={faUser} />
-          </Col>
-          <Col>
-            <h5>
-              <b>Imię:</b> {this.props.user.firstName}
-            </h5>
-            <h5>
-              <b>Nazwisko:</b> {this.props.user.surname}
-            </h5>
-            <h5>
-              <b>Email:</b> {this.props.user.email}
-            </h5>
-            {this.props.player.budget && (
+  renderContent() {
+    if(this.props.user) {
+      return (
+        <Container className="bg-light border rounded shadow-container profile-container">
+          <h3>Witaj {this.props.user.username} !</h3>
+          <hr className="my-4"></hr>
+          <Row>
+            <Col sm={6} className="text-center">
+              <FontAwesomeIcon size="6x" icon={faUser} />
+            </Col>
+            <Col>
               <h5>
-                <b>Budżet: </b>
-                {Math.round((this.props.player.budget + Number.EPSILON) * 100) /
-                  100}{" "}
-                $
+                <b>Imię:</b> {this.props.user.firstName}
               </h5>
-            )}
-          </Col>
-        </Row>
-        <hr className="my-4"></hr>
-        <div className="text-center">
-          {this.renderContentByRole(this.props.user.roles[0])}
-          <LinkContainer to="/ranking">
-            <Button className="profile-button" variant="outline-dark">
-              Wyświetl ranking
-            </Button>
-          </LinkContainer>
-          <LinkContainer to="/editPassword">
+              <h5>
+                <b>Nazwisko:</b> {this.props.user.surname}
+              </h5>
+              <h5>
+                <b>Email:</b> {this.props.user.email}
+              </h5>
+              {this.props.player.budget && (
+                <h5>
+                  <b>Budżet: </b>
+                  {Math.round((this.props.player.budget + Number.EPSILON) * 100) /
+                    100}{" "}
+                  $
+                </h5>
+              )}
+            </Col>
+          </Row>
+          <hr className="my-4"></hr>
+          <div className="text-center">
+            {this.renderContentByRole(this.props.user.roles[0])}
+            <LinkContainer to="/ranking">
+              <Button className="profile-button" variant="outline-dark">
+                Wyświetl ranking
+              </Button>
+            </LinkContainer>
+            <LinkContainer to="/editPassword">
+              <Button
+                id="openEditPasswordButton"
+                className="profile-button"
+                variant="outline-dark"
+              >
+                Zmień hasło
+              </Button>
+            </LinkContainer>
             <Button
-              id="openEditPasswordButton"
+              onClick={() => this.props.logout()}
               className="profile-button"
               variant="outline-dark"
             >
-              Zmień hasło
+              Wyloguj się
             </Button>
-          </LinkContainer>
-          <Button
-            onClick={() => this.props.logout()}
-            className="profile-button"
-            variant="outline-dark"
-          >
-            Wyloguj się
-          </Button>
-        </div>
-      </Container>
-    );
+          </div>
+        </Container>
+      );
+    }
+    }
+
+  render() {
+    return(
+      <div>
+        {this.renderContent()}
+      </div>
+    )
   }
 }
+
 
 const mapStateToProps = (state) => {
   return {
