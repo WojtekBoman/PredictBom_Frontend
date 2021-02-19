@@ -26,7 +26,6 @@ import Ranking from "./Contracts/Ranking";
 import TransactionsPage from "./Transactions/TransactionsPage";
 import UserOfferPage from "./Contracts/UserOfferPage";
 import DeleteMarketPage from "./Markets/DeleteMarketPage";
-import ReactNotification from 'react-notifications-component'
 import {Divider} from 'semantic-ui-react';
 
 const App = () => {

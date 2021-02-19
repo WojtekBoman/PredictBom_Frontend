@@ -10,8 +10,8 @@ const HomePage = (props) => {
     <Container className="bg-light border rounded shadow-container create-market-container">
       <header>
         <h2>Dołącz do PredictBom już dziś !</h2>
-        <hr className="my-4"></hr>
       </header>
+      <hr className="my-4"></hr>
       <Row>
         <Col sm={6}>
           <Image variant="top" src={Poland} alt="Obrazek Polska" className="img-cover" />
