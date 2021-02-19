@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3f47b09c702e923608d3d1145a120a79",
+    "revision": "d3338c73461c89618b7e1783a5f4c785",
     "url": "/PredictBom_Frontend/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/PredictBom_Frontend/static/css/2.58e15d2b.chunk.css"
   },
   {
-    "revision": "7a535a86fcd48aca241d",
-    "url": "/PredictBom_Frontend/static/css/main.d0491180.chunk.css"
+    "revision": "6c25af6d8d710de845f2",
+    "url": "/PredictBom_Frontend/static/css/main.cd3d3ff5.chunk.css"
   },
   {
     "revision": "293220507494d75aebde",
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/PredictBom_Frontend/static/js/2.e81a7249.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "7a535a86fcd48aca241d",
+    "revision": "6c25af6d8d710de845f2",
     "url": "/PredictBom_Frontend/static/js/main.eb010f3e.chunk.js"
   },
   {
@@ -30,10 +30,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "f63e26dd20ad90db8d06f88848200198",
     "url": "/PredictBom_Frontend/static/media/Poland.f63e26dd.png"
-  },
-  {
-    "revision": "9f6da2a6868f7723ac7c150ee6c8cf29",
-    "url": "/PredictBom_Frontend/static/media/background2.9f6da2a6.jpg"
   },
   {
     "revision": "7921ca204fdcc14bd450aef062b5e56f",
