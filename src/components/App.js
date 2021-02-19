@@ -15,7 +15,6 @@ import ResetPasswordWithToken from "./Auth/ResetPasswordWithToken";
 import MakeMarketPublicPage from "./Markets/MakeMarketPublicPage";
 import MarketsPage from "./Markets/MarketsPage";
 import MarketDetails from "./Markets/MarketDetails";
-
 import EditMarketPage from "./Markets/EditMarketPage";
 import SolveMarketPage from "./Markets/SolveMarketPage";
 import ContractDetails from "./Contracts/ContractDetails";
@@ -28,7 +27,7 @@ import TransactionsPage from "./Transactions/TransactionsPage";
 import UserOfferPage from "./Contracts/UserOfferPage";
 import DeleteMarketPage from "./Markets/DeleteMarketPage";
 import ReactNotification from 'react-notifications-component'
-import 'react-notifications-component/dist/theme.css'
+import 'semantic-ui-css/semantic.min.css'
 
 const App = () => {
   return (
