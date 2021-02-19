@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
+import {HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import history from "../history";
 import { PrivateRoute } from "./PrivateRoute";
 import HomePage from "./HomePage";

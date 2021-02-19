@@ -9,7 +9,7 @@ const isPrivate = () => {
         const now = new Date();
         return now.getTime() > expiry * 1000;
     }
-    return false;
+    return true;
    
 }
 
