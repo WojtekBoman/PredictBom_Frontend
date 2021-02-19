@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/PredictBom_Frontend/static/css/main.d0491180.chunk.css",
-    "main.js": "/PredictBom_Frontend/static/js/main.6cc20d86.chunk.js",
-    "main.js.map": "/PredictBom_Frontend/static/js/main.6cc20d86.chunk.js.map",
+    "main.js": "/PredictBom_Frontend/static/js/main.c7e406d6.chunk.js",
+    "main.js.map": "/PredictBom_Frontend/static/js/main.c7e406d6.chunk.js.map",
     "runtime-main.js": "/PredictBom_Frontend/static/js/runtime-main.5e2458eb.js",
     "runtime-main.js.map": "/PredictBom_Frontend/static/js/runtime-main.5e2458eb.js.map",
     "static/css/2.58e15d2b.chunk.css": "/PredictBom_Frontend/static/css/2.58e15d2b.chunk.css",
     "static/js/2.7cc1eb03.chunk.js": "/PredictBom_Frontend/static/js/2.7cc1eb03.chunk.js",
     "static/js/2.7cc1eb03.chunk.js.map": "/PredictBom_Frontend/static/js/2.7cc1eb03.chunk.js.map",
     "index.html": "/PredictBom_Frontend/index.html",
-    "precache-manifest.329a6f2e89c869f338c96ca33515f25f.js": "/PredictBom_Frontend/precache-manifest.329a6f2e89c869f338c96ca33515f25f.js",
+    "precache-manifest.f57513609b02fb54ce4e9d13c6e2b3ed.js": "/PredictBom_Frontend/precache-manifest.f57513609b02fb54ce4e9d13c6e2b3ed.js",
     "service-worker.js": "/PredictBom_Frontend/service-worker.js",
     "static/css/2.58e15d2b.chunk.css.map": "/PredictBom_Frontend/static/css/2.58e15d2b.chunk.css.map",
     "static/css/main.d0491180.chunk.css.map": "/PredictBom_Frontend/static/css/main.d0491180.chunk.css.map",
@@ -26,6 +26,6 @@
     "static/css/2.58e15d2b.chunk.css",
     "static/js/2.7cc1eb03.chunk.js",
     "static/css/main.d0491180.chunk.css",
-    "static/js/main.6cc20d86.chunk.js"
+    "static/js/main.c7e406d6.chunk.js"
   ]
 }
