@@ -53,7 +53,7 @@ class TransactionList extends React.Component {
         if(!this.props.alert.payload)
         return (
         <div className="text-center">
-            <FontAwesomeIcon icon={faSadTear} size={"9x"}/>
+            <FontAwesomeIcon icon={faSadTear} size={"6x"}/>
             <h2>Nie znaleziono żadnych transakcji</h2>
         </div>
         )
@@ -91,7 +91,7 @@ class TransactionList extends React.Component {
     renderInfo() {
         if(this.props.alert.payload) {
             return <div className="text-center">
-            <FontAwesomeIcon icon={faExclamationCircle} size={"9x"}/>
+            <FontAwesomeIcon icon={faExclamationCircle} size={"6x"}/>
             <h3>{this.props.alert.payload}</h3>
         </div>
         }

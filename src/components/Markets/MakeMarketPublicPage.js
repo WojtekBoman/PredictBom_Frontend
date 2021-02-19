@@ -65,7 +65,7 @@ class MakeMarketPublicPage extends React.Component {
   renderMarketIsAlreadyPublishedInfo = () => {
     return (
       <div className="text-center">
-        <FontAwesomeIcon icon={faExclamationCircle} size={"9x"} />
+        <FontAwesomeIcon icon={faExclamationCircle} size={"6x"} />
         <h2>Rynek posiada już status publiczny</h2>
       </div>
     );

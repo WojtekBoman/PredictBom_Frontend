@@ -67,8 +67,8 @@ class ContractList extends React.Component {
   renderNotFoundMessage() {
     return (
       <div className="text-center">
-        <FontAwesomeIcon icon={faSadTear} size={"9x"} />
-        <h2>Nie znaleziono żadnych kontraktów</h2>
+        <FontAwesomeIcon icon={faSadTear} size={"6x"} />
+        <h3>Nie znaleziono żadnych kontraktów</h3>
       </div>
     );
   }
@@ -79,7 +79,7 @@ class ContractList extends React.Component {
     ) {
       return (
         <div className="text-center">
-          <FontAwesomeIcon icon={faExclamationCircle} size={"9x"} />
+          <FontAwesomeIcon icon={faExclamationCircle} size={"6x"} />
           <h3>{this.props.alert.payload}</h3>
         </div>
       );

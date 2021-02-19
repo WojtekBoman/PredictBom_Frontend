@@ -13,12 +13,12 @@ export const createMarket = ({
   description,
 }) => {
   return (dispatch) => {
-    dispatch(request({ topic }));
+    dispatch(request());
 
     marketService.createMarket(topic, category, endDate, description).then(
       (res) => {
         dispatch(success(res));
-        history.push(`editBets/${res.marketId}`);
+        history.push(`/markets/editBets/${res.marketId}`);
       },
       (error) => {
         dispatch(failure());
@@ -28,7 +28,7 @@ export const createMarket = ({
   };
 
   function request(market) {
-    return { type: marketsConstants.CREATE_MARKET_REQUEST, payload: market };
+    return { type: marketsConstants.CREATE_MARKET_REQUEST };
   }
   function success(market) {
     return { type: marketsConstants.CREATE_MARKET_SUCCESS, payload: market };
@@ -49,9 +49,7 @@ export const editMarket = (
       .then(
         (res) => {
           dispatch(success(res));
-          res.published
-            ? history.push("/markets")
-            : history.push("/markets/private");
+          history.push(`/markets/details/${marketId}`)
         },
         (error) => {
           dispatch(failure());

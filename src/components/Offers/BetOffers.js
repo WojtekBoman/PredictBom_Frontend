@@ -62,7 +62,7 @@ class BetOffers extends React.Component {
     renderFailedToFetch() {
         if(this.props.alert.payload && this.props.alert.type !== "ALERT_BUYING") {
            return <div className="text-center">
-            <FontAwesomeIcon icon={faExclamationCircle} size={"9x"}/>
+            <FontAwesomeIcon icon={faExclamationCircle} size={"6x"}/>
             <h3>{this.props.alert.payload}</h3>
             </div>
         }

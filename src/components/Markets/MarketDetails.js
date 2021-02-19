@@ -58,7 +58,7 @@ class MarketDetails extends React.Component {
     if (this.props.alert.payload && this.props.alert.type !== "ALERT_BUYING")
       return (
         <Container className="text-center bg-light border rounded shadow-container create-market-container">
-          <FontAwesomeIcon icon={faSadTear} size={"9x"} />
+          <FontAwesomeIcon icon={faSadTear} size={"6x"} />
           <h3>{this.props.alert.payload}</h3>
         </Container>
       );

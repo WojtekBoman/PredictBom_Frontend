@@ -52,14 +52,14 @@ class MarketsList extends React.Component {
     if (!this.props.alert.payload) {
       return (
         <div className="text-center">
-          <FontAwesomeIcon icon={faSadTear} size={"9x"} />
+          <FontAwesomeIcon icon={faSadTear} size={"6x"} />
           <h3>W tej chwili w grze nie toczą się żadne rynki</h3>
         </div>
       );
     } else {
       return (
         <div className="text-center">
-          <FontAwesomeIcon icon={faExclamationCircle} size={"9x"} />
+          <FontAwesomeIcon icon={faExclamationCircle} size={"6x"} />
           <h3>{this.props.alert.payload}</h3>
         </div>
       );
