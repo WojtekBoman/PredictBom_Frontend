@@ -14,7 +14,7 @@ const HomePage = (props) => {
       </header>
       <Row>
         <Col sm={6}>
-          <Image variant="top" src={Poland} className="img-cover" />
+          <Image variant="top" src={Poland} alt="Obrazek Polska" className="img-cover" />
         </Col>
         <Col sm={6}>
           <div className="advantages home-info">

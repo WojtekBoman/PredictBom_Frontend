@@ -1,11 +1,10 @@
 import React from "react";
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { Container, Row, Col, Image,Button, Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import { fetchContractDetails } from "../../actions/contractActions";
 import ContractBet from "./ContractBet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Modal } from "react-bootstrap";
 import OffersList from "../Offers/OffersList";
 import { LinkContainer } from "react-router-bootstrap";
 import { faSadTear } from "@fortawesome/free-solid-svg-icons";

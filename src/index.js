@@ -7,6 +7,7 @@ import reduxThunk from "redux-thunk";
 import App from "./components/App";
 import reducers from "./reducers";
 
+import 'semantic-ui-css/semantic.min.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./scss/app.scss";
 

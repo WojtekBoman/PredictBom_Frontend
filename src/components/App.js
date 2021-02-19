@@ -27,14 +27,13 @@ import TransactionsPage from "./Transactions/TransactionsPage";
 import UserOfferPage from "./Contracts/UserOfferPage";
 import DeleteMarketPage from "./Markets/DeleteMarketPage";
 import ReactNotification from 'react-notifications-component'
-import 'semantic-ui-css/semantic.min.css'
+import {Divider} from 'semantic-ui-react';
 
 const App = () => {
   return (
     <div className="wrapper">
       <Router history={history}>
         <NavigationBar />
-        <ReactNotification />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/login" component={LoginPage} />
@@ -88,6 +87,7 @@ const App = () => {
          
         </Switch>
       </Router>
+      <Divider hidden />
     </div>
   );
 };
