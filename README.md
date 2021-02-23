@@ -2,6 +2,7 @@
 Front-end part of the PredictBom application.
 <br />
 Live version: 	[Try it](https://wojtekboman.github.io/PredictBom_Frontend)
+Backend repository: [Link](https://github.com/WojtekBoman/PredictBom_Backend)
 
 ## Table of contents
 * [General info](#general-info)
