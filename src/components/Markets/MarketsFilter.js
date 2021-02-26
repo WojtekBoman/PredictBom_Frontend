@@ -71,7 +71,7 @@ class MarketsFilter extends React.Component {
           <option value={"createdDate,desc"}>Od najnowszych</option>
           <option value={"createdDate,asc"}>Od najstarszych</option>
           <option value={"endDate,asc"}>
-            Nabliższego czasu zakończenia
+            Najbliższego czasu zakończenia
           </option>
           <option value={"endDate,desc"}>
             Najdalszego czasu zakończenia
