@@ -70,10 +70,10 @@ class MarketsFilter extends React.Component {
         <Form.Control as="select" onChange={this.handleSort}>
           <option value={"createdDate,desc"}>Od najnowszych</option>
           <option value={"createdDate,asc"}>Od najstarszych</option>
-          <option value={"endDate,desc"}>
+          <option value={"endDate,asc"}>
             Nabliższego czasu zakończenia
           </option>
-          <option value={"endDate,asc"}>
+          <option value={"endDate,desc"}>
             Najdalszego czasu zakończenia
           </option>
         </Form.Control>
