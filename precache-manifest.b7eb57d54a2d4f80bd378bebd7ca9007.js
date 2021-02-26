@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "44f348f73fdef900695b3c89f2c060b5",
+    "revision": "501a41ca050bf7a443e628186b7b57f0",
     "url": "/PredictBom_Frontend/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/PredictBom_Frontend/static/css/2.d43d42b0.chunk.css"
   },
   {
-    "revision": "51cc318eec4f517346a9",
+    "revision": "cf4454c14518fc00c261",
     "url": "/PredictBom_Frontend/static/css/main.d0491180.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/PredictBom_Frontend/static/js/2.93fa4406.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "51cc318eec4f517346a9",
-    "url": "/PredictBom_Frontend/static/js/main.ab6e200c.chunk.js"
+    "revision": "cf4454c14518fc00c261",
+    "url": "/PredictBom_Frontend/static/js/main.740f436f.chunk.js"
   },
   {
     "revision": "415902916fc35233b710",
